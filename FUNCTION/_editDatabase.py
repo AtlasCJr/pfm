@@ -6,7 +6,9 @@ import pandas as pd
 def createDatabase() -> None:
     if not os.path.exists("DB.sql"):
         with open("DB.sql", 'w'): pass
-
+    else:
+        return
+    
     conn = sqlite3.connect("DB.sql")
     cursor = conn.cursor()
 
@@ -63,3 +65,5 @@ def getTransactionData() -> pd.DataFrame:
 if __name__ == "__main__":
     os.system("cls" if os.name =="nt" else "clear")
     createDatabase()
+
+    addTransaction("Beli Ayam", 1, 10000)
