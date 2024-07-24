@@ -4,12 +4,12 @@ from datetime import datetime
 import pandas as pd
 
 def createDatabase() -> None:
-    if not os.path.exists("DB.sql"):
-        with open("DB.sql", 'w'): pass
+    if not os.path.exists("DB.db"):
+        with open("DB.db", 'w'): pass
     else:
         return
     
-    conn = sqlite3.connect("DB.sql")
+    conn = sqlite3.connect("DB.db")
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -35,7 +35,7 @@ def createDatabase() -> None:
     conn.close()
 
 def addLog(content:str) -> None:
-    conn = sqlite3.connect("DB.sql")
+    conn = sqlite3.connect("DB.db")
     cursor = conn.cursor()
 
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -48,7 +48,7 @@ def addLog(content:str) -> None:
     conn.close()
 
 def addTransaction(item:str, type:int, value:int) -> None:
-    conn = sqlite3.connect("DB.sql")
+    conn = sqlite3.connect("DB.db")
     cursor = conn.cursor()
 
     cursor.execute("""
