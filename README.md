@@ -15,34 +15,34 @@ A personal finance manager (PFM) is a tool or software designed to help individu
 
 #### Database
 The database consist is created in SQLite. There are 4 + 1 tables in the database:
-- Accounts
--- User Id  <-- Primary Key
--- Username
--- Hashed Password
--- Created At
--- Updated At
++ Accounts
+    * User Id  <-- Primary Key
+    * Username
+    * Hashed Password
+    * Created At
+    * Updated At
 
-- Chats
--- Message Id <-- Primary Key
--- User Id <-- Foreign Key
--- Message Type
--- Message
--- Timestap
++ Chats
+    * Message Id <-- Primary Key
+    * User Id <-- Foreign Key
+    * Message Type
+    * Message
+    * Timestap
 
-- Log
--- ID <-- Primary Key
--- Message
--- Timestamp
++ Log
+    * ID <-- Primary Key
+    * Message
+    * Timestamp
 
-- Transaction
--- Transaction Id <-- Primary Key
--- User Id <-- Foreign Key
--- Item
--- Type
--- Category
--- Value
--- Created At
--- Updated At
++ Transaction
+    * Transaction Id <-- Primary Key
+    * User Id <-- Foreign 
+    * Item
+    * Type
+    * Category
+    * Value
+    * Created At
+    * Updated At
 
 and one more table _sqlite_sequences_ which hold account the incrementation for 'Log'.
 
