@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 import pandas as pd
 from uuid import uuid4 as randomID
+from hashlib import sha256
 
 from Functions._Classes import Account
 
@@ -23,8 +24,8 @@ def createDatabase() -> None:
         USER_ID TEXT PRIMARY KEY,
         USERNAME TEXT UNIQUE,
         HASHED_PASSWORD INTEGER,
-        CREATED_AT TEXT,
-        UPDATED_AT TEXT,
+        CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UPDATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
         BALANCE INT
     )
     """)
@@ -37,8 +38,8 @@ def createDatabase() -> None:
         TYPE INTEGER,
         CATEGORY INTEGER,
         VALUE INTEGER,
-        CREATED_AT TEXT,
-        UPDATED_AT TEXT,
+        CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UPDATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (USER_ID) REFERENCES accounts(USER_ID)
     )
     """)
@@ -49,7 +50,7 @@ def createDatabase() -> None:
         USER_ID TEXT,
         MESSAGE_TYPE INT,
         MESSAGE TEXT,
-        TIMESTAMP TEXT,
+        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (USER_ID) REFERENCES accounts(USER_ID)
     )
     """)
@@ -57,8 +58,8 @@ def createDatabase() -> None:
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS log (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        MESSAGE TEXT,
-        TIMESTAMP TEXT
+        MESSAGE TEXT NOT NULL,
+        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP
     )
     """)
 
@@ -74,31 +75,29 @@ def addLog(message: str) -> None:
     conn = sqlite3.connect("DB.db")
     cursor = conn.cursor()
 
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
     cursor.execute(
-        "INSERT INTO log (TIMESTAMP, MESSAGE) VALUES (?, ?)", 
-        (now, message)
+        "INSERT INTO log (MESSAGE) VALUES (?)", 
+        (message, )
     )
 
     conn.commit()
     conn.close()
 
-def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at: str = None, updated_at: str = None) -> None:
+def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at:str = None) -> None:
     """
     Inserts a transaction record into the transactions table.
     """
-    if created_at is None:
-        created_at = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
-    if updated_at is None:
-        updated_at = created_at
+
     conn = sqlite3.connect("DB.db")
     cursor = conn.cursor()
     id = str(randomID())
 
+    if created_at == None:
+        created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
     cursor.execute(
         "INSERT INTO transactions (TRANSACTION_ID, USER_ID, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-        (id, account.user_id, item, type, category, value, created_at, updated_at)
+        (id, account.user_id, item, type, category, value, created_at, created_at)
     )
 
     conn.commit()
@@ -111,13 +110,10 @@ def addAccount(account:Account) -> None:
     conn = sqlite3.connect("DB.db")
     cursor = conn.cursor()
 
-    try:
-        cursor.execute(
-            "INSERT INTO accounts (USER_ID, USERNAME, HASHED_PASSWORD, CREATED_AT, UPDATED_AT, BALANCE) VALUES (?, ?, ?, ?, ?, ?)", 
-            (account.user_id, account.username, account.password, account.created_at, account.updated_at, account.balance)
-        )
-    except:
-        pass
+    cursor.execute(
+        "INSERT INTO accounts (USER_ID, USERNAME, HASHED_PASSWORD, BALANCE) VALUES (?, ?, ?, ?)", 
+        (account.user_id, account.username, sha256(account.password.encode()).hexdigest(), account.balance)
+    )
 
     conn.commit()
     conn.close()
@@ -131,6 +127,21 @@ def getTransactionData(account:Account) -> pd.DataFrame:
     conn.close()
     
     return df
+
+def updateBalance(user_id: str, revenue: int, expenses: int) -> None:
+    """
+    Updates the balance of a user account.
+    """
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+    balance = revenue - expenses
+
+    cursor.execute("""
+    UPDATE accounts SET BALANCE = ? WHERE USER_ID = ?
+    """, (balance, user_id))
+
+    conn.commit()
+    conn.close()
 
 def getAccount(username:str):
     """
