@@ -49,5 +49,8 @@ and one more table _sqlite_sequences_ which hold account the incrementation for 
 #### Updates
 _other definition and/or explanation will be updated soon._
 
+#### Notes
++ SQL data adding speed is about 300 items/s according to TQDM
+
 #### Temporary Copy-Paste
 pyuic5 -x your_file.ui -o your_file.py

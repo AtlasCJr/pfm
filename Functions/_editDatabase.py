@@ -4,6 +4,8 @@ from datetime import datetime
 import pandas as pd
 from uuid import uuid4 as randomID
 
+from Functions._Classes import Account
+
 def createDatabase() -> None:
     """
     Initializes the database by creating necessary tables if they do not exist.
@@ -19,7 +21,7 @@ def createDatabase() -> None:
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS accounts (
         USER_ID TEXT PRIMARY KEY,
-        USERNAME TEXT,
+        USERNAME TEXT UNIQUE,
         HASHED_PASSWORD INTEGER,
         CREATED_AT TEXT,
         UPDATED_AT TEXT,
@@ -74,14 +76,15 @@ def addLog(message: str) -> None:
 
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    cursor.execute("""
-    INSERT INTO log (TIMESTAMP, MESSAGE) VALUES (?, ?)
-    """, (now, message))
+    cursor.execute(
+        "INSERT INTO log (TIMESTAMP, MESSAGE) VALUES (?, ?)", 
+        (now, message)
+    )
 
     conn.commit()
     conn.close()
 
-def addTransaction(item: str, type:int, category: int, value: int, created_at: str = None, updated_at: str = None) -> None:
+def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at: str = None, updated_at: str = None) -> None:
     """
     Inserts a transaction record into the transactions table.
     """
@@ -93,26 +96,55 @@ def addTransaction(item: str, type:int, category: int, value: int, created_at: s
     cursor = conn.cursor()
     id = str(randomID())
 
-    cursor.execute("""
-    INSERT INTO transactions (TRANSACTION_ID, USER_ID, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (id, "asdasd", item, type, category, value, created_at, updated_at))
+    cursor.execute(
+        "INSERT INTO transactions (TRANSACTION_ID, USER_ID, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+        (id, account.user_id, item, type, category, value, created_at, updated_at)
+    )
 
     conn.commit()
     conn.close()
 
-def getTransactionData() -> pd.DataFrame:
+def addAccount(account:Account) -> None:
+    """
+    Add an account from the Account class to the account table
+    """
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute(
+            "INSERT INTO accounts (USER_ID, USERNAME, HASHED_PASSWORD, CREATED_AT, UPDATED_AT, BALANCE) VALUES (?, ?, ?, ?, ?, ?)", 
+            (account.user_id, account.username, account.password, account.created_at, account.updated_at, account.balance)
+        )
+    except:
+        pass
+
+    conn.commit()
+    conn.close()
+
+def getTransactionData(account:Account) -> pd.DataFrame:
     """
     Retrieves all transaction records as a Pandas DataFrame.
     """
     conn = sqlite3.connect("DB.db")
-    df = pd.read_sql_query("SELECT * FROM transactions", conn)
+    df = pd.read_sql_query("SELECT * FROM transactions WHERE USER_ID = ?", conn, params=(account.user_id,))
     conn.close()
+    
     return df
 
-if __name__ == "__main__":
-    os.system("cls" if os.name == "nt" else "clear")
-    createDatabase()
+def getAccount(username:str):
+    """
+    Get the Account class from the given username
+    """
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT * FROM accounts WHERE USERNAME = ?", (username,))
 
-    addTransaction("Ayam Goreng", 1, 1, 20000)
+    row = cursor.fetchone()
 
-    print(getTransactionData())
+    conn.close()
+
+    account = Account(row[1], row[2], row[3], row[4], row[5], row[0])
+    
+    return account

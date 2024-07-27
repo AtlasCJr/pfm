@@ -7,9 +7,10 @@ from PyQt5.QtWidgets import QApplication, QDialog, QStackedWidget
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QFont
 
-from Intro import Ui_Intro
-from Menu import Ui_Menu
-from Holder import Ui_Holder
+
+from Pages.Intro import Ui_Intro
+from Pages.Menu import Ui_Menu
+from Pages.Holder import Ui_Holder
 
 os.system("cls" if os.name == "nt" else "clear")
 
