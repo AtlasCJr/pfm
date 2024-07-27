@@ -5,7 +5,7 @@ import pandas as pd
 from uuid import uuid4 as randomID
 from hashlib import sha256
 
-from Functions._Classes import Account
+from Functions._Variables import Account
 
 def createDatabase() -> None:
     """
@@ -94,7 +94,7 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
 
     if created_at == None:
         created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
+
     cursor.execute(
         "INSERT INTO transactions (TRANSACTION_ID, USER_ID, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
         (id, account.user_id, item, type, category, value, created_at, created_at)
@@ -110,9 +110,28 @@ def addAccount(account:Account) -> None:
     conn = sqlite3.connect("DB.db")
     cursor = conn.cursor()
 
+    try:
+        cursor.execute(
+            "INSERT INTO accounts (USER_ID, USERNAME, HASHED_PASSWORD, BALANCE) VALUES (?, ?, ?, ?)", 
+            (account.user_id, account.username, sha256(account.password.encode()).hexdigest(), account.balance)
+        )
+    except:
+        return
+
+    conn.commit()
+    conn.close()
+
+def updateBalance(account:Account, new_balance:int) -> None:
+    """
+    Updates the balance of a user account.
+    """
+
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+
     cursor.execute(
-        "INSERT INTO accounts (USER_ID, USERNAME, HASHED_PASSWORD, BALANCE) VALUES (?, ?, ?, ?)", 
-        (account.user_id, account.username, sha256(account.password.encode()).hexdigest(), account.balance)
+        "UPDATE accounts SET BALANCE = ? WHERE USER_ID = ?", 
+        (new_balance, account.user_id)
     )
 
     conn.commit()
@@ -127,21 +146,6 @@ def getTransactionData(account:Account) -> pd.DataFrame:
     conn.close()
     
     return df
-
-def updateBalance(user_id: str, revenue: int, expenses: int) -> None:
-    """
-    Updates the balance of a user account.
-    """
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
-    balance = revenue - expenses
-
-    cursor.execute("""
-    UPDATE accounts SET BALANCE = ? WHERE USER_ID = ?
-    """, (balance, user_id))
-
-    conn.commit()
-    conn.close()
 
 def getAccount(username:str):
     """
