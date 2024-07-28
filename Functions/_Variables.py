@@ -1,13 +1,19 @@
-from uuid import uuid4 as randomID
-
 class Account:
-    def __init__(self, username: str, password: str, created_at: str, updated_at: str, balance, user_id: str = None) -> None:
-        self.user_id = user_id if user_id is not None else str(randomID())
+    def __init__(self, username: str, password: str, created_at: str, updated_at: str, balance) -> None:
         self.username = username
         self.password = password
         self.created_at = created_at
         self.updated_at = updated_at
         self.balance = balance
+
+    def summary(self):
+        print(f"""
+            {'Username':>20}: {self.username}
+            {'Password':>20}: {self.password}
+            {'Date Created':>20}: {self.created_at}
+            {'Date Updated':>20}: {self.updated_at}
+            {'Balance':>20}: {self.balance}
+        """)
 
 typeMapping = {
     0: "Foods & Drinks",

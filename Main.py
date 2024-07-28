@@ -40,7 +40,7 @@ class cIntro(QDialog, Ui_Intro):
         text1 = "My Project"
         text2 = """Created By:          
 
-Jonathan Edward Charles De Fretes     
+Jonathan Edward Charles De Fretes
 Davin Nazhif Wilviadli     
 Muhammad Farhan Hanafi
         """

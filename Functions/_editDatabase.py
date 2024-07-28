@@ -21,8 +21,7 @@ def createDatabase() -> None:
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS accounts (
-        USER_ID TEXT PRIMARY KEY,
-        USERNAME TEXT UNIQUE,
+        USERNAME TEXT UNIQUE PRIMARY KEY,
         HASHED_PASSWORD INTEGER,
         CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
         UPDATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -32,34 +31,36 @@ def createDatabase() -> None:
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS transactions (
-        TRANSACTION_ID TEXT PRIMARY KEY,
-        USER_ID TEXT,
+        TRANSACTION_ID TEXT UNIQUE PRIMARY KEY,
+        USERNAME TEXT,
         ITEM TEXT,
         TYPE INTEGER,
         CATEGORY INTEGER,
         VALUE INTEGER,
         CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
         UPDATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (USER_ID) REFERENCES accounts(USER_ID)
+        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
     )
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS chats (
         MESSAGE_ID TEXT PRIMARY KEY,
-        USER_ID TEXT,
+        USERNAME TEXT,
         MESSAGE_TYPE INT,
         MESSAGE TEXT,
         TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (USER_ID) REFERENCES accounts(USER_ID)
+        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
     )
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS log (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        MESSAGE TEXT NOT NULL,
-        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP
+        USERNAME TEXT,
+        MESSAGE TEXT,
+        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
     )
     """)
 
@@ -76,14 +77,14 @@ def addLog(message: str) -> None:
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO log (MESSAGE) VALUES (?)", 
-        (message, )
+        "INSERT INTO log (MESSAGE, USERNAME) VALUES (?, ?)", 
+        (message, "SYSTEM")
     )
 
     conn.commit()
     conn.close()
 
-def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at:str = None) -> None:
+def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at:str = None, updated_at:str = None) -> None:
     """
     Inserts a transaction record into the transactions table.
     """
@@ -94,10 +95,12 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
 
     if created_at == None:
         created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    if updated_at == None:
+        updated_at = created_at
 
     cursor.execute(
-        "INSERT INTO transactions (TRANSACTION_ID, USER_ID, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-        (id, account.user_id, item, type, category, value, created_at, created_at)
+        "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+        (id, account.username, item, type, category, value, created_at, updated_at)
     )
 
     conn.commit()
@@ -112,8 +115,8 @@ def addAccount(account:Account) -> None:
 
     try:
         cursor.execute(
-            "INSERT INTO accounts (USER_ID, USERNAME, HASHED_PASSWORD, BALANCE) VALUES (?, ?, ?, ?)", 
-            (account.user_id, account.username, sha256(account.password.encode()).hexdigest(), account.balance)
+            "INSERT INTO accounts (USERNAME, HASHED_PASSWORD, BALANCE) VALUES (?, ?, ?)", 
+            (account.username, sha256(account.password.encode()).hexdigest(), account.balance)
         )
     except:
         return
@@ -130,8 +133,8 @@ def updateBalance(account:Account, new_balance:int) -> None:
     cursor = conn.cursor()
 
     cursor.execute(
-        "UPDATE accounts SET BALANCE = ? WHERE USER_ID = ?", 
-        (new_balance, account.user_id)
+        "UPDATE accounts SET BALANCE = ? WHERE USERNAME = ?", 
+        (new_balance, account.username)
     )
 
     conn.commit()
@@ -142,12 +145,12 @@ def getTransactionData(account:Account) -> pd.DataFrame:
     Retrieves all transaction records as a Pandas DataFrame.
     """
     conn = sqlite3.connect("DB.db")
-    df = pd.read_sql_query("SELECT * FROM transactions WHERE USER_ID = ?", conn, params=(account.user_id,))
+    df = pd.read_sql_query("SELECT * FROM transactions WHERE USERNAME = ?", conn, params=(account.username,))
     conn.close()
     
     return df
 
-def getAccount(username:str):
+def getAccount(username:str) -> Account:
     """
     Get the Account class from the given username
     """
@@ -160,6 +163,6 @@ def getAccount(username:str):
 
     conn.close()
 
-    account = Account(row[1], row[2], row[3], row[4], row[5], row[0])
+    account = Account(row[0], row[1], row[2], row[3], row[4])
     
     return account
