@@ -11,4 +11,7 @@ Daftar Type
 3   -> Healthcare
 4   -> Asuransi
 5   -> Barang Mewah
-10  -> Pendapatan
+10  -> Pendapatan Aktif
+11  -> Pendapatan Pasif
+12  -> Pendapatan Investasi
+13  -> Pendapatan Tambahan

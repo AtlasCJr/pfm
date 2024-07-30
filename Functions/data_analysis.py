@@ -14,15 +14,13 @@ def getTimeCycle(data: pd.DataFrame, cycle: str, pos: int = 0) -> pd.DataFrame:
     """
 
     cycle = str.upper(cycle)
-
-    if cycle not in ["DAY", "WEEK", "MONTH", "YEAR"]: 
+    if cycle not in ["DAY", "WEEK", "MONTH", "YEAR"]:
         return
 
-    data['CREATED_AT'] = pd.to_datetime(data['CREATED_AT'])
-    data = data.drop(columns=['UPDATED_AT', 'TRANSACTION_ID', 'ITEM', 'USERNAME'])
-    data = data.set_index('CREATED_AT')
+    frequency = {'DAY': 'D', 'WEEK': 'W', 'MONTH': 'ME', 'YEAR': 'YE'}[cycle]
 
-    frequency = {'DAY': 'D', 'WEEK': 'W', 'MONTH': 'M', 'YEAR': 'Y'}[cycle]
+    data['CREATED_AT'] = pd.to_datetime(data['CREATED_AT'])
+    data = data.drop(columns=['UPDATED_AT', 'TRANSACTION_ID', 'ITEM', 'USERNAME']).set_index('CREATED_AT')
 
     latest_date = data.index.max()
 
@@ -39,51 +37,48 @@ def getTimeCycle(data: pd.DataFrame, cycle: str, pos: int = 0) -> pd.DataFrame:
         start_date = data.index.min()
         end_date = latest_date
 
+    print(start_date, end_date)
+
     data = data[(data.index >= start_date) & (data.index <= end_date)]
 
-    expense_types = data[data['CATEGORY'] == 0]['TYPE'].unique()
-    revenue_types = data[data['CATEGORY'] == 1]['TYPE'].unique()
-
-    expenses_resampled = pd.concat([
+    expenses = pd.concat([
         data[(data['CATEGORY'] == 0) & (data['TYPE'] == i)]
         .drop(columns=['CATEGORY', 'TYPE'])
         .resample(frequency)
         .sum()
         .rename(columns={'VALUE': f'{i}'})
-        for i in expense_types
+        for i in data[data['CATEGORY'] == 0]['TYPE'].unique()
     ], axis=1)
 
-    revenue_resampled = pd.concat([
+    revenue = pd.concat([
         data[(data['CATEGORY'] == 1) & (data['TYPE'] == i)]
         .drop(columns=['CATEGORY', 'TYPE'])
         .resample(frequency)
         .sum()
         .rename(columns={'VALUE': f'{i}'})
-        for i in revenue_types
+        for i in data[data['CATEGORY'] == 1]['TYPE'].unique()
     ], axis=1)
 
-    if not expenses_resampled.empty:
-        expenses_resampled.columns = pd.MultiIndex.from_product([['Expenses'], expenses_resampled.columns])
-    if not revenue_resampled.empty:
-        revenue_resampled.columns = pd.MultiIndex.from_product([['Revenue'], revenue_resampled.columns])
+    expenses.columns = pd.MultiIndex.from_product([['Expenses'], expenses.columns])
+    revenue.columns = pd.MultiIndex.from_product([['Revenue'], revenue.columns])
 
-    resampled_data = pd.concat([expenses_resampled, revenue_resampled], axis=1).fillna(0)
+    expenses['Expenses', 'TOTAL'] = expenses.sum(axis=1)
+    revenue['Revenue', 'TOTAL'] = revenue.sum(axis=1)
 
-    if not resampled_data.empty:
-        resampled_data['Expenses', 'TOTAL'] = resampled_data['Expenses'].sum(axis=1)
-        resampled_data['Revenue', 'TOTAL'] = resampled_data['Revenue'].sum(axis=1)
-        resampled_data['TOTAL'] = resampled_data['Revenue', 'TOTAL'] - resampled_data['Expenses', 'TOTAL']
+    DATA = pd.concat([expenses, revenue], axis=1).fillna(0)
+
+    DATA['TOTAL'] = DATA['Revenue', 'TOTAL'] - DATA['Expenses', 'TOTAL']
 
     if cycle == 'DAY':
-        resampled_data.index = resampled_data.index.strftime('%Y-%m-%d')
+        DATA.index = DATA.index.strftime('%Y-%m-%d')
     elif cycle == 'WEEK':
-        resampled_data = resampled_data.groupby(resampled_data.index.to_period('W')).first()
-        resampled_data.index = resampled_data.index.strftime('%Y-%m-%d')
+        DATA = DATA.groupby(DATA.index.to_period('W')).first()
+        DATA.index = DATA.index.strftime('%Y-%m-%d')
     elif cycle == 'MONTH':
-        resampled_data.index = resampled_data.index.strftime('%Y-%m')
+        DATA.index = DATA.index.strftime('%Y-%m')
     elif cycle == 'YEAR':
-        resampled_data.index = resampled_data.index.strftime('%Y')
+        DATA.index = DATA.index.strftime('%Y')
 
-    resampled_data.index.name = cycle
+    DATA.index.name = cycle
 
-    return resampled_data
+    return DATA
