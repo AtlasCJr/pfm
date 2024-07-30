@@ -11,8 +11,8 @@ INI CUMA BUAT MASUKIN DATA DARI DATA CREATION KE SQL
 
 import pandas as pd
 from tqdm import tqdm 
-from Functions._editDatabase import *
-from Functions._Variables import Account
+from Functions.edit_database import *
+from Functions.variables import Account
 
 
 

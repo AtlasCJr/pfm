@@ -7,13 +7,11 @@ class Account:
         self.balance = balance
 
     def summary(self):
-        print(f"""
-            {'Username':>20}: {self.username}
-            {'Password':>20}: {self.password}
-            {'Date Created':>20}: {self.created_at}
-            {'Date Updated':>20}: {self.updated_at}
-            {'Balance':>20}: {self.balance}
-        """)
+        print(f"{'Username':>15}: {self.username}")
+        print(f"{'Password':>15}: {self.password}")
+        print(f"{'Date Created':>15}: {self.created_at}")
+        print(f"{'Date Updated':>15}: {self.updated_at}")
+        print(f"{'Balance':>15}: {self.balance}")
 
 typeMapping = {
     0: "Foods & Drinks",
