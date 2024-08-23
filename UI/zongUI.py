@@ -67,7 +67,7 @@ class SplashScreen(QMainWindow):
             self.close()
 
         # INCREASE COUNTER
-        counter += 0.75
+        counter += 0.5
 
     # Progress bar value
     def progressBarValue(self, value):
