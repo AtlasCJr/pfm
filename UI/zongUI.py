@@ -1,5 +1,4 @@
 import sys
-import platform
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
@@ -8,11 +7,12 @@ from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFont
 
 # Import UI file
 from loadingScreen import Ui_loadingScreen
+from loginPage import Ui_loginPage
 
 counter = 0
 jumper = 0
 
-class SplashScreen(QMainWindow):
+class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.ui = Ui_loadingScreen()
@@ -30,44 +30,13 @@ class SplashScreen(QMainWindow):
         shadow.setOffset(0, 0)
         self.setGraphicsEffect(shadow)
 
-         ## QTIMER ==> START
+        ## QTIMER ==> START
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.progress)
         # TIMER IN MILLISECONDS
         self.timer.start(15)
 
         self.show()
-
-    def progress(self):
-        global counter
-        global jumper
-        value = counter
-
-        htmlText = """<html><head/><body><p align="center">{VALUE}<span style=" font-size:48pt; vertical-align:sub;">%</span></p></body></html>"""
-
-        newhtml = htmlText.replace("{VALUE}", str(int(jumper)))
-
-        if(value > jumper):                       
-            self.ui.percentage.setText(newhtml)
-            jumper += 7
-
-        if value >= 100: value = 1
-
-        self.progressBarValue(value)
-        # CLOSE SPLASH SCREE AND OPEN APP
-        if counter > 100:
-            # STOP TIMER
-            self.timer.stop()
-
-            # # SHOW MAIN WINDOW
-            # self.main = MainWindow()
-            # self.main.show()
-
-            # CLOSE SPLASH SCREEN
-            self.close()
-
-        # INCREASE COUNTER
-        counter += 0.5
 
     # Progress bar value
     def progressBarValue(self, value):
@@ -96,7 +65,38 @@ class SplashScreen(QMainWindow):
         # APPLY STYLESHEET WITH NEW VALUES
         self.ui.circularProg.setStyleSheet(newStylesheet)
 
+    def progress(self):
+        global counter
+        global jumper
+        value = counter
+
+        htmlText = """<html><head/><body><p align="center">{VALUE}<span style=" font-size:48pt; vertical-align:sub;">%</span></p></body></html>"""
+
+        newhtml = htmlText.replace("{VALUE}", str(int(jumper)))
+
+        if(value > jumper):                       
+            self.ui.percentage.setText(newhtml)
+            jumper += 7
+
+        if value >= 100: value = 1
+
+        self.progressBarValue(value)
+        # CLOSE SPLASH SCREE AND OPEN APP
+        if counter > 100:
+            # STOP TIMER
+            self.timer.stop()
+
+            self.login_window = QWidget()
+            self.ui = Ui_loginPage()   
+            self.ui.setupUi(self.login_window)
+            self.login_window.show()  
+
+            self.close()
+
+        # INCREASE COUNTER
+        counter += 0.5
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = SplashScreen()
+    window = MainProgram()
     sys.exit(app.exec_())
