@@ -1,17 +1,13 @@
 import sys
-import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
 from PyQt5.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'folder_lain'))
-
 # Import UI file
-from UI.loadingScreen import Ui_loadingScreen
-from UI.loginPage import Ui_loginPage
-from UI.signupPage import Ui_signupPage
+from loadingScreen import Ui_loadingScreen
+from loginPage import Ui_loginPage
 
 counter = 0
 jumper = 0
@@ -49,7 +45,7 @@ class MainProgram(QMainWindow):
                 border-radius: 150px;
                 background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{stop_1} rgba(0, 0, 0, 0), stop:{stop_2} rgba(255, 215, 0, 255));
             }
-                    """
+        """
         # GET PROGRESS BAR VALUE, CONVERT TO FLOAT AND INVERT VALUES
         # stop works of 1.000 to 0.000
         progress = (100 - value) / 100.0
@@ -90,36 +86,15 @@ class MainProgram(QMainWindow):
             # STOP TIMER
             self.timer.stop()
 
-            self.login_page()
+            self.login_window = QWidget()
+            self.ui = Ui_loginPage()   
+            self.ui.setupUi(self.login_window)
+            self.login_window.show()  
 
-            # Connect the create account button to the function to show the signup page
-            self.login_ui.createAcc.clicked.connect(self.show_signup_page)
+            self.close()
 
         # INCREASE COUNTER
         counter += 0.5
-    
-    def login_page(self):
-       # Replace loading screen with login page
-        self.login_window = QWidget()
-        self.login_ui = Ui_loginPage()
-        self.login_ui.setupUi(self.login_window)
-
-        self.setWindowFlags(QtCore.Qt.Window)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
-        self.show()
-
-        self.setCentralWidget(self.login_window)
-        self.login_window.show()
-
-
-    def show_signup_page(self):
-        # Replace login window with signup page
-        self.signup_window = QWidget()
-        self.signup_ui = Ui_signupPage()
-        self.signup_ui.setupUi(self.signup_window)
-        self.setCentralWidget(self.signup_window)
-        self.signup_window.show()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
