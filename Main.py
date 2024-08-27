@@ -6,8 +6,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'folder_lain'))
-
 # Import UI file
 from UI.loadingScreen import Ui_loadingScreen
 from UI.loginPage import Ui_loginPage
