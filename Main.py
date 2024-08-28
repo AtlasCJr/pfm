@@ -3,8 +3,11 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
-from UI.Master import Ui_MainWindow
+from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
+
+from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount
+from Functions.variables import Account
 
 class LoadingScreen(QMainWindow):
     def __init__(self):
@@ -68,39 +71,107 @@ class LoadingScreen(QMainWindow):
         if counter > 100:
             self.timer.stop()
             self.close()  # Close the loading screen
-            self.show_main_program()  # Show the main program window
+            self.setMaster()  # Show the main program window
 
         counter += 0.5
 
-    def show_main_program(self):
+    def setMaster(self):
         self.main_window = MainProgram()
         self.main_window.show()
 
 class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        self.ui = Ui_MainWindow()
+
+        self.ui = Ui_Master()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
 
-        # Connect buttons to the appropriate functions
-        self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))   
-        self.ui.loginButton.clicked.connect(self.show_loginsignup)
+        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+        # Header Buttons
+        self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
+        self.ui.loginButton.clicked.connect(self.Authentication)
         self.ui.inputdataButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.inputData)) 
         self.ui.showdatabutton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.showData))   
         self.ui.chatbotButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chatBot))
         self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
         self.ui.aboutButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.about))
 
-        # Buttons inside loginsignup widget
+        # Authentication Buttons
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))  # Login -> CP
         self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
-        self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # CP -> Login
+        self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # CP -> Login
 
-    def show_loginsignup(self):
+        self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)
+        self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)
+
+    def Authentication(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup)
         self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
+
+    def handleSignIn(self):
+        username = self.ui.SI_inputUsername.text()
+
+        if username == "":
+            self.ui.SI_ErrorMsg.setText("Username cannot be empty.")
+            return
+        if len(username) <= 5:
+            self.ui.SI_ErrorMsg.setText("Username cannot be less than 5 characters.")
+            return
+        if isUsernameAvailable(username):
+            self.ui.SI_ErrorMsg.setText("Username has already been taken.")
+            return
+        
+        password1 = self.ui.SI_inputPassword1.text()
+        password2 = self.ui.SI_inputPassword2.text()
+
+        if password1 == "" or password2 == "":
+            self.ui.SI_ErrorMsg.setText("Password cannot be empty.")
+            return
+        if len(password1) <= 5:
+            self.ui.SI_ErrorMsg.setText("Password cannot be less than 5 characters.")
+            return
+        if password1 != password2:
+            self.ui.SI_ErrorMsg.setText("The typed password doesn't match.")
+            return
+
+        security_q = int(self.ui.SI_dropdownSecurity.currentText()[1])
+        security_a = self.ui.SI_inputSecurity.text()
+
+        if security_a == "":
+            self.ui.SI_ErrorMsg.setText("Security answer cannot be empty.")
+            return
+
+        tos = self.ui.SI_checkboxTerm.isChecked()
+
+        if not tos:
+            self.ui.SI_ErrorMsg.setText("Terms of Service has to be checked.")
+            return
+        
+        newAcc = Account(username, password1, security_q, security_a)
+        self.ui.SI_ErrorMsg.setText("")
+        addAccount(newAcc)
+
+    def handleLogIn(self) -> Account:
+        username = self.ui.LI_inputUsername.text()
+        password = self.ui.LI_inputPassword.text()
+
+        isCorrect = checkAccount(username, password)
+
+        print(isCorrect)
+
+        if isCorrect:
+            self.ui.LI_ErrorMsg.text("")
+            return getAccount(username)
+        else:
+            self.ui.LI_ErrorMsg.text("Wrong username or password.")
+            return None
+
+
+
 
 if __name__ == "__main__":
 

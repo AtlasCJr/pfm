@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Master</class>
+ <widget class="QMainWindow" name="Master">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Personal Finance Manager</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../Assets/UWOGH.jpg</normaloff>../Assets/UWOGH.jpg</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
@@ -289,8 +296,11 @@ background-color: rgb(42, 43, 48);
                          <pointsize>10</pointsize>
                         </font>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(255, 55, 58);</string>
+                       </property>
                        <property name="text">
-                        <string>*Incorrect Password</string>
+                        <string/>
                        </property>
                       </widget>
                      </item>
@@ -398,7 +408,7 @@ QScrollBar::sub-page:vertical {
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>0</y>
+                    <y>-238</y>
                     <width>593</width>
                     <height>900</height>
                    </rect>
@@ -593,8 +603,14 @@ QComboBox QAbstractItemView {
                         <property name="cursor">
                          <cursorShape>PointingHandCursor</cursorShape>
                         </property>
+                        <property name="layoutDirection">
+                         <enum>Qt::LeftToRight</enum>
+                        </property>
                         <property name="styleSheet">
                          <string notr="true"/>
+                        </property>
+                        <property name="currentText">
+                         <string/>
                         </property>
                         <item>
                          <property name="text">
@@ -703,11 +719,13 @@ QComboBox QAbstractItemView {
                          </font>
                         </property>
                         <property name="styleSheet">
-                         <string notr="true"> color:rgb(42, 43, 48);
-</string>
+                         <string notr="true">color: rgb(255, 32, 35);</string>
                         </property>
                         <property name="text">
-                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;*Password Doesn't Match&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         <string/>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                         </property>
                        </widget>
                       </item>
@@ -1057,6 +1075,9 @@ QComboBox QAbstractItemView {
                          <bold>true</bold>
                         </font>
                        </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
                        <property name="text">
                         <string>Back to Log In</string>
                        </property>
@@ -1227,16 +1248,16 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="profileButton">
+        <widget class="QPushButton" name="aboutButton">
          <property name="text">
-          <string>Profile</string>
+          <string>About</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="aboutButton">
+        <widget class="QPushButton" name="profileButton">
          <property name="text">
-          <string>About</string>
+          <string>Profile</string>
          </property>
         </widget>
        </item>
