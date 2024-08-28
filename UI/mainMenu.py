@@ -14,11 +14,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1077, 831)
+        MainWindow.resize(793, 766)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_3.setObjectName("gridLayout_3")
         self.menuBar = QtWidgets.QWidget(self.centralwidget)
         self.menuBar.setMaximumSize(QtCore.QSize(90, 16777215))
         self.menuBar.setObjectName("menuBar")
@@ -46,8 +46,9 @@ class Ui_MainWindow(object):
         self.aboutButton = QtWidgets.QPushButton(self.menuBar)
         self.aboutButton.setObjectName("aboutButton")
         self.verticalLayout.addWidget(self.aboutButton)
-        self.horizontalLayout.addWidget(self.menuBar)
+        self.gridLayout_3.addWidget(self.menuBar, 0, 0, 1, 1)
         self.mainMenu = QtWidgets.QWidget(self.centralwidget)
+        self.mainMenu.setStyleSheet("background-color: #E5E5E5")
         self.mainMenu.setObjectName("mainMenu")
         self.gridLayout = QtWidgets.QGridLayout(self.mainMenu)
         self.gridLayout.setObjectName("gridLayout")
@@ -64,36 +65,420 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.home)
         self.loginsignup = QtWidgets.QWidget()
         self.loginsignup.setObjectName("loginsignup")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.loginsignup)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.loginsignup)
+        self.gridLayout_2.setObjectName("gridLayout_2")
         self.innerstackedWidget = QtWidgets.QStackedWidget(self.loginsignup)
+        self.innerstackedWidget.setMinimumSize(QtCore.QSize(630, 700))
+        self.innerstackedWidget.setMaximumSize(QtCore.QSize(1000, 1000))
         self.innerstackedWidget.setObjectName("innerstackedWidget")
         self.loginPage = QtWidgets.QWidget()
+        self.loginPage.setStyleSheet("")
         self.loginPage.setObjectName("loginPage")
-        self.label_2 = QtWidgets.QLabel(self.loginPage)
-        self.label_2.setGeometry(QtCore.QRect(160, 300, 914, 100))
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.loginPage)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.loginFrame = QtWidgets.QFrame(self.loginPage)
+        self.loginFrame.setMinimumSize(QtCore.QSize(500, 630))
+        self.loginFrame.setMaximumSize(QtCore.QSize(1000, 700))
+        self.loginFrame.setStyleSheet("#loginFrame{\n"
+"    background-color: rgb(42, 43, 48);       \n"
+"       padding-left: 15px;      \n"
+"       padding-right: 15px;       \n"
+"    padding-top: 25px;          \n"
+"    padding-bottom: 25px;\n"
+"    border-radius: 15px;      \n"
+"}\n"
+"#username, #password{\n"
+"    padding-top:25px;\n"
+"}\n"
+"QLabel{\n"
+"    background-color:none;\n"
+"    padding:5px;\n"
+"}\n"
+"QLineEdit{\n"
+"    height:50px;\n"
+"    padding: 1px 15 px;\n"
+"    background-color: rgb(42, 43, 48);\n"
+"    border: 1px solid rgba(84,86,95,255);\n"
+"    border-radius: 10px;\n"
+"    color:rgb(255, 255, 255);\n"
+"}\n"
+"#signin{\n"
+"    background-color: rgb(254, 221, 59);    \n"
+"    border-radius:5px;\n"
+"    height:50px;\n"
+"}\n"
+"#createAcc{\n"
+"    color:rgb(255, 255, 255);\n"
+"    background-color: rgb(84, 86, 95);\n"
+"    border-radius:15px;\n"
+"    height:30px;\n"
+"}\n"
+"#forgotPW{\n"
+"    background-color:rgb(42,43,48);\n"
+"    color:#808390;\n"
+"    border-radius:15px;\n"
+"    height:30px;\n"
+"}\n"
+"#username, #password, #noAcc{\n"
+"    color: rgb(128, 131, 144);\n"
+"    font-family: Poppins;\n"
+"}\n"
+"#errorMsg{\n"
+"    color: rgb(42, 43, 48);\n"
+"    font-family: Poppins;\n"
+"}\n"
+"#frame, #frame_2{\n"
+"background-color: rgb(42, 43, 48);\n"
+"}")
+        self.loginFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.loginFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.loginFrame.setObjectName("loginFrame")
+        self.gridLayout_4 = QtWidgets.QGridLayout(self.loginFrame)
+        self.gridLayout_4.setObjectName("gridLayout_4")
+        self.username = QtWidgets.QLabel(self.loginFrame)
         font = QtGui.QFont()
-        font.setPointSize(50)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
-        self.createAcc = QtWidgets.QPushButton(self.loginPage)
-        self.createAcc.setGeometry(QtCore.QRect(320, 470, 93, 28))
-        self.createAcc.setObjectName("createAcc")
-        self.forgotPW = QtWidgets.QPushButton(self.loginPage)
-        self.forgotPW.setGeometry(QtCore.QRect(390, 530, 93, 28))
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.username.setFont(font)
+        self.username.setObjectName("username")
+        self.gridLayout_4.addWidget(self.username, 1, 0, 1, 1)
+        self.password = QtWidgets.QLabel(self.loginFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.password.setFont(font)
+        self.password.setObjectName("password")
+        self.gridLayout_4.addWidget(self.password, 3, 0, 1, 1)
+        self.inputUsername = QtWidgets.QLineEdit(self.loginFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.inputUsername.setFont(font)
+        self.inputUsername.setObjectName("inputUsername")
+        self.gridLayout_4.addWidget(self.inputUsername, 2, 0, 1, 1)
+        self.inputPw = QtWidgets.QLineEdit(self.loginFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.inputPw.setFont(font)
+        self.inputPw.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.inputPw.setObjectName("inputPw")
+        self.gridLayout_4.addWidget(self.inputPw, 4, 0, 1, 1)
+        self.signin = QtWidgets.QPushButton(self.loginFrame)
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.signin.setFont(font)
+        self.signin.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.signin.setObjectName("signin")
+        self.gridLayout_4.addWidget(self.signin, 6, 0, 1, 1)
+        self.loginHeader = QtWidgets.QLabel(self.loginFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins Medium")
+        font.setPointSize(13)
+        self.loginHeader.setFont(font)
+        self.loginHeader.setObjectName("loginHeader")
+        self.gridLayout_4.addWidget(self.loginHeader, 0, 0, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(553, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_4.addItem(spacerItem, 7, 0, 1, 1)
+        self.frame = QtWidgets.QFrame(self.loginFrame)
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.forgotPW = QtWidgets.QPushButton(self.frame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.forgotPW.setFont(font)
+        self.forgotPW.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.forgotPW.setObjectName("forgotPW")
+        self.horizontalLayout_2.addWidget(self.forgotPW)
+        spacerItem1 = QtWidgets.QSpacerItem(589, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
+        self.errorMsg = QtWidgets.QLabel(self.frame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(10)
+        self.errorMsg.setFont(font)
+        self.errorMsg.setObjectName("errorMsg")
+        self.horizontalLayout_2.addWidget(self.errorMsg)
+        self.gridLayout_4.addWidget(self.frame, 5, 0, 1, 1)
+        self.frame_2 = QtWidgets.QFrame(self.loginFrame)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_2)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.noAcc = QtWidgets.QLabel(self.frame_2)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.noAcc.setFont(font)
+        self.noAcc.setObjectName("noAcc")
+        self.horizontalLayout_3.addWidget(self.noAcc)
+        self.createAcc = QtWidgets.QPushButton(self.frame_2)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.createAcc.setFont(font)
+        self.createAcc.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.createAcc.setObjectName("createAcc")
+        self.horizontalLayout_3.addWidget(self.createAcc)
+        self.gridLayout_4.addWidget(self.frame_2, 8, 0, 1, 1)
+        self.verticalLayout_3.addWidget(self.loginFrame)
         self.innerstackedWidget.addWidget(self.loginPage)
         self.signupPage = QtWidgets.QWidget()
+        self.signupPage.setStyleSheet("QScrollArea {\n"
+"    border: 10px solid rgb(42, 43, 48);; /* Set the border color and width */\n"
+"    border-radius: 15px; /* Optional: Add some rounding to the corners */\n"
+"    background-color:  rgb(42, 43, 48); /* Ensure the background matches your theme */\n"
+"}\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background-color: #2C2F33;\n"
+"    width: 12px;\n"
+"    margin: 0px 0px 0px 0px;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background-color: #555;\n"
+"    min-height: 20px;\n"
+"    border-radius: 5px;\n"
+"    border: 2px solid #2C2F33;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background-color: #888;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical,\n"
+"QScrollBar::add-line:vertical {\n"
+"    border: none;\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, \n"
+"QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"}")
         self.signupPage.setObjectName("signupPage")
-        self.label_8 = QtWidgets.QLabel(self.signupPage)
-        self.label_8.setGeometry(QtCore.QRect(270, 300, 914, 100))
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.signupPage)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.scrollArea = QtWidgets.QScrollArea(self.signupPage)
+        self.scrollArea.setStyleSheet("")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollBar = QtWidgets.QWidget()
+        self.scrollBar.setGeometry(QtCore.QRect(0, 0, 576, 900))
+        self.scrollBar.setStyleSheet("")
+        self.scrollBar.setObjectName("scrollBar")
+        self.gridLayout_5 = QtWidgets.QGridLayout(self.scrollBar)
+        self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_5.setObjectName("gridLayout_5")
+        self.signupFrame = QtWidgets.QFrame(self.scrollBar)
+        self.signupFrame.setMinimumSize(QtCore.QSize(500, 900))
+        self.signupFrame.setStyleSheet("#signupFrame{\n"
+"    background-color: rgb(42, 43, 48);    \n"
+"       padding-left: 15px;      \n"
+"       padding-right: 15px;       \n"
+"    padding-top: 25px;          \n"
+"    padding-bottom: 25px;\n"
+"}\n"
+"#backtoLogin{\n"
+"    color:rgb(255, 255, 255);\n"
+"    background-color: rgb(84, 86, 95);\n"
+"    border-radius:15px;\n"
+"    height:30px;\n"
+"}\n"
+"QLabel{\n"
+"    background-color: rgb(42, 43, 48);\n"
+"    padding-left:5px;\n"
+"}\n"
+"#frame_3{\n"
+"    background-color: rgb(42, 43, 48);\n"
+"}\n"
+"#regUsername, #regPw, #security, #signuperrorMsg, #requiredField, #haveAcc{\n"
+"    color:#808390;\n"
+"    font-family: Poppins;\n"
+"}\n"
+"\n"
+"#regUsername, #regPw, #security{\n"
+"    padding-top:25px;\n"
+"}\n"
+"QLineEdit{\n"
+"    height:50px;\n"
+"    padding: 1px 15 px;\n"
+"    background-color: rgb(42, 43, 48);\n"
+"    border: 1px solid rgba(84,86,95,255);\n"
+"    border-radius: 10px;\n"
+"    color:rgb(255, 255, 255);\n"
+"    font-family: Poppins;\n"
+"    font-size:15px;\n"
+"}\n"
+"#signup{\n"
+"    background-color: rgb(254, 221, 59);    \n"
+"    border-radius:5px;\n"
+"    height:50px;\n"
+"}\n"
+"#termAgree{\n"
+"    background-color: rgb(42, 43, 48);\n"
+"    color:#808390;\n"
+"}\n"
+"#secQuestion{\n"
+"background-color: rgb(128, 131, 144);\n"
+"}\n"
+"QComboBox {\n"
+"    color: white;                        /* Warna teks combobox */\n"
+"    background-color: #333333;           /* Warna latar belakang combobox */\n"
+"    border: 1px solid #555555;           /* Warna border combobox */\n"
+"    border-radius: 5px;                  /* Membuat sudut rounded */\n"
+"}\n"
+"QComboBox QAbstractItemView {\n"
+"    color: white;                        /* Warna teks dropdown */\n"
+"    background-color: #333333;           /* Warna latar belakang dropdown */\n"
+"    selection-background-color: #fedd3b; /* Warna latar belakang item yang dipilih*/\n"
+"    selection-color: black;              /* Warna teks item yang dipilih */\n"
+"    border: 1px solid #555555;          /* Warna border dropdown */\n"
+"}\n"
+"")
+        self.signupFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.signupFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.signupFrame.setObjectName("signupFrame")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.signupFrame)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.signupHeader = QtWidgets.QLabel(self.signupFrame)
         font = QtGui.QFont()
-        font.setPointSize(50)
-        self.label_8.setFont(font)
-        self.label_8.setObjectName("label_8")
-        self.backtoLogin = QtWidgets.QPushButton(self.signupPage)
-        self.backtoLogin.setGeometry(QtCore.QRect(340, 470, 93, 28))
+        font.setFamily("Poppins Medium")
+        font.setPointSize(13)
+        self.signupHeader.setFont(font)
+        self.signupHeader.setObjectName("signupHeader")
+        self.verticalLayout_4.addWidget(self.signupHeader)
+        self.regUsername = QtWidgets.QLabel(self.signupFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.regUsername.setFont(font)
+        self.regUsername.setObjectName("regUsername")
+        self.verticalLayout_4.addWidget(self.regUsername)
+        self.inputregUsername = QtWidgets.QLineEdit(self.signupFrame)
+        self.inputregUsername.setObjectName("inputregUsername")
+        self.verticalLayout_4.addWidget(self.inputregUsername)
+        self.regPw = QtWidgets.QLabel(self.signupFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.regPw.setFont(font)
+        self.regPw.setObjectName("regPw")
+        self.verticalLayout_4.addWidget(self.regPw)
+        self.inputregPw = QtWidgets.QLineEdit(self.signupFrame)
+        self.inputregPw.setStyleSheet("")
+        self.inputregPw.setObjectName("inputregPw")
+        self.verticalLayout_4.addWidget(self.inputregPw)
+        self.reinputregPw = QtWidgets.QLineEdit(self.signupFrame)
+        self.reinputregPw.setObjectName("reinputregPw")
+        self.verticalLayout_4.addWidget(self.reinputregPw)
+        self.security = QtWidgets.QLabel(self.signupFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.security.setFont(font)
+        self.security.setObjectName("security")
+        self.verticalLayout_4.addWidget(self.security)
+        self.secQuestion = QtWidgets.QComboBox(self.signupFrame)
+        self.secQuestion.setMinimumSize(QtCore.QSize(0, 40))
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.secQuestion.setFont(font)
+        self.secQuestion.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.secQuestion.setStyleSheet("")
+        self.secQuestion.setObjectName("secQuestion")
+        self.secQuestion.addItem("")
+        self.secQuestion.setItemText(0, "")
+        self.secQuestion.addItem("")
+        self.secQuestion.addItem("")
+        self.secQuestion.addItem("")
+        self.secQuestion.addItem("")
+        self.secQuestion.addItem("")
+        self.secQuestion.addItem("")
+        self.secQuestion.addItem("")
+        self.secQuestion.addItem("")
+        self.verticalLayout_4.addWidget(self.secQuestion)
+        self.secAnswer = QtWidgets.QLineEdit(self.signupFrame)
+        self.secAnswer.setObjectName("secAnswer")
+        self.verticalLayout_4.addWidget(self.secAnswer)
+        self.signuperrorMsg = QtWidgets.QLabel(self.signupFrame)
+        self.signuperrorMsg.setMinimumSize(QtCore.QSize(0, 0))
+        self.signuperrorMsg.setMaximumSize(QtCore.QSize(16777215, 25))
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.signuperrorMsg.setFont(font)
+        self.signuperrorMsg.setStyleSheet(" color:rgb(42, 43, 48);\n"
+"")
+        self.signuperrorMsg.setObjectName("signuperrorMsg")
+        self.verticalLayout_4.addWidget(self.signuperrorMsg)
+        self.termAgree = QtWidgets.QCheckBox(self.signupFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.termAgree.setFont(font)
+        self.termAgree.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.termAgree.setObjectName("termAgree")
+        self.verticalLayout_4.addWidget(self.termAgree)
+        self.requiredField = QtWidgets.QLabel(self.signupFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.requiredField.setFont(font)
+        self.requiredField.setObjectName("requiredField")
+        self.verticalLayout_4.addWidget(self.requiredField)
+        self.signup = QtWidgets.QPushButton(self.signupFrame)
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.signup.setFont(font)
+        self.signup.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.signup.setObjectName("signup")
+        self.verticalLayout_4.addWidget(self.signup)
+        self.frame_3 = QtWidgets.QFrame(self.signupFrame)
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame_3)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.haveAcc = QtWidgets.QLabel(self.frame_3)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.haveAcc.setFont(font)
+        self.haveAcc.setStyleSheet("padding:0px;")
+        self.haveAcc.setObjectName("haveAcc")
+        self.horizontalLayout.addWidget(self.haveAcc)
+        self.backtoLogin = QtWidgets.QPushButton(self.frame_3)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.backtoLogin.setFont(font)
+        self.backtoLogin.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.backtoLogin.setStyleSheet("")
         self.backtoLogin.setObjectName("backtoLogin")
+        self.horizontalLayout.addWidget(self.backtoLogin)
+        self.verticalLayout_4.addWidget(self.frame_3)
+        self.gridLayout_5.addWidget(self.signupFrame, 0, 0, 1, 1)
+        self.scrollArea.setWidget(self.scrollBar)
+        self.verticalLayout_2.addWidget(self.scrollArea)
         self.innerstackedWidget.addWidget(self.signupPage)
         self.changePW = QtWidgets.QWidget()
         self.changePW.setObjectName("changePW")
@@ -107,7 +492,7 @@ class Ui_MainWindow(object):
         self.backtoLogin_2.setGeometry(QtCore.QRect(360, 450, 93, 28))
         self.backtoLogin_2.setObjectName("backtoLogin_2")
         self.innerstackedWidget.addWidget(self.changePW)
-        self.verticalLayout_2.addWidget(self.innerstackedWidget)
+        self.gridLayout_2.addWidget(self.innerstackedWidget, 1, 1, 1, 1)
         self.stackedWidget.addWidget(self.loginsignup)
         self.inputData = QtWidgets.QWidget()
         self.inputData.setObjectName("inputData")
@@ -155,12 +540,12 @@ class Ui_MainWindow(object):
         self.label_7.setObjectName("label_7")
         self.stackedWidget.addWidget(self.about)
         self.gridLayout.addWidget(self.stackedWidget, 0, 0, 1, 1)
-        self.horizontalLayout.addWidget(self.mainMenu)
+        self.gridLayout_3.addWidget(self.mainMenu, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(1)
-        self.innerstackedWidget.setCurrentIndex(2)
+        self.innerstackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -174,11 +559,38 @@ class Ui_MainWindow(object):
         self.profileButton.setText(_translate("MainWindow", "Profile"))
         self.aboutButton.setText(_translate("MainWindow", "About"))
         self.label.setText(_translate("MainWindow", "Home"))
-        self.label_2.setText(_translate("MainWindow", "Login"))
+        self.username.setText(_translate("MainWindow", "Username"))
+        self.password.setText(_translate("MainWindow", "Password"))
+        self.inputUsername.setPlaceholderText(_translate("MainWindow", "Please enter your username..."))
+        self.inputPw.setPlaceholderText(_translate("MainWindow", "Please enter yout password..."))
+        self.signin.setText(_translate("MainWindow", "Log in"))
+        self.loginHeader.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:20pt; color:#fedd3b;\">Take control of your finances.</span></p><p><span style=\" font-size:20pt; color:#808390;\">Log in to your PFM account</span></p></body></html>"))
+        self.forgotPW.setText(_translate("MainWindow", "Forgot Password?"))
+        self.errorMsg.setText(_translate("MainWindow", "*Incorrect Password"))
+        self.noAcc.setText(_translate("MainWindow", "Don\'t Have an Account Yet?"))
         self.createAcc.setText(_translate("MainWindow", "Create"))
-        self.forgotPW.setText(_translate("MainWindow", "forgot PW"))
-        self.label_8.setText(_translate("MainWindow", "Signup"))
-        self.backtoLogin.setText(_translate("MainWindow", "Back to Login"))
+        self.signupHeader.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:20pt; color:#fedd3b;\">Build your wealth.</span></p><p><span style=\" font-size:20pt; color:#808390;\">Create your PFM account</span></p></body></html>"))
+        self.regUsername.setText(_translate("MainWindow", "<html><head/><body><p>Username<span style=\" color:#ea0003;\">*</span></p></body></html>"))
+        self.inputregUsername.setPlaceholderText(_translate("MainWindow", "Create your username..."))
+        self.regPw.setText(_translate("MainWindow", "<html><head/><body><p>Password<span style=\" color:#ea0003;\">*</span></p></body></html>"))
+        self.inputregPw.setPlaceholderText(_translate("MainWindow", "Create your password..."))
+        self.reinputregPw.setPlaceholderText(_translate("MainWindow", "Re-enter your password..."))
+        self.security.setText(_translate("MainWindow", "<html><head/><body><p>Security<span style=\" color:#ea0003;\">*</span></p></body></html>"))
+        self.secQuestion.setItemText(1, _translate("MainWindow", "   Birthplace"))
+        self.secQuestion.setItemText(2, _translate("MainWindow", "   Favorite book"))
+        self.secQuestion.setItemText(3, _translate("MainWindow", "   Favorite color"))
+        self.secQuestion.setItemText(4, _translate("MainWindow", "   Favorite food"))
+        self.secQuestion.setItemText(5, _translate("MainWindow", "   Favorite movie"))
+        self.secQuestion.setItemText(6, _translate("MainWindow", "   Favorite sport"))
+        self.secQuestion.setItemText(7, _translate("MainWindow", "   Favorite band"))
+        self.secQuestion.setItemText(8, _translate("MainWindow", "   Pet\'s name"))
+        self.secAnswer.setPlaceholderText(_translate("MainWindow", "Write your answer..."))
+        self.signuperrorMsg.setText(_translate("MainWindow", "<html><head/><body><p align=\"right\">*Password Doesn\'t Match</p></body></html>"))
+        self.termAgree.setText(_translate("MainWindow", "I accept the Terms of Service and Privacy Policy"))
+        self.requiredField.setText(_translate("MainWindow", "Fields marked with (*) are requierd."))
+        self.signup.setText(_translate("MainWindow", "Sign up"))
+        self.haveAcc.setText(_translate("MainWindow", "Already Have an Account?"))
+        self.backtoLogin.setText(_translate("MainWindow", "Log in"))
         self.label_9.setText(_translate("MainWindow", "changePW"))
         self.backtoLogin_2.setText(_translate("MainWindow", "Back to Login_2"))
         self.label_3.setText(_translate("MainWindow", "Input Data"))
