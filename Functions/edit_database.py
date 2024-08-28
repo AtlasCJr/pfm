@@ -112,6 +112,9 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
     cursor = conn.cursor()
     id = str(randomID())
 
+    if updated_at == None:
+        updated_at = created_at
+
     cursor.execute(
         "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
         (id, account.username, item, type, category, value, created_at, updated_at)
