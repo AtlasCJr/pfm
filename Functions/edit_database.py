@@ -34,7 +34,7 @@ def createDatabase() -> None:
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS miscellaneous (
         TYPE TEXT UNIQUE PRIMARY KEY,
-        VALUE TEXT,
+        VALUE TEXT
     )
     """)
     
@@ -73,10 +73,20 @@ def createDatabase() -> None:
     )
     """)
 
-    addLog("Database created")
+    cursor.execute("INSERT INTO miscellaneous (TYPE, VALUE) VALUES (?, ?)", 
+        ("last_user", "")
+    )
+    cursor.execute("INSERT INTO miscellaneous (TYPE, VALUE) VALUES (?, ?)", 
+        ("times_opened", "")
+    )
+    cursor.execute("INSERT INTO miscellaneous (TYPE, VALUE) VALUES (?, ?)", 
+        ("time_spent", "")
+    )
 
     conn.commit()
     conn.close()
+
+    addLog("Database created")
 
 def addLog(message: str) -> None:
     """
