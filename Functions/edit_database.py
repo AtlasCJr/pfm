@@ -33,10 +33,8 @@ def createDatabase() -> None:
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS miscellaneous (
-        MISCELLANEOUS_ID TEXT UNIQUE PRIMARY KEY,
-        USERNAME TEXT,
-        CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
+        TYPE TEXT UNIQUE PRIMARY KEY,
+        VALUE TEXT,
     )
     """)
     

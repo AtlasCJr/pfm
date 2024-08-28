@@ -9,7 +9,7 @@ A personal finance manager (PFM) is a tool or software designed to help individu
 
 #### Features
 - Multiple accounts
-- Embedded database system 
+- Embedded database system (potentially online)
 - Internal model prediction
 - Internal chatbot
 
@@ -21,6 +21,8 @@ The database consist is created in SQLite. There are 4 + 1 tables in the databas
     * Hashed Password
     * Created At
     * Updated At
+    * Security Question
+    * Security Answer
 
 + Chats
     * Message Id <-- Primary Key
@@ -44,13 +46,15 @@ The database consist is created in SQLite. There are 4 + 1 tables in the databas
     * Created At
     * Updated At
 
-and one more table _sqlite_sequences_ which hold account the incrementation for 'Log'.
++ Miscellaneous
+    * Type <-- Primary Key
+    * Value
+
+and one more table _sqlite_sequences_ which hold account the incrementation for 'Log' and some data in 'Miscellaneous'.
 
 #### Updates
-_other definition and/or explanation will be updated soon._
-
-#### Notes
-+ SQL data adding speed is about 300 items/s according to TQDM
+28/08/2024
++ Added the final home page
 
 #### Temporary Copy-Paste
 pyuic5 -x your_file.ui -o your_file.py
