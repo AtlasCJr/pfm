@@ -1,7 +1,17 @@
+from datetime import datetime
+
 class Account:
-    def __init__(self, username: str, password: str, created_at: str, updated_at: str, balance) -> None:
+    def __init__(self, username: str, 
+                 password: str, security_question:int, 
+                 security_answer:str, 
+                 created_at: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
+                 updated_at: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
+                 balance:int = 0
+                ) -> None:
         self.username = username
         self.password = password
+        self.security_question = security_question
+        self.security_answer = security_answer
         self.created_at = created_at
         self.updated_at = updated_at
         self.balance = balance

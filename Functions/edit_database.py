@@ -23,12 +23,23 @@ def createDatabase() -> None:
     CREATE TABLE IF NOT EXISTS accounts (
         USERNAME TEXT UNIQUE PRIMARY KEY,
         HASHED_PASSWORD INTEGER,
+        SECURITY_QUESTION INTEGER,
+        HASHED_SECURITY_ANSWER INTEGER,
         CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
         UPDATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
         BALANCE INT
     )
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS miscellaneous (
+        MISCELLANEOUS_ID TEXT UNIQUE PRIMARY KEY,
+        USERNAME TEXT,
+        CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
+    )
+    """)
+    
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS transactions (
         TRANSACTION_ID TEXT UNIQUE PRIMARY KEY,
@@ -93,11 +104,6 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
     cursor = conn.cursor()
     id = str(randomID())
 
-    if created_at == None:
-        created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    if updated_at == None:
-        updated_at = created_at
-
     cursor.execute(
         "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
         (id, account.username, item, type, category, value, created_at, updated_at)
@@ -115,15 +121,59 @@ def addAccount(account:Account) -> None:
 
     try:
         cursor.execute(
-            "INSERT INTO accounts (USERNAME, HASHED_PASSWORD, BALANCE) VALUES (?, ?, ?)", 
-            (account.username, sha256(account.password.encode()).hexdigest(), account.balance)
+            "INSERT INTO accounts (USERNAME, HASHED_PASSWORD, SECURITY_QUESTION, HASHED_SECURITY_ANSWER, BALANCE) VALUES (?, ?, ?, ?, ?)", 
+            (account.username, 
+             sha256(account.password.encode()).hexdigest(), 
+             account.security_question, 
+             account.security_answer, 
+             account.balance
+            )
         )
-    except:
-        return
 
-    conn.commit()
+        conn.commit()
+    except sqlite3.IntegrityError:
+        conn.rollback()
+        conn.close()
+        return "Username already exists"
+
     conn.close()
 
+def checkAccount(username:str, password:str) -> bool:
+    """
+    Check if the given username and password is correct
+    """
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM accounts WHERE USERNAME = ?", (username,))
+
+    row = cursor.fetchone()
+
+    conn.close()
+
+    if row == None:
+        return False
+    else:
+        return sha256(password.encode()).hexdigest() == row[1]
+
+def checkSecurityAnswer(username:str, security_answer:str) -> bool:
+    """
+    Check if the given security answer is correct
+    """
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM accounts WHERE USERNAME = ?", (username,))
+
+    row = cursor.fetchone()
+
+    conn.close()
+
+    if row == None:
+        return False
+    else:
+        return sha256(security_answer.encode()).hexdigest() == row[3]
+    
 def updateBalance(account:Account, new_balance:int) -> None:
     """
     Updates the balance of a user account.
@@ -135,6 +185,39 @@ def updateBalance(account:Account, new_balance:int) -> None:
     cursor.execute(
         "UPDATE accounts SET BALANCE = ? WHERE USERNAME = ?", 
         (new_balance, account.username)
+    )
+
+    conn.commit()
+    conn.close()
+
+def addMiscellaneous(account:Account) -> None:
+    """
+    Adds a miscellaneous field to a user account.
+    """
+
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+    id = str(randomID())
+
+    cursor.execute(
+        "INSERT INTO miscellaneous (MISCELLANEOUS_ID, USERNAME) VALUES (?, ?)", 
+        (id, account.username)
+    )
+
+    conn.commit()
+    conn.close()
+
+def deleteMiscellaneous(account:Account) -> None:
+    """
+    Deletes a miscellaneous field from a user account.
+    """
+
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM miscellaneous WHERE USERNAME = ?", 
+        (account.username,)
     )
 
     conn.commit()
@@ -166,3 +249,30 @@ def getAccount(username:str) -> Account:
     account = Account(row[0], row[1], row[2], row[3], row[4])
     
     return account
+
+def addChats(username:str, message_type:int, message:str) -> None:
+    """
+    Inserts a chat message into the chats table.
+    """
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+    id = str(randomID())
+
+    cursor.execute(
+        "INSERT INTO chats (MESSAGE_ID, USERNAME, MESSAGE_TYPE, MESSAGE) VALUES (?, ?, ?, ?)", 
+        (id, username, message_type, message)
+    )
+
+    conn.commit()
+    conn.close()
+
+def isUsernameAvailable(username:str) -> bool:
+    conn = sqlite3.connect("DB.db")
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1 FROM accounts WHERE USERNAME = ?", (username,))
+        row = cursor.fetchone()
+        return row is not None
+    finally:
+        conn.close()

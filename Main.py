@@ -3,20 +3,12 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
-from PyQt5.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient) 
-
-# Import UI file
+from UI.Master import Ui_MainWindow
 from UI.loadingScreen import Ui_loadingScreen
-from UI.loginPage import Ui_loginPage
-from UI.signupPage import Ui_signupPage
 
-counter = 0
-jumper = 0
-
-class MainProgram(QMainWindow):
+class LoadingScreen(QMainWindow):
     def __init__(self):
-        QMainWindow.__init__(self)
+        super().__init__()
         self.ui = Ui_loadingScreen()
         self.ui.setupUi(self)
 
@@ -25,46 +17,34 @@ class MainProgram(QMainWindow):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-        # Add drop shadow effect
         shadow = QtWidgets.QGraphicsDropShadowEffect(self)
         shadow.setBlurRadius(20)
         shadow.setColor(QtGui.QColor(0, 0, 0, 150))
         shadow.setOffset(0, 0)
         self.setGraphicsEffect(shadow)
 
-        ## QTIMER ==> START
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.progress)
-        # TIMER IN MILLISECONDS
         self.timer.start(15)
 
         self.show()
 
-    # Progress bar value
     def progressBarValue(self, value):
         styleSheet = """
             QFrame{
                 border-radius: 150px;
                 background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{stop_1} rgba(0, 0, 0, 0), stop:{stop_2} rgba(255, 215, 0, 255));
             }
-                    """
-        # GET PROGRESS BAR VALUE, CONVERT TO FLOAT AND INVERT VALUES
-        # stop works of 1.000 to 0.000
+        """
         progress = (100 - value) / 100.0
-
-        # GET NEW VALUES
         stop_1 = str(progress - 0.001)
         stop_2 = str(progress)
 
-        # FIX MAX VALUE
         if value == 100:
             stop_1 = "1.000"
             stop_2 = "1.000"
 
-        # SET VALUES TO NEW STYLESHEET
         newStylesheet = styleSheet.replace("{stop_1}", stop_1).replace("{stop_2}", stop_2)
-
-        # APPLY STYLESHEET WITH NEW VALUES
         self.ui.circularProg.setStyleSheet(newStylesheet)
 
     def progress(self):
@@ -76,22 +56,60 @@ class MainProgram(QMainWindow):
 
         newhtml = htmlText.replace("{VALUE}", str(int(jumper)))
 
-        if(value > jumper):                       
+        if value > jumper:                       
             self.ui.percentage.setText(newhtml)
             jumper += 7
 
-        if value >= 100: value = 1
+        if value >= 100:
+            value = 1
 
         self.progressBarValue(value)
-        # CLOSE SPLASH SCREE AND OPEN APP
-        if counter > 100:
-            # STOP TIMER
-            self.timer.stop()
 
-        # INCREASE COUNTER
+        if counter > 100:
+            self.timer.stop()
+            self.close()  # Close the loading screen
+            self.show_main_program()  # Show the main program window
+
         counter += 0.5
 
+    def show_main_program(self):
+        self.main_window = MainProgram()
+        self.main_window.show()
+
+class MainProgram(QMainWindow):
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+
+        # Connect buttons to the appropriate functions
+        self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))   
+        self.ui.loginButton.clicked.connect(self.show_loginsignup)
+        self.ui.inputdataButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.inputData)) 
+        self.ui.showdatabutton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.showData))   
+        self.ui.chatbotButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chatBot))
+        self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
+        self.ui.aboutButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.about))
+
+        # Buttons inside loginsignup widget
+        self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))  # Login -> CP
+        self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
+        self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
+        self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # CP -> Login
+
+    def show_loginsignup(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup)
+        self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
+
 if __name__ == "__main__":
+
+    os.system("cls" if os.name == "nt" else "clear")
+
+    global counter, jumper
+    counter = 0
+    jumper = 0
+
     app = QApplication(sys.argv)
-    window = MainProgram()
+    loading_screen = LoadingScreen()
     sys.exit(app.exec_())
