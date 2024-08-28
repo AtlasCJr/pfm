@@ -4,9 +4,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
 from PyQt5.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-
-sys.path.append(os.path.join(os.path.dirname(__file__), 'folder_lain'))
+from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient) 
 
 # Import UI file
 from UI.loadingScreen import Ui_loadingScreen
@@ -90,36 +88,8 @@ class MainProgram(QMainWindow):
             # STOP TIMER
             self.timer.stop()
 
-            self.login_page()
-
-            # Connect the create account button to the function to show the signup page
-            self.login_ui.createAcc.clicked.connect(self.show_signup_page)
-
         # INCREASE COUNTER
         counter += 0.5
-    
-    def login_page(self):
-       # Replace loading screen with login page
-        self.login_window = QWidget()
-        self.login_ui = Ui_loginPage()
-        self.login_ui.setupUi(self.login_window)
-
-        self.setWindowFlags(QtCore.Qt.Window)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground, False)
-        self.show()
-
-        self.setCentralWidget(self.login_window)
-        self.login_window.show()
-
-
-    def show_signup_page(self):
-        # Replace login window with signup page
-        self.signup_window = QWidget()
-        self.signup_ui = Ui_signupPage()
-        self.signup_ui.setupUi(self.signup_window)
-        self.setCentralWidget(self.signup_window)
-        self.signup_window.show()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
