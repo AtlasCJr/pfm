@@ -15,74 +15,10 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="0">
-     <widget class="QWidget" name="menuBar" native="true">
-      <property name="maximumSize">
-       <size>
-        <width>90</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QPushButton" name="homeButton">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Home</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="loginButton">
-         <property name="text">
-          <string>Login/Signup</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="inputdataButton">
-         <property name="text">
-          <string>Input Data</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="showdatabutton">
-         <property name="text">
-          <string>Show Data</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="chatbotButton">
-         <property name="text">
-          <string>Chat Bot</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="profileButton">
-         <property name="text">
-          <string>Profile</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="aboutButton">
-         <property name="text">
-          <string>About</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QWidget" name="mainMenu" native="true">
       <property name="styleSheet">
-       <string notr="true">background-color: #E5E5E5</string>
+       <string notr="true">background-color: #23272A</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -127,7 +63,7 @@
               </size>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -152,7 +88,7 @@
                   <string notr="true">#loginFrame{
 	background-color: rgb(42, 43, 48);       
    	padding-left: 15px;      
-   	padding-right: 15px;       
+   	padding-right: 20px;       
     padding-top: 25px;          
     padding-bottom: 25px;
 	border-radius: 15px;      
@@ -459,7 +395,7 @@ QScrollBar::sub-page:vertical {
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>0</y>
+                    <y>-168</y>
                     <width>576</width>
                     <height>900</height>
                    </rect>
@@ -491,8 +427,8 @@ QScrollBar::sub-page:vertical {
                      <property name="styleSheet">
                       <string notr="true">#signupFrame{
 	background-color: rgb(42, 43, 48);    
-   	padding-left: 15px;      
-   	padding-right: 15px;       
+   	padding-left: 5px;      
+   	padding-right: 5px;       
     padding-top: 25px;          
     padding-bottom: 25px;
 }
@@ -536,12 +472,9 @@ QLineEdit{
 	background-color: rgb(42, 43, 48);
 	color:#808390;
 }
-#secQuestion{
-background-color: rgb(128, 131, 144);
-}
 QComboBox {
     color: white;                        /* Warna teks combobox */
-    background-color: #333333;           /* Warna latar belakang combobox */
+    background-color:  rgb(128, 131, 144);           /* Warna latar belakang combobox */
     border: 1px solid #555555;           /* Warna border combobox */
     border-radius: 5px;                  /* Membuat sudut rounded */
 }
@@ -631,6 +564,9 @@ QComboBox QAbstractItemView {
                           <family>Poppins</family>
                           <pointsize>9</pointsize>
                          </font>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
                         </property>
                         <property name="text">
                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Security&lt;span style=&quot; color:#ea0003;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -751,6 +687,9 @@ QComboBox QAbstractItemView {
                         <property name="cursor">
                          <cursorShape>PointingHandCursor</cursorShape>
                         </property>
+                        <property name="styleSheet">
+                         <string notr="true">padding-left:7px;</string>
+                        </property>
                         <property name="text">
                          <string>I accept the Terms of Service and Privacy Policy</string>
                         </property>
@@ -846,37 +785,287 @@ QComboBox QAbstractItemView {
               </layout>
              </widget>
              <widget class="QWidget" name="changePW">
-              <widget class="QLabel" name="label_9">
-               <property name="geometry">
-                <rect>
-                 <x>230</x>
-                 <y>300</y>
-                 <width>914</width>
-                 <height>100</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>50</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>changePW</string>
-               </property>
-              </widget>
-              <widget class="QPushButton" name="backtoLogin_2">
-               <property name="geometry">
-                <rect>
-                 <x>360</x>
-                 <y>450</y>
-                 <width>93</width>
-                 <height>28</height>
-                </rect>
-               </property>
-               <property name="text">
-                <string>Back to Login_2</string>
-               </property>
-              </widget>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_6">
+               <item row="0" column="0">
+                <widget class="QFrame" name="changepwFrame">
+                 <property name="styleSheet">
+                  <string notr="true">#changepwFrame{
+	background-color: rgb(42, 43, 48);
+   	padding-left: 15px;      
+   	padding-right: 20px;       
+    padding-top: 25px;          
+    padding-bottom: 25px;
+	border-radius: 15px;      
+}
+#frame_5{
+	background-color: rgb(42, 43, 48);
+}
+QLineEdit{
+	height:50px;
+	padding: 1px 15 px;
+	background-color: rgb(42, 43, 48);
+	border: 1px solid rgba(84,86,95,255);
+	border-radius: 10px;
+	color:rgb(255, 255, 255);
+	font-family: Poppins;
+    font-size:15px;
+}
+QLabel{
+	background-color: rgb(42, 43, 48);
+	padding-left:5px;
+}
+#savePw{
+	background-color: #FFD700;	
+	border-radius:5px;
+	height:50px;
+}
+#secQuestionLabel, #resetPw, #whatuWaiting{
+	color:#808390;
+	font-family: Poppins;
+}
+#secQuestionLabel, #resetPw{
+	padding-top:25px;
+}
+#backtoLogin_2{
+	color:rgb(255, 255, 255);
+	background-color: rgb(84, 86, 95);
+	border-radius:15px;
+	height:30px;
+}
+QComboBox {
+    color: white;                        /* Warna teks combobox */
+    background-color:rgb(128, 131, 144);           /* Warna latar belakang combobox */
+    border: 1px solid #555555;           /* Warna border combobox */
+    border-radius: 5px;                  /* Membuat sudut rounded */
+}
+QComboBox QAbstractItemView {
+    color: white;                        /* Warna teks dropdown */
+    background-color: #333333;           /* Warna latar belakang dropdown */
+    selection-background-color: #fedd3b; /* Warna latar belakang item yang dipilih*/
+    selection-color: black;              /* Warna teks item yang dipilih */
+    border: 1px solid #555555;          /* Warna border dropdown */
+}</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <item>
+                   <widget class="QLabel" name="changepwHeader">
+                    <property name="font">
+                     <font>
+                      <family>Poppins Medium</family>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; color:#fedd3b;&quot;&gt;Protect your finances.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; color:#808390;&quot;&gt;Enhance your protection.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="secQuestionLabel">
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                      <pointsize>9</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Security Question</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="secQuestion_2">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                      <pointsize>9</pointsize>
+                     </font>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Birthplace</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Favorite book</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Favorite color</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Favorite food</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Favorite movie</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Favorite sport</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Favorite band</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>   Pet's name</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="secAnswer_2">
+                    <property name="placeholderText">
+                     <string>Write your answer...</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="resetPw">
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                      <pointsize>9</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Reset Password</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="enternewPw">
+                    <property name="placeholderText">
+                     <string>Create your new password...</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="reenternewPw">
+                    <property name="placeholderText">
+                     <string>Enter your new password...</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="succesMsg">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                      <pointsize>9</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#2a2b30;&quot;&gt;*Passwords don't match&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="savePw">
+                    <property name="font">
+                     <font>
+                      <family>Montserrat</family>
+                      <pointsize>11</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Save</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_5">
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_4">
+                     <item>
+                      <widget class="QLabel" name="whatuWaiting">
+                       <property name="font">
+                        <font>
+                         <family>Poppins</family>
+                         <pointsize>9</pointsize>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>What Are You Waiting For?</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="backtoLogin_2">
+                       <property name="font">
+                        <font>
+                         <family>Segoe UI</family>
+                         <pointsize>9</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Back to Log In</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </widget>
            </item>
@@ -982,6 +1171,70 @@ QComboBox QAbstractItemView {
            </property>
           </widget>
          </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QWidget" name="menuBar" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>90</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="homeButton">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Home</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="loginButton">
+         <property name="text">
+          <string>Login/Signup</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="inputdataButton">
+         <property name="text">
+          <string>Input Data</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="showdatabutton">
+         <property name="text">
+          <string>Show Data</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="chatbotButton">
+         <property name="text">
+          <string>Chat Bot</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="profileButton">
+         <property name="text">
+          <string>Profile</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="aboutButton">
+         <property name="text">
+          <string>About</string>
+         </property>
         </widget>
        </item>
       </layout>

@@ -19,36 +19,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.menuBar = QtWidgets.QWidget(self.centralwidget)
-        self.menuBar.setMaximumSize(QtCore.QSize(90, 16777215))
-        self.menuBar.setObjectName("menuBar")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.menuBar)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.homeButton = QtWidgets.QPushButton(self.menuBar)
-        self.homeButton.setStyleSheet("")
-        self.homeButton.setObjectName("homeButton")
-        self.verticalLayout.addWidget(self.homeButton)
-        self.loginButton = QtWidgets.QPushButton(self.menuBar)
-        self.loginButton.setObjectName("loginButton")
-        self.verticalLayout.addWidget(self.loginButton)
-        self.inputdataButton = QtWidgets.QPushButton(self.menuBar)
-        self.inputdataButton.setObjectName("inputdataButton")
-        self.verticalLayout.addWidget(self.inputdataButton)
-        self.showdatabutton = QtWidgets.QPushButton(self.menuBar)
-        self.showdatabutton.setObjectName("showdatabutton")
-        self.verticalLayout.addWidget(self.showdatabutton)
-        self.chatbotButton = QtWidgets.QPushButton(self.menuBar)
-        self.chatbotButton.setObjectName("chatbotButton")
-        self.verticalLayout.addWidget(self.chatbotButton)
-        self.profileButton = QtWidgets.QPushButton(self.menuBar)
-        self.profileButton.setObjectName("profileButton")
-        self.verticalLayout.addWidget(self.profileButton)
-        self.aboutButton = QtWidgets.QPushButton(self.menuBar)
-        self.aboutButton.setObjectName("aboutButton")
-        self.verticalLayout.addWidget(self.aboutButton)
-        self.gridLayout_3.addWidget(self.menuBar, 0, 0, 1, 1)
         self.mainMenu = QtWidgets.QWidget(self.centralwidget)
-        self.mainMenu.setStyleSheet("background-color: #E5E5E5")
+        self.mainMenu.setStyleSheet("background-color: #23272A")
         self.mainMenu.setObjectName("mainMenu")
         self.gridLayout = QtWidgets.QGridLayout(self.mainMenu)
         self.gridLayout.setObjectName("gridLayout")
@@ -82,7 +54,7 @@ class Ui_MainWindow(object):
         self.loginFrame.setStyleSheet("#loginFrame{\n"
 "    background-color: rgb(42, 43, 48);       \n"
 "       padding-left: 15px;      \n"
-"       padding-right: 15px;       \n"
+"       padding-right: 20px;       \n"
 "    padding-top: 25px;          \n"
 "    padding-bottom: 25px;\n"
 "    border-radius: 15px;      \n"
@@ -276,7 +248,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollBar = QtWidgets.QWidget()
-        self.scrollBar.setGeometry(QtCore.QRect(0, 0, 576, 900))
+        self.scrollBar.setGeometry(QtCore.QRect(0, -168, 576, 900))
         self.scrollBar.setStyleSheet("")
         self.scrollBar.setObjectName("scrollBar")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.scrollBar)
@@ -286,8 +258,8 @@ class Ui_MainWindow(object):
         self.signupFrame.setMinimumSize(QtCore.QSize(500, 900))
         self.signupFrame.setStyleSheet("#signupFrame{\n"
 "    background-color: rgb(42, 43, 48);    \n"
-"       padding-left: 15px;      \n"
-"       padding-right: 15px;       \n"
+"       padding-left: 5px;      \n"
+"       padding-right: 5px;       \n"
 "    padding-top: 25px;          \n"
 "    padding-bottom: 25px;\n"
 "}\n"
@@ -331,12 +303,9 @@ class Ui_MainWindow(object):
 "    background-color: rgb(42, 43, 48);\n"
 "    color:#808390;\n"
 "}\n"
-"#secQuestion{\n"
-"background-color: rgb(128, 131, 144);\n"
-"}\n"
 "QComboBox {\n"
 "    color: white;                        /* Warna teks combobox */\n"
-"    background-color: #333333;           /* Warna latar belakang combobox */\n"
+"    background-color:  rgb(128, 131, 144);           /* Warna latar belakang combobox */\n"
 "    border: 1px solid #555555;           /* Warna border combobox */\n"
 "    border-radius: 5px;                  /* Membuat sudut rounded */\n"
 "}\n"
@@ -389,6 +358,7 @@ class Ui_MainWindow(object):
         font.setFamily("Poppins")
         font.setPointSize(9)
         self.security.setFont(font)
+        self.security.setStyleSheet("")
         self.security.setObjectName("security")
         self.verticalLayout_4.addWidget(self.security)
         self.secQuestion = QtWidgets.QComboBox(self.signupFrame)
@@ -431,6 +401,7 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.termAgree.setFont(font)
         self.termAgree.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.termAgree.setStyleSheet("padding-left:7px;")
         self.termAgree.setObjectName("termAgree")
         self.verticalLayout_4.addWidget(self.termAgree)
         self.requiredField = QtWidgets.QLabel(self.signupFrame)
@@ -481,16 +452,163 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.scrollArea)
         self.innerstackedWidget.addWidget(self.signupPage)
         self.changePW = QtWidgets.QWidget()
+        self.changePW.setStyleSheet("")
         self.changePW.setObjectName("changePW")
-        self.label_9 = QtWidgets.QLabel(self.changePW)
-        self.label_9.setGeometry(QtCore.QRect(230, 300, 914, 100))
+        self.gridLayout_6 = QtWidgets.QGridLayout(self.changePW)
+        self.gridLayout_6.setObjectName("gridLayout_6")
+        self.changepwFrame = QtWidgets.QFrame(self.changePW)
+        self.changepwFrame.setStyleSheet("#changepwFrame{\n"
+"    background-color: rgb(42, 43, 48);\n"
+"       padding-left: 15px;      \n"
+"       padding-right: 20px;       \n"
+"    padding-top: 25px;          \n"
+"    padding-bottom: 25px;\n"
+"    border-radius: 15px;      \n"
+"}\n"
+"#frame_5{\n"
+"    background-color: rgb(42, 43, 48);\n"
+"}\n"
+"QLineEdit{\n"
+"    height:50px;\n"
+"    padding: 1px 15 px;\n"
+"    background-color: rgb(42, 43, 48);\n"
+"    border: 1px solid rgba(84,86,95,255);\n"
+"    border-radius: 10px;\n"
+"    color:rgb(255, 255, 255);\n"
+"    font-family: Poppins;\n"
+"    font-size:15px;\n"
+"}\n"
+"QLabel{\n"
+"    background-color: rgb(42, 43, 48);\n"
+"    padding-left:5px;\n"
+"}\n"
+"#savePw{\n"
+"    background-color: #FFD700;    \n"
+"    border-radius:5px;\n"
+"    height:50px;\n"
+"}\n"
+"#secQuestionLabel, #resetPw, #whatuWaiting{\n"
+"    color:#808390;\n"
+"    font-family: Poppins;\n"
+"}\n"
+"#secQuestionLabel, #resetPw{\n"
+"    padding-top:25px;\n"
+"}\n"
+"#backtoLogin_2{\n"
+"    color:rgb(255, 255, 255);\n"
+"    background-color: rgb(84, 86, 95);\n"
+"    border-radius:15px;\n"
+"    height:30px;\n"
+"}\n"
+"QComboBox {\n"
+"    color: white;                        /* Warna teks combobox */\n"
+"    background-color:rgb(128, 131, 144);           /* Warna latar belakang combobox */\n"
+"    border: 1px solid #555555;           /* Warna border combobox */\n"
+"    border-radius: 5px;                  /* Membuat sudut rounded */\n"
+"}\n"
+"QComboBox QAbstractItemView {\n"
+"    color: white;                        /* Warna teks dropdown */\n"
+"    background-color: #333333;           /* Warna latar belakang dropdown */\n"
+"    selection-background-color: #fedd3b; /* Warna latar belakang item yang dipilih*/\n"
+"    selection-color: black;              /* Warna teks item yang dipilih */\n"
+"    border: 1px solid #555555;          /* Warna border dropdown */\n"
+"}")
+        self.changepwFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.changepwFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.changepwFrame.setObjectName("changepwFrame")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.changepwFrame)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.changepwHeader = QtWidgets.QLabel(self.changepwFrame)
         font = QtGui.QFont()
-        font.setPointSize(50)
-        self.label_9.setFont(font)
-        self.label_9.setObjectName("label_9")
-        self.backtoLogin_2 = QtWidgets.QPushButton(self.changePW)
-        self.backtoLogin_2.setGeometry(QtCore.QRect(360, 450, 93, 28))
+        font.setFamily("Poppins Medium")
+        self.changepwHeader.setFont(font)
+        self.changepwHeader.setObjectName("changepwHeader")
+        self.verticalLayout_5.addWidget(self.changepwHeader)
+        self.secQuestionLabel = QtWidgets.QLabel(self.changepwFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.secQuestionLabel.setFont(font)
+        self.secQuestionLabel.setObjectName("secQuestionLabel")
+        self.verticalLayout_5.addWidget(self.secQuestionLabel)
+        self.secQuestion_2 = QtWidgets.QComboBox(self.changepwFrame)
+        self.secQuestion_2.setMinimumSize(QtCore.QSize(0, 40))
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.secQuestion_2.setFont(font)
+        self.secQuestion_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.secQuestion_2.setStyleSheet("")
+        self.secQuestion_2.setObjectName("secQuestion_2")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.setItemText(0, "")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.addItem("")
+        self.secQuestion_2.addItem("")
+        self.verticalLayout_5.addWidget(self.secQuestion_2)
+        self.secAnswer_2 = QtWidgets.QLineEdit(self.changepwFrame)
+        self.secAnswer_2.setObjectName("secAnswer_2")
+        self.verticalLayout_5.addWidget(self.secAnswer_2)
+        self.resetPw = QtWidgets.QLabel(self.changepwFrame)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.resetPw.setFont(font)
+        self.resetPw.setObjectName("resetPw")
+        self.verticalLayout_5.addWidget(self.resetPw)
+        self.enternewPw = QtWidgets.QLineEdit(self.changepwFrame)
+        self.enternewPw.setObjectName("enternewPw")
+        self.verticalLayout_5.addWidget(self.enternewPw)
+        self.reenternewPw = QtWidgets.QLineEdit(self.changepwFrame)
+        self.reenternewPw.setObjectName("reenternewPw")
+        self.verticalLayout_5.addWidget(self.reenternewPw)
+        self.succesMsg = QtWidgets.QLabel(self.changepwFrame)
+        self.succesMsg.setMinimumSize(QtCore.QSize(0, 25))
+        self.succesMsg.setMaximumSize(QtCore.QSize(16777215, 25))
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.succesMsg.setFont(font)
+        self.succesMsg.setObjectName("succesMsg")
+        self.verticalLayout_5.addWidget(self.succesMsg)
+        self.savePw = QtWidgets.QPushButton(self.changepwFrame)
+        font = QtGui.QFont()
+        font.setFamily("Montserrat")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.savePw.setFont(font)
+        self.savePw.setObjectName("savePw")
+        self.verticalLayout_5.addWidget(self.savePw)
+        self.frame_5 = QtWidgets.QFrame(self.changepwFrame)
+        self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_5.setObjectName("frame_5")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_5)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.whatuWaiting = QtWidgets.QLabel(self.frame_5)
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        self.whatuWaiting.setFont(font)
+        self.whatuWaiting.setObjectName("whatuWaiting")
+        self.horizontalLayout_4.addWidget(self.whatuWaiting)
+        self.backtoLogin_2 = QtWidgets.QPushButton(self.frame_5)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(9)
+        font.setBold(True)
+        font.setWeight(75)
+        self.backtoLogin_2.setFont(font)
         self.backtoLogin_2.setObjectName("backtoLogin_2")
+        self.horizontalLayout_4.addWidget(self.backtoLogin_2)
+        self.verticalLayout_5.addWidget(self.frame_5)
+        self.gridLayout_6.addWidget(self.changepwFrame, 0, 0, 1, 1)
         self.innerstackedWidget.addWidget(self.changePW)
         self.gridLayout_2.addWidget(self.innerstackedWidget, 1, 1, 1, 1)
         self.stackedWidget.addWidget(self.loginsignup)
@@ -541,23 +659,44 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.about)
         self.gridLayout.addWidget(self.stackedWidget, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.mainMenu, 0, 1, 1, 1)
+        self.menuBar = QtWidgets.QWidget(self.centralwidget)
+        self.menuBar.setMaximumSize(QtCore.QSize(90, 16777215))
+        self.menuBar.setObjectName("menuBar")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.menuBar)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.homeButton = QtWidgets.QPushButton(self.menuBar)
+        self.homeButton.setStyleSheet("")
+        self.homeButton.setObjectName("homeButton")
+        self.verticalLayout.addWidget(self.homeButton)
+        self.loginButton = QtWidgets.QPushButton(self.menuBar)
+        self.loginButton.setObjectName("loginButton")
+        self.verticalLayout.addWidget(self.loginButton)
+        self.inputdataButton = QtWidgets.QPushButton(self.menuBar)
+        self.inputdataButton.setObjectName("inputdataButton")
+        self.verticalLayout.addWidget(self.inputdataButton)
+        self.showdatabutton = QtWidgets.QPushButton(self.menuBar)
+        self.showdatabutton.setObjectName("showdatabutton")
+        self.verticalLayout.addWidget(self.showdatabutton)
+        self.chatbotButton = QtWidgets.QPushButton(self.menuBar)
+        self.chatbotButton.setObjectName("chatbotButton")
+        self.verticalLayout.addWidget(self.chatbotButton)
+        self.profileButton = QtWidgets.QPushButton(self.menuBar)
+        self.profileButton.setObjectName("profileButton")
+        self.verticalLayout.addWidget(self.profileButton)
+        self.aboutButton = QtWidgets.QPushButton(self.menuBar)
+        self.aboutButton.setObjectName("aboutButton")
+        self.verticalLayout.addWidget(self.aboutButton)
+        self.gridLayout_3.addWidget(self.menuBar, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(1)
-        self.innerstackedWidget.setCurrentIndex(0)
+        self.innerstackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.homeButton.setText(_translate("MainWindow", "Home"))
-        self.loginButton.setText(_translate("MainWindow", "Login/Signup"))
-        self.inputdataButton.setText(_translate("MainWindow", "Input Data"))
-        self.showdatabutton.setText(_translate("MainWindow", "Show Data"))
-        self.chatbotButton.setText(_translate("MainWindow", "Chat Bot"))
-        self.profileButton.setText(_translate("MainWindow", "Profile"))
-        self.aboutButton.setText(_translate("MainWindow", "About"))
         self.label.setText(_translate("MainWindow", "Home"))
         self.username.setText(_translate("MainWindow", "Username"))
         self.password.setText(_translate("MainWindow", "Password"))
@@ -591,13 +730,36 @@ class Ui_MainWindow(object):
         self.signup.setText(_translate("MainWindow", "Sign up"))
         self.haveAcc.setText(_translate("MainWindow", "Already Have an Account?"))
         self.backtoLogin.setText(_translate("MainWindow", "Log in"))
-        self.label_9.setText(_translate("MainWindow", "changePW"))
-        self.backtoLogin_2.setText(_translate("MainWindow", "Back to Login_2"))
+        self.changepwHeader.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:20pt; color:#fedd3b;\">Protect your finances.</span></p><p><span style=\" font-size:20pt; color:#808390;\">Enhance your protection.</span></p></body></html>"))
+        self.secQuestionLabel.setText(_translate("MainWindow", "Security Question"))
+        self.secQuestion_2.setItemText(1, _translate("MainWindow", "   Birthplace"))
+        self.secQuestion_2.setItemText(2, _translate("MainWindow", "   Favorite book"))
+        self.secQuestion_2.setItemText(3, _translate("MainWindow", "   Favorite color"))
+        self.secQuestion_2.setItemText(4, _translate("MainWindow", "   Favorite food"))
+        self.secQuestion_2.setItemText(5, _translate("MainWindow", "   Favorite movie"))
+        self.secQuestion_2.setItemText(6, _translate("MainWindow", "   Favorite sport"))
+        self.secQuestion_2.setItemText(7, _translate("MainWindow", "   Favorite band"))
+        self.secQuestion_2.setItemText(8, _translate("MainWindow", "   Pet\'s name"))
+        self.secAnswer_2.setPlaceholderText(_translate("MainWindow", "Write your answer..."))
+        self.resetPw.setText(_translate("MainWindow", "Reset Password"))
+        self.enternewPw.setPlaceholderText(_translate("MainWindow", "Create your new password..."))
+        self.reenternewPw.setPlaceholderText(_translate("MainWindow", "Enter your new password..."))
+        self.succesMsg.setText(_translate("MainWindow", "<html><head/><body><p align=\"right\"><span style=\" color:#2a2b30;\">*Passwords don\'t match</span></p></body></html>"))
+        self.savePw.setText(_translate("MainWindow", "Save"))
+        self.whatuWaiting.setText(_translate("MainWindow", "What Are You Waiting For?"))
+        self.backtoLogin_2.setText(_translate("MainWindow", "Back to Log In"))
         self.label_3.setText(_translate("MainWindow", "Input Data"))
         self.label_4.setText(_translate("MainWindow", "Show Data"))
         self.label_5.setText(_translate("MainWindow", "Chatbot"))
         self.label_6.setText(_translate("MainWindow", "Profile"))
         self.label_7.setText(_translate("MainWindow", "About"))
+        self.homeButton.setText(_translate("MainWindow", "Home"))
+        self.loginButton.setText(_translate("MainWindow", "Login/Signup"))
+        self.inputdataButton.setText(_translate("MainWindow", "Input Data"))
+        self.showdatabutton.setText(_translate("MainWindow", "Show Data"))
+        self.chatbotButton.setText(_translate("MainWindow", "Chat Bot"))
+        self.profileButton.setText(_translate("MainWindow", "Profile"))
+        self.aboutButton.setText(_translate("MainWindow", "About"))
 
 
 if __name__ == "__main__":
