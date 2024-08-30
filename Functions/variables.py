@@ -1,4 +1,6 @@
 from datetime import datetime
+from PyQt5.QtCore import QThread, pyqtSignal
+from Functions.chats import getBotAnswer
 
 class Account:
     def __init__(self, username: str, 
@@ -22,6 +24,17 @@ class Account:
         print(f"{'Date Created':>15}: {self.created_at}")
         print(f"{'Date Updated':>15}: {self.updated_at}")
         print(f"{'Balance':>15}: {self.balance}")
+
+class botWorker(QThread):
+    resultReady = pyqtSignal(str)
+
+    def __init__(self, question):
+        super().__init__()
+        self.question = question
+
+    def run(self):
+        bot_answer = getBotAnswer(self.question)
+        self.resultReady.emit(bot_answer)
 
 typeMapping = {
     0: "Foods & Drinks",

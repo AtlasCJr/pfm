@@ -7,8 +7,7 @@ from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
 
 from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount
-from Functions.variables import Account
-
+from Functions.variables import Account, botWorker
 class LoadingScreen(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -108,6 +107,9 @@ class MainProgram(QMainWindow):
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)
 
+        # Chatting
+        self.ui.userChatInput.returnPressed.connect(self.askGemini)
+
     def Authentication(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup)
         self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
@@ -164,13 +166,66 @@ class MainProgram(QMainWindow):
         print(isCorrect)
 
         if isCorrect:
-            self.ui.LI_ErrorMsg.text("")
+            self.ui.LI_ErrorMsg.setText("")
             return getAccount(username)
         else:
-            self.ui.LI_ErrorMsg.text("Wrong username or password.")
+            self.ui.LI_ErrorMsg.setText("Wrong username or password.")
             return None
 
+    def askGemini(self):
+        question = self.ui.userChatInput.text()
+        self.ui.userChatInput.clear()
 
+        # Multi-threading
+        self.botWorker = botWorker(question)
+        self.botWorker.resultReady.connect(self.handleBotAnswer)
+        self.botWorker.start()
+
+    def addChatFrame(self, text):
+        FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
+        FRAME.setSizePolicy(sizePolicy)
+        FRAME.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        FRAME.setFrameShadow(QtWidgets.QFrame.Raised)
+        
+        LAYOUT = QtWidgets.QHBoxLayout(FRAME)
+        LAYOUT.setContentsMargins(0, -1, 0, -1)
+
+        LABEL = QtWidgets.QLabel(FRAME)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(LABEL.sizePolicy().hasHeightForWidth())
+        LABEL.setSizePolicy(sizePolicy)
+        LABEL.setMinimumSize(QtCore.QSize(0, 50))
+        LABEL.setStyleSheet("""
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 127);
+            padding-left: 50px;
+            padding-right: 25px;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+        """)
+        LABEL.setAlignment(QtCore.Qt.AlignJustify | QtCore.Qt.AlignVCenter)
+        LABEL.setWordWrap(True)
+        LABEL.setText(text)
+        LAYOUT.addWidget(LABEL)
+
+        SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+        LAYOUT.addItem(SPACERS)
+
+        return FRAME
+    
+    def handleBotAnswer(self, answer):
+        newChatFrame = self.addChatFrame(answer)
+
+        self.ui.verticalLayout_9.addWidget(newChatFrame)
+        self.ui.chatHandle.verticalScrollBar().setValue(self.ui.chatHandle.verticalScrollBar().maximum())
+
+        print(answer)
 
 
 if __name__ == "__main__":
