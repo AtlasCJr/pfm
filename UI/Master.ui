@@ -1347,6 +1347,19 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QPushButton" name="homeButton">
          <property name="styleSheet">
           <string notr="true"/>
@@ -1390,6 +1403,19 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           <string>About</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QPushButton" name="profileButton">
