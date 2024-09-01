@@ -31,7 +31,7 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1650,7 +1650,7 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">border: none;</string>
          </property>
          <property name="text">
           <string>Home</string>
@@ -1669,6 +1669,9 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
            <height>30</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
          <property name="text">
           <string>Login</string>
          </property>
@@ -1685,6 +1688,9 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
          </property>
          <property name="text">
           <string>Upload</string>
@@ -1703,6 +1709,9 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
            <height>30</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
          <property name="text">
           <string>Analyze</string>
          </property>
@@ -1720,6 +1729,9 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
            <height>30</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
          <property name="text">
           <string>Chatbot</string>
          </property>
@@ -1736,6 +1748,9 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
            <width>0</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
          </property>
          <property name="text">
           <string>About</string>
@@ -1772,6 +1787,9 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
            <width>50</width>
            <height>50</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
          </property>
          <property name="text">
           <string/>
