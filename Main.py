@@ -174,6 +174,7 @@ class MainProgram(QMainWindow):
         if isCorrect:
             self.ui.LI_ErrorMsg.setText("")
             self.currentAcc = getAccount(username)
+            self.accountChanged()
             self.ui.stackedWidget.setCurrentWidget(self.ui.home)
             return
         else:
