@@ -90,22 +90,7 @@ class MainProgram(QMainWindow):
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
 
-        self.ui.homeText.setText(f"""
-        <html><head/><body>
-            <p align="center"><span style=" font-style:italic;">
-                &quot;The journey of a thousand miles begins with one step.&quot; 
-            </span></p>
-            
-            <p align="center"><span style=" font-style:italic;">
-                — Lao Tzu
-            </span></p><p align="center"></p>
-            
-            <br/>
-            
-            <p>Hi, {self.currentAcc.username}!</p>
-            <p>It is {getDate()}.<br/>What would you like to do?</p>
-        </body></html>
-        """)
+        self.accountChanged()
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -255,6 +240,67 @@ class MainProgram(QMainWindow):
 
         print(answer)
 
+    def accountChanged(self):
+        self.ui.homeText.setText(f"""
+            <html><head/><body>
+                <p align="center"><span style=" font-style:italic;">
+                    &quot;The journey of a thousand miles begins with one step.&quot; 
+                </span></p>
+                
+                <p align="center"><span style=" font-style:italic;">
+                    — Lao Tzu
+                </span></p><p align="center"></p>
+                
+                <br/>
+                
+                <p>Hi, {self.currentAcc.username}!</p>
+                <p>It is {getDate()}.<br/>What would you like to do?</p>
+            </body></html>
+            """)
+        
+        self.ui.PF_usernamePassword.setText(f"""
+            <html><head/><body>
+                <p><span style=" font-weight:600;">
+                    Username
+                </span></p>
+                
+                <p>{self.currentAcc.username}</p>
+                
+                <p><span style=" font-weight:600;">
+                    Password
+                </span></p>
+                
+                <p>{self.currentAcc.password}</p>
+            </body></html>
+        """)
+
+        self.ui.PF_information.setText(f"""
+            <html><head/><body>
+                <p><span style=" font-weight:600;">
+                    Date Created
+                </span></p>
+                                       
+                <p>{self.currentAcc.created_at}</p>
+                                       
+                <p><span style=" font-weight:600;">
+                    Date Updated
+                </span></p>
+                                       
+                <p>{self.currentAcc.updated_at}</p>
+                                       
+                <p><span style=" font-weight:600;">
+                    Balance
+                </span></p>
+                                       
+                <p>{self.currentAcc.balance}</p>
+                                       
+                <p><span style=" font-weight:600;">
+                    Transaction Uploaded
+                </span></p>
+                
+                <p>dajhdajhd</p>
+            </body></html>
+        """)
 
 if __name__ == "__main__":
 
