@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import *
 from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
 
-from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastUser
+from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastUser, editAccount
 from Functions.edit_database import *
 from Functions.variables import Account, botWorker
 from Functions.others import getDate
@@ -113,9 +113,11 @@ class MainProgram(QMainWindow):
         self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
         self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # CP -> Login
+        self.ui.PF_changePassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))       # Profile.FP -> CP
 
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)
+        self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)
 
         # Chatting
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
@@ -150,7 +152,7 @@ class MainProgram(QMainWindow):
             self.ui.SI_ErrorMsg.setText("The typed password doesn't match.")
             return
 
-        security_q = int(self.ui.SI_dropdownSecurity.currentText()[1])
+        security_q = int(self.ui.SI_dropdownSecurity.currentText()[3])
         security_a = self.ui.SI_inputSecurity.text()
 
         if security_a == "":
@@ -165,6 +167,7 @@ class MainProgram(QMainWindow):
         
         newAcc = Account(username, password1, security_q, security_a)
         self.ui.SI_ErrorMsg.setText("")
+        self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         addAccount(newAcc)
 
     def handleLogIn(self) -> Account:
@@ -182,6 +185,31 @@ class MainProgram(QMainWindow):
         else:
             self.ui.LI_ErrorMsg.setText("Wrong username or password.")
             return
+
+    def handleChangePW(self):
+        username = self.ui.CP_inputUsername.text()
+        answer = self.ui.CP_inputSecAnswer.text()
+
+        password1 = self.ui.CP_inputPassword1.text()
+        password2 = self.ui.CP_inputPassword2.text()
+
+        if password1 == "" or password2 == "":
+            self.ui.CP_errorMsg.setText("Password cannot be empty.")
+            return
+        if len(password1) <= 5:
+            self.ui.CP_errorMsg.setText("Password cannot be less than 5 characters.")
+            return
+        if password1 != password2:
+            self.ui.CP_errorMsg.setText("The typed password doesn't match.")
+            return
+
+        if answer == self.currentAcc.security_question:
+            thisAcc = getAccount(username)
+            thisAcc.password = password1
+            editAccount(thisAcc)
+            self.ui.stackedWidget.setCurrentWidget(self.ui.loginPage)
+        else:
+            self.ui.CP_errorMsg.setText("Wrong security answer.")
 
     def askGemini(self):
         question = self.ui.userChatInput.text()
