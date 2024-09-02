@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import *
 from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
 
-from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastAccount
+from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastUser
 from Functions.variables import Account, botWorker
 from Functions.others import getDate
 
@@ -84,7 +84,7 @@ class LoadingScreen(QMainWindow):
 class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        self.currentAcc = getLastAccount()
+        self.currentAcc = getLastUser()
 
         self.ui = Ui_Master()
         self.ui.setupUi(self)
