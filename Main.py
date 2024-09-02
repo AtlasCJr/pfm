@@ -91,14 +91,20 @@ class MainProgram(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
 
         self.ui.homeText.setText(f"""
-        <html><head/><body><p align="center">
-            <span style=" font-style:italic;">
-                &quot;The journey of a thousand miles begins with one step.&quot; </span></p><p align="center"><span style=" font-style:italic;">— Lao Tzu</span></p><p align="center">
-            <br/></p>
+        <html><head/><body>
+            <p align="center"><span style=" font-style:italic;">
+                &quot;The journey of a thousand miles begins with one step.&quot; 
+            </span></p>
             
-            <p>Hi, {self.currentAcc.username}!</p><p>It is {getDate()}. 
-            <br/>What would you like to do?
-        </p></body></html>
+            <p align="center"><span style=" font-style:italic;">
+                — Lao Tzu
+            </span></p><p align="center"></p>
+            
+            <br/>
+            
+            <p>Hi, {self.currentAcc.username}!</p>
+            <p>It is {getDate()}.<br/>What would you like to do?</p>
+        </body></html>
         """)
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
