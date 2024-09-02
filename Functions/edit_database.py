@@ -209,6 +209,8 @@ def getAccount(username:str) -> Account:
 
     conn.close()
 
+    updateLastUser(row[0])
+
     if row is None:
         # Check online database
         # account = get_account(username)

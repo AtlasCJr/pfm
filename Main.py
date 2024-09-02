@@ -85,13 +85,15 @@ class LoadingScreen(QMainWindow):
 class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        self.currentAcc = getLastUser()
+
 
         self.ui = Ui_Master()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
 
+        self.currentAcc = getLastUser()
         self.accountChanged()
+
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -100,10 +102,11 @@ class MainProgram(QMainWindow):
         self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
         self.ui.loginButton.clicked.connect(self.Authentication)
         self.ui.inputdataButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.inputData)) 
-        self.ui.showdatabutton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.showData))   
+        self.ui.visualizeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.visualize))   
         self.ui.chatbotButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chatBot))
         self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
         self.ui.aboutButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.about))
+        self.ui.analyzeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.analyze))
 
         # Authentication Buttons
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))  # Login -> CP
@@ -169,8 +172,6 @@ class MainProgram(QMainWindow):
         password = self.ui.LI_inputPassword.text()
 
         isCorrect = checkAccount(username, password)
-
-        print(isCorrect)
 
         if isCorrect:
             self.ui.LI_ErrorMsg.setText("")
