@@ -301,7 +301,7 @@ def updateLastUser(username:str) -> None:
     conn.commit()
     conn.close()
 
-def getLastUser() -> str:
+def getLastUser() -> Account:
     """
     Retrieves the last user that logged in.
     """
@@ -312,9 +312,11 @@ def getLastUser() -> str:
 
     row = cursor.fetchone()
 
+    Account = getAccount(row[0])
+
     conn.close()
 
-    return row[0]
+    return Account
 
 def updateTimesOpened() -> None:
     """
