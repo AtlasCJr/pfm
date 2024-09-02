@@ -223,6 +223,8 @@ class MainProgram(QMainWindow):
             background-color: {"rgb(0, 0, 127)" if isBot else "rgb(0, 127, 0)"};
             padding-left: {"50" if isBot else "25"}px;
             padding-right: {"50" if not isBot else "25"}px;
+            padding-top: 20px;
+            padding-bottom: 20px;
             border-top-{"right" if isBot else "left"}-radius: 25px;
             border-bottom-{"right" if isBot else "left"}-radius: 25px;
         """)

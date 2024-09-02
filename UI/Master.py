@@ -729,6 +729,9 @@ class Ui_Master(object):
 "padding-left: 50px;\n"
 "padding-right: 25px;\n"
 "\n"
+"padding-top: 20px;\n"
+"padding-bottom: 20px;\n"
+"\n"
 "border-top-right-radius: 25px;\n"
 "border-bottom-right-radius: 25px;")
         self.label_8.setAlignment(QtCore.Qt.AlignJustify|QtCore.Qt.AlignVCenter)
@@ -907,6 +910,7 @@ class Ui_Master(object):
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
         self.frame_16 = QtWidgets.QFrame(self.scrollAreaWidgetContents_2)
+        self.frame_16.setMaximumSize(QtCore.QSize(16777215, 300))
         self.frame_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_16.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_16.setObjectName("frame_16")
@@ -938,7 +942,7 @@ class Ui_Master(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollArea_3.setObjectName("scrollArea_3")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 324, 278))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 324, 232))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_18.setObjectName("verticalLayout_18")
@@ -998,6 +1002,9 @@ class Ui_Master(object):
         self.graphicsView = QtWidgets.QGraphicsView(self.frame_18)
         self.graphicsView.setObjectName("graphicsView")
         self.verticalLayout_17.addWidget(self.graphicsView)
+        self.graphicsView_2 = QtWidgets.QGraphicsView(self.frame_18)
+        self.graphicsView_2.setObjectName("graphicsView_2")
+        self.verticalLayout_17.addWidget(self.graphicsView_2)
         self.verticalLayout_16.addWidget(self.frame_18)
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_13.addWidget(self.scrollArea_2)
@@ -1146,7 +1153,7 @@ class Ui_Master(object):
 
         self.retranslateUi(Master)
         self.stackedWidget.setCurrentIndex(6)
-        self.innerstackedWidget.setCurrentIndex(1)
+        self.innerstackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(Master)
 
     def retranslateUi(self, Master):
