@@ -17,7 +17,8 @@ def getBotAnswer(message:str) -> str:
     )
 
     prompt = """
-    Answer the following questions briefly. Only 1 paragraph is allowed and don't use bold/italic/underlined messages. Write your answers in paragraphs, not points.
+    Answer the following questions briefly. Only 1 paragraph is allowed and don't use bold/italic/underlined messages. Write your answers in paragraph, not points.
+    Don't make the paragraph long, you can only give 4-5 sentences.
     """
 
     conversation = model.start_chat(history=[

@@ -6,7 +6,8 @@ from PyQt5.QtWidgets import *
 from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
 
-from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastAccount
+from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastUser
+from Functions.edit_database import *
 from Functions.variables import Account, botWorker
 from Functions.others import getDate
 
@@ -84,28 +85,13 @@ class LoadingScreen(QMainWindow):
 class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        self.currentAcc = getLastAccount()
+        self.currentAcc = getLastUser()
 
         self.ui = Ui_Master()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
 
-        self.ui.homeText.setText(f"""
-        <html><head/><body>
-            <p align="center"><span style=" font-style:italic;">
-                &quot;The journey of a thousand miles begins with one step.&quot; 
-            </span></p>
-            
-            <p align="center"><span style=" font-style:italic;">
-                — Lao Tzu
-            </span></p><p align="center"></p>
-            
-            <br/>
-            
-            <p>Hi, {self.currentAcc.username}!</p>
-            <p>It is {getDate()}.<br/>What would you like to do?</p>
-        </body></html>
-        """)
+        self.accountChanged()
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -189,6 +175,7 @@ class MainProgram(QMainWindow):
         if isCorrect:
             self.ui.LI_ErrorMsg.setText("")
             self.currentAcc = getAccount(username)
+            self.accountChanged()
             self.ui.stackedWidget.setCurrentWidget(self.ui.home)
             return
         else:
@@ -199,12 +186,14 @@ class MainProgram(QMainWindow):
         question = self.ui.userChatInput.text()
         self.ui.userChatInput.clear()
 
+        self.addChatFrame(question, False)
+
         # Multi-threading
         self.botWorker = botWorker(question)
         self.botWorker.resultReady.connect(self.handleBotAnswer)
         self.botWorker.start()
 
-    def addChatFrame(self, text):
+    def addChatFrame(self, text, isBot:bool):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -217,6 +206,10 @@ class MainProgram(QMainWindow):
         LAYOUT = QtWidgets.QHBoxLayout(FRAME)
         LAYOUT.setContentsMargins(0, -1, 0, -1)
 
+        if not isBot:
+            SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+            LAYOUT.addItem(SPACERS)
+
         LABEL = QtWidgets.QLabel(FRAME)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -224,32 +217,92 @@ class MainProgram(QMainWindow):
         sizePolicy.setHeightForWidth(LABEL.sizePolicy().hasHeightForWidth())
         LABEL.setSizePolicy(sizePolicy)
         LABEL.setMinimumSize(QtCore.QSize(0, 50))
-        LABEL.setStyleSheet("""
+        LABEL.setStyleSheet(f"""
             color: rgb(255, 255, 255);
-            background-color: rgb(0, 0, 127);
-            padding-left: 50px;
-            padding-right: 25px;
-            border-top-right-radius: 25px;
-            border-bottom-right-radius: 25px;
+            background-color: {"rgb(0, 0, 127)" if isBot else "rgb(0, 127, 0)"};
+            padding-left: {"50" if isBot else "25"}px;
+            padding-right: {"50" if not isBot else "25"}px;
+            border-top-{"right" if isBot else "left"}-radius: 25px;
+            border-bottom-{"right" if isBot else "left"}-radius: 25px;
         """)
         LABEL.setAlignment(QtCore.Qt.AlignJustify | QtCore.Qt.AlignVCenter)
         LABEL.setWordWrap(True)
         LABEL.setText(text)
         LAYOUT.addWidget(LABEL)
 
-        SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
-        LAYOUT.addItem(SPACERS)
+        if isBot:
+            SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+            LAYOUT.addItem(SPACERS)
 
-        return FRAME
+        self.ui.verticalLayout_9.addWidget(FRAME)
+        self.ui.chatHandle.verticalScrollBar().setValue(self.ui.chatHandle.verticalScrollBar().maximum())
     
     def handleBotAnswer(self, answer):
-        newChatFrame = self.addChatFrame(answer)
-
-        self.ui.verticalLayout_9.addWidget(newChatFrame)
-        self.ui.chatHandle.verticalScrollBar().setValue(self.ui.chatHandle.verticalScrollBar().maximum())
+        self.addChatFrame(answer, True)
 
         print(answer)
 
+    def accountChanged(self):
+        self.ui.homeText.setText(f"""
+            <html><head/><body>
+                <p align="center"><span style=" font-style:italic;">
+                    &quot;The journey of a thousand miles begins with one step.&quot; 
+                </span></p>
+                
+                <p align="center"><span style=" font-style:italic;">
+                    — Lao Tzu
+                </span></p><p align="center"></p>
+                
+                <br/>
+                
+                <p>Hi, {self.currentAcc.username}!</p>
+                <p>It is {getDate()}.<br/>What would you like to do?</p>
+            </body></html>
+            """)
+        
+        self.ui.PF_usernamePassword.setText(f"""
+            <html><head/><body>
+                <p><span style=" font-weight:600;">
+                    Username
+                </span></p>
+                
+                <p>{self.currentAcc.username}</p>
+                
+                <p><span style=" font-weight:600;">
+                    Password
+                </span></p>
+                
+                <p>{self.currentAcc.password}</p>
+            </body></html>
+        """)
+
+        self.ui.PF_information.setText(f"""
+            <html><head/><body>
+                <p><span style=" font-weight:600;">
+                    Date Created
+                </span></p>
+                                       
+                <p>{self.currentAcc.created_at}</p>
+                                       
+                <p><span style=" font-weight:600;">
+                    Date Updated
+                </span></p>
+                                       
+                <p>{self.currentAcc.updated_at}</p>
+                                       
+                <p><span style=" font-weight:600;">
+                    Balance
+                </span></p>
+                                       
+                <p>{self.currentAcc.balance}</p>
+                                       
+                <p><span style=" font-weight:600;">
+                    Transaction Uploaded
+                </span></p>
+                
+                <p>dajhdajhd</p>
+            </body></html>
+        """)
 
 if __name__ == "__main__":
 

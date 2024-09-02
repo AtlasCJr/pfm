@@ -8,7 +8,8 @@ class Account:
                  security_answer:str, 
                  created_at: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
                  updated_at: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
-                 balance:int = 0
+                 balance:int = 0,
+                 num_transactions:int = 0
                 ) -> None:
         self.username = username
         self.password = password
@@ -17,6 +18,7 @@ class Account:
         self.created_at = created_at
         self.updated_at = updated_at
         self.balance = balance
+        self.num_transactions = num_transactions
 
     def summary(self):
         print(f"{'Username':>15}: {self.username}")

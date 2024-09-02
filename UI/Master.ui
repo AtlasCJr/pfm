@@ -495,7 +495,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>576</width>
+                    <width>500</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1309,8 +1309,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>574</width>
-                   <height>544</height>
+                   <width>162</width>
+                   <height>738</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1490,6 +1490,9 @@ padding: 15px;</string>
                  </item>
                  <item>
                   <widget class="QLabel" name="PF_infoBanner">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
                    <property name="text">
                     <string>TextLabel</string>
                    </property>
@@ -1509,6 +1512,9 @@ padding: 15px;</string>
                 <layout class="QHBoxLayout" name="horizontalLayout_9">
                  <item>
                   <widget class="QFrame" name="frame_12">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
                    <property name="frameShape">
                     <enum>QFrame::StyledPanel</enum>
                    </property>
@@ -1538,6 +1544,9 @@ padding: 15px;</string>
                  </item>
                  <item>
                   <widget class="QLabel" name="PF_information">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
                    <property name="text">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Date Created&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Monday, xx August xxxx&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Date Updated&lt;/span&gt;&lt;/p&gt;&lt;p&gt;ajkajda&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Balance&lt;/span&gt;&lt;/p&gt;&lt;p&gt;dkajkdjak&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Transaction Uploaded&lt;/span&gt;&lt;/p&gt;&lt;p&gt;dajhdajhd&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
@@ -1668,6 +1677,9 @@ padding: 15px;</string>
                  </item>
                  <item>
                   <widget class="QPushButton" name="PF_deleteAccount">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
                    <property name="text">
                     <string>Delete Account</string>
                    </property>
