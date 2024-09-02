@@ -7,6 +7,7 @@ from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
 
 from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastUser
+from Functions.edit_database import *
 from Functions.variables import Account, botWorker
 from Functions.others import getDate
 

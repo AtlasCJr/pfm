@@ -313,6 +313,8 @@ def getLastUser() -> Account:
 
     row = cursor.fetchone()
 
+    Account = getAccount(row[0])
+
     conn.close()
 
     return getAccount(row[0])
