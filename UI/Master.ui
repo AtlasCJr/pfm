@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>771</width>
+    <width>856</width>
     <height>754</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>4</number>
+          <number>6</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -156,7 +156,7 @@
               </size>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -495,7 +495,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>500</width>
+                    <width>665</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1309,8 +1309,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>679</width>
-                   <height>578</height>
+                   <width>661</width>
+                   <height>562</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1531,8 +1531,23 @@ padding: 15px;</string>
                     </item>
                     <item>
                      <widget class="QPushButton" name="PF_changePassword">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>50</width>
+                        <height>30</height>
+                       </size>
+                      </property>
                       <property name="styleSheet">
-                       <string notr="true">color: rgb(255, 255, 255);</string>
+                       <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+
+border-radius: 15px;</string>
                       </property>
                       <property name="text">
                        <string>Change Password</string>
@@ -1667,8 +1682,23 @@ padding: 15px;</string>
                  </item>
                  <item>
                   <widget class="QPushButton" name="PF_logOut">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>60</width>
+                     <height>30</height>
+                    </size>
+                   </property>
                    <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 255, 255);</string>
+                    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+
+border-radius: 5px;</string>
                    </property>
                    <property name="text">
                     <string>Log Out</string>
@@ -1677,8 +1707,17 @@ padding: 15px;</string>
                  </item>
                  <item>
                   <widget class="QPushButton" name="PF_deleteAccount">
+                   <property name="minimumSize">
+                    <size>
+                     <width>90</width>
+                     <height>30</height>
+                    </size>
+                   </property>
                    <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 255, 255);</string>
+                    <string notr="true">color: rgb(0, 0, 0);
+
+background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
                    </property>
                    <property name="text">
                     <string>Delete Account</string>
@@ -1707,10 +1746,16 @@ padding: 15px;</string>
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
-                <width>611</width>
-                <height>698</height>
+                <y>-202</y>
+                <width>696</width>
+                <height>900</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>900</height>
+               </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_16">
                <item>
@@ -1737,6 +1782,12 @@ padding: 15px;</string>
                </item>
                <item>
                 <widget class="QFrame" name="frame_17">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>300</height>
+                  </size>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
@@ -1763,8 +1814,8 @@ padding: 15px;</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>282</width>
-                       <height>228</height>
+                       <width>324</width>
+                       <height>278</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">

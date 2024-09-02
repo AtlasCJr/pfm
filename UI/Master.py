@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Master(object):
     def setupUi(self, Master):
         Master.setObjectName("Master")
-        Master.resize(771, 754)
+        Master.resize(856, 754)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("UI\\../Assets/UWOGH.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Master.setWindowIcon(icon)
@@ -282,7 +282,7 @@ class Ui_Master(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollBar = QtWidgets.QWidget()
-        self.scrollBar.setGeometry(QtCore.QRect(0, 0, 500, 900))
+        self.scrollBar.setGeometry(QtCore.QRect(0, 0, 665, 900))
         self.scrollBar.setStyleSheet("")
         self.scrollBar.setObjectName("scrollBar")
         self.gridLayout_5 = QtWidgets.QGridLayout(self.scrollBar)
@@ -700,7 +700,7 @@ class Ui_Master(object):
         self.chatHandle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.chatHandle.setObjectName("chatHandle")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 679, 578))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 661, 562))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
@@ -807,7 +807,16 @@ class Ui_Master(object):
         self.PF_usernamePassword.setObjectName("PF_usernamePassword")
         self.verticalLayout_15.addWidget(self.PF_usernamePassword)
         self.PF_changePassword = QtWidgets.QPushButton(self.frame_12)
-        self.PF_changePassword.setStyleSheet("color: rgb(255, 255, 255);")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.PF_changePassword.sizePolicy().hasHeightForWidth())
+        self.PF_changePassword.setSizePolicy(sizePolicy)
+        self.PF_changePassword.setMinimumSize(QtCore.QSize(50, 30))
+        self.PF_changePassword.setStyleSheet("color: rgb(0, 0, 0);\n"
+"background-color: rgb(255, 255, 255);\n"
+"\n"
+"border-radius: 15px;")
         self.PF_changePassword.setObjectName("PF_changePassword")
         self.verticalLayout_15.addWidget(self.PF_changePassword)
         self.horizontalLayout_9.addWidget(self.frame_12)
@@ -860,11 +869,24 @@ class Ui_Master(object):
         spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_10.addItem(spacerItem10)
         self.PF_logOut = QtWidgets.QPushButton(self.frame_15)
-        self.PF_logOut.setStyleSheet("color: rgb(255, 255, 255);")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.PF_logOut.sizePolicy().hasHeightForWidth())
+        self.PF_logOut.setSizePolicy(sizePolicy)
+        self.PF_logOut.setMinimumSize(QtCore.QSize(60, 30))
+        self.PF_logOut.setStyleSheet("color: rgb(0, 0, 0);\n"
+"background-color: rgb(255, 255, 255);\n"
+"\n"
+"border-radius: 5px;")
         self.PF_logOut.setObjectName("PF_logOut")
         self.horizontalLayout_10.addWidget(self.PF_logOut)
         self.PF_deleteAccount = QtWidgets.QPushButton(self.frame_15)
-        self.PF_deleteAccount.setStyleSheet("color: rgb(255, 255, 255);")
+        self.PF_deleteAccount.setMinimumSize(QtCore.QSize(90, 30))
+        self.PF_deleteAccount.setStyleSheet("color: rgb(0, 0, 0);\n"
+"\n"
+"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
         self.PF_deleteAccount.setObjectName("PF_deleteAccount")
         self.horizontalLayout_10.addWidget(self.PF_deleteAccount)
         self.verticalLayout_14.addWidget(self.frame_15)
@@ -879,7 +901,8 @@ class Ui_Master(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollArea_2.setObjectName("scrollArea_2")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 611, 698))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, -202, 696, 900))
+        self.scrollAreaWidgetContents_2.setMinimumSize(QtCore.QSize(0, 900))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
@@ -899,6 +922,7 @@ class Ui_Master(object):
         self.horizontalLayout_13.addWidget(self.calendarWidget)
         self.verticalLayout_16.addWidget(self.frame_16)
         self.frame_17 = QtWidgets.QFrame(self.scrollAreaWidgetContents_2)
+        self.frame_17.setMaximumSize(QtCore.QSize(16777215, 300))
         self.frame_17.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_17.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_17.setObjectName("frame_17")
@@ -914,7 +938,7 @@ class Ui_Master(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollArea_3.setObjectName("scrollArea_3")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 282, 228))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 324, 278))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_18.setObjectName("verticalLayout_18")
@@ -1122,7 +1146,7 @@ class Ui_Master(object):
 
         self.retranslateUi(Master)
         self.stackedWidget.setCurrentIndex(6)
-        self.innerstackedWidget.setCurrentIndex(2)
+        self.innerstackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(Master)
 
     def retranslateUi(self, Master):
