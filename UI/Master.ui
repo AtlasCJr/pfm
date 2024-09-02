@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
-    <height>754</height>
+    <width>797</width>
+    <height>766</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -156,7 +156,7 @@
               </size>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -495,7 +495,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>580</width>
+                    <width>576</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -705,42 +705,42 @@ QComboBox QAbstractItemView {
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Birthplace</string>
+                          <string>   1. Where were you born?</string>
                          </property>
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Favorite book</string>
+                          <string>   2. What is your favorite book?</string>
                          </property>
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Favorite color</string>
+                          <string>   3. What is your favorite color?</string>
                          </property>
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Favorite food</string>
+                          <string>   4. What is your favorite food?</string>
                          </property>
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Favorite movie</string>
+                          <string>   5. What is your favorite movie?</string>
                          </property>
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Favorite sport</string>
+                          <string>   6. What is your favorite sport?</string>
                          </property>
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Favorite band</string>
+                          <string>   7. What is your favorite band?</string>
                          </property>
                         </item>
                         <item>
                          <property name="text">
-                          <string>   Pet's name</string>
+                          <string>   8. What is the name of your pet?</string>
                          </property>
                         </item>
                        </widget>
@@ -1015,42 +1015,42 @@ QComboBox QAbstractItemView {
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Birthplace</string>
+                      <string>   1. Where were you born?</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Favorite book</string>
+                      <string>   2. What is your favorite book?</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Favorite color</string>
+                      <string>   3. What is your favorite color?</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Favorite food</string>
+                      <string>   4. What is your favorite food?</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Favorite movie</string>
+                      <string>   5. What is your favorite movie?</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Favorite sport</string>
+                      <string>   6. What is your favorite sport?</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Favorite band</string>
+                      <string>   7. What is ypur favorite band?</string>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>   Pet's name</string>
+                      <string>   8. What is the name of your pet?</string>
                      </property>
                     </item>
                    </widget>
@@ -1309,8 +1309,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>162</width>
-                   <height>738</height>
+                   <width>181</width>
+                   <height>892</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_9">
