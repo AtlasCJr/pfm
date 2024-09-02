@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>767</width>
+    <width>770</width>
     <height>754</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -125,7 +125,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="homeText">
              <property name="styleSheet">
               <string notr="true">color: rgb(255, 255, 255);</string>
              </property>
@@ -495,7 +495,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>748</width>
+                    <width>580</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1309,8 +1309,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>781</width>
-                   <height>562</height>
+                   <width>162</width>
+                   <height>738</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_9">

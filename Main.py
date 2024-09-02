@@ -6,8 +6,11 @@ from PyQt5.QtWidgets import *
 from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
 
-from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount
+from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastAccount
 from Functions.variables import Account, botWorker
+from Functions.others import getDate
+
+
 class LoadingScreen(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -81,10 +84,22 @@ class LoadingScreen(QMainWindow):
 class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+        self.currentAcc = getLastAccount()
 
         self.ui = Ui_Master()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+
+        self.ui.homeText.setText(f"""
+        <html><head/><body><p align="center">
+            <span style=" font-style:italic;">
+                &quot;The journey of a thousand miles begins with one step.&quot; </span></p><p align="center"><span style=" font-style:italic;">— Lao Tzu</span></p><p align="center">
+            <br/></p>
+            
+            <p>Hi, {self.currentAcc.username}!</p><p>It is {getDate()}. 
+            <br/>What would you like to do?
+        </p></body></html>
+        """)
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -167,10 +182,12 @@ class MainProgram(QMainWindow):
 
         if isCorrect:
             self.ui.LI_ErrorMsg.setText("")
-            return getAccount(username)
+            self.currentAcc = getAccount(username)
+            self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+            return
         else:
             self.ui.LI_ErrorMsg.setText("Wrong username or password.")
-            return None
+            return
 
     def askGemini(self):
         question = self.ui.userChatInput.text()

@@ -258,6 +258,8 @@ def getAccount(username:str) -> Account:
     conn.close()
 
     account = Account(row[0], row[1], row[2], row[3], row[4])
+
+    setLastAccount(account)
     
     return account
 
@@ -287,3 +289,26 @@ def isUsernameAvailable(username:str) -> bool:
         return row is not None
     finally:
         conn.close()
+
+def getLastAccount() -> Account:
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM miscellaneous WHERE TYPE = 'last_user'")
+    row = cursor.fetchone()
+
+    conn.close()
+
+    acc = getAccount(row[1])
+    return acc
+
+def setLastAccount(acc:Account) -> None:
+    username = acc.username
+
+    conn = sqlite3.connect("DB.db")
+    cursor = conn.cursor()
+
+    cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = 'last_user'", (username,))
+    conn.commit()
+    
+    conn.close()
