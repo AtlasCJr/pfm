@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1037</width>
-    <height>825</height>
+    <height>824</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -256,7 +256,11 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>4</number>
+<<<<<<< Updated upstream
+          <number>0</number>
+=======
+          <number>3</number>
+>>>>>>> Stashed changes
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -717,7 +721,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>810</width>
+                    <width>500</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1640,7 +1644,7 @@ QScrollBar::sub-page:vertical {
                 <x>0</x>
                 <y>0</y>
                 <width>832</width>
-                <height>1187</height>
+                <height>986</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2003,7 +2007,7 @@ border: none;</string>
                    <x>0</x>
                    <y>0</y>
                    <width>768</width>
-                   <height>555</height>
+                   <height>563</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
