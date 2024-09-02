@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>972</width>
+    <width>767</width>
     <height>754</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>5</number>
+          <number>6</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1309,7 +1309,7 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>744</width>
+                   <width>781</width>
                    <height>562</height>
                   </rect>
                  </property>
@@ -1438,24 +1438,263 @@ padding: 15px;</string>
           </layout>
          </widget>
          <widget class="QWidget" name="profile">
-          <widget class="QLabel" name="label_6">
-           <property name="geometry">
-            <rect>
-             <x>320</x>
-             <y>230</y>
-             <width>231</width>
-             <height>211</height>
-            </rect>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>50</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Profile</string>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QFrame" name="frame_9">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_12">
+              <property name="leftMargin">
+               <number>100</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_11">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string>Atlas</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_6">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string>Monday, September 1st 2024 - Tuesday, September 2nd 2024</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_10">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <widget class="QFrame" name="frame_11">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_13">
+                 <item>
+                  <widget class="QLabel" name="label_12">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Username&lt;/p&gt;&lt;p&gt;Date Created&lt;/p&gt;&lt;p&gt;Date Updated&lt;/p&gt;&lt;p&gt;Balance&lt;/p&gt;&lt;p&gt;Transactions Uploaded&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="Line" name="line">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_12">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_12">
+                 <item>
+                  <widget class="QLabel" name="label_14">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sigma&lt;/p&gt;&lt;p&gt;Monday, September 1st 2024&lt;/p&gt;&lt;p&gt;Tuesday, September 2nd 2024&lt;/p&gt;&lt;p&gt;Rp. 1.000.000&lt;/p&gt;&lt;p&gt;17&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_13">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <item>
+               <widget class="QFrame" name="frame_14">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
+                  <spacer name="horizontalSpacer_12">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>50</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_13">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);
+</string>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;We’re grateful that you’ve entrusted us with your financial journey. Managing your finances is a significant step towards achieving your goals, and we’re here to support you every step of the way.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_13">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>50</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_15">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                 <item>
+                  <spacer name="horizontalSpacer_11">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_2">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
+                   <property name="text">
+                    <string>Change Password</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 255, 255);</string>
+                   </property>
+                   <property name="text">
+                    <string>Log Out</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="about">
           <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1523,8 +1762,11 @@ padding: 15px;</string>
                    <property name="text">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#fedd3b;&quot;&gt;About Us&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Who We Are and What We Do&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
+                   <property name="alignment">
+                    <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+                   </property>
                    <property name="margin">
-                    <number>25</number>
+                    <number>0</number>
                    </property>
                   </widget>
                  </item>
@@ -1561,13 +1803,13 @@ padding: 15px;</string>
 This app was created by Jonathan Edward, Davin, and Farhan as part of the requirements for the Control Laboratory Assistant program at FTUI. The project repository is available on GitHub.</string>
                    </property>
                    <property name="alignment">
-                    <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+                    <set>Qt::AlignJustify|Qt::AlignTop</set>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>
                    </property>
                    <property name="margin">
-                    <number>50</number>
+                    <number>0</number>
                    </property>
                    <property name="indent">
                     <number>-1</number>
@@ -1595,6 +1837,22 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
               </item>
              </layout>
             </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>50</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <spacer name="verticalSpacer_2">
@@ -1656,7 +1914,7 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>Home</string>
+          <string> Home</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1679,7 +1937,7 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>Login</string>
+          <string> Login</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1702,7 +1960,7 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>Upload</string>
+          <string> Upload</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1725,7 +1983,7 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>Analyze</string>
+          <string> Analyze</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1748,7 +2006,7 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>Chatbot</string>
+          <string> Chatbot</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1771,7 +2029,7 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>About</string>
+          <string> About</string>
          </property>
          <property name="icon">
           <iconset>
