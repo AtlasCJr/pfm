@@ -31,7 +31,7 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1309,8 +1309,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>181</width>
-                   <height>892</height>
+                   <width>574</width>
+                   <height>544</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1440,59 +1440,6 @@ padding: 15px;</string>
          <widget class="QWidget" name="profile">
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
-            <widget class="QFrame" name="frame_9">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_12">
-              <property name="leftMargin">
-               <number>100</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="label_11">
-                <property name="styleSheet">
-                 <string notr="true">color: rgb(255, 255, 255);</string>
-                </property>
-                <property name="text">
-                 <string>Atlas</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_6">
-                <property name="styleSheet">
-                 <string notr="true">color: rgb(255, 255, 255);</string>
-                </property>
-                <property name="text">
-                 <string>Monday, September 1st 2024 - Tuesday, September 2nd 2024</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
             <widget class="QFrame" name="frame_10">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
@@ -1500,7 +1447,7 @@ padding: 15px;</string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <layout class="QVBoxLayout" name="verticalLayout_12">
               <item>
                <widget class="QFrame" name="frame_11">
                 <property name="frameShape">
@@ -1509,17 +1456,42 @@ padding: 15px;</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_13">
+                <layout class="QHBoxLayout" name="horizontalLayout_12">
                  <item>
-                  <widget class="QLabel" name="label_12">
-                   <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 255, 255);</string>
+                  <widget class="QLabel" name="PF_profilePict">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>80</width>
+                     <height>80</height>
+                    </size>
                    </property>
                    <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Username&lt;/p&gt;&lt;p&gt;Date Created&lt;/p&gt;&lt;p&gt;Date Updated&lt;/p&gt;&lt;p&gt;Balance&lt;/p&gt;&lt;p&gt;Transactions Uploaded&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <string/>
                    </property>
-                   <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <property name="pixmap">
+                    <pixmap>../Assets/user.png</pixmap>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="PF_infoBanner">
+                   <property name="text">
+                    <string>TextLabel</string>
                    </property>
                   </widget>
                  </item>
@@ -1527,31 +1499,47 @@ padding: 15px;</string>
                </widget>
               </item>
               <item>
-               <widget class="Line" name="line">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(255, 255, 255);</string>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QFrame" name="frame_12">
+               <widget class="QFrame" name="frame_9">
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
                  <item>
-                  <widget class="QLabel" name="label_14">
-                   <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 255, 255);</string>
+                  <widget class="QFrame" name="frame_12">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
                    </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_15">
+                    <item>
+                     <widget class="QLabel" name="PF_usernamePassword">
+                      <property name="text">
+                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Username&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sigma&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Password&lt;/span&gt;&lt;/p&gt;&lt;p&gt;niggas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="PF_changePassword">
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(255, 255, 255);</string>
+                      </property>
+                      <property name="text">
+                       <string>Change Password</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="PF_information">
                    <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sigma&lt;/p&gt;&lt;p&gt;Monday, September 1st 2024&lt;/p&gt;&lt;p&gt;Tuesday, September 2nd 2024&lt;/p&gt;&lt;p&gt;Rp. 1.000.000&lt;/p&gt;&lt;p&gt;17&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Date Created&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Monday, xx August xxxx&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Date Updated&lt;/span&gt;&lt;/p&gt;&lt;p&gt;ajkajda&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Balance&lt;/span&gt;&lt;/p&gt;&lt;p&gt;dkajkdjak&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Transaction Uploaded&lt;/span&gt;&lt;/p&gt;&lt;p&gt;dajhdajhd&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
@@ -1614,7 +1602,7 @@ padding: 15px;</string>
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_13">
+                  <widget class="QLabel" name="PF_thxMessage">
                    <property name="styleSheet">
                     <string notr="true">color: rgb(255, 255, 255);
 </string>
@@ -1656,7 +1644,7 @@ padding: 15px;</string>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_10">
                  <item>
-                  <spacer name="horizontalSpacer_11">
+                  <spacer name="spacerrr">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -1669,22 +1657,19 @@ padding: 15px;</string>
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_2">
-                   <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 255, 255);</string>
-                   </property>
-                   <property name="text">
-                    <string>Change Password</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="PF_logOut">
                    <property name="styleSheet">
                     <string notr="true">color: rgb(255, 255, 255);</string>
                    </property>
                    <property name="text">
                     <string>Log Out</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="PF_deleteAccount">
+                   <property name="text">
+                    <string>Delete Account</string>
                    </property>
                   </widget>
                  </item>
