@@ -4,7 +4,8 @@ from Functions.chats import getBotAnswer
 
 class Account:
     def __init__(self, username: str, 
-                 password: str, security_question:int, 
+                 password: str, 
+                 security_question:int, 
                  security_answer:str, 
                  created_at: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
                  updated_at: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 

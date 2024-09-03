@@ -1,13 +1,13 @@
 import sys
 import os
+from datetime import datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
 from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
 
-from Functions.edit_database import isUsernameAvailable, addAccount, checkAccount, getAccount, getLastUser, editAccount
-from Functions.edit_database import *
+from Functions.database import *
 from Functions.variables import Account, botWorker
 from Functions.others import getDate
 
@@ -85,7 +85,9 @@ class LoadingScreen(QMainWindow):
 class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-
+        
+        global start 
+        start = datetime.now()
 
         self.ui = Ui_Master()
         self.ui.setupUi(self)
@@ -216,6 +218,8 @@ class MainProgram(QMainWindow):
         self.ui.userChatInput.clear()
 
         self.addChatFrame(question, False)
+        
+        # addChats(self.currentAcc.username)
 
         # Multi-threading
         self.botWorker = botWorker(question)
@@ -331,9 +335,12 @@ class MainProgram(QMainWindow):
                     Transaction Uploaded
                 </span></p>
                 
-                <p>dajhdajhd</p>
+                <p>{self.currentAcc.num_transactions}</p>
             </body></html>
         """)
+
+    def searchData(self):
+        return
 
 if __name__ == "__main__":
 
@@ -343,6 +350,13 @@ if __name__ == "__main__":
     counter = 0
     jumper = 0
 
+    global start
+
     app = QApplication(sys.argv)
     loading_screen = LoadingScreen()
-    sys.exit(app.exec_())
+    app.exec_()
+
+    updateTimesOpened()
+    updateTimeSpent(start)
+    
+    sys.exit()

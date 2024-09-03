@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>771</width>
+    <width>929</width>
     <height>770</height>
    </rect>
   </property>
@@ -256,7 +256,7 @@
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>4</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -719,8 +719,8 @@ QScrollBar::sub-page:vertical {
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-238</y>
-                    <width>580</width>
+                    <y>0</y>
+                    <width>500</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1420,8 +1420,8 @@ QComboBox QAbstractItemView {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-409</y>
-                <width>611</width>
+                <y>-393</y>
+                <width>769</width>
                 <height>1107</height>
                </rect>
               </property>
@@ -1756,8 +1756,8 @@ p, li { white-space: pre-wrap; }
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>576</width>
-                   <height>574</height>
+                   <width>734</width>
+                   <height>590</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -2216,7 +2216,7 @@ border-radius: 5px;</string>
                <rect>
                 <x>0</x>
                 <y>-202</y>
-                <width>696</width>
+                <width>769</width>
                 <height>900</height>
                </rect>
               </property>
@@ -2289,7 +2289,7 @@ border-radius: 5px;</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>324</width>
+                       <width>361</width>
                        <height>232</height>
                       </rect>
                      </property>
@@ -2343,6 +2343,12 @@ border-radius: 5px;</string>
                     <layout class="QHBoxLayout" name="horizontalLayout_15">
                      <item>
                       <widget class="QLabel" name="label_6">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
                        <property name="styleSheet">
                         <string notr="true">color: rgb(255, 255, 255);</string>
                        </property>
@@ -2363,6 +2369,12 @@ border-radius: 5px;</string>
                      </item>
                      <item>
                       <widget class="QLabel" name="label_9">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
                        <property name="styleSheet">
                         <string notr="true">color: rgb(255, 255, 255);</string>
                        </property>
@@ -2586,16 +2598,6 @@ This app was created by Jonathan Edward, Davin, and Farhan as part of the requir
            </item>
           </layout>
          </widget>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QFrame" name="frame_23">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
         </widget>
        </item>
       </layout>

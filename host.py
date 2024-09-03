@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from Functions.edit_database_host import *
+from Functions.database_host import *
 from Functions.variables import Account
 
 app = Flask(__name__)

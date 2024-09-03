@@ -6,7 +6,7 @@ from uuid import uuid4 as randomID
 from hashlib import sha256
 
 from Functions.variables import Account
-from Functions.client import *
+from Functions.database_client import *
 
 def createDatabase() -> None:
     """
@@ -112,14 +112,14 @@ def addAccount(account:Account) -> str:
         conn.commit()
 
         # Add account to online database
-        # add_account(account)
-        # if add_account(account):
-        #     conn.close()
-        #     return "Account added successfully"
-        # else:
-        #     conn.rollback()
-        #     conn.close()
-        #     return "Username already exists"
+        add_account(account)
+        if add_account(account):
+            conn.close()
+            return "Account added successfully"
+        else:
+            conn.rollback()
+            conn.close()
+            return "Username already exists"
 
     except sqlite3.IntegrityError:
         conn.rollback()
@@ -219,7 +219,7 @@ def getAccount(username:str) -> Account:
         # else:
         #     return account
     else:
-        return Account(row[0], row[1], row[2], row[3], row[4])
+        return Account(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
 
 def editAccount(account:Account) -> str:
     """
@@ -332,10 +332,10 @@ def updateTimesOpened() -> None:
 
     row = cursor.fetchone()
 
-    if row == None:
-        cursor.execute("INSERT INTO miscellaneous (TYPE, VALUE) VALUES (?, ?)", ("times_opened", 1))
+    if row[0] == '':
+        cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = ?", (str(1), "times_opened"))
     else:
-        cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = ?", (int(row[0]) + 1, "times_opened"))
+        cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = ?", (str(int(row[0]) + 1), "times_opened"))
 
     conn.commit()
     conn.close()
@@ -369,16 +369,17 @@ def updateTimeSpent(start_time: datetime) -> None:
 
     row = cursor.fetchone()
 
-    if row is None:
-        cursor.execute("INSERT INTO miscellaneous (TYPE, VALUE) VALUES (?, ?)", ("time_spent", time_spent).strftime("%H:%M:%S"))
+    print(time_spent)
+
+    if row[0] == '':
+        cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = ?", (str(time_spent).split('.')[0], "time_spent"))
     else:
-        cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = ?", ((row[0] + time_spent).strftime("%H:%M:%S"), "time_spent"))
+        initial_time = datetime.strptime(row[0], "%H:%M:%S")
+        new_time = (initial_time + time_spent).time().strftime("%H:%M:%S")
+        cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = ?", (new_time, "time_spent"))
 
     conn.commit()
     conn.close()
-
-# # Contoh penggunaan (diletakkan di awal program)
-# start_time = datetime.now()
 
 def getTimeSpent() -> datetime:
     """
@@ -526,11 +527,11 @@ def addChats(username:str, message_type:int, message:str) -> str:
         conn.close()
 
         # Add chat to online database
-        # add_chats(username, message_type, message, id)
-        # if add_chats(username, message_type, message, id):
-        #     return "Chat added successfully"
-        # else:
-        #     return "Error adding chat"
+        add_chats(username, message_type, message, id)
+        if add_chats(username, message_type, message, id):
+            return "Chat added successfully"
+        else:
+            return "Error adding chat"
     except Exception as e:
         return f"Error adding chat: {str(e)}"
 
