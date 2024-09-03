@@ -264,7 +264,7 @@ class MainProgram(QMainWindow):
             return
 
         if answer == self.currentAcc.security_question:
-            thisAcc = getAccount(username)
+            thisAcc = getAccount(self.currentAcc.username)
             thisAcc.password = password1
             editAccount(thisAcc)
             self.ui.stackedWidget.setCurrentWidget(self.ui.loginPage)

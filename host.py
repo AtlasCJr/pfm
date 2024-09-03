@@ -148,8 +148,10 @@ def add_transaction():
 @app.route('/get_transaction/<username>', methods=['GET'])
 def get_transaction(username):
     try:
+
+        account = getAccount(username)
         # Mengambil data transaksi dari database
-        df = getTransaction(username)
+        df = getTransaction(account)
         
         # Mengubah DataFrame menjadi format JSON
         transactions = df.to_dict(orient='records')

@@ -1,7 +1,7 @@
 import requests
 from Functions.variables import Account
 
-BASE_URL = 'https://df8d-103-138-49-25.ngrok-free.app'
+BASE_URL = 'https://pfmtugascaslabkendaliftui2024.loca.lt'
 
 def add_account(account: Account) -> bool:
     url = f'{BASE_URL}/add_account'
