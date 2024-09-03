@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1059</width>
-    <height>772</height>
+    <width>1037</width>
+    <height>820</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,88 +28,23 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_19">
-    <property name="spacing">
-     <number>0</number>
-    </property>
     <item>
-     <widget class="QWidget" name="sideMenu" native="true">
+     <widget class="QWidget" name="widget" native="true">
       <property name="minimumSize">
        <size>
-        <width>200</width>
+        <width>100</width>
         <height>0</height>
        </size>
       </property>
-      <property name="styleSheet">
-       <string notr="true">#sideMenu{
-background-color:#1A1A1A;
-}
-QPushButton{
-	padding-left:20px;
-	font-family: Poppins;
-	color: #CCCCCC;
-}
-#appName{
-font-family: Poppins;
-padding-left:5px;
-}
-QPushButton:hover {
-	background-color: rgb(93, 96, 107);
-	border-radius:6px;
-}</string>
-      </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QFrame" name="frame_29">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>TextLabel</string>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_25">
-          <item>
-           <widget class="QLabel" name="logo">
-            <property name="minimumSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap>../Assets/App Icon/PFM_logoonly.png</pixmap>
-            </property>
-            <property name="scaledContents">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="appName">
-            <property name="font">
-             <font>
-              <family>Poppins</family>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; color:#fedd3b;&quot;&gt;PFM&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+       <item>
         <widget class="QPushButton" name="homeButton">
          <property name="minimumSize">
           <size>
@@ -117,32 +52,22 @@ QPushButton:hover {
            <height>30</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
          <property name="styleSheet">
-          <string notr="true">border: none;
-</string>
+          <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string> Home               </string>
+          <string> Home</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/light-grey Icon/home.png</normaloff>../Assets/light-grey Icon/home.png</iconset>
+           <normaloff>../Assets/Grey/output-onlinepngtools.png</normaloff>../Assets/Grey/output-onlinepngtools.png</iconset>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+       <item>
         <widget class="QPushButton" name="loginButton">
          <property name="minimumSize">
           <size>
@@ -150,12 +75,6 @@ QPushButton:hover {
            <height>30</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -163,15 +82,15 @@ QPushButton:hover {
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string> Login                </string>
+          <string> Login</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/light-grey Icon/login.png</normaloff>../Assets/light-grey Icon/login.png</iconset>
+           <normaloff>../Assets/Grey/output-onlinepngtools (5).png</normaloff>../Assets/Grey/output-onlinepngtools (5).png</iconset>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+       <item>
         <widget class="QPushButton" name="inputdataButton">
          <property name="minimumSize">
           <size>
@@ -179,12 +98,6 @@ QPushButton:hover {
            <height>30</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -192,15 +105,15 @@ QPushButton:hover {
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string> Upload             </string>
+          <string> Upload</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/light-grey Icon/upload.png</normaloff>../Assets/light-grey Icon/upload.png</iconset>
+           <normaloff>../Assets/Grey/output-onlinepngtools (7).png</normaloff>../Assets/Grey/output-onlinepngtools (7).png</iconset>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+       <item>
         <widget class="QPushButton" name="visualizeButton">
          <property name="minimumSize">
           <size>
@@ -208,25 +121,19 @@ QPushButton:hover {
            <height>30</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
          <property name="styleSheet">
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string> Visualize          </string>
+          <string> Visualize</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/Grey Icon/visualize.png</normaloff>../Assets/Grey Icon/visualize.png</iconset>
+           <normaloff>../Assets/Grey/output-onlinepngtools (4).png</normaloff>../Assets/Grey/output-onlinepngtools (4).png</iconset>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+       <item>
         <widget class="QPushButton" name="analyzeButton">
          <property name="minimumSize">
           <size>
@@ -234,12 +141,6 @@ QPushButton:hover {
            <height>30</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -247,15 +148,15 @@ QPushButton:hover {
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string> Analyze           </string>
+          <string> Analyze</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/light-grey Icon/analyze.png</normaloff>../Assets/light-grey Icon/analyze.png</iconset>
+           <normaloff>../Assets/Grey/output-onlinepngtools (3).png</normaloff>../Assets/Grey/output-onlinepngtools (3).png</iconset>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+       <item>
         <widget class="QPushButton" name="chatbotButton">
          <property name="minimumSize">
           <size>
@@ -263,12 +164,6 @@ QPushButton:hover {
            <height>30</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -276,40 +171,11 @@ QPushButton:hover {
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string> Chatbot          </string>
+          <string> Chatbot</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/light-grey Icon/chat.png</normaloff>../Assets/light-grey Icon/chat.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
-        <widget class="QPushButton" name="aboutButton">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">border: none;</string>
-         </property>
-         <property name="text">
-          <string> About              </string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../Assets/light-grey Icon/about.png</normaloff>../Assets/light-grey Icon/about.png</iconset>
+           <normaloff>../Assets/Grey/output-onlinepngtools (1).png</normaloff>../Assets/Grey/output-onlinepngtools (1).png</iconset>
          </property>
         </widget>
        </item>
@@ -326,7 +192,30 @@ QPushButton:hover {
          </property>
         </spacer>
        </item>
-       <item alignment="Qt::AlignLeft">
+       <item>
+        <widget class="QPushButton" name="aboutButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
+         <property name="text">
+          <string> About</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../Assets/Grey/output-onlinepngtools (6).png</normaloff>../Assets/Grey/output-onlinepngtools (6).png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="profileButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -340,12 +229,6 @@ QPushButton:hover {
            <height>0</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Poppins</family>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -353,29 +236,13 @@ QPushButton:hover {
           <string notr="true">border: none;</string>
          </property>
          <property name="text">
-          <string>Profile               </string>
+          <string/>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/light-grey Icon/profile.png</normaloff>../Assets/light-grey Icon/profile.png</iconset>
+           <normaloff>../Assets/user.png</normaloff>../Assets/user.png</iconset>
          </property>
         </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -389,7 +256,7 @@ QPushButton:hover {
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -839,12 +706,6 @@ QScrollBar::sub-page:vertical {
               <layout class="QVBoxLayout" name="verticalLayout_2">
                <item>
                 <widget class="QScrollArea" name="scrollArea">
-                 <property name="minimumSize">
-                  <size>
-                   <width>750</width>
-                   <height>0</height>
-                  </size>
-                 </property>
                  <property name="styleSheet">
                   <string notr="true"/>
                  </property>
@@ -856,7 +717,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>718</width>
+                    <width>500</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -880,7 +741,7 @@ QScrollBar::sub-page:vertical {
                     <widget class="QFrame" name="signupFrame">
                      <property name="minimumSize">
                       <size>
-                       <width>700</width>
+                       <width>500</width>
                        <height>900</height>
                       </size>
                      </property>
@@ -1711,48 +1572,24 @@ QLabel{
           </layout>
          </widget>
          <widget class="QWidget" name="inputData">
-          <layout class="QVBoxLayout" name="verticalLayout_25">
-           <item>
-            <widget class="QLabel" name="ID_transactionName">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="ID_inputTransaction"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="ID_type">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="ID_dropdownType"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="ID_calendar">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCalendarWidget" name="ID_calendarWidget"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="ID_value">
-             <property name="text">
-              <string>TextLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="ID_inputValue"/>
-           </item>
-          </layout>
+          <widget class="QLabel" name="label_3">
+           <property name="geometry">
+            <rect>
+             <x>204</x>
+             <y>165</y>
+             <width>521</width>
+             <height>361</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>50</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Input Data</string>
+           </property>
+          </widget>
          </widget>
          <widget class="QWidget" name="analyze">
           <property name="styleSheet">
@@ -1802,8 +1639,8 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>383</width>
-                <height>1620</height>
+                <width>845</width>
+                <height>1107</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2165,8 +2002,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>290</width>
-                   <height>442</height>
+                   <width>787</width>
+                   <height>595</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -2256,7 +2093,7 @@ border: none;</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap>../Assets/chatbot-blue.png</pixmap>
+                        <pixmap>../Assets/Grey/output-onlinepngtools (8).png</pixmap>
                        </property>
                        <property name="scaledContents">
                         <bool>true</bool>
@@ -2397,7 +2234,7 @@ border-radius: 25px;</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap>../Assets/user2-blue.png</pixmap>
+                        <pixmap>../Assets/Grey/output-onlinepngtools (10).png</pixmap>
                        </property>
                        <property name="scaledContents">
                         <bool>true</bool>
@@ -2420,7 +2257,7 @@ border-radius: 25px;</string>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>1000</width>
+                         <width>16777215</width>
                          <height>16777215</height>
                         </size>
                        </property>
@@ -2938,8 +2775,8 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-202</y>
-                <width>773</width>
+                <y>0</y>
+                <width>404</width>
                 <height>900</height>
                </rect>
               </property>
@@ -2994,7 +2831,7 @@ QScrollBar::sub-page:vertical {
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_14">
                   <item>
-                   <widget class="QScrollArea" name="listTransaction">
+                   <widget class="QScrollArea" name="scrollArea_3">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                       <horstretch>0</horstretch>
@@ -3012,13 +2849,13 @@ QScrollBar::sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>345</width>
-                       <height>260</height>
+                       <width>98</width>
+                       <height>93</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">
                       <item>
-                       <widget class="QFrame" name="Transaction1">
+                       <widget class="QFrame" name="frame_20">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -3104,55 +2941,25 @@ QScrollBar::sub-page:vertical {
                 </widget>
                </item>
                <item>
-                <widget class="QFrame" name="frame_20">
+                <widget class="QFrame" name="frame_18">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_26">
+                 <layout class="QVBoxLayout" name="verticalLayout_17">
                   <item>
-                   <spacer name="horizontalSpacer_3">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                   <widget class="QGraphicsView" name="graphicsView"/>
                   </item>
                   <item>
-                   <widget class="QWidget" name="VI_Graph1" native="true">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>400</width>
-                      <height>200</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_4">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                   <widget class="QGraphicsView" name="graphicsView_2"/>
                   </item>
                  </layout>
                 </widget>
@@ -3182,8 +2989,8 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>158</width>
-                <height>207</height>
+                <width>875</width>
+                <height>745</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">

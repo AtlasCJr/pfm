@@ -1,4 +1,6 @@
 import pandas as pd
+from Functions.variables import enrichedData
+import numpy as np
 
 def getTimeCycle(data: pd.DataFrame, cycle: str, pos: int = 0) -> pd.DataFrame:
     """
@@ -82,3 +84,64 @@ def getTimeCycle(data: pd.DataFrame, cycle: str, pos: int = 0) -> pd.DataFrame:
     DATA.index.name = cycle
 
     return DATA
+
+def enrichData(df: pd.DataFrame) -> enrichedData:
+  old_data = df.copy()
+  def WoM(dt):
+    """ Returns the week of the month for the specified date. """
+    first_day = dt.replace(day=1)
+    dom = dt.day
+    adjusted_dom = dom + first_day.weekday()
+    
+    return int(np.ceil(adjusted_dom / 7.0))
+
+  df['UPDATED_AT'] = pd.to_datetime(df['UPDATED_AT'])
+  df = df.drop(columns=['CREATED_AT', 'TRANSACTION_ID', 'ITEM', 'USERNAME']).set_index('UPDATED_AT').sort_index()
+  
+  
+  expenses = pd.concat([
+    df[(df['CATEGORY'] == 0) & (df['TYPE'] == i)]
+    .drop(columns=['CATEGORY', 'TYPE'])
+    .resample('D')
+    .sum()
+    .rename(columns={'VALUE': f'{i}'})
+    for i in df[df['CATEGORY'] == 0]['TYPE'].unique()
+  ], axis=1)
+
+  
+  revenue = pd.concat([
+    df[(df['CATEGORY'] == 1) & (df['TYPE'] == i)]
+    .drop(columns=['CATEGORY', 'TYPE'])
+    .resample('D')
+    .sum()
+    .rename(columns={'VALUE': f'{i}'})
+    for i in df[df['CATEGORY'] == 1]['TYPE'].unique()
+  ], axis=1)
+
+  expenses = expenses.reindex(sorted(expenses.columns, key=lambda x: int(x)), axis=1)
+  revenue = revenue.reindex(sorted(revenue.columns, key=lambda x: int(x)), axis=1)
+
+
+  expenses.columns = pd.MultiIndex.from_product([['Expenses'], expenses.columns])
+  revenue.columns = pd.MultiIndex.from_product([['Revenue'], revenue.columns])
+
+  expenses[('Expenses', 'TOTAL')] = expenses.sum(axis=1)
+  revenue[('Revenue', 'TOTAL')] = revenue.sum(axis=1)
+
+
+  features = pd.DataFrame(index=expenses.index.union(revenue.index))
+  features[("Features", "DoW")] = features.index.day_of_week
+  features[("Features", "DoM")] = features.index.day
+  features[("Features", "WoM")] = features.index.map(WoM)
+  features[("Features", "DAY")] = features.index.day_of_year
+  features[("Features", "WEEK")] = features.index.isocalendar().week
+  features[("Features", "QUARTER")] = features.index.quarter
+  features[("Features", "MONTH")] = features.index.month
+  features[("Features", "YEAR")] = features.index.year
+
+  DATA = pd.concat([expenses, revenue, features], axis=1).fillna(0)
+  
+  DATA.index.name = "DATE"
+  DATA['TOTAL'] = DATA['Revenue', 'TOTAL'] - DATA['Expenses', 'TOTAL']
+
+  return enrichedData(old_data, DATA)

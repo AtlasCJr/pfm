@@ -369,7 +369,7 @@ def updateTimeSpent(start_time: datetime) -> None:
 
     row = cursor.fetchone()
 
-    print(time_spent)
+    # print(time_spent)
 
     if row[0] == '':
         cursor.execute("UPDATE miscellaneous SET VALUE = ? WHERE TYPE = ?", (str(time_spent).split('.')[0], "time_spent"))

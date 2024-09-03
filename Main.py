@@ -9,6 +9,7 @@ from UI.loadingScreen import Ui_loadingScreen
 
 from Functions.database import *
 from Functions.variables import Account, botWorker
+from Functions.data_analysis import *
 from Functions.others import getDate
 
 
@@ -96,7 +97,6 @@ class MainProgram(QMainWindow):
         self.currentAcc = getLastUser()
         self.accountChanged()
 
-
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
@@ -111,18 +111,77 @@ class MainProgram(QMainWindow):
         self.ui.analyzeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.analyze))
 
         # Authentication Buttons
-        self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))  # Login -> CP
+        self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.forgetPW))  # Login -> FP
         self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
-        self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # CP -> Login
-        self.ui.PF_changePassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))       # Profile.FP -> CP
+        self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # FP -> Login
+        self.ui.PF_changePassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))        # Profile -> CP
+        self.ui.CP_buttonSavePW.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.profile))          # CP -> Profile
 
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)
         self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)
 
+        # Visualize
+        self.ui.calendarWidget.selectionChanged.connect(self.searchData)
+
         # Chatting
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
+
+    def searchData(self):
+        date = self.ui.calendarWidget.selectedDate()
+        date = date.toString("yyyy-MM-dd")
+
+        df = getTransaction(self.currentAcc)
+        ED = enrichData(df)
+        data = ED.old_data
+
+        selectedData = data[data['CREATED_AT'].str.startswith(date)]
+
+        ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
+        self.ui.VI_Graph1.update()
+
+        # print(selectedData)
+
+        # Remove all widgets from the layout
+        while self.ui.verticalLayout_18.count():
+            item = self.ui.verticalLayout_18.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+
+        for _, row in selectedData.iterrows():
+            self.addDataFrame(row['ITEM'], row['VALUE'])
+    
+    def addDataFrame(self, title:str, price:int):
+        FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents_3)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
+        FRAME.setSizePolicy(sizePolicy)
+        FRAME.setMinimumSize(QtCore.QSize(0, 75))
+        FRAME.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        FRAME.setFrameShadow(QtWidgets.QFrame.Raised)
+
+
+        LABEL = QtWidgets.QLabel(FRAME)
+        LABEL.setStyleSheet("color: rgb(255, 255, 255);")
+        LABEL.setText(f"""
+        <html><head/><body>
+            <p><span style=\" font-weight:600;\">
+                {title}
+            </span></p>
+            <p>
+                {str(price)}
+            </p>
+        </body></html>"
+        """)
+
+        LAYOUT = QtWidgets.QVBoxLayout(FRAME)
+        LAYOUT.addWidget(LABEL)
+
+        self.ui.verticalLayout_18.addWidget(FRAME)
 
     def Authentication(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup)
@@ -189,7 +248,6 @@ class MainProgram(QMainWindow):
             return
 
     def handleChangePW(self):
-        username = self.ui.CP_inputUsername.text()
         answer = self.ui.CP_inputSecAnswer.text()
 
         password1 = self.ui.CP_inputPassword1.text()
@@ -233,13 +291,26 @@ class MainProgram(QMainWindow):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
         FRAME.setSizePolicy(sizePolicy)
+        FRAME.setMaximumSize(QtCore.QSize(1000, 16777215))
+        FRAME.setStyleSheet("background-color: rgb(42, 43, 48); ")
         FRAME.setFrameShape(QtWidgets.QFrame.StyledPanel)
         FRAME.setFrameShadow(QtWidgets.QFrame.Raised)
         
         LAYOUT = QtWidgets.QHBoxLayout(FRAME)
         LAYOUT.setContentsMargins(0, -1, 0, -1)
 
-        if not isBot:
+        if isBot:
+            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+            LAYOUT.addItem(SPACERS)
+
+            LOGO = QtWidgets.QLabel(FRAME)
+            LOGO.setMinimumSize(QtCore.QSize(40, 40))
+            LOGO.setMaximumSize(QtCore.QSize(40, 40))
+            LOGO.setText("")
+            LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/Grey/output-onlinepngtools (8).png"))
+            LOGO.setScaledContents(True)
+            LAYOUT.addWidget(LOGO)
+        else:
             SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
 
@@ -250,23 +321,38 @@ class MainProgram(QMainWindow):
         sizePolicy.setHeightForWidth(LABEL.sizePolicy().hasHeightForWidth())
         LABEL.setSizePolicy(sizePolicy)
         LABEL.setMinimumSize(QtCore.QSize(0, 50))
+        LABEL.setMaximumSize(QtCore.QSize(1000, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPixelSize(11)
+        LABEL.setFont(font)
         LABEL.setStyleSheet(f"""
             color: rgb(255, 255, 255);
-            background-color: {"rgb(0, 0, 127)" if isBot else "rgb(0, 127, 0)"};
-            padding-left: {"50" if isBot else "25"}px;
-            padding-right: {"50" if not isBot else "25"}px;
+            background-color: {"#2A3B47" if isBot else "#6A5ACD"};
+            padding-left: 30px;
+            padding-right: 25px;
             padding-top: 20px;
             padding-bottom: 20px;
-            border-top-{"right" if isBot else "left"}-radius: 25px;
-            border-bottom-{"right" if isBot else "left"}-radius: 25px;
+            border-radius: 25px;
         """)
-        LABEL.setAlignment(QtCore.Qt.AlignJustify | QtCore.Qt.AlignVCenter)
+        LABEL.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         LABEL.setWordWrap(True)
         LABEL.setText(text)
         LAYOUT.addWidget(LABEL)
 
         if isBot:
             SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+            LAYOUT.addItem(SPACERS)
+        else:
+            LOGO =  QtWidgets.QLabel(FRAME)
+            LOGO.setMinimumSize(QtCore.QSize(40, 40))
+            LOGO.setMaximumSize(QtCore.QSize(40, 40))
+            LOGO.setText("")
+            LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/Grey/output-onlinepngtools (10).png"))
+            LOGO.setScaledContents(True)
+            LAYOUT.addWidget(LOGO)
+
+            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
 
         self.ui.verticalLayout_9.addWidget(FRAME)
@@ -275,7 +361,7 @@ class MainProgram(QMainWindow):
     def handleBotAnswer(self, answer):
         self.addChatFrame(answer, True)
 
-        print(answer)
+        # print(answer)
 
     def accountChanged(self):
         self.ui.homeText.setText(f"""
@@ -338,9 +424,6 @@ class MainProgram(QMainWindow):
                 <p>{self.currentAcc.num_transactions}</p>
             </body></html>
         """)
-
-    def searchData(self):
-        return
 
 if __name__ == "__main__":
 
