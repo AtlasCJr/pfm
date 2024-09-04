@@ -393,10 +393,10 @@ text-align: left;</string>
        <string notr="true">background-color: #23272A</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
+       <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>4</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1850,9 +1850,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
-                <width>383</width>
-                <height>1620</height>
+                <y>-202</y>
+                <width>773</width>
+                <height>900</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2070,21 +2070,6 @@ padding: 0 150px;</string>
                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Budget&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                    </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QFrame" name="frame_25">
-                 <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                 <layout class="QVBoxLayout" name="verticalLayout_22">
-                  <item>
-                   <widget class="QGraphicsView" name="graphicsView_3"/>
                   </item>
                  </layout>
                 </widget>
