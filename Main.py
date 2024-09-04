@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 
 from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
+# from UI.otherComponents import Notification
 
 from Functions.database import *
 from Functions.variables import Account, botWorker
@@ -100,6 +101,7 @@ class MainProgram(QMainWindow):
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
+
         # Header Buttons
         self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
         self.ui.loginButton.clicked.connect(self.Authentication)
@@ -121,6 +123,9 @@ class MainProgram(QMainWindow):
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)
         self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)
+
+        self.ui.LI_inputUsername.returnPressed.connect(lambda: self.ui.LI_inputPassword.setFocus())
+        self.ui.LI_inputPassword.returnPressed.connect(self.handleLogIn)
 
         # Visualize
         self.ui.calendarWidget.selectionChanged.connect(self.searchData)
@@ -339,7 +344,7 @@ class MainProgram(QMainWindow):
         sizePolicy.setHeightForWidth(LABEL.sizePolicy().hasHeightForWidth())
         LABEL.setSizePolicy(sizePolicy)
         LABEL.setMinimumSize(QtCore.QSize(0, 50))
-        LABEL.setMaximumSize(QtCore.QSize(1000, 16777215))
+        LABEL.setMaximumSize(QtCore.QSize(4000, 16777215))
         font = QtGui.QFont()
         font.setFamily("Poppins")
         font.setPixelSize(11)

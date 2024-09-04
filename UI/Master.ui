@@ -393,10 +393,10 @@ text-align: left;</string>
        <string notr="true">background-color: #23272A</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
+       <item row="1" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -880,7 +880,7 @@ QScrollBar::sub-page:vertical {
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-220</y>
+                    <y>0</y>
                     <width>755</width>
                     <height>900</height>
                    </rect>
@@ -2469,7 +2469,7 @@ border-radius: 25px;</string>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>1000</width>
+                         <width>4000</width>
                          <height>16777215</height>
                         </size>
                        </property>
@@ -2987,7 +2987,7 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-202</y>
+                <y>0</y>
                 <width>773</width>
                 <height>900</height>
                </rect>
