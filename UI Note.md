@@ -1,4 +1,3 @@
-
 Color Pallette
 
 1. Primary Colors:
@@ -17,4 +16,3 @@ Color Pallette
 4. Supporting Colors:
    - White (for contrast and readability): #FFFFFF | RGB: (255, 255, 255)
    - Charcoal (for a softer black alternative): #333333 | RGB: (51, 51, 51)
-

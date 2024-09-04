@@ -116,7 +116,7 @@ class MainProgram(QMainWindow):
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
         self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # FP -> Login
         self.ui.PF_changePassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))        # Profile -> CP
-        self.ui.CP_buttonSavePW.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.profile))          # CP -> Profile
+        self.ui.CP_buttonSavePW.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))                              # CP -> Profile
 
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)
@@ -196,6 +196,9 @@ class MainProgram(QMainWindow):
         if len(username) <= 5:
             self.ui.SI_ErrorMsg.setText("Username cannot be less than 5 characters.")
             return
+        if " " in username:
+            self.ui.SI_ErrorMsg.setText("Username cannot has spaces.")
+            return
         if isUsernameAvailable(username):
             self.ui.SI_ErrorMsg.setText("Username has already been taken.")
             return
@@ -209,6 +212,9 @@ class MainProgram(QMainWindow):
         if len(password1) <= 5:
             self.ui.SI_ErrorMsg.setText("Password cannot be less than 5 characters.")
             return
+        if " " in password1:
+            self.ui.SI_ErrorMsg.setText("Password cannot has spaces.")
+            return
         if password1 != password2:
             self.ui.SI_ErrorMsg.setText("The typed password doesn't match.")
             return
@@ -221,14 +227,23 @@ class MainProgram(QMainWindow):
             return
 
         tos = self.ui.SI_checkboxTerm.isChecked()
+        security_a = security_a.lower()
 
         if not tos:
             self.ui.SI_ErrorMsg.setText("Terms of Service has to be checked.")
             return
-        
+
+
+        self.ui.SI_ErrorMsg.clear()
+        self.ui.SI_inputUsername.clear()
+        self.ui.SI_inputPassword1.clear()
+        self.ui.SI_inputPassword2.clear()
+        self.ui.SI_dropdownSecurity.setCurrentIndex(0)
+        self.ui.SI_checkboxTerm.setChecked(False)
+
+
         newAcc = Account(username, password1, security_q, security_a)
-        self.ui.SI_ErrorMsg.setText("")
-        self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+        self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
         addAccount(newAcc)
 
     def handleLogIn(self) -> Account:
@@ -236,6 +251,9 @@ class MainProgram(QMainWindow):
         password = self.ui.LI_inputPassword.text()
 
         isCorrect = checkAccount(username, password)
+
+        self.ui.LI_inputUsername.clear()
+        self.ui.LI_inputPassword.clear()
 
         if isCorrect:
             self.ui.LI_ErrorMsg.setText("")

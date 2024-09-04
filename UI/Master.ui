@@ -113,7 +113,7 @@ QPushButton:hover {
         <widget class="QPushButton" name="homeButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>180</width>
            <height>30</height>
           </size>
          </property>
@@ -131,10 +131,10 @@ QPushButton:hover {
          </property>
          <property name="styleSheet">
           <string notr="true">border: none;
-</string>
+text-align: left;</string>
          </property>
          <property name="text">
-          <string> Home               </string>
+          <string> Home</string>
          </property>
          <property name="icon">
           <iconset>
@@ -146,7 +146,7 @@ QPushButton:hover {
         <widget class="QPushButton" name="loginButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>180</width>
            <height>30</height>
           </size>
          </property>
@@ -160,10 +160,11 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">border: none;
+text-align: left;</string>
          </property>
          <property name="text">
-          <string> Login                </string>
+          <string> Login</string>
          </property>
          <property name="icon">
           <iconset>
@@ -175,7 +176,7 @@ QPushButton:hover {
         <widget class="QPushButton" name="inputdataButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>180</width>
            <height>30</height>
           </size>
          </property>
@@ -189,7 +190,8 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">border: none;
+text-align: left;</string>
          </property>
          <property name="text">
           <string> Upload             </string>
@@ -204,7 +206,7 @@ QPushButton:hover {
         <widget class="QPushButton" name="visualizeButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>180</width>
            <height>30</height>
           </size>
          </property>
@@ -215,10 +217,11 @@ QPushButton:hover {
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">border: none;
+text-align: left;</string>
          </property>
          <property name="text">
-          <string> Visualize          </string>
+          <string> Visualize</string>
          </property>
          <property name="icon">
           <iconset>
@@ -230,7 +233,7 @@ QPushButton:hover {
         <widget class="QPushButton" name="analyzeButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>180</width>
            <height>30</height>
           </size>
          </property>
@@ -244,7 +247,8 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">border: none;
+text-align: left;</string>
          </property>
          <property name="text">
           <string> Analyze           </string>
@@ -259,7 +263,7 @@ QPushButton:hover {
         <widget class="QPushButton" name="chatbotButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>180</width>
            <height>30</height>
           </size>
          </property>
@@ -273,7 +277,8 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">border: none;
+text-align: left;</string>
          </property>
          <property name="text">
           <string> Chatbot          </string>
@@ -288,7 +293,7 @@ QPushButton:hover {
         <widget class="QPushButton" name="aboutButton">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>180</width>
            <height>30</height>
           </size>
          </property>
@@ -302,7 +307,8 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">border: none;
+text-align: left;</string>
          </property>
          <property name="text">
           <string> About              </string>
@@ -336,8 +342,8 @@ QPushButton:hover {
          </property>
          <property name="minimumSize">
           <size>
-           <width>0</width>
-           <height>0</height>
+           <width>180</width>
+           <height>30</height>
           </size>
          </property>
          <property name="font">
@@ -350,10 +356,11 @@ QPushButton:hover {
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
-          <string notr="true">border: none;</string>
+          <string notr="true">border: none;
+text-align: left;</string>
          </property>
          <property name="text">
-          <string>Profile               </string>
+          <string>Profile</string>
          </property>
          <property name="icon">
           <iconset>
@@ -389,7 +396,7 @@ QPushButton:hover {
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -511,7 +518,7 @@ QPushButton:hover {
               </size>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -594,6 +601,12 @@ background-color: rgb(42, 43, 48);
                  <layout class="QGridLayout" name="gridLayout_4">
                   <item row="1" column="0">
                    <widget class="QLabel" name="username">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="font">
                      <font>
                       <family>Poppins</family>
@@ -603,10 +616,19 @@ background-color: rgb(42, 43, 48);
                     <property name="text">
                      <string>Username</string>
                     </property>
+                    <property name="alignment">
+                     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+                    </property>
                    </widget>
                   </item>
                   <item row="3" column="0">
                    <widget class="QLabel" name="password">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="font">
                      <font>
                       <family>Poppins</family>
@@ -615,6 +637,9 @@ background-color: rgb(42, 43, 48);
                     </property>
                     <property name="text">
                      <string>Password</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
                     </property>
                    </widget>
                   </item>
@@ -855,8 +880,8 @@ QScrollBar::sub-page:vertical {
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>0</y>
-                    <width>718</width>
+                    <y>-220</y>
+                    <width>755</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -969,6 +994,12 @@ QComboBox QAbstractItemView {
                       </item>
                       <item>
                        <widget class="QLabel" name="regUsername">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="font">
                          <font>
                           <family>Poppins</family>
@@ -992,6 +1023,12 @@ QComboBox QAbstractItemView {
                       </item>
                       <item>
                        <widget class="QLabel" name="regPw">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="font">
                          <font>
                           <family>Poppins</family>
@@ -1025,6 +1062,12 @@ QComboBox QAbstractItemView {
                       </item>
                       <item>
                        <widget class="QLabel" name="security">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="font">
                          <font>
                           <family>Poppins</family>
@@ -1217,6 +1260,12 @@ QComboBox QAbstractItemView {
                       </item>
                       <item>
                        <widget class="QFrame" name="frame_3">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="frameShape">
                          <enum>QFrame::StyledPanel</enum>
                         </property>
@@ -2165,8 +2214,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>290</width>
-                   <height>442</height>
+                   <width>715</width>
+                   <height>547</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -3051,12 +3100,28 @@ QScrollBar::sub-page:vertical {
                         </layout>
                        </widget>
                       </item>
+                      <item>
+                       <spacer name="verticalSpacer_2">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
                      </layout>
                     </widget>
                    </widget>
                   </item>
                   <item>
                    <widget class="QFrame" name="frame_19">
+                    <property name="styleSheet">
+                     <string notr="true">color: white;</string>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
                     </property>
@@ -3065,13 +3130,100 @@ QScrollBar::sub-page:vertical {
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_15">
                      <item>
-                      <widget class="QLabel" name="label_6">
-                       <property name="styleSheet">
-                        <string notr="true">color: rgb(255, 255, 255);</string>
+                      <widget class="QFrame" name="frame_18">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
                        </property>
-                       <property name="text">
-                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Item&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sigma&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Type/Category&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Food/Expenses&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Value&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Rp. 20.000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
                        </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_17">
+                        <item>
+                         <widget class="QLabel" name="label_3">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Item</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="VI_Item">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">padding: 10px;</string>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_20">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Value</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="VI_Value">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">padding: 10px;</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="VI_updateButton">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">background-color: rgb(255, 170, 127);
+border: none;
+border-radius: 5px;</string>
+                          </property>
+                          <property name="text">
+                           <string>Update Transaction</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </widget>
                      </item>
                      <item>
@@ -3085,16 +3237,129 @@ QScrollBar::sub-page:vertical {
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_9">
-                       <property name="styleSheet">
-                        <string notr="true">color: rgb(255, 255, 255);</string>
+                      <widget class="QFrame" name="frame_30">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
                        </property>
-                       <property name="text">
-                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Created At&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Monday, August 1st 2024&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Updated A&lt;/span&gt;t&lt;/p&gt;&lt;p&gt;Monday, August 2nd 2024&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
                        </property>
-                       <property name="alignment">
-                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_26">
+                        <item>
+                         <widget class="QLabel" name="label_27">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Date</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QDateTimeEdit" name="VI_Date"/>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="label_6">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Type</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="VI_Type">
+                          <item>
+                           <property name="text">
+                            <string>Food/Drink</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Transportation</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Entertainment</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Healthcare</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Assurenace</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Luxurious Goods</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Active Income</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Passive Income</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Investation</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Other Income</string>
+                           </property>
+                          </item>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="VI_ErrorMsg">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Error Message</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="VI_deleteButton">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>30</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">background-color: rgb(255, 0, 0);
+border: none;
+border-radius: 5px;</string>
+                          </property>
+                          <property name="text">
+                           <string>Delete Transaction</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
                       </widget>
                      </item>
                     </layout>

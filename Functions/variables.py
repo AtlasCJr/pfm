@@ -4,6 +4,8 @@ from Functions.chats import getBotAnswer
 
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.ticker import FuncFormatter
+
 import pandas as pd
 from PyQt5 import QtWidgets
 
@@ -46,7 +48,7 @@ class botWorker(QThread):
         self.resultReady.emit(bot_answer)
 
 class Canvas(FigureCanvas):
-    def __init__(self, parent=None, figsize=(12, 6)):
+    def __init__(self, parent=None, figsize=(10, 5)):
         self.fig, self.ax = plt.subplots(figsize=figsize, dpi=100)
         super().__init__(self.fig)
         self.setParent(parent)
@@ -60,6 +62,19 @@ class enrichedData:
         self.figsize = figsize
 
     def plotAll(self, RANGE1: str, RANGE2: str, displacement: tuple[int, ...], parent):
+        if parent.layout() is None:
+            layout = QtWidgets.QVBoxLayout(parent)
+            parent.setLayout(layout)
+        else:
+            layout = parent.layout()
+
+        if parent is not None:
+            for i in reversed(range(parent.layout().count())):
+                widget_to_remove = parent.layout().itemAt(i).widget()
+                if widget_to_remove is not None:
+                    widget_to_remove.setParent(None)
+                    widget_to_remove.deleteLater()
+
         canvas = Canvas(parent, figsize=self.figsize)
         
         if RANGE1 != "YEAR":
@@ -78,11 +93,21 @@ class enrichedData:
         canvas.ax.set_ylabel("Rp.")
         canvas.ax.set_title("Complete Plot", pad=20)
     
-        curData['Expenses']['TOTAL'].cumsum().plot(ax=canvas.ax, label='Cumulative Expenses', alpha=0.6)
-        curData['Revenue']['TOTAL'].cumsum().plot(ax=canvas.ax, label='Cumulative Revenue', alpha=0.6)
-        curData['TOTAL'].cumsum().plot(ax=canvas.ax, label='Budget', alpha=0.6)
+        curData['Expenses']['TOTAL'].cumsum().plot(ax=canvas.ax, label='Cumulative Expenses', alpha=0.6, linewidth=2)
+        curData['Revenue']['TOTAL'].cumsum().plot(ax=canvas.ax, label='Cumulative Revenue', alpha=0.6, linewidth=2)
+        curData['TOTAL'].cumsum().plot(ax=canvas.ax, label='Budget', alpha=0.6, linewidth=2)
+
+        if RANGE1 == "YEAR":
+            canvas.ax.set_xticks(curData.index)
+            canvas.ax.set_xticklabels([int(year) for year in curData.index])
+
+        def format_y(value, tick_number):
+            return f'{value / 1e8:.1f}e8'
+
+        canvas.ax.yaxis.set_major_formatter(FuncFormatter(format_y))
     
         canvas.ax.legend()
+        canvas.ax.grid(True)
         # canvas.fig.tight_layout()
         canvas.draw()
 
