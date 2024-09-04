@@ -524,24 +524,34 @@ class MainProgram(QMainWindow):
         # print(answer)
 
     def accountChanged(self):
-
         if self.currentAcc is None:
+            # Enable/Disable buttons
             self.ui.loginButton.setEnabled(True)
             self.ui.inputdataButton.setEnabled(False)
             self.ui.visualizeButton.setEnabled(False)
             self.ui.analyzeButton.setEnabled(False)
             self.ui.profileButton.setEnabled(False)
 
+            # Set opacity effects
             SHOW = QGraphicsOpacityEffect()
             SHOW.setOpacity(1)
             self.ui.loginButton.setGraphicsEffect(SHOW)
 
-            UNSHOW = QGraphicsOpacityEffect()
-            UNSHOW.setOpacity(0.5)
-            self.ui.loginButton.setGraphicsEffect(UNSHOW)
-            self.ui.inputdataButton.setGraphicsEffect(UNSHOW)
-            self.ui.visualizeButton.setGraphicsEffect(UNSHOW)
-            self.ui.profileButton.setGraphicsEffect(UNSHOW)
+            UNSHOW1 = QGraphicsOpacityEffect()
+            UNSHOW1.setOpacity(0.5)
+            self.ui.inputdataButton.setGraphicsEffect(UNSHOW1)
+
+            UNSHOW2 = QGraphicsOpacityEffect()
+            UNSHOW2.setOpacity(0.5)
+            self.ui.visualizeButton.setGraphicsEffect(UNSHOW2)
+
+            UNSHOW3 = QGraphicsOpacityEffect()
+            UNSHOW3.setOpacity(0.5)
+            self.ui.analyzeButton.setGraphicsEffect(UNSHOW3)
+
+            UNSHOW4 = QGraphicsOpacityEffect()
+            UNSHOW4.setOpacity(0.5)
+            self.ui.profileButton.setGraphicsEffect(UNSHOW4)
 
             self.ui.homeText.setText(f"""
                 <html><head/><body>
@@ -564,24 +574,39 @@ class MainProgram(QMainWindow):
         else:
             self.ui.loginButton.setEnabled(False)
             self.ui.inputdataButton.setEnabled(True)
-            self.ui.visualizeButton.setEnabled(True)
-            self.ui.analyzeButton.setEnabled(True)
             self.ui.profileButton.setEnabled(True)
+
+            if self.currentAcc.num_transactions != 0:
+                self.ui.visualizeButton.setEnabled(True)
+                self.ui.analyzeButton.setEnabled(True)
 
             UNSHOW = QGraphicsOpacityEffect()
             UNSHOW.setOpacity(0.5)
             self.ui.loginButton.setGraphicsEffect(UNSHOW)
 
-            SHOW = QGraphicsOpacityEffect()
-            SHOW.setOpacity(1)
-            self.ui.loginButton.setGraphicsEffect(SHOW)
-            self.ui.inputdataButton.setGraphicsEffect(SHOW)
-            self.ui.visualizeButton.setGraphicsEffect(SHOW)
-            self.ui.profileButton.setGraphicsEffect(SHOW)
+            SHOW1 = QGraphicsOpacityEffect()
+            SHOW1.setOpacity(1)
+            self.ui.profileButton.setGraphicsEffect(SHOW1)
 
-        df = getTransaction(self.currentAcc)
-        self.ED = enrichData(df)
-        self.old_data = self.ED.old_data
+            SHOW2 = QGraphicsOpacityEffect()
+            SHOW2.setOpacity(1)
+            self.ui.inputdataButton.setGraphicsEffect(SHOW2)
+
+            if self.currentAcc.num_transactions != 0:
+                SHOW3 = QGraphicsOpacityEffect()
+                SHOW3.setOpacity(1)
+                self.ui.visualizeButton.setGraphicsEffect(SHOW3)
+
+                SHOW4 = QGraphicsOpacityEffect()
+                SHOW4.setOpacity(1)
+                self.ui.analyzeButton.setGraphicsEffect(SHOW4)
+
+
+
+        if self.currentAcc.num_transactions != 0:
+            df = getTransaction(self.currentAcc)
+            self.ED = enrichData(df)
+            self.old_data = self.ED.old_data
     
         self.ui.homeText.setText(f"""
             <html><head/><body>
