@@ -48,8 +48,8 @@ class botWorker(QThread):
         self.resultReady.emit(bot_answer)
 
 class Canvas(FigureCanvas):
-    def __init__(self, parent=None, figsize=(10, 5)):
-        self.fig, self.ax = plt.subplots(figsize=figsize, dpi=100)
+    def __init__(self, parent=None, figsize=(9, 6)):
+        self.fig, self.ax = plt.subplots(figsize=figsize, dpi=50)
         super().__init__(self.fig)
         self.setParent(parent)
         # self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -111,6 +111,66 @@ class enrichedData:
         # canvas.fig.tight_layout()
         canvas.draw()
 
+        if parent is not None:
+            layout = parent.layout()
+            if layout is None:
+                layout = QtWidgets.QVBoxLayout(parent)
+                parent.setLayout(layout)
+            layout.addWidget(canvas)
+
+    def plotCategory(self, cat: int, parent):
+        # Set up the layout for the parent widget
+        if parent.layout() is None:
+            layout = QtWidgets.QVBoxLayout(parent)
+            parent.setLayout(layout)
+        else:
+            layout = parent.layout()
+
+        # Clear any existing widgets in the layout
+        if parent is not None:
+            for i in reversed(range(parent.layout().count())):
+                widget_to_remove = parent.layout().itemAt(i).widget()
+                if widget_to_remove is not None:
+                    widget_to_remove.setParent(None)
+                    widget_to_remove.deleteLater()
+
+        # Create a new canvas to draw the plot
+        canvas = Canvas(parent, figsize=self.figsize)
+
+        # Define the type categories to be plotted
+        all_types = [0, 1, 2, 3, 4, 5, 10, 11, 12, 13]
+
+        # Group by 'TYPE' and sum 'VALUE', ensuring all types are included
+        byType = self.old_data.groupby('TYPE')['VALUE'].sum().reset_index()
+        byType = byType.set_index('TYPE').reindex(all_types, fill_value=0).reset_index()
+
+        # Mapping 'TYPE' to 'TYPE_LABEL'
+        byType['TYPE_LABEL'] = byType['TYPE'].map(typeMapping)
+
+        # Sort the values in descending order
+        byType = byType.sort_values("VALUE", ascending=False)
+
+        # Create color mapping based on 'TYPE'
+        colors = ["red" if type_val < 10 else "green" for type_val in byType['TYPE']]
+
+        # Plot the bar graph on the canvas axes
+        canvas.ax.bar(byType['TYPE_LABEL'], byType['VALUE'], color=colors)
+
+        # Set the labels and title
+        canvas.ax.set_xlabel('Type')
+        canvas.ax.set_ylabel('Rp.')
+        canvas.ax.set_title('Expenses by Type', pad=20)
+        canvas.ax.set_xticks(range(len(byType['TYPE_LABEL'])))
+        canvas.ax.set_xticklabels(byType['TYPE_LABEL'], rotation=45, ha='right')
+
+        # Add a title text above the plot
+        canvas.ax.text(0.5, 1.01, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=15)
+
+        # Show the grid and draw the canvas
+        canvas.ax.grid(True)
+        canvas.draw()
+
+        # Add the canvas to the parent widget layout
         if parent is not None:
             layout = parent.layout()
             if layout is None:

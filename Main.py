@@ -144,16 +144,13 @@ class MainProgram(QMainWindow):
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
 
         # Delete and Log Out
-        self.ui.PF_logOut.clicked.connect(self.handleLogOut(0))
-
-    # def handleLogOut(self, phase:int):
-    #     if phase == 0:
-    #         self.ui.PF_logOut.setText("Are You Sure?")
-    #     pass
 
     def setupVisualize(self):
         self.ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
         self.ui.VI_Graph1.update()
+
+        self.ED.plotCategory(0, self.ui.VI_Graph2)
+        self.ui.VI_Graph2.update()
 
     def searchData(self):
         date = self.ui.calendarWidget.selectedDate()
