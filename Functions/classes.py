@@ -247,7 +247,8 @@ class enrichedData:
 
         canvas.ax.set_xlabel('')
         canvas.ax.set_xticks(indices + bar_width / 2)
-        canvas.ax.set_xticklabels(cur_data['LABEL'], rotation=45, ha='right')
+        if time_cycle == "MONTH":
+            canvas.ax.set_xticklabels(cur_data['LABEL'], rotation=45, ha='right')
         canvas.ax.set_ylabel('Rp.')
         canvas.ax.set_title(f'{title} Distribution', pad=20)
 

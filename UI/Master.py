@@ -1898,7 +1898,7 @@ class Ui_Master(object):
         Master.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Master)
-        self.stackedWidget.setCurrentIndex(6)
+        self.stackedWidget.setCurrentIndex(0)
         self.innerstackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(Master)
 
@@ -1914,7 +1914,7 @@ class Ui_Master(object):
         self.chatbotButton.setText(_translate("Master", " Chatbot          "))
         self.aboutButton.setText(_translate("Master", " About              "))
         self.profileButton.setText(_translate("Master", " Profile"))
-        self.label.setText(_translate("Master", "<html><head/><body><p><span style=\" font-size:18pt;\">Personal </span></p><p><span style=\" font-size:18pt;\">Finance</span></p><p><span style=\" font-size:18pt;\">Manager</span></p></body></html>"))
+        self.label.setText(_translate("Master", "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600; color:#fedd3b;\">P</span><span style=\" font-size:20pt; color:#ffffff;\">ersonal</span></p><p><span style=\" font-size:20pt; font-weight:600; color:#fedd3b;\">F</span><span style=\" font-size:20pt; color:#ffffff;\">inance</span></p><p><span style=\" font-size:20pt; font-weight:600; color:#fedd3b;\">M</span><span style=\" font-size:20pt; color:#ffffff;\">anager</span></p></body></html>"))
         self.homeText.setText(_translate("Master", "<html><head/><body><p align=\"center\"><span style=\" font-style:italic;\">&quot;The journey of a thousand miles begins with one step.&quot; </span></p><p align=\"center\"><span style=\" font-style:italic;\">— Lao Tzu</span></p><p align=\"center\"><br/></p><p>Hi, User!</p><p>It is Monday, September 2nd 2024. What would you like to do?</p><p>It seemes that you are currently not logged in. Try logging in or create a new account to use our app!</p></body></html>"))
         self.username.setText(_translate("Master", "Username"))
         self.password.setText(_translate("Master", "Password"))

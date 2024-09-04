@@ -437,7 +437,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -504,7 +504,7 @@ text-align: left;</string>
                  <string notr="true">color: rgb(255, 255, 255);</string>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Personal &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Finance&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Manager&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; color:#fedd3b;&quot;&gt;P&lt;/span&gt;&lt;span style=&quot; font-size:20pt; color:#ffffff;&quot;&gt;ersonal&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; color:#fedd3b;&quot;&gt;F&lt;/span&gt;&lt;span style=&quot; font-size:20pt; color:#ffffff;&quot;&gt;inance&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; color:#fedd3b;&quot;&gt;M&lt;/span&gt;&lt;span style=&quot; font-size:20pt; color:#ffffff;&quot;&gt;anager&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -922,7 +922,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>755</width>
+                    <width>748</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1927,9 +1927,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-265</y>
-                <width>773</width>
-                <height>963</height>
+                <y>0</y>
+                <width>378</width>
+                <height>1561</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2359,8 +2359,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>715</width>
-                   <height>547</height>
+                   <width>290</width>
+                   <height>250</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -3013,7 +3013,7 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>773</width>
+                <width>435</width>
                 <height>1560</height>
                </rect>
               </property>
@@ -3110,8 +3110,8 @@ QScrollBar::sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>345</width>
-                       <height>226</height>
+                       <width>98</width>
+                       <height>99</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -3589,8 +3589,8 @@ border-radius: 5px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>803</width>
-                <height>697</height>
+                <width>158</width>
+                <height>207</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">

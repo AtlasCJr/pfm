@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import *
 
 from UI.Master import Ui_Master
 from UI.loadingScreen import Ui_loadingScreen
-# from UI.otherComponents import Notification
+from UI.Alert import Ui_Alert
 
 from Functions.database import *
 from Functions.classes import Account, botWorker
@@ -85,6 +85,32 @@ class LoadingScreen(QMainWindow):
         self.main_window = MainProgram()
         self.main_window.show()
 
+class Alert(QDialog):
+    def __init__(self, text: str):
+        QDialog.__init__(self)
+
+        self.ui = Ui_Alert()
+        self.ui.setupUi(self)
+
+        self.ui.msg.setText(text)
+
+        self.result = False
+
+        self.ui.CANCEL.clicked.connect(self.CANCEL)
+        self.ui.YES.clicked.connect(self.CONTINUE)
+
+    def CANCEL(self):
+        self.result = False
+        self.close()
+
+    def CONTINUE(self):
+        self.result = True
+        self.close()
+
+    def getResult(self):
+        self.exec_()
+        return self.result
+
 class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -159,6 +185,18 @@ class MainProgram(QMainWindow):
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
 
         # Delete and Log Out
+        self.ui.PF_logOut.clicked.connect(self.handleLogOut)
+
+    def handleLogOut(self):
+        alert = Alert("You are about to Log Out")
+        answer = alert.getResult()
+
+        if answer:
+            updateLastUser("")
+            self.currentAcc = None
+            self.accountChanged()
+        else:
+            return
 
     def setupVisualize(self):
         self.searchData()
@@ -178,7 +216,6 @@ class MainProgram(QMainWindow):
         self.graphIndex[0] -= 1
         self.graphIndex[0] %= 5
         self.graphAnalyze(self.graphIndex[0])
-
 
     def setupAnalyze(self):
         self.ui.linregTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -493,6 +530,7 @@ class MainProgram(QMainWindow):
             self.ui.inputdataButton.setEnabled(False)
             self.ui.visualizeButton.setEnabled(False)
             self.ui.analyzeButton.setEnabled(False)
+            self.ui.profileButton.setEnabled(False)
 
             SHOW = QGraphicsOpacityEffect()
             SHOW.setOpacity(1)
@@ -503,13 +541,32 @@ class MainProgram(QMainWindow):
             self.ui.loginButton.setGraphicsEffect(UNSHOW)
             self.ui.inputdataButton.setGraphicsEffect(UNSHOW)
             self.ui.visualizeButton.setGraphicsEffect(UNSHOW)
+            self.ui.profileButton.setGraphicsEffect(UNSHOW)
 
+            self.ui.homeText.setText(f"""
+                <html><head/><body>
+                    <p align="center"><span style=" font-style:italic;">
+                        &quot;The journey of a thousand miles begins with one step.&quot; 
+                    </span></p>
+                    
+                    <p align="center"><span style=" font-style:italic;">
+                        — Lao Tzu
+                    </span></p><p align="center"></p>
+                    
+                    <br/>
+                    
+                    <p>Hi, User!</p>
+                    <p>It is {getDate()}.<br/>What would you like to do?</p>
+                </body></html>
+                """)
+            
             return
         else:
             self.ui.loginButton.setEnabled(False)
             self.ui.inputdataButton.setEnabled(True)
             self.ui.visualizeButton.setEnabled(True)
             self.ui.analyzeButton.setEnabled(True)
+            self.ui.profileButton.setEnabled(True)
 
             UNSHOW = QGraphicsOpacityEffect()
             UNSHOW.setOpacity(0.5)
@@ -520,7 +577,7 @@ class MainProgram(QMainWindow):
             self.ui.loginButton.setGraphicsEffect(SHOW)
             self.ui.inputdataButton.setGraphicsEffect(SHOW)
             self.ui.visualizeButton.setGraphicsEffect(SHOW)
-
+            self.ui.profileButton.setGraphicsEffect(SHOW)
 
         df = getTransaction(self.currentAcc)
         self.ED = enrichData(df)
