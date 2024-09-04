@@ -95,17 +95,19 @@ class MainProgram(QMainWindow):
         self.ui = Ui_Master()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
-        self.currentAcc = None
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-        try:
-            self.currentAcc = getLastUser()
-        except Exception:
-            pass
+
+        self.currentAcc = None
+
+        try: self.currentAcc = getLastUser()
+        except Exception: pass
 
         self.accountChanged()
+
+        self.graphIndex = [0]
 
         # Header Buttons
         self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
@@ -138,9 +140,9 @@ class MainProgram(QMainWindow):
         self.ui.LI_inputUsername.returnPressed.connect(lambda: self.ui.LI_inputPassword.setFocus())
         self.ui.LI_inputPassword.returnPressed.connect(self.handleLogIn)
 
-        self.ui.CP_inputSecAnswer.returnPressed.conenct(lambda: self.ui.CP_inputPassword1.setFocus())
-        self.ui.CP_inputPassword1.returnPressed.conenct(lambda: self.ui.CP_inputPassword2.setFocus())
-        self.ui.CP_inputPassword2.returnPressed.conenct(self.handleChangePW)
+        self.ui.CP_inputSecAnswer.returnPressed.connect(lambda: self.ui.CP_inputPassword1.setFocus())
+        self.ui.CP_inputPassword1.returnPressed.connect(lambda: self.ui.CP_inputPassword2.setFocus())
+        self.ui.CP_inputPassword2.returnPressed.connect(self.handleChangePW)
 
         self.ui.FP_inputUsername.returnPressed.connect(lambda: self.ui.FP_inputSecAnswer.setFocus())
         self.ui.FP_inputSecAnswer.returnPressed.connect(lambda: self.ui.FP_inputPassword1.setFocus())
@@ -150,17 +152,33 @@ class MainProgram(QMainWindow):
         # Visualize
         self.ui.calendarWidget.selectionChanged.connect(self.searchData)
 
+        self.ui.AN_backButton.clicked.connect(self.handleBackButton)
+        self.ui.AN_forwardButton.clicked.connect(self.handleForwardButton)
+
         # Chatting
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
 
         # Delete and Log Out
 
     def setupVisualize(self):
+        self.searchData()
+
         self.ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
         self.ui.VI_Graph1.update()
 
         self.ED.plotCategory(0, self.ui.VI_Graph2)
         self.ui.VI_Graph2.update()
+
+    def handleForwardButton(self):
+        self.graphIndex[0] -= 1
+        self.graphIndex[0] %= 5
+        self.graphAnalyze(self.graphIndex[0])
+
+    def handleBackButton(self):
+        self.graphIndex[0] -= 1
+        self.graphIndex[0] %= 5
+        self.graphAnalyze(self.graphIndex[0])
+
 
     def setupAnalyze(self):
         self.ui.linregTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -173,7 +191,10 @@ class MainProgram(QMainWindow):
                 item.setTextAlignment(Qt.AlignCenter)
                 self.ui.linregTable.setItem(j, i, item)
 
-        self.ED.plotTimeCycle(0, self.ui.AN_Graph1)
+        self.graphAnalyze(self.graphIndex[0])
+
+    def graphAnalyze(self, index:int):
+        self.ED.plotTimeCycle(index, self.ui.AN_Graph1)
         self.ui.AN_Graph1.update()
 
     def searchData(self):
@@ -182,9 +203,6 @@ class MainProgram(QMainWindow):
 
         self.selectedData = self.old_data[self.old_data['CREATED_AT'].str.startswith(date)]
 
-        # print(selectedData)
-
-        # Remove all widgets from the layout
         while self.ui.verticalLayout_18.count():
             item = self.ui.verticalLayout_18.takeAt(0)
             widget = item.widget()
@@ -226,7 +244,7 @@ class MainProgram(QMainWindow):
             <p>
                 {str(price)}
             </p>
-        </body></html>"
+        </body></html>
         """)
 
         LAYOUT = QtWidgets.QVBoxLayout(FRAME)
