@@ -143,6 +143,14 @@ class MainProgram(QMainWindow):
         # Chatting
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
 
+        # Delete and Log Out
+        self.ui.PF_logOut.clicked.connect(self.handleLogOut(0))
+
+    # def handleLogOut(self, phase:int):
+    #     if phase == 0:
+    #         self.ui.PF_logOut.setText("Are You Sure?")
+    #     pass
+
     def setupVisualize(self):
         self.ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
         self.ui.VI_Graph1.update()
@@ -174,7 +182,6 @@ class MainProgram(QMainWindow):
         self.ui.VI_Value.setText(str(row['VALUE'].values[0]))
         self.ui.VI_Type.setCurrentIndex(int(row['TYPE'].values[0]))
         self.ui.VI_Date.setDateTime(QDateTime.fromString(str(row['CREATED_AT'].values[0]), "yyyy-MM-dd HH:mm:ss"))
-
 
     def addDataFrame(self, title:str, price:int, id:str):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents_3)
@@ -410,18 +417,36 @@ class MainProgram(QMainWindow):
 
         if self.currentAcc is None:
             self.ui.loginButton.setEnabled(True)
+            self.ui.inputdataButton.setEnabled(False)
+            self.ui.visualizeButton.setEnabled(False)
+            self.ui.analyzeButton.setEnabled(False)
 
-            opacity_effect = QGraphicsOpacityEffect()
-            opacity_effect.setOpacity(1)
-            self.ui.loginButton.setGraphicsEffect(opacity_effect)
+            SHOW = QGraphicsOpacityEffect()
+            SHOW.setOpacity(1)
+            self.ui.loginButton.setGraphicsEffect(SHOW)
+
+            UNSHOW = QGraphicsOpacityEffect()
+            UNSHOW.setOpacity(0.5)
+            self.ui.loginButton.setGraphicsEffect(UNSHOW)
+            self.ui.inputdataButton.setGraphicsEffect(UNSHOW)
+            self.ui.visualizeButton.setGraphicsEffect(UNSHOW)
 
             return
         else:
             self.ui.loginButton.setEnabled(False)
+            self.ui.inputdataButton.setEnabled(True)
+            self.ui.visualizeButton.setEnabled(True)
+            self.ui.analyzeButton.setEnabled(True)
 
-            opacity_effect = QGraphicsOpacityEffect()
-            opacity_effect.setOpacity(0.5)
-            self.ui.loginButton.setGraphicsEffect(opacity_effect)
+            UNSHOW = QGraphicsOpacityEffect()
+            UNSHOW.setOpacity(0.5)
+            self.ui.loginButton.setGraphicsEffect(UNSHOW)
+
+            SHOW = QGraphicsOpacityEffect()
+            SHOW.setOpacity(1)
+            self.ui.loginButton.setGraphicsEffect(SHOW)
+            self.ui.inputdataButton.setGraphicsEffect(SHOW)
+            self.ui.visualizeButton.setGraphicsEffect(SHOW)
 
 
         df = getTransaction(self.currentAcc)

@@ -96,7 +96,8 @@ class Ui_Master(object):
         self.loginButton.setFont(font)
         self.loginButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.loginButton.setStyleSheet("border: none;\n"
-"text-align: left;")
+"text-align: left;\n"
+"transparancy: 0.3")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("UI\\../Assets/light-grey Icon/login.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.loginButton.setIcon(icon2)
@@ -122,6 +123,7 @@ class Ui_Master(object):
         font.setFamily("Poppins")
         font.setPointSize(11)
         self.visualizeButton.setFont(font)
+        self.visualizeButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.visualizeButton.setStyleSheet("border: none;\n"
 "text-align: left;")
         icon4 = QtGui.QIcon()
@@ -1383,6 +1385,7 @@ class Ui_Master(object):
         sizePolicy.setHeightForWidth(self.PF_changePassword.sizePolicy().hasHeightForWidth())
         self.PF_changePassword.setSizePolicy(sizePolicy)
         self.PF_changePassword.setMinimumSize(QtCore.QSize(50, 30))
+        self.PF_changePassword.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.PF_changePassword.setStyleSheet("color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
 "\n"
@@ -1444,7 +1447,8 @@ class Ui_Master(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.PF_logOut.sizePolicy().hasHeightForWidth())
         self.PF_logOut.setSizePolicy(sizePolicy)
-        self.PF_logOut.setMinimumSize(QtCore.QSize(60, 30))
+        self.PF_logOut.setMinimumSize(QtCore.QSize(150, 30))
+        self.PF_logOut.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.PF_logOut.setStyleSheet("color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
 "\n"
@@ -1452,7 +1456,8 @@ class Ui_Master(object):
         self.PF_logOut.setObjectName("PF_logOut")
         self.horizontalLayout_10.addWidget(self.PF_logOut)
         self.PF_deleteAccount = QtWidgets.QPushButton(self.frame_15)
-        self.PF_deleteAccount.setMinimumSize(QtCore.QSize(90, 30))
+        self.PF_deleteAccount.setMinimumSize(QtCore.QSize(150, 30))
+        self.PF_deleteAccount.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.PF_deleteAccount.setStyleSheet("color: rgb(0, 0, 0);\n"
 "\n"
 "background-color: rgb(255, 255, 255);\n"
@@ -1803,7 +1808,7 @@ class Ui_Master(object):
         Master.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(Master)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(5)
         self.innerstackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(Master)
 
@@ -1887,7 +1892,7 @@ class Ui_Master(object):
         self.CB_botChat_2.setText(_translate("Master", "<html><head/><body><p><span style=\" font-size:11pt;\">Hello there! How may I assist you today?</span></p></body></html>"))
         self.userChatInput.setPlaceholderText(_translate("Master", "Ask us anything..."))
         self.PF_infoBanner.setText(_translate("Master", "TextLabel"))
-        self.PF_usernamePassword.setText(_translate("Master", "<html><head/><body><p><span style=\" font-weight:600;\">Username</span></p><p>Sigma</p><p><span style=\" font-weight:600;\">Password</span></p><p>niggas</p></body></html>"))
+        self.PF_usernamePassword.setText(_translate("Master", "<html><head/><body><p><span style=\" font-weight:600;\">Username</span></p><p>Sigma</p><p><span style=\" font-weight:600;\">Password</span></p><p>sigma</p></body></html>"))
         self.PF_changePassword.setText(_translate("Master", "Change Password"))
         self.PF_information.setText(_translate("Master", "<html><head/><body><p><span style=\" font-weight:600;\">Date Created</span></p><p>Monday, xx August xxxx</p><p><span style=\" font-weight:600;\">Date Updated</span></p><p>ajkajda</p><p><span style=\" font-weight:600;\">Balance</span></p><p>dkajkdjak</p><p><span style=\" font-weight:600;\">Transaction Uploaded</span></p><p>dajhdajhd</p></body></html>"))
         self.PF_thxMessage.setText(_translate("Master", "<html><head/><body><p align=\"center\"><span style=\" font-style:italic;\">We’re grateful that you’ve entrusted us with your financial journey. Managing your finances is a significant step towards achieving your goals, and we’re here to support you every step of the way.</span></p></body></html>"))
