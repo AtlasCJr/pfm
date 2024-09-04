@@ -2,7 +2,7 @@ import sys
 import os
 from datetime import datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QDateTime
+from PyQt5.QtCore import QDateTime, Qt
 from PyQt5.QtWidgets import *
 
 from UI.Master import Ui_Master
@@ -12,7 +12,7 @@ from UI.loadingScreen import Ui_loadingScreen
 from Functions.database import *
 from Functions.variables import Account, botWorker
 from Functions.data_analysis import *
-from Functions.others import getDate
+from Functions.others import *
 
 
 class LoadingScreen(QMainWindow):
@@ -113,14 +113,11 @@ class MainProgram(QMainWindow):
         self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
         self.ui.loginButton.clicked.connect(self.Authentication)
         self.ui.inputdataButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.inputData))
-        self.ui.visualizeButton.clicked.connect(lambda: (
-            self.setupVisualize(), 
-            self.ui.stackedWidget.setCurrentWidget(self.ui.visualize))
-        )
+        self.ui.visualizeButton.clicked.connect(lambda: (self.setupVisualize(), self.ui.stackedWidget.setCurrentWidget(self.ui.visualize)))
+        self.ui.analyzeButton.clicked.connect(lambda: (self.setupAnalyze(), self.ui.stackedWidget.setCurrentWidget(self.ui.analyze)))
         self.ui.chatbotButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chatBot))
-        self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
         self.ui.aboutButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.about))
-        self.ui.analyzeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.analyze))
+        self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
 
         # Authentication Buttons
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.forgetPW))  # Login -> FP
@@ -151,6 +148,16 @@ class MainProgram(QMainWindow):
 
         self.ED.plotCategory(0, self.ui.VI_Graph2)
         self.ui.VI_Graph2.update()
+
+    def setupAnalyze(self):
+        self.ui.linregTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        linreg = self.ED.getLinReg()
+        for j, y in enumerate(linreg):
+            for i, x in enumerate(y):
+                item = QTableWidgetItem(formatNumber(x))
+                item.setTextAlignment(Qt.AlignCenter)
+                self.ui.linregTable.setItem(j, i, item)
 
     def searchData(self):
         date = self.ui.calendarWidget.selectedDate()

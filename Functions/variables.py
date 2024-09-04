@@ -6,6 +6,8 @@ from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.ticker import FuncFormatter
 
+from scipy.stats import linregress
+
 import pandas as pd
 from PyQt5 import QtWidgets
 
@@ -60,6 +62,37 @@ class enrichedData:
         self.old_data = old_data
         self.data = data
         self.figsize = figsize
+
+    def getLinReg(self):
+        data = self.data
+
+        totalYear = self.data['Features'].iloc[-1]['YEAR'] - self.data['Features'].iloc[0]['YEAR'] + 1
+
+        linreg = []
+        for y in ['Expenses', 'Revenue']:
+            curtype = []
+            for x in ['DAY', 'WEEK', 'MONTH', 'QUARTER', 'YEAR']:
+                cur_data = data.copy()
+                cur_data[x] = cur_data['Features'][x]
+                cur_data = cur_data.groupby(x, as_index=False)[y].sum()
+                cur_data['Cumulative'] = cur_data[y]['TOTAL'].cumsum()
+
+                slope, intercept, r_value, p_value, std_err = linregress(cur_data[x], cur_data['Cumulative'])
+
+                slope /= totalYear
+
+                curtype.append(slope)
+            
+            linreg.append(curtype)
+
+        curtype = []
+        for i in range(5):
+            curtype.append(linreg[1][i] - linreg[0][i])
+        
+        linreg.append(curtype)
+
+        return linreg
+        
 
     def plotAll(self, RANGE1: str, RANGE2: str, displacement: tuple[int, ...], parent):
         if parent.layout() is None:

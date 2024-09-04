@@ -94,6 +94,12 @@ QPushButton:hover {
           </item>
           <item>
            <widget class="QLabel" name="appName">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Poppins</family>
@@ -363,7 +369,7 @@ text-align: left;</string>
 text-align: left;</string>
          </property>
          <property name="text">
-          <string>Profile</string>
+          <string> Profile</string>
          </property>
          <property name="icon">
           <iconset>
@@ -399,7 +405,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1854,14 +1860,14 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>773</width>
-                <height>900</height>
+                <width>785</width>
+                <height>698</height>
                </rect>
               </property>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>900</height>
+                <height>0</height>
                </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1884,7 +1890,7 @@ QScrollBar::sub-page:vertical {
 padding: 0 150px;</string>
                  </property>
                  <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Linear regression is a statistical model which estimates the linear relationship between a scalar response (dependent variable) and one or more explanatory variables (regressor or independent variable). Linear regression analysis is used to predict the value of a variable based on the value of another variable. But aside predicting, it can also do something else like finding a gradient of a data/line.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Linear regression is a statistical model which estimates the linear relationship between a scalar response (dependent variable) and one or more explanatory variables (regressor or independent variable). Linear regression analysis is used to predict the value of a variable based on the value of another variable. But aside predicting, it can also do something else like finding a gradient of a data/line.&lt;/p&gt;&lt;p&gt;By using Linear Regression, we can find the gradient (Rp. / unit of time) of a given data which is your transactions (expenses, revenue, or both).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignJustify|Qt::AlignVCenter</set>
@@ -1898,91 +1904,159 @@ padding: 0 150px;</string>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_13">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                <spacer name="verticalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
                  </property>
-                 <property name="text">
-                  <string/>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
                  </property>
-                 <property name="pixmap">
-                  <pixmap>../Assets/linreg_img.png</pixmap>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_12">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
+                 <property name="sizeHint" stdset="0">
                   <size>
-                   <width>0</width>
-                   <height>50</height>
+                   <width>20</width>
+                   <height>40</height>
                   </size>
                  </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: rgb(255, 255, 255);
-padding: 0 150px;</string>
-                 </property>
-                 <property name="text">
-                  <string>By using Linear Regression, we can find the gradient (Rp. / unit of time) of a given data which is your transactions (expenses, revenue, or both).</string>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                </widget>
+                </spacer>
                </item>
                <item>
                 <widget class="QFrame" name="frame_21">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                   <item>
-                   <widget class="QLabel" name="label_14">
-                    <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Expenses&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Daily&lt;/p&gt;&lt;p&gt;Weekly&lt;/p&gt;&lt;p&gt;Monthly&lt;/p&gt;&lt;p&gt;Quarterly&lt;/p&gt;&lt;p&gt;Annualy&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="Line" name="line_2">
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(255, 255, 255);</string>
-                    </property>
+                   <spacer name="horizontalSpacer_3">
                     <property name="orientation">
-                     <enum>Qt::Vertical</enum>
+                     <enum>Qt::Horizontal</enum>
                     </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QTableWidget" name="linregTable">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QHeaderView::section {
+	color: black;
+}
+
+QTableWidget::item {
+	color: white;
+}</string>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::NoFrame</enum>
+                    </property>
+                    <property name="editTriggers">
+                     <set>QAbstractItemView::NoEditTriggers</set>
+                    </property>
+                    <property name="showGrid">
+                     <bool>true</bool>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
+                    </property>
+                    <attribute name="horizontalHeaderVisible">
+                     <bool>true</bool>
+                    </attribute>
+                    <attribute name="horizontalHeaderCascadingSectionResizes">
+                     <bool>false</bool>
+                    </attribute>
+                    <attribute name="horizontalHeaderHighlightSections">
+                     <bool>true</bool>
+                    </attribute>
+                    <attribute name="horizontalHeaderMinimumSectionSize">
+                     <number>39</number>
+                    </attribute>
+                    <attribute name="horizontalHeaderStretchLastSection">
+                     <bool>false</bool>
+                    </attribute>
+                    <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+                     <bool>false</bool>
+                    </attribute>
+                    <attribute name="verticalHeaderStretchLastSection">
+                     <bool>false</bool>
+                    </attribute>
+                    <row>
+                     <property name="text">
+                      <string>Expense</string>
+                     </property>
+                    </row>
+                    <row>
+                     <property name="text">
+                      <string>Revenue</string>
+                     </property>
+                    </row>
+                    <row>
+                     <property name="text">
+                      <string>Budget</string>
+                     </property>
+                    </row>
+                    <column>
+                     <property name="text">
+                      <string>Daily</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>Weekly</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>Monthly</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>Quarterly</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>Annually</string>
+                     </property>
+                    </column>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_15">
-                    <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);</string>
+                   <spacer name="horizontalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
                     </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Expenses&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
                     </property>
-                   </widget>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                  </layout>
                 </widget>
@@ -1995,82 +2069,47 @@ padding: 0 150px;</string>
                  <property name="frameShadow">
                   <enum>QFrame::Raised</enum>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_17">
+                 <layout class="QHBoxLayout" name="horizontalLayout_16">
                   <item>
-                   <widget class="QLabel" name="label_16">
+                   <widget class="QPushButton" name="pushButton">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);</string>
+                     <string notr="true">border: none;
+color: rgb(255, 255, 255);
+padding: 10px;</string>
                     </property>
                     <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Revenue&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Daily&lt;/p&gt;&lt;p&gt;Weekly&lt;/p&gt;&lt;p&gt;Monthly&lt;/p&gt;&lt;p&gt;Quarterly&lt;/p&gt;&lt;p&gt;Annualy&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     <string>&lt;</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="Line" name="line_3">
+                   <widget class="QWidget" name="widget" native="true">
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(255, 255, 255);</string>
                     </property>
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_17">
+                   <widget class="QPushButton" name="pushButton_2">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);</string>
+                     <string notr="true">border: none;
+color: rgb(255, 255, 255);
+padding: 10px;</string>
                     </property>
                     <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Revenue&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QFrame" name="frame_24">
-                 <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_18">
-                  <item>
-                   <widget class="QLabel" name="label_18">
-                    <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Budget&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Daily&lt;/p&gt;&lt;p&gt;Weekly&lt;/p&gt;&lt;p&gt;Monthly&lt;/p&gt;&lt;p&gt;Quarterly&lt;/p&gt;&lt;p&gt;Annualy&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="Line" name="line_4">
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(255, 255, 255);</string>
-                    </property>
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="label_19">
-                    <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Budget&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;p&gt;Rp. 10.000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&gt;</string>
                     </property>
                    </widget>
                   </item>
@@ -2831,7 +2870,7 @@ QScrollBar::sub-page:vertical {
            <item>
             <widget class="QScrollArea" name="scrollArea_2">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -2857,13 +2896,13 @@ QScrollBar::sub-page:vertical {
                 <x>0</x>
                 <y>0</y>
                 <width>773</width>
-                <height>900</height>
+                <height>1120</height>
                </rect>
               </property>
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>900</height>
+                <height>0</height>
                </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -2912,7 +2951,7 @@ QScrollBar::sub-page:vertical {
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
-                   <height>300</height>
+                   <height>16777215</height>
                   </size>
                  </property>
                  <property name="frameShape">
@@ -2948,7 +2987,7 @@ QScrollBar::sub-page:vertical {
                        <x>0</x>
                        <y>0</y>
                        <width>345</width>
-                       <height>149</height>
+                       <height>226</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -3098,6 +3137,19 @@ QScrollBar::sub-page:vertical {
                          </widget>
                         </item>
                         <item>
+                         <spacer name="verticalSpacer_9">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>40</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
                          <widget class="QPushButton" name="VI_updateButton">
                           <property name="minimumSize">
                            <size>
@@ -3240,6 +3292,19 @@ border-radius: 5px;</string>
                          </widget>
                         </item>
                         <item>
+                         <spacer name="verticalSpacer_6">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>40</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
                          <widget class="QPushButton" name="VI_deleteButton">
                           <property name="minimumSize">
                            <size>
@@ -3267,6 +3332,22 @@ border-radius: 5px;</string>
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QFrame" name="frame_20">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -3277,7 +3358,7 @@ border-radius: 5px;</string>
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
-                   <height>0</height>
+                   <height>200</height>
                   </size>
                  </property>
                  <property name="frameShape">
@@ -3320,7 +3401,7 @@ border-radius: 5px;</string>
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
-                   <height>0</height>
+                   <height>200</height>
                   </size>
                  </property>
                  <property name="frameShape">
@@ -3393,8 +3474,8 @@ border-radius: 5px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>158</width>
-                <height>207</height>
+                <width>803</width>
+                <height>697</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">

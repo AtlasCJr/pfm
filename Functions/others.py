@@ -19,3 +19,13 @@ def getDate() -> str:
     formatted_date = date.strftime(f"%A, %B {day}{suffix} %Y")
 
     return formatted_date
+
+def formatNumber(x) -> str:
+    if isinstance(x, int):
+        return f"Rp. {x:,}".replace(",", ".")
+    
+    elif isinstance(x, float):
+        return f"Rp. {x:,.2f}".replace(",", ".")
+        
+    else:
+        return ""
