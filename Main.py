@@ -2,6 +2,7 @@ import sys
 import os
 from datetime import datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QDateTime
 from PyQt5.QtWidgets import *
 
 from UI.Master import Ui_Master
@@ -95,8 +96,11 @@ class MainProgram(QMainWindow):
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
 
-        self.currentAcc = getLastUser()
-        self.accountChanged()
+        try:
+            self.currentAcc = getLastUser()
+            self.accountChanged()
+        except Exception:
+            pass
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -105,8 +109,11 @@ class MainProgram(QMainWindow):
         # Header Buttons
         self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
         self.ui.loginButton.clicked.connect(self.Authentication)
-        self.ui.inputdataButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.inputData)) 
-        self.ui.visualizeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.visualize))   
+        self.ui.inputdataButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.inputData))
+        self.ui.visualizeButton.clicked.connect(lambda: (
+            self.setupVisualize(), 
+            self.ui.stackedWidget.setCurrentWidget(self.ui.visualize))
+        )
         self.ui.chatbotButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chatBot))
         self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
         self.ui.aboutButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.about))
@@ -133,18 +140,15 @@ class MainProgram(QMainWindow):
         # Chatting
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
 
+    def setupVisualize(self):
+        self.ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
+        self.ui.VI_Graph1.update()
+
     def searchData(self):
         date = self.ui.calendarWidget.selectedDate()
         date = date.toString("yyyy-MM-dd")
 
-        df = getTransaction(self.currentAcc)
-        ED = enrichData(df)
-        data = ED.old_data
-
-        selectedData = data[data['CREATED_AT'].str.startswith(date)]
-
-        ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
-        self.ui.VI_Graph1.update()
+        self.selectedData = self.old_data[self.old_data['CREATED_AT'].str.startswith(date)]
 
         # print(selectedData)
 
@@ -155,10 +159,21 @@ class MainProgram(QMainWindow):
             if widget is not None:
                 widget.deleteLater()
 
-        for _, row in selectedData.iterrows():
-            self.addDataFrame(row['ITEM'], row['VALUE'])
+        for _, row in self.selectedData.iterrows():
+            self.addDataFrame(row['ITEM'], row['VALUE'], row['TRANSACTION_ID'])
     
-    def addDataFrame(self, title:str, price:int):
+    def showData(self, id:str):
+        row = self.selectedData[self.selectedData['TRANSACTION_ID'] == id]
+
+        # print(row)
+
+        self.ui.VI_Item.setText(str(row['ITEM'].values[0]))
+        self.ui.VI_Value.setText(str(row['VALUE'].values[0]))
+        self.ui.VI_Type.setCurrentIndex(int(row['TYPE'].values[0]))
+        self.ui.VI_Date.setDateTime(QDateTime.fromString(str(row['CREATED_AT'].values[0]), "yyyy-MM-dd HH:mm:ss"))
+
+
+    def addDataFrame(self, title:str, price:int, id:str):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents_3)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -185,6 +200,8 @@ class MainProgram(QMainWindow):
 
         LAYOUT = QtWidgets.QVBoxLayout(FRAME)
         LAYOUT.addWidget(LABEL)
+
+        FRAME.mousePressEvent = lambda event, trans_id=id: self.showData(trans_id)
 
         self.ui.verticalLayout_18.addWidget(FRAME)
 
@@ -387,6 +404,10 @@ class MainProgram(QMainWindow):
         # print(answer)
 
     def accountChanged(self):
+        df = getTransaction(self.currentAcc)
+        self.ED = enrichData(df)
+        self.old_data = self.ED.old_data
+    
         self.ui.homeText.setText(f"""
             <html><head/><body>
                 <p align="center"><span style=" font-style:italic;">
