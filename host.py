@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from Functions.database_host import *
-from Functions.variables import Account
+from Functions.classes import Account
 
 app = Flask(__name__)
 

@@ -10,7 +10,7 @@ from UI.loadingScreen import Ui_loadingScreen
 # from UI.otherComponents import Notification
 
 from Functions.database import *
-from Functions.variables import Account, botWorker
+from Functions.classes import Account, botWorker
 from Functions.data_analysis import *
 from Functions.others import *
 
@@ -97,17 +97,15 @@ class MainProgram(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         self.currentAcc = None
 
+        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
         try:
             self.currentAcc = getLastUser()
         except Exception:
             pass
 
         self.accountChanged()
-
-
-        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-
 
         # Header Buttons
         self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
@@ -121,15 +119,16 @@ class MainProgram(QMainWindow):
 
         # Authentication Buttons
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.forgetPW))  # Login -> FP
-        self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
-        self.ui.CP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # FP -> Login
+        self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
+        self.ui.FP_buttonSavePW.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))         # FP -> Login
         self.ui.PF_changePassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))        # Profile -> CP
         self.ui.CP_buttonSavePW.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))                              # CP -> Profile
 
-        self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)
-        self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)
-        self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)
+        self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)                                                                  # Sign In
+        self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)                                                                   # Log In
+        self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)                                                            # Change Password
+        # self.ui.FP_buttonSavePW.clicked.connect(self.handleForgetPW)                                                            # Forget Password
 
         self.ui.LI_inputUsername.returnPressed.connect(lambda: self.ui.LI_inputPassword.setFocus())
         self.ui.LI_inputPassword.returnPressed.connect(self.handleLogIn)
@@ -158,6 +157,9 @@ class MainProgram(QMainWindow):
                 item = QTableWidgetItem(formatNumber(x))
                 item.setTextAlignment(Qt.AlignCenter)
                 self.ui.linregTable.setItem(j, i, item)
+
+        self.ED.plotTimeCycle(0, self.ui.AN_Graph1)
+        self.ui.AN_Graph1.update()
 
     def searchData(self):
         date = self.ui.calendarWidget.selectedDate()
@@ -301,6 +303,37 @@ class MainProgram(QMainWindow):
             self.ui.LI_ErrorMsg.setText("Wrong username or password.")
             return
 
+    def handleForgetPW(self):
+        username = self.ui.FP_inputUsername.text()
+
+        # if 
+
+        answer = self.ui.FP_inputSecAnswer.text()
+
+        password1 = self.ui.CP_inputPassword1.text()
+        password2 = self.ui.CP_inputPassword2.text()
+
+        if password1 == "" or password2 == "":
+            self.ui.CP_errorMsg.setText("Password cannot be empty.")
+            return
+        if len(password1) <= 5:
+            self.ui.CP_errorMsg.setText("Password cannot be less than 5 characters.")
+            return
+        if " " in password1:
+            self.ui.CP_errorMsg.setText("Password cannot has spaces.")
+            return
+        if password1 != password2:
+            self.ui.CP_errorMsg.setText("The typed password doesn't match.")
+            return
+
+        if answer == self.currentAcc.security_question:
+            thisAcc = getAccount(self.currentAcc.username)
+            thisAcc.password = password1
+            editAccount(thisAcc)
+            self.ui.stackedWidget.setCurrentWidget(self.ui.loginPage)
+        else:
+            self.ui.CP_errorMsg.setText("Wrong security answer.")
+
     def handleChangePW(self):
         answer = self.ui.CP_inputSecAnswer.text()
 
@@ -312,6 +345,9 @@ class MainProgram(QMainWindow):
             return
         if len(password1) <= 5:
             self.ui.CP_errorMsg.setText("Password cannot be less than 5 characters.")
+            return
+        if " " in password1:
+            self.ui.CP_errorMsg.setText("Password cannot has spaces.")
             return
         if password1 != password2:
             self.ui.CP_errorMsg.setText("The typed password doesn't match.")

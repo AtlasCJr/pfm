@@ -5,7 +5,7 @@ import pandas as pd
 from uuid import uuid4 as randomID
 from hashlib import sha256
 
-from Functions.variables import Account
+from Functions.classes import Account
 
 def createDatabase() -> None:
     """

@@ -2089,7 +2089,7 @@ padding: 10px;</string>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QWidget" name="widget" native="true">
+                   <widget class="QWidget" name="AN_Graph1" native="true">
                     <property name="styleSheet">
                      <string notr="true">background-color: rgb(255, 255, 255);</string>
                     </property>

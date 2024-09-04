@@ -1,5 +1,5 @@
 import requests
-from Functions.variables import Account
+from Functions.classes import Account
 
 BASE_URL = 'https://pfmtugascaslabkendaliftui2024.loca.lt'
 

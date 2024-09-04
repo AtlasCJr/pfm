@@ -1,5 +1,5 @@
 import pandas as pd
-from Functions.variables import enrichedData
+from Functions.classes import enrichedData
 import numpy as np
 
 def getTimeCycle(data: pd.DataFrame, cycle: str, pos: int = 0) -> pd.DataFrame:
