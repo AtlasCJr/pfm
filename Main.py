@@ -555,20 +555,11 @@ class MainProgram(QMainWindow):
 
             self.ui.homeText.setText(f"""
                 <html><head/><body>
-                    <p align="center"><span style=" font-style:italic;">
-                        &quot;The journey of a thousand miles begins with one step.&quot; 
-                    </span></p>
-                    
-                    <p align="center"><span style=" font-style:italic;">
-                        — Lao Tzu
-                    </span></p><p align="center"></p>
-                    
-                    <br/>
-                    
                     <p>Hi, User!</p>
-                    <p>It is {getDate()}.<br/>What would you like to do?</p>
+                    <p>It is Monday, September 2nd 2024. What would you like to do?</p>
+                    <p>It seemes that you are currently not logged in. Try logging in or create a new account to use our app!</p>
                 </body></html>
-                """)
+            """)
             
             return
         else:
