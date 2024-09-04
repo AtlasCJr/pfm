@@ -437,7 +437,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>6</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -549,7 +549,7 @@ text-align: left;</string>
               <string notr="true">color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hi, User!&lt;/p&gt;&lt;p&gt;It is Monday, September 2nd 2024. What would you like to do?&lt;/p&gt;&lt;p&gt;It seemes that you are currently not logged in. Try logging in or create a new account to use our app!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hi, User!&lt;/p&gt;&lt;p&gt;It’s Monday, September 2nd, 2024. What would you like to do today?&lt;/p&gt;&lt;p&gt;It seems you’re not logged in at the moment. Try logging in or create a new account to get started and enjoy all the features of our app!&lt;/p&gt;&lt;p&gt;Need help? Feel free to reach out to our Chatbot&lt;span style=&quot; font-weight:600;&quot;/&gt;if you have any questions or need assistance.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
@@ -2378,8 +2378,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>290</width>
-                   <height>250</height>
+                   <width>715</width>
+                   <height>547</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -2683,6 +2683,19 @@ padding-left: 35px;</string>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_12">
                  <item>
+                  <spacer name="horizontalSpacer_7">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="PF_profilePict">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -2714,14 +2727,54 @@ padding-left: 35px;</string>
                   </widget>
                  </item>
                  <item>
+                  <spacer name="horizontalSpacer_18">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="PF_infoBanner">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>16</pointsize>
+                    </font>
+                   </property>
                    <property name="styleSheet">
                     <string notr="true">color: rgb(255, 255, 255);</string>
                    </property>
                    <property name="text">
-                    <string>TextLabel</string>
+                    <string>USERNAME</string>
                    </property>
                   </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_11">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </widget>
@@ -3032,7 +3085,7 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>435</width>
+                <width>773</width>
                 <height>1560</height>
                </rect>
               </property>
@@ -3129,8 +3182,8 @@ QScrollBar::sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>98</width>
-                       <height>99</height>
+                       <width>345</width>
+                       <height>226</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -3608,8 +3661,8 @@ border-radius: 5px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>158</width>
-                <height>207</height>
+                <width>803</width>
+                <height>697</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
