@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 from PyQt5 import QtWidgets
 
-plt.style.use('fivethirtyeight')
+# plt.style.use('fivethirtyeight')
 
 class Account:
     def __init__(self, username: str, 
@@ -54,15 +54,15 @@ class botWorker(QThread):
         self.resultReady.emit(bot_answer)
 
 class Canvas(FigureCanvas):
-    def __init__(self, parent=None, figsize=(9, 6)):
-        self.fig, self.ax = plt.subplots(figsize=figsize, dpi=50)
+    def __init__(self, figsize, parent=None):
+        self.fig, self.ax = plt.subplots(figsize=figsize, dpi=60)
         super().__init__(self.fig)
         self.setParent(parent)
         # self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         # self.updateGeometry()
 
 class enrichedData:
-    def __init__(self, old_data: pd.DataFrame, data: pd.DataFrame, figsize: tuple[int, int] = (20, 10)) -> None:
+    def __init__(self, old_data: pd.DataFrame, data: pd.DataFrame, figsize: tuple[int, int] = (15, 5)) -> None:
         self.old_data = old_data
         self.data = data
         self.figsize = figsize
@@ -111,7 +111,7 @@ class enrichedData:
                     widget_to_remove.setParent(None)
                     widget_to_remove.deleteLater()
 
-        canvas = Canvas(parent, figsize=self.figsize)
+        canvas = Canvas(figsize=self.figsize, parent=parent)
         
         if RANGE1 != "YEAR":
             last_data = self.data['Features', RANGE2].iloc[-1] - displacement
@@ -125,7 +125,7 @@ class enrichedData:
 
             canvas.ax.text(0.5, 1.04, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
 
-        canvas.ax.set_xlabel(RANGE1.title())
+        canvas.ax.set_xlabel('')
         canvas.ax.set_ylabel("Rp.")
         canvas.ax.set_title("Complete Plot", pad=20)
     
@@ -144,7 +144,7 @@ class enrichedData:
     
         canvas.ax.legend()
         canvas.ax.grid(True)
-        # canvas.fig.tight_layout()
+        canvas.fig.tight_layout()
         canvas.draw()
 
         if parent is not None:
@@ -168,7 +168,7 @@ class enrichedData:
                     widget_to_remove.setParent(None)
                     widget_to_remove.deleteLater()
 
-        canvas = Canvas(parent, figsize=self.figsize)
+        canvas = Canvas(figsize=self.figsize, parent=parent)
 
         all_types = [0, 1, 2, 3, 4, 5, 10, 11, 12, 13]
 
@@ -183,15 +183,15 @@ class enrichedData:
 
         canvas.ax.bar(byType['TYPE_LABEL'], byType['VALUE'], color=colors)
 
-        canvas.ax.set_xlabel('Type')
+        canvas.ax.set_xlabel('')
         canvas.ax.set_ylabel('Rp.')
         canvas.ax.set_title('Expenses by Type', pad=20)
         canvas.ax.set_xticks(range(len(byType['TYPE_LABEL'])))
         canvas.ax.set_xticklabels(byType['TYPE_LABEL'], rotation=45, ha='right')
 
-        canvas.ax.text(0.5, 1.01, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=15)
-
+        canvas.ax.text(0.5, 1.01, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
         canvas.ax.grid(True)
+        canvas.fig.tight_layout()
         canvas.draw()
 
         if parent is not None:
@@ -211,7 +211,6 @@ class enrichedData:
         else:
             layout = parent.layout()
 
-        # Clear any existing widgets in the parent
         if parent is not None:
             for i in reversed(range(parent.layout().count())):
                 widget_to_remove = parent.layout().itemAt(i).widget()
@@ -219,8 +218,7 @@ class enrichedData:
                     widget_to_remove.setParent(None)
                     widget_to_remove.deleteLater()
 
-        # Initialize Canvas for Matplotlib
-        canvas = Canvas(parent, figsize=self.figsize)
+        canvas = Canvas(figsize=self.figsize, parent=parent)
 
         time_cycle = ["DoW", "WoM", "MONTH", "QUARTER", "YEAR"][x]
         time_dict = [dayMapping, weekMapping, monthMapping, quarterMapping, None][x]
@@ -232,36 +230,30 @@ class enrichedData:
         if time_cycle == "WoM":
             cur_data[time_cycle] = cur_data[time_cycle].replace(6, 5)
 
-        # Group and calculate totals
         cur_data = cur_data.groupby(time_cycle, as_index=False).sum()
 
-        # Adjust Expenses by subtracting '5'
         cur_data.loc[:, ('Expenses', 'TOTAL')] = cur_data[('Expenses', 'TOTAL')] - cur_data[('Expenses', '5')]
 
         indices = np.arange(len(cur_data))
         bar_width = 0.35
 
-        # Plot Expenses and Revenue
         canvas.ax.bar(indices, cur_data[('Expenses', 'TOTAL')], width=bar_width, label='Expenses')
         canvas.ax.bar(indices + bar_width, cur_data[('Revenue', 'TOTAL')], width=bar_width, label='Revenue')
 
-        # Map Labels
         if time_cycle != "YEAR":
             cur_data['LABEL'] = cur_data[time_cycle].map(time_dict).fillna("Unknown")
         else:
             cur_data['LABEL'] = cur_data[time_cycle].astype(str)
 
-        # Set axis labels and ticks
-        canvas.ax.set_xlabel(title)
+        canvas.ax.set_xlabel('')
         canvas.ax.set_xticks(indices + bar_width / 2)
         canvas.ax.set_xticklabels(cur_data['LABEL'], rotation=45, ha='right')
         canvas.ax.set_ylabel('Rp.')
         canvas.ax.set_title(f'{title} Distribution', pad=20)
 
-        # Add grid, legend, and draw the canvas
         canvas.ax.grid(True)
         canvas.ax.legend()
+        canvas.fig.tight_layout()
         canvas.draw()
 
-        # Add the canvas to the parent layout
         layout.addWidget(canvas)

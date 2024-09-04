@@ -121,17 +121,31 @@ class MainProgram(QMainWindow):
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.forgetPW))  # Login -> FP
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
         self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
-        self.ui.FP_buttonSavePW.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))         # FP -> Login
-        self.ui.PF_changePassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW))        # Profile -> CP
+        self.ui.FP_buttonSavePW.clicked.connect(lambda: (
+            self.handleForgetPW,
+            self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
+        ))                                                                                                                      # FP -> Login
+        self.ui.PF_changePassword.clicked.connect(lambda: (
+            self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup),
+            self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW)
+        ))                                                                                                                      # Profile -> CP
         self.ui.CP_buttonSavePW.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))                              # CP -> Profile
 
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)                                                                  # Sign In
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)                                                                   # Log In
         self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)                                                            # Change Password
-        # self.ui.FP_buttonSavePW.clicked.connect(self.handleForgetPW)                                                            # Forget Password
 
         self.ui.LI_inputUsername.returnPressed.connect(lambda: self.ui.LI_inputPassword.setFocus())
         self.ui.LI_inputPassword.returnPressed.connect(self.handleLogIn)
+
+        self.ui.CP_inputSecAnswer.returnPressed.conenct(lambda: self.ui.CP_inputPassword1.setFocus())
+        self.ui.CP_inputPassword1.returnPressed.conenct(lambda: self.ui.CP_inputPassword2.setFocus())
+        self.ui.CP_inputPassword2.returnPressed.conenct(self.handleChangePW)
+
+        self.ui.FP_inputUsername.returnPressed.connect(lambda: self.ui.FP_inputSecAnswer.setFocus())
+        self.ui.FP_inputSecAnswer.returnPressed.connect(lambda: self.ui.FP_inputPassword1.setFocus())
+        self.ui.FP_inputPassword1.returnPressed.connect(lambda: self.ui.FP_inputPassword2.setFocus())
+        self.ui.FP_inputPassword2.returnPressed.connect(lambda: self.ui.FP_buttonSavePW.click())
 
         # Visualize
         self.ui.calendarWidget.selectionChanged.connect(self.searchData)
@@ -150,6 +164,7 @@ class MainProgram(QMainWindow):
 
     def setupAnalyze(self):
         self.ui.linregTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.linregTable.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         linreg = self.ED.getLinReg()
         for j, y in enumerate(linreg):
