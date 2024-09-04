@@ -95,12 +95,15 @@ class MainProgram(QMainWindow):
         self.ui = Ui_Master()
         self.ui.setupUi(self)
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
+        self.currentAcc = None
 
         try:
             self.currentAcc = getLastUser()
-            self.accountChanged()
         except Exception:
             pass
+
+        self.accountChanged()
+
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -404,6 +407,23 @@ class MainProgram(QMainWindow):
         # print(answer)
 
     def accountChanged(self):
+
+        if self.currentAcc is None:
+            self.ui.loginButton.setEnabled(True)
+
+            opacity_effect = QGraphicsOpacityEffect()
+            opacity_effect.setOpacity(1)
+            self.ui.loginButton.setGraphicsEffect(opacity_effect)
+
+            return
+        else:
+            self.ui.loginButton.setEnabled(False)
+
+            opacity_effect = QGraphicsOpacityEffect()
+            opacity_effect.setOpacity(0.5)
+            self.ui.loginButton.setGraphicsEffect(opacity_effect)
+
+
         df = getTransaction(self.currentAcc)
         self.ED = enrichData(df)
         self.old_data = self.ED.old_data

@@ -161,7 +161,8 @@ text-align: left;</string>
          </property>
          <property name="styleSheet">
           <string notr="true">border: none;
-text-align: left;</string>
+text-align: left;
+transparancy: 0.3</string>
          </property>
          <property name="text">
           <string> Login</string>
@@ -396,7 +397,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -492,7 +493,7 @@ text-align: left;</string>
               <string notr="true">color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;&amp;quot;The journey of a thousand miles begins with one step.&amp;quot; &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;— Lao Tzu&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Hi, User!&lt;/p&gt;&lt;p&gt;It is Monday, September 2nd 2024. What would you like to do?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;&amp;quot;The journey of a thousand miles begins with one step.&amp;quot; &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;— Lao Tzu&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Hi, User!&lt;/p&gt;&lt;p&gt;It is Monday, September 2nd 2024. What would you like to do?&lt;/p&gt;&lt;p&gt;It seemes that you are currently not logged in. Try logging in or create a new account to use our app!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
