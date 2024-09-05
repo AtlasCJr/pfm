@@ -194,6 +194,50 @@ class MainProgram(QMainWindow):
         self.ui.PF_logOut.clicked.connect(self.handleLogOut)
         self.ui.PF_deleteAccount.clicked.connect(self.handleDeleteAcc)
 
+        # Upload
+        self.ui.ID_addTransaction.clicked.connect(self.handleAddTransaction)
+
+    def handleAddTransaction(self):
+        item = self.ui.ID_inputTransaction.text()
+        type = self.ui.ID_dropdownType.currentIndex()
+        date = self.ui.ID_calendarWidget.selectedDate().toPyDate()
+        # date = date.toString("yyyy-MM-dd")
+        value = self.ui.ID_inputValue.text()
+
+        if item == "":
+            self.ui.ID_errorMsg.setText("Item name cannot be empty.")
+            return
+        
+        if value == "":
+            self.ui.ID_errorMsg.setText("Value cannot be empty.")
+            return
+        try: int(value)
+        except Exception:
+            self.ui.ID_errorMsg.setText("Value cannot be converted to int. Please input numbers only.")
+            return
+        if int(value) < 0:
+            self.ui.ID_errorMsg.setText("Value cannot be negative.")
+            return
+        
+        if date > datetime.now().date():
+            self.ui.ID_errorMsg.setText("Date cannot be later than today.")
+            return
+        
+        category = 0 if type < 10 else 1
+        value = int(value)
+        date = date.strftime("%Y-%m-%d")
+
+        self.ui.ID_errorMsg.clear()
+        addTransaction(self.currentAcc, item, type, category, value, date)
+
+        self.ui.ID_inputTransaction.clear()
+        self.ui.ID_dropdownType.clear()
+        self.ui.ID_inputValue.clear()
+
+        self.currentAcc = getAccount(self.currentAcc.username)
+        self.accountChanged()
+
+
     def handleDeleteTransaction(self):
         alert = Alert("You are about to delete your chosen transaction.")
         answer = alert.getResult()
