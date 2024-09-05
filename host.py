@@ -184,6 +184,24 @@ def _editTransaction():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'error': str(e)}), 500
+    
+# Route untuk menghapus transaksi
+@app.route('/_deleteTransaction', methods=['POST'])
+def _deleteTransaction():
+    try:
+        data = request.json
+        username = data.get('username')
+        transaction_id = data.get('transaction_id')
+        
+        # Pastikan akun ada di database sebelum menghapus transaksi
+
+        account = getAccount(username)
+        deleteTransaction(account, transaction_id)
+        
+        return jsonify({"message": "Transaction deleted successfully!"}), 200
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': str(e)}), 500
 
 # Route untuk menambahkan chat
 @app.route('/_addChats', methods=['POST'])
