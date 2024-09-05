@@ -160,21 +160,6 @@ def _deleteTransaction(username: str, transaction_id: str)-> bool:
         return True
     except requests.exceptions.RequestException:
         return False
-
-def _addChats(username: str, message_type: str, message: str, id:str)-> bool:
-    url = f'{BASE_URL}/_addChats'
-    data = {
-        'id': id,
-        'username': username,
-        'message_type': message_type,
-        'message': message
-    }
-    try:
-        response = requests.post(url, json=data)
-        response.raise_for_status()
-        return True
-    except requests.exceptions.RequestException:
-        return False
     
 def _addLog(message:str)-> bool:
     url = f'{BASE_URL}/_addLog'

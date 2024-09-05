@@ -148,6 +148,7 @@ class MainProgram(QMainWindow):
         self.ui.chatbotButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chatBot))
         self.ui.aboutButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.about))
         self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
+        self.ui.editButton.clicked.connect(lambda: (self.searchData(), self.ui.stackedWidget.setCurrentWidget(self.ui.edit)))
 
         # Authentication
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.forgetPW))  # Login -> FP
@@ -174,10 +175,11 @@ class MainProgram(QMainWindow):
         self.ui.FP_inputPassword2.returnPressed.connect(lambda: self.ui.FP_buttonSavePW.click())
 
         # Visualize
-        self.ui.calendarWidget.selectionChanged.connect(self.searchData)
 
-        self.ui.VI_updateButton.clicked.connect(self.handleUpdateTransaction)
-        self.ui.VI_deleteButton.clicked.connect(self.handleDeleteTransaction)
+        # Edit
+        self.ui.calendarWidget.selectionChanged.connect(self.searchData)
+        self.ui.ED_updateButton.clicked.connect(self.handleUpdateTransaction)
+        self.ui.ED_deleteButton.clicked.connect(self.handleDeleteTransaction)
 
         # Analysis
         self.ui.AN_backButton.clicked.connect(self.handleBackButton)
@@ -246,6 +248,10 @@ class MainProgram(QMainWindow):
         if answer:
             deleteTransaction(self.currentAcc, self.selectedTransactionID)
 
+            self.ui.ED_Item.clear()
+            self.ui.ED_Type.setCurrentIndex(0)
+            self.ui.ED_Value.clear()
+
             self.currentAcc = getAccount(self.currentAcc.username)
             self.accountChanged()
             self.searchData()
@@ -257,17 +263,19 @@ class MainProgram(QMainWindow):
         answer = alert.getResult()
 
         if answer:
-            item = self.ui.VI_Item.text()
-            type = self.ui.VI_Type.currentIndex()
+            item = self.ui.ED_Item.text()
+            type = self.ui.ED_Type.currentIndex()
             category = 0 if type < 10 else 1
-            value = self.ui.VI_Value.text()
-            date = self.ui.VI_Date.dateTime().toPyDateTime()
+            value = self.ui.ED_Value.text()
+            date = self.ui.ED_Date.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
 
-            editTransaction(self.currentAcc, self.selectedTransactionID, item, type, category, value)
+            editTransaction(self.currentAcc, self.selectedTransactionID, item, type, category, value, date)
 
-            self.ui.VI_Item.clear()
-            self.ui.VI_Type.setCurrentIndex(0)
-            self.ui.VI_Value.clear()
+            print("changed")
+
+            self.ui.ED_Item.clear()
+            self.ui.ED_Type.setCurrentIndex(0)
+            self.ui.ED_Value.clear()
 
             self.accountChanged()
             self.searchData()
@@ -299,13 +307,17 @@ class MainProgram(QMainWindow):
             return
 
     def setupVisualize(self):
-        self.searchData()
-
         self.ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
         self.ui.VI_Graph1.update()
 
         self.ED.plotCategory(0, self.ui.VI_Graph2)
         self.ui.VI_Graph2.update()
+
+        self.graphAnalyze(self.graphIndex[0])
+
+    def graphAnalyze(self, index:int):
+        self.ED.plotTimeCycle(index, self.ui.VI_Graph3)
+        self.ui.VI_Graph3.update()
 
     def handleForwardButton(self):
         self.graphIndex[0] -= 1
@@ -327,12 +339,30 @@ class MainProgram(QMainWindow):
                 item = QTableWidgetItem(formatNumber(x))
                 item.setTextAlignment(Qt.AlignCenter)
                 self.ui.linregTable.setItem(j, i, item)
+        
+        question = f"""
+        This is my current economical state. I live in Indonesia. Please tell me about my current status.
+        Expenses:
+        Daily: {linreg[0][0]}
+        Weekly: {linreg[0][1]}
+        Monthly: {linreg[0][2]}
+        Quarterly: {linreg[0][3]}
+        Annually: {linreg[0][4]}
 
-        self.graphAnalyze(self.graphIndex[0])
+        Revenue:
+        Daily: {linreg[1][0]}
+        Weekly: {linreg[1][1]}
+        Monthly: {linreg[1][2]}
+        Quarterly: {linreg[1][3]}
+        Annually: {linreg[1][4]}
+        """
 
-    def graphAnalyze(self, index:int):
-        self.ED.plotTimeCycle(index, self.ui.VI_Graph3)
-        self.ui.VI_Graph3.update()
+        self.botWorker = botWorker(question)
+        self.botWorker.resultReady.connect(self.analyzeTable)
+        self.botWorker.start()
+
+    def analyzeTable(self, answer):
+        self.ui.AN_Explanation.setText(answer)
 
     def searchData(self):
         date = self.ui.calendarWidget.selectedDate()
@@ -354,10 +384,10 @@ class MainProgram(QMainWindow):
 
         self.selectedTransactionID = id
 
-        self.ui.VI_Item.setText(str(row['ITEM'].values[0]))
-        self.ui.VI_Value.setText(str(row['VALUE'].values[0]))
-        self.ui.VI_Type.setCurrentIndex(int(row['TYPE'].values[0]))
-        self.ui.VI_Date.setDateTime(QDateTime.fromString(str(row['CREATED_AT'].values[0]), "yyyy-MM-dd HH:mm:ss"))
+        self.ui.ED_Item.setText(str(row['ITEM'].values[0]))
+        self.ui.ED_Value.setText(str(row['VALUE'].values[0]))
+        self.ui.ED_Type.setCurrentIndex(int(row['TYPE'].values[0]))
+        self.ui.ED_Date.setDateTime(QDateTime.fromString(str(row['CREATED_AT'].values[0]), "yyyy-MM-dd HH:mm:ss"))
 
     def addDataFrame(self, title:str, price:int, id:str):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents_3)
@@ -543,7 +573,7 @@ class MainProgram(QMainWindow):
         self.botWorker.resultReady.connect(self.handleBotAnswer)
         self.botWorker.start()
 
-    def addChatFrame(self, text, isBot:bool):
+    def addChatFrame(self, text:str, isBot:bool):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -583,7 +613,6 @@ class MainProgram(QMainWindow):
         LABEL.setMaximumSize(QtCore.QSize(4000, 16777215))
         font = QtGui.QFont()
         font.setFamily("Poppins")
-        font.setPixelSize(11)
         LABEL.setFont(font)
         LABEL.setStyleSheet(f"""
             color: rgb(255, 255, 255);
@@ -596,7 +625,7 @@ class MainProgram(QMainWindow):
         """)
         LABEL.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         LABEL.setWordWrap(True)
-        LABEL.setText(text)
+        LABEL.setText(f"<html><head/><body><p><span style=\" font-size:11pt;\">{text}</span></p></body></html>")
         LAYOUT.addWidget(LABEL)
 
         if isBot:
@@ -620,8 +649,6 @@ class MainProgram(QMainWindow):
     def handleBotAnswer(self, answer):
         self.addChatFrame(answer, True)
 
-        # print(answer)
-
     def accountChanged(self):
         if self.currentAcc is None:
             # Enable/Disable buttons
@@ -630,6 +657,7 @@ class MainProgram(QMainWindow):
             self.ui.visualizeButton.setEnabled(False)
             self.ui.analyzeButton.setEnabled(False)
             self.ui.profileButton.setEnabled(False)
+            self.ui.editButton.setEnabled(False)
 
             # Set opacity effects
             SHOW = QGraphicsOpacityEffect()
@@ -652,6 +680,10 @@ class MainProgram(QMainWindow):
             UNSHOW4.setOpacity(0.5)
             self.ui.profileButton.setGraphicsEffect(UNSHOW4)
 
+            UNSHOW5 = QGraphicsOpacityEffect()
+            UNSHOW5.setOpacity(0.5)
+            self.ui.editButton.setGraphicsEffect(UNSHOW5)
+
             self.ui.homeText.setText(f"""
                 <html><head/><body>
                     <p>Hi, User!</p>
@@ -666,6 +698,7 @@ class MainProgram(QMainWindow):
             self.ui.loginButton.setEnabled(False)
             self.ui.inputdataButton.setEnabled(True)
             self.ui.profileButton.setEnabled(True)
+            self.ui.editButton.setEnabled(True)
 
             if self.currentAcc.num_transactions != 0:
                 self.ui.visualizeButton.setEnabled(True)
@@ -694,6 +727,10 @@ class MainProgram(QMainWindow):
                 SHOW4 = QGraphicsOpacityEffect()
                 SHOW4.setOpacity(1)
                 self.ui.analyzeButton.setGraphicsEffect(SHOW4)
+
+                SHOW5 = QGraphicsOpacityEffect()
+                SHOW5.setOpacity(1)
+                self.ui.editButton.setGraphicsEffect(SHOW5)
             else:
                 UNSHOW2 = QGraphicsOpacityEffect()
                 UNSHOW2.setOpacity(0.5)
@@ -702,6 +739,10 @@ class MainProgram(QMainWindow):
                 UNSHOW3 = QGraphicsOpacityEffect()
                 UNSHOW3.setOpacity(0.5)
                 self.ui.analyzeButton.setGraphicsEffect(UNSHOW3)
+
+                UNSHOW4 = QGraphicsOpacityEffect()
+                UNSHOW4.setOpacity(0.5)
+                self.ui.editButton.setGraphicsEffect(UNSHOW4)
 
 
 

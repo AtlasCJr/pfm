@@ -114,11 +114,11 @@ def _deleteAccount(username):
 # Route untuk memeriksa ketersediaan username
 @app.route('/_isUsernameAvailable/<username>', methods=['GET'])
 def _isUsernameAvailable(username):
-    account = getAccount(username)
+    account = isUsernameAvailable(username)
     if account:
-        return jsonify({"available": False}), 200
-    else:
         return jsonify({"available": True}), 200
+    else:
+        raise Exception("User not found!")
 
 # Route untuk menambahkan transaksi baru
 @app.route('/_addTransaction', methods=['POST'])
@@ -199,24 +199,6 @@ def _deleteTransaction():
         deleteTransaction(account, transaction_id)
         
         return jsonify({"message": "Transaction deleted successfully!"}), 200
-    except Exception as e:
-        print(f"Error: {e}")
-        return jsonify({'error': str(e)}), 500
-
-# Route untuk menambahkan chat
-@app.route('/_addChats', methods=['POST'])
-def _addChats():
-    try:
-        data = request.json
-        id = data.get('id')
-        username = data.get('username')
-        message_type = data.get('message_type')
-        message = data.get('message')
-        
-        # Pastikan akun ada di database sebelum menambahkan chat
-        addChats(username, message_type, message, id)
-        
-        return jsonify({"message": "Chat added successfully!"}), 200
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'error': str(e)}), 500

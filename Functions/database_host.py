@@ -27,7 +27,8 @@ def createDatabase() -> None:
         HASHED_SECURITY_ANSWER INTEGER,
         CREATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
         UPDATED_AT DATETIME DEFAULT CURRENT_TIMESTAMP,
-        BALANCE INT
+        BALANCE INT,
+        TRANSACTIONS INT DEFAULT 0
     )
     """)
 
@@ -53,23 +54,10 @@ def createDatabase() -> None:
     """)
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS chats (
-        MESSAGE_ID TEXT PRIMARY KEY,
-        USERNAME TEXT,
-        MESSAGE_TYPE INT,
-        MESSAGE TEXT,
-        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
-    )
-    """)
-
-    cursor.execute("""
     CREATE TABLE IF NOT EXISTS log (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        USERNAME TEXT,
         MESSAGE TEXT,
-        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
+        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP
     )
     """)
 
@@ -89,7 +77,7 @@ def createDatabase() -> None:
     addLog("Database created")
 
 # Account functions
-def addAccount(account:Account) -> str:
+def addAccount(account:Account) -> None:
     """
     Add an account from the Account class to the account table
     """
@@ -111,10 +99,10 @@ def addAccount(account:Account) -> str:
     except sqlite3.IntegrityError:
         conn.rollback()
         conn.close()
-        return "Username already exists"
+        addLog("Failed added account : Username already exists")
 
     conn.close()
-    return "Account added successfully"
+    addLog("Account added successfully")
 
 def checkAccount(username:str, password:str) -> bool:
     """
@@ -152,7 +140,7 @@ def checkSecurity(username:str, security_question:int, security_answer:str) -> b
     else:
         return security_question == row[2] and sha256(security_answer.encode()).hexdigest() == row[3]
     
-def updateBalance(account:Account, new_balance:int)-> str:
+def updateBalance(account:Account, new_balance:int)-> None:
     """
     Updates the balance of a user account.
     """
@@ -169,8 +157,10 @@ def updateBalance(account:Account, new_balance:int)-> str:
         conn.commit()
         conn.close()
 
+        addLog("Balance updated successfully")
+
     except Exception as e:
-        raise Exception(f"Error updating balance: {str(e)}")
+        addLog(f"Error updating balance: {str(e)}")
 
 def getAccount(username:str) -> Account:
     """
@@ -185,12 +175,14 @@ def getAccount(username:str) -> Account:
 
     conn.close()
 
+    updateLastUser(row[0])
+
     if row is None:
         return None
     else:
-        return Account(row[0], row[1], row[2], row[3], row[4])
+        return Account(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
 
-def editAccount(account:Account) -> str:
+def editAccount(account:Account) -> None:
     """
     Updates the account information of a user account.
     """
@@ -211,11 +203,11 @@ def editAccount(account:Account) -> str:
         conn.commit()
         conn.close()
 
-        return "Account information updated successfully"
+        addLog("Account information updated successfully")
     except Exception as e:
-        return f"Error updating account information: {str(e)}"
+        addLog(f"Error updating account information: {str(e)}")
 
-def deleteAccount(account:Account) -> str:
+def deleteAccount(account:Account) -> None:
     """
     Deletes a user account.
     """
@@ -232,9 +224,9 @@ def deleteAccount(account:Account) -> str:
         conn.commit()
         conn.close()
 
-        return "Account deleted successfully"
+        addLog("Account deleted successfully")
     except Exception as e:
-        return f"Error deleting account: {str(e)}"
+        addLog(f"Error deleting account: {str(e)}")
 
 def isUsernameAvailable(username:str) -> bool:
     conn = sqlite3.connect("DB.db")
@@ -243,7 +235,10 @@ def isUsernameAvailable(username:str) -> bool:
         cursor = conn.cursor()
         cursor.execute("SELECT 1 FROM accounts WHERE USERNAME = ?", (username,))
         row = cursor.fetchone()
-        return row is not None
+        if row is None:
+            return False
+        else:
+            return True
     finally:
         conn.close()
 
@@ -331,9 +326,6 @@ def updateTimeSpent(start_time: datetime) -> None:
     conn.commit()
     conn.close()
 
-# # Contoh penggunaan (diletakkan di awal program)
-# start_time = datetime.now()
-
 def getTimeSpent() -> datetime:
     """
     Retrieves the total time spent on the program.
@@ -354,20 +346,31 @@ def addTransaction(id: str, account:Account, item: str, type:int, category: int,
     """
     Inserts a transaction record into the transactions table.
     """
+    try:
+        conn = sqlite3.connect("DB.db")
+        cursor = conn.cursor()
 
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
+        if category == 0:
+            value = -value
 
-    if updated_at == None:
-        updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        new_balance = account.balance + value
+        updateBalance(account, new_balance)
 
-    cursor.execute(
-        "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-        (id, account.username, item, type, category, value, created_at, updated_at)
-    )
+        if updated_at == None:
+            updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    conn.commit()
-    conn.close()
+        cursor.execute(
+            "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+            (id, account.username, item, type, category, value, created_at, updated_at)
+        )
+
+        conn.commit()
+        conn.close()
+
+        addLog("Transaction added successfully")
+
+    except Exception as e:
+        addLog(f"Error adding transaction: {str(e)}")
 
 def getTransaction(account:Account) -> pd.DataFrame:
     """
@@ -384,67 +387,72 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
     Updates a transaction record.
     """
 
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
+    try:
+        conn = sqlite3.connect("DB.db")
+        cursor = conn.cursor()
 
-    if updated_at is None:
-        updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        if updated_at is None:
+            updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    cursor.execute(
-        "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, CREATED AT = ?, UPDATED_AT = ? WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
-        (item, type, category, value, created_at, updated_at, transaction_id, account.username)
-    )
+        cursor.execute(
+            "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, CREATED AT = ?, UPDATED_AT = ? WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
+            (item, type, category, value, created_at, updated_at, transaction_id, account.username)
+        )
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
+
+        addLog("Transaction edited successfully")
+    
+    except Exception as e:
+        addLog(f"Error editing transaction: {str(e)}")
 
 def deleteTransaction(account:Account, transaction_id:str) -> None:
     """
     Deletes a transaction record.
     """
 
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
+    try:
+        conn = sqlite3.connect("DB.db")
+        cursor = conn.cursor()
 
-    cursor.execute(
-        "DELETE FROM transactions WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
-        (transaction_id, account.username)
-    )
+        cursor.execute(
+            "DELETE FROM transactions WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
+            (transaction_id, account.username)
+        )
 
-    conn.commit()
-    conn.close()
+        conn.commit()
 
-# Chat functions
-def addChats(username:str, message_type:int, message:str, id:str = None) -> None:
-    """
-    Inserts a chat message into the chats table.
-    """
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
+        cursor.execute("""
+                UPDATE accounts
+                SET TRANSACTIONS = TRANSACTIONS - 1
+                WHERE USERNAME = ?
+            """, (account.username,))
 
-    if id is None:
-        id = str(randomID())
+        conn.commit()
+        conn.close()
 
-    cursor.execute(
-        "INSERT INTO chats (MESSAGE_ID, USERNAME, MESSAGE_TYPE, MESSAGE) VALUES (?, ?, ?, ?)", 
-        (id, username, message_type, message)
-    )
-
-    conn.commit()
-    conn.close()
+        addLog("Transaction deleted successfully")
+    
+    except Exception as e:
+        addLog(f"Error deleting transaction: {str(e)}")
 
 # Log functions
 def addLog(message: str) -> None:
     """
     Inserts a log entry with a timestamp into the log table.
     """
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
+    try:
+        conn = sqlite3.connect("DB.db")
+        cursor = conn.cursor()
 
-    cursor.execute(
-        "INSERT INTO log (MESSAGE, USERNAME) VALUES (?, ?)", 
-        (message, "SYSTEM")
-    )
+        cursor.execute(
+            "INSERT INTO log (MESSAGE) VALUES (?)", 
+            (message,)
+        )
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+    except Exception as e:
+        addLog(f"Error inserting log: {str(e)}")
+    finally:
+        conn.close()

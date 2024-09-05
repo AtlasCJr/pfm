@@ -1,11 +1,3 @@
-"""
-
-JANGAN DI RUN LAGI
-INI CUMA BUAT MASUKIN DATA DARI DATA CREATION KE SQL
-
-"""
-
-
 import pandas as pd
 from tqdm import tqdm 
 from Functions.database import *

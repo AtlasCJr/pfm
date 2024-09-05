@@ -55,23 +55,10 @@ def createDatabase() -> None:
     """)
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS chats (
-        MESSAGE_ID TEXT PRIMARY KEY,
-        USERNAME TEXT,
-        MESSAGE_TYPE INT,
-        MESSAGE TEXT,
-        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
-    )
-    """)
-
-    cursor.execute("""
     CREATE TABLE IF NOT EXISTS log (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        USERNAME TEXT,
         MESSAGE TEXT,
-        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (USERNAME) REFERENCES accounts(USERNAME)
+        TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP
     )
     """)
 
@@ -91,7 +78,7 @@ def createDatabase() -> None:
     addLog("Database created")
 
 # Account functions
-def addAccount(account:Account) -> str:
+def addAccount(account:Account) -> None:
     """
     Add an account from the Account class to the account table
     """
@@ -111,20 +98,22 @@ def addAccount(account:Account) -> str:
 
         conn.commit()
 
+        addLog("Account added successfully")
+
         # Add account to online database
         dc._addAccount(account)
         if dc._addAccount(account):
             conn.close()
-            return "Account added successfully"
+            addLog("Account added in online successfully")
         else:
             conn.rollback()
             conn.close()
-            return "Username already exists"
+            addLog("Failed added account in online")
 
     except sqlite3.IntegrityError:
         conn.rollback()
         conn.close()
-        return "Username already exists"
+        addLog("Failed added account : Username already exists")
 
 def checkAccount(username:str, password:str) -> bool:
     """
@@ -141,10 +130,10 @@ def checkAccount(username:str, password:str) -> bool:
 
     if row == None:
         # Check online database
-        # if _checkAccount(username, password):
-        #     return True
-        # else:
-        return False
+        if dc._checkAccount(username, password):
+            return True
+        else:
+            return False
     else:
         return sha256(password.encode()).hexdigest() == row[1]
 
@@ -163,14 +152,14 @@ def checkSecurity(username:str, security_question:int, security_answer:str) -> b
 
     if row == None:
         # Check online database
-        # if _checkSecurity(username, security_question, security_answer):
-        #     return True
-        # else:
-        return False
+        if dc._checkSecurity(username, security_question, security_answer):
+            return True
+        else:
+            return False
     else:
         return security_question == row[2] and sha256(security_answer.encode()).hexdigest() == row[3]
     
-def updateBalance(account:Account, new_balance:int)-> str:
+def updateBalance(account:Account, new_balance:int)-> None:
     """
     Updates the balance of a user account.
     """
@@ -187,14 +176,16 @@ def updateBalance(account:Account, new_balance:int)-> str:
         conn.commit()
         conn.close()
 
+        addLog("Balance updated successfully")
+
         # Update online database
-        # if _updateBalance(account.username, new_balance):
-        #     return "Balance updated successfully"
-        # else:
-        #     return "Error updating balance"
+        if dc._updateBalance(account.username, new_balance):
+            addLog("Balance updated in online successfully")
+        else:
+            addLog("Error updating balance in online")
 
     except Exception as e:
-        return Exception(f"Error updating balance: {str(e)}")
+        addLog(f"Error updating balance: {str(e)}")
 
 def getAccount(username:str) -> Account:
     """
@@ -213,15 +204,15 @@ def getAccount(username:str) -> Account:
 
     if row is None:
         # Check online database
-        # account = _getAccount(username)
-        # if account is None:
-        return None
-        # else:
-        #     return account
+        account = dc._getAccount(username)
+        if account is None:
+            return None
+        else:
+            return account
     else:
         return Account(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
 
-def editAccount(account:Account) -> str:
+def editAccount(account:Account) -> None:
     """
     Updates the account information of a user account.
     """
@@ -242,16 +233,18 @@ def editAccount(account:Account) -> str:
         conn.commit()
         conn.close()
 
-        # Update online database
-        # _editAccount(account)
-        # if _editAccount(account):
-        #     return "Account information updated successfully"
-        # else:
-        #     return "Error updating account information"
-    except Exception as e:
-        return f"Error updating account information: {str(e)}"
+        addLog("Account information updated successfully")
 
-def deleteAccount(account:Account) -> str:
+        #Update online database
+        dc._editAccount(account)
+        if dc._editAccount(account):
+            addLog("Account information updated in online successfully")
+        else:
+            addLog("Error updating account information in online")
+    except Exception as e:
+        addLog(f"Error updating account information: {str(e)}")
+
+def deleteAccount(account:Account) -> None:
     """
     Deletes a user account.
     """
@@ -268,14 +261,16 @@ def deleteAccount(account:Account) -> str:
         conn.commit()
         conn.close()
 
+        addLog("Account deleted successfully")
+
         # Delete account from online database
-        # _deleteAccount(account.username)
-        # if_deleteAccount(account.username):
-        #     return "Account deleted successfully"
-        # else:
-        #     return "Error deleting account"
+        dc._deleteAccount(account.username)
+        if dc._deleteAccount(account.username):
+            addLog("Account deleted in online successfully")
+        else:
+            addLog("Error deleting account in online")
     except Exception as e:
-        return f"Error deleting account: {str(e)}"
+        addLog(f"Error deleting account: {str(e)}")
 
 def isUsernameAvailable(username:str) -> bool:
     conn = sqlite3.connect("DB.db")
@@ -284,11 +279,11 @@ def isUsernameAvailable(username:str) -> bool:
     try:
         cursor.execute("SELECT 1 FROM accounts WHERE USERNAME = ?", (username,))
         row = cursor.fetchone()
-        #Check online database
-        # if row is None and _isUsernameAvailable(username):
-        #     return True
-        # else:
-        #     return False
+
+        if row is None and not dc._isUsernameAvailable(username):
+            return False
+        else:
+            return True
     finally:
         conn.close()
 
@@ -395,40 +390,53 @@ def getTimeSpent() -> datetime:
     return row[0]
 
 # Transaction functions
-def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at:str) -> str:
+def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at:str) -> None:
     """
     Inserts a transaction record into the transactions table.
     """
 
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
-    id = str(randomID())
+    try:
+        conn = sqlite3.connect("DB.db")
+        cursor = conn.cursor()
+        id = str(randomID())
 
-    updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    cursor.execute(
-        "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
-        (id, account.username, item, type, category, value, created_at, updated_at)
-    )
+        if category == 0:
+            value = -value
 
-    conn.commit()
+        new_balance = account.balance + value
+        updateBalance(account, new_balance)
 
-    cursor.execute("""
-        UPDATE accounts
-        SET TRANSACTIONS = TRANSACTIONS + 1
-        WHERE USERNAME = ?
-    """, (account.username,))
+        updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        cursor.execute(
+            "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+            (id, account.username, item, type, category, value, created_at, updated_at)
+        )
 
-    conn.commit()
+        conn.commit()
 
-    # Add transaction to online database
-    # _addTransaction(id, account.username, item, type, category, value, created_at, updated_at)
-    # if _addTransaction(id, account.username, item, type, category, value, created_at, updated_at):
-    #     conn.close()
-    #     return "Transaction added successfully"
-    # else:
-    #     conn.rollback()
-    #     conn.close()
-    #     return "Error adding transaction"
+        cursor.execute("""
+            UPDATE accounts
+            SET TRANSACTIONS = TRANSACTIONS + 1
+            WHERE USERNAME = ?
+        """, (account.username,))
+
+        conn.commit()
+
+        addLog("Transaction added successfully")
+
+        # # Add transaction to online database
+        # _addTransaction(id, account.username, item, type, category, value, created_at, updated_at)
+        # if _addTransaction(id, account.username, item, type, category, value, created_at, updated_at):
+        #     conn.close()
+        #     addLog("Transaction added in online successfully")
+        # else:
+        #     conn.rollback()
+        #     conn.close()
+        #     addLog("Error adding transaction in online")
+        conn.close()
+    
+    except Exception as e:
+        addLog(f"Error adding transaction: {str(e)}")
 
 def getTransaction(account:Account) -> pd.DataFrame:
     """
@@ -448,7 +456,7 @@ def getTransaction(account:Account) -> pd.DataFrame:
     else:
         return df
 
-def editTransaction(account: Account, transaction_id: str, item: str, type: int, category: int, value: int, created_at: str) -> str:
+def editTransaction(account: Account, transaction_id: str, item: str, type: int, category: int, value: int, created_at: str) -> None:
     """
     Updates a transaction record.
     """
@@ -467,16 +475,18 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
         conn.commit()
         conn.close()
 
+        addLog("Transaction edited successfully")
+
         # Update transaction in online database
         # _editTransaction(account.username, transaction_id, item, type, category, value, created_at, updated_at)
         # if _editTransaction(account.username, transaction_id, item, type, category, value, created_at, updated_at):
-        #     return "Transaction information updated successfully"
+        #     addLog("Transaction information updated in online successfully")
         # else:
-        #     return "Error updating transaction information"
+        #     addLog("Error updating transaction information in online")
     except Exception as e:
-        return f"Error updating transaction information: {str(e)}"
+        addLog(f"Error edited transaction information: {str(e)}")
 
-def deleteTransaction(account:Account, transaction_id:str) -> str:
+def deleteTransaction(account:Account, transaction_id:str) -> None:
     """
     Deletes a transaction record.
     """
@@ -501,57 +511,36 @@ def deleteTransaction(account:Account, transaction_id:str) -> str:
         conn.commit()
         conn.close()
 
-        # Delete transaction from online database
-        dc._deleteTransaction(account.username, transaction_id)
-        if dc._deleteTransaction(account.username, transaction_id):
-            return "Transaction deleted successfully"
-        else:
-            return "Error deleting transaction"
+        addLog("Transaction deleted successfully")
+
+        # # Delete transaction from online database
+        # dc._deleteTransaction(account.username, transaction_id)
+        # if dc._deleteTransaction(account.username, transaction_id):
+        #     addLog("Transaction deleted in online successfully")
+        # else:
+        #     addLog("Error deleting transaction in online")
     except Exception as e:
-        return f"Error deleting transaction: {str(e)}"
-
-# Chat functions
-def addChats(username:str, message_type:int, message:str) -> str:
-    """
-    Inserts a chat message into the chats table.
-    """
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
-    id = str(randomID())
-
-    try:
-        cursor.execute(
-            "INSERT INTO chats (MESSAGE_ID, USERNAME, MESSAGE_TYPE, MESSAGE) VALUES (?, ?, ?, ?)", 
-            (id, username, message_type, message)
-        )
-
-        conn.commit()
-        conn.close()
-
-        # Add chat to online database
-        dc._addChats(username, message_type, message, id)
-        if dc._addChats(username, message_type, message, id):
-            return "Chat added successfully"
-        else:
-            return "Error adding chat"
-    except Exception as e:
-        return f"Error adding chat: {str(e)}"
+        addLog(f"Error deleting transaction: {str(e)}")
 
 # Log functions
 def addLog(message: str) -> None:
     """
     Inserts a log entry with a timestamp into the log table.
     """
-    conn = sqlite3.connect("DB.db")
-    cursor = conn.cursor()
+    try:
+        conn = sqlite3.connect("DB.db")
+        cursor = conn.cursor()
 
-    cursor.execute(
-        "INSERT INTO log (MESSAGE, USERNAME) VALUES (?, ?)", 
-        (message, "SYSTEM")
-    )
+        cursor.execute(
+            "INSERT INTO log (MESSAGE) VALUES (?)", 
+            (message,)
+        )
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+    except Exception as e:
+        print(f"Error inserting log: {str(e)}")
+    finally:
+        conn.close()
 
     # Add log to online database
-    # _addLog(message)
+    dc._addLog(message)
