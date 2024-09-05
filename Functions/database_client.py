@@ -3,8 +3,8 @@ from Functions.classes import Account
 
 BASE_URL = 'https://pfmtugascaslabkendaliftui2024.loca.lt'
 
-def add_account(account: Account) -> bool:
-    url = f'{BASE_URL}/add_account'
+def _addAccount(account: Account) -> bool:
+    url = f'{BASE_URL}/_addAccount'
     data = {
         'username': account.username,
         'password': account.password,
@@ -19,8 +19,8 @@ def add_account(account: Account) -> bool:
     except requests.exceptions.RequestException:
         return False
 
-def check_account(username: str, password: str) -> bool:
-    url = f'{BASE_URL}/check_account/{username}/{password}'
+def _checkAccount(username: str, password: str) -> bool:
+    url = f'{BASE_URL}/_checkAccount/{username}/{password}'
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -30,8 +30,8 @@ def check_account(username: str, password: str) -> bool:
     except requests.exceptions.RequestException:
         return False
 
-def check_security(username:str, security_question:int, security_answer:str) -> bool:
-    url = f'{BASE_URL}/check_security/{username}/{security_question}/{security_answer}'
+def _checkSecurity(username:str, security_question:int, security_answer:str) -> bool:
+    url = f'{BASE_URL}/_checkSecurity/{username}/{security_question}/{security_answer}'
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -41,8 +41,8 @@ def check_security(username:str, security_question:int, security_answer:str) -> 
     except requests.exceptions.RequestException:
         return False
     
-def update_balance(username: str, new_balance: int) -> bool:
-    url = f'{BASE_URL}/update_balance'
+def _updateBalance(username: str, new_balance: int) -> bool:
+    url = f'{BASE_URL}/_updateBalance'
     data = {
         'username': username,
         'balance': new_balance
@@ -54,8 +54,8 @@ def update_balance(username: str, new_balance: int) -> bool:
     except requests.exceptions.RequestException:
         return False
 
-def get_account(username: str)-> dict:
-    url = f'{BASE_URL}/get_account/{username}'
+def _getAccount(username: str)-> dict:
+    url = f'{BASE_URL}/_getAccount/{username}'
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -64,8 +64,8 @@ def get_account(username: str)-> dict:
         print(f"Error occurred: {e}")
         return None
 
-def edit_account(account : Account)-> bool:
-    url = f'{BASE_URL}/edit_account'
+def _editAccount(account : Account)-> bool:
+    url = f'{BASE_URL}/_editAccount'
     data = {
         'username': account.username,
         'password': account.password,
@@ -79,8 +79,8 @@ def edit_account(account : Account)-> bool:
     except requests.exceptions.RequestException:
         return False
 
-def delete_account(username: str)-> bool:
-    url = f'{BASE_URL}/delete_account'
+def _deleteAccount(username: str)-> bool:
+    url = f'{BASE_URL}/_deleteAccount'
     data = {
         'username': username
     }
@@ -91,8 +91,8 @@ def delete_account(username: str)-> bool:
     except requests.exceptions.RequestException:
         return False
 
-def is_username_available(username: str) -> bool:
-    url = f'{BASE_URL}/is_username_available/{username}'
+def _isUsernameAvailable(username: str) -> bool:
+    url = f'{BASE_URL}/_isUsernameAvailable/{username}'
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -100,8 +100,8 @@ def is_username_available(username: str) -> bool:
     except requests.exceptions.RequestException:
         return False
 
-def add_transaction(id: str, username: str, item: str, type: int, category: int, value: int, created_at: str, updated_at: str)-> bool:
-    url = f'{BASE_URL}/add_transaction'
+def _addTransaction(id: str, username: str, item: str, type: int, category: int, value: int, created_at: str, updated_at: str)-> bool:
+    url = f'{BASE_URL}/_addTransaction'
     data = {
         'id': id,
         'username': username,
@@ -119,8 +119,8 @@ def add_transaction(id: str, username: str, item: str, type: int, category: int,
     except requests.exceptions.RequestException:
         return False
 
-def get_transaction(username: str)-> dict:
-    url = f'{BASE_URL}/get_transaction/{username}'
+def _getTransaction(username: str)-> dict:
+    url = f'{BASE_URL}/_getTransaction/{username}'
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -129,8 +129,8 @@ def get_transaction(username: str)-> dict:
         print (f"Error occurred: {e}")
         return None
 
-def edit_transaction(username: str, transaction_id: str, item: str, type: int, category: int, value: int, created_at: str, updated_at: str)-> bool:
-    url = f'{BASE_URL}/edit_transaction'
+def _editTransaction(username: str, transaction_id: str, item: str, type: int, category: int, value: int, created_at: str, updated_at: str)-> bool:
+    url = f'{BASE_URL}/_editTransaction'
     data = {
         'id': transaction_id,
         'username': username,
@@ -148,8 +148,8 @@ def edit_transaction(username: str, transaction_id: str, item: str, type: int, c
     except requests.exceptions.RequestException:
         return False
     
-def delete_transaction(username: str, transaction_id: str)-> bool:
-    url = f'{BASE_URL}/delete_transaction'
+def _deleteTransaction(username: str, transaction_id: str)-> bool:
+    url = f'{BASE_URL}/_deleteTransaction'
     data = {
         'username': username,
         'id': transaction_id
@@ -161,8 +161,8 @@ def delete_transaction(username: str, transaction_id: str)-> bool:
     except requests.exceptions.RequestException:
         return False
 
-def add_chats(username: str, message_type: str, message: str, id:str)-> bool:
-    url = f'{BASE_URL}/add_chats'
+def _addChats(username: str, message_type: str, message: str, id:str)-> bool:
+    url = f'{BASE_URL}/_addChats'
     data = {
         'id': id,
         'username': username,
@@ -176,8 +176,8 @@ def add_chats(username: str, message_type: str, message: str, id:str)-> bool:
     except requests.exceptions.RequestException:
         return False
     
-def add_log(message:str)-> bool:
-    url = f'{BASE_URL}/add_log'
+def _addLog(message:str)-> bool:
+    url = f'{BASE_URL}/_addLog'
     data = {
         'message': message
     }

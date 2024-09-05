@@ -6,7 +6,7 @@ from uuid import uuid4 as randomID
 from hashlib import sha256
 
 from Functions.classes import Account
-from Functions.database_client import *
+from Functions.database_client import _addAccount, _checkAccount, _checkSecurity, _updateBalance, _getAccount, _editAccount, _deleteAccount, _isUsernameAvailable, _addTransaction, _getTransaction, _editTransaction, _deleteTransaction, _addChats, _addLog
 
 def createDatabase() -> None:
     """
@@ -112,8 +112,8 @@ def addAccount(account:Account) -> str:
         conn.commit()
 
         # Add account to online database
-        add_account(account)
-        if add_account(account):
+        _addAccount(account)
+        if _addAccount(account):
             conn.close()
             return "Account added successfully"
         else:
@@ -141,7 +141,7 @@ def checkAccount(username:str, password:str) -> bool:
 
     if row == None:
         # Check online database
-        # if check_account(username, password):
+        # if _checkAccount(username, password):
         #     return True
         # else:
         return False
@@ -163,7 +163,7 @@ def checkSecurity(username:str, security_question:int, security_answer:str) -> b
 
     if row == None:
         # Check online database
-        # if check_security(username, security_question, security_answer):
+        # if _checkSecurity(username, security_question, security_answer):
         #     return True
         # else:
         return False
@@ -188,7 +188,7 @@ def updateBalance(account:Account, new_balance:int)-> str:
         conn.close()
 
         # Update online database
-        # if update_balance(account.username, new_balance):
+        # if _updateBalance(account.username, new_balance):
         #     return "Balance updated successfully"
         # else:
         #     return "Error updating balance"
@@ -213,7 +213,7 @@ def getAccount(username:str) -> Account:
 
     if row is None:
         # Check online database
-        # account = get_account(username)
+        # account = _getAccount(username)
         # if account is None:
         return None
         # else:
@@ -243,8 +243,8 @@ def editAccount(account:Account) -> str:
         conn.close()
 
         # Update online database
-        # edit_account(account)
-        # if edit_account(account):
+        # _editAccount(account)
+        # if _editAccount(account):
         #     return "Account information updated successfully"
         # else:
         #     return "Error updating account information"
@@ -269,8 +269,8 @@ def deleteAccount(account:Account) -> str:
         conn.close()
 
         # Delete account from online database
-        # delete_account(account.username)
-        # if delete_account(account.username):
+        # _deleteAccount(account.username)
+        # if_deleteAccount(account.username):
         #     return "Account deleted successfully"
         # else:
         #     return "Error deleting account"
@@ -285,7 +285,7 @@ def isUsernameAvailable(username:str) -> bool:
         cursor.execute("SELECT 1 FROM accounts WHERE USERNAME = ?", (username,))
         row = cursor.fetchone()
         #Check online database
-        # if row is None and is_username_available(username):
+        # if row is None and _isUsernameAvailable(username):
         #     return True
         # else:
         #     return False
@@ -314,8 +314,6 @@ def getLastUser() -> Account:
     cursor.execute("SELECT VALUE FROM miscellaneous WHERE TYPE = 'last_user'")
 
     row = cursor.fetchone()
-
-    Account = getAccount(row[0])
 
     conn.close()
 
@@ -426,8 +424,8 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
     conn.commit()
 
     # Add transaction to online database
-    # add_transaction(id, account.username, item, type, category, value, created_at, updated_at)
-    # if add_transaction(id, account.username, item, type, category, value, created_at, updated_at):
+    # _addTransaction(id, account.username, item, type, category, value, created_at, updated_at)
+    # if _addTransaction(id, account.username, item, type, category, value, created_at, updated_at):
     #     conn.close()
     #     return "Transaction added successfully"
     # else:
@@ -445,7 +443,7 @@ def getTransaction(account:Account) -> pd.DataFrame:
     
     if df.empty:
         # Check online database
-        # online_df = get_transaction(account.username)
+        # online_df = _getTransaction(account.username)
         # if online_df is not None:
         #     return online_df
         # else:
@@ -474,8 +472,8 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
         conn.close()
 
         # Update transaction in online database
-        # edit_transaction(account.username, transaction_id, item, type, category, value, updated_at)
-        # if edit_transaction(account.username, transaction_id, item, type, category, value, updated_at):
+        # _editTransaction(account.username, transaction_id, item, type, category, value, updated_at)
+        # if _editTransaction(account.username, transaction_id, item, type, category, value, updated_at):
         #     return "Transaction information updated successfully"
         # else:
         #     return "Error updating transaction information"
@@ -500,8 +498,8 @@ def deleteTransaction(account:Account, transaction_id:str) -> str:
         conn.close()
 
         # Delete transaction from online database
-        # delete_account(account.username)
-        # if delete_account(account.username):
+        # _deleteTransaction(account.username)
+        # if _deleteTransaction(account.username):
         #     return "Transaction deleted successfully"
         # else:
         #     return "Error deleting transaction"
@@ -527,8 +525,8 @@ def addChats(username:str, message_type:int, message:str) -> str:
         conn.close()
 
         # Add chat to online database
-        add_chats(username, message_type, message, id)
-        if add_chats(username, message_type, message, id):
+        _addChats(username, message_type, message, id)
+        if _addChats(username, message_type, message, id):
             return "Chat added successfully"
         else:
             return "Error adding chat"
@@ -552,4 +550,4 @@ def addLog(message: str) -> None:
     conn.close()
 
     # Add log to online database
-    # add_log(message)
+    # _addLog(message)
