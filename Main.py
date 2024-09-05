@@ -92,6 +92,9 @@ class Alert(QDialog):
         self.ui = Ui_Alert()
         self.ui.setupUi(self)
 
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
         self.ui.msg.setText(text)
 
         self.result = False
@@ -127,6 +130,7 @@ class MainProgram(QMainWindow):
 
 
         self.currentAcc = None
+        self.selectedTransactionID = None
 
         try: self.currentAcc = getLastUser()
         except Exception: pass
@@ -145,19 +149,13 @@ class MainProgram(QMainWindow):
         self.ui.aboutButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.about))
         self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
 
-        # Authentication Buttons
+        # Authentication
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.forgetPW))  # Login -> FP
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
         self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
-        self.ui.FP_buttonSavePW.clicked.connect(lambda: (
-            self.handleForgetPW,
-            self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
-        ))                                                                                                                      # FP -> Login
-        self.ui.PF_changePassword.clicked.connect(lambda: (
-            self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup),
-            self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW)
-        ))                                                                                                                      # Profile -> CP
+        self.ui.FP_buttonSavePW.clicked.connect(lambda: self.handleForgetPW)                                                                                                                      # FP -> Login
         self.ui.CP_buttonSavePW.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))                              # CP -> Profile
+
 
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)                                                                  # Sign In
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)                                                                   # Log In
@@ -178,23 +176,80 @@ class MainProgram(QMainWindow):
         # Visualize
         self.ui.calendarWidget.selectionChanged.connect(self.searchData)
 
+        self.ui.VI_updateButton.clicked.connect(self.handleUpdateTransaction)
+        self.ui.VI_deleteButton.clicked.connect(self.handleDeleteTransaction)
+
+        # Analysis
         self.ui.AN_backButton.clicked.connect(self.handleBackButton)
         self.ui.AN_forwardButton.clicked.connect(self.handleForwardButton)
 
         # Chatting
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
 
-        # Delete and Log Out
+        # Profile
+        self.ui.PF_changePassword.clicked.connect(lambda: (
+            self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup),
+            self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW)
+        ))
         self.ui.PF_logOut.clicked.connect(self.handleLogOut)
+        self.ui.PF_deleteAccount.clicked.connect(self.handleDeleteAcc)
+
+    def handleDeleteTransaction(self):
+        alert = Alert("You are about to delete your chosen transaction.")
+        answer = alert.getResult()
+
+        if answer:
+            deleteTransaction(self.currentAcc, self.selectedTransactionID)
+
+            self.currentAcc = getAccount(self.currentAcc.username)
+            self.accountChanged()
+            self.searchData()
+        else:
+            return
+
+    def handleUpdateTransaction(self):
+        alert = Alert("You are about to change your chosen transaction.")
+        answer = alert.getResult()
+
+        if answer:
+            item = self.ui.VI_Item.text()
+            type = self.ui.VI_Type.currentIndex()
+            category = 0 if type < 10 else 1
+            value = self.ui.VI_Value.text()
+            date = self.ui.VI_Date.dateTime().toPyDateTime()
+
+            editTransaction(self.currentAcc, self.selectedTransactionID, item, type, category, value)
+
+            self.ui.VI_Item.clear()
+            self.ui.VI_Type.setCurrentIndex(0)
+            self.ui.VI_Value.clear()
+
+            self.accountChanged()
+            self.searchData()
+        else:
+            return
+
+    def handleDeleteAcc(self):
+        alert = Alert("You are about to delete your account.")
+        answer = alert.getResult()
+
+        if answer:
+            updateLastUser("")
+            deleteAccount(self.currentAcc)
+            self.currentAcc = None
+            self.accountChanged()
+        else:
+            return
 
     def handleLogOut(self):
-        alert = Alert("You are about to Log Out")
+        alert = Alert("You are about to log out.")
         answer = alert.getResult()
 
         if answer:
             updateLastUser("")
             self.currentAcc = None
             self.accountChanged()
+            self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         else:
             return
 
@@ -252,7 +307,7 @@ class MainProgram(QMainWindow):
     def showData(self, id:str):
         row = self.selectedData[self.selectedData['TRANSACTION_ID'] == id]
 
-        # print(row)
+        self.selectedTransactionID = id
 
         self.ui.VI_Item.setText(str(row['ITEM'].values[0]))
         self.ui.VI_Value.setText(str(row['VALUE'].values[0]))
@@ -376,8 +431,6 @@ class MainProgram(QMainWindow):
     def handleForgetPW(self):
         username = self.ui.FP_inputUsername.text()
 
-        # if 
-
         answer = self.ui.FP_inputSecAnswer.text()
 
         password1 = self.ui.CP_inputPassword1.text()
@@ -397,9 +450,10 @@ class MainProgram(QMainWindow):
             return
 
         if answer == self.currentAcc.security_question:
-            thisAcc = getAccount(self.currentAcc.username)
+            thisAcc = getAccount(username)
             thisAcc.password = password1
             editAccount(thisAcc)
+
             self.ui.stackedWidget.setCurrentWidget(self.ui.loginPage)
         else:
             self.ui.CP_errorMsg.setText("Wrong security answer.")
@@ -602,18 +656,9 @@ class MainProgram(QMainWindow):
     
         self.ui.homeText.setText(f"""
             <html><head/><body>
-                <p align="center"><span style=" font-style:italic;">
-                    &quot;The journey of a thousand miles begins with one step.&quot; 
-                </span></p>
-                
-                <p align="center"><span style=" font-style:italic;">
-                    — Lao Tzu
-                </span></p><p align="center"></p>
-                
-                <br/>
-                
                 <p>Hi, {self.currentAcc.username}!</p>
                 <p>It is {getDate()}.<br/>What would you like to do?</p>
+                <p>Need help? Feel free to reach out to our Chatbot<span style=" font-weight:600;"/>if you have any questions or need assistance.</p>
             </body></html>
             """)
         

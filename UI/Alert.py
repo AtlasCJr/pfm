@@ -16,16 +16,45 @@ class Ui_Alert(object):
         Alert.setObjectName("Alert")
         Alert.resize(350, 200)
         Alert.setMaximumSize(QtCore.QSize(350, 200))
+        Alert.setStyleSheet("")
         self.horizontalLayout = QtWidgets.QHBoxLayout(Alert)
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.frame_3 = QtWidgets.QFrame(Alert)
+        self.frame_3.setStyleSheet("background-color: rgb(229, 229, 229);\n"
+"border: 5px rgb(194, 64, 0) solid;")
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_3)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.frame = QtWidgets.QFrame(Alert)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.frame = QtWidgets.QFrame(self.frame_3)
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.frame_4 = QtWidgets.QFrame(self.frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
+        self.frame_4.setSizePolicy(sizePolicy)
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_4)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.label_2 = QtWidgets.QLabel(self.frame_4)
+        self.label_2.setMinimumSize(QtCore.QSize(30, 30))
+        self.label_2.setMaximumSize(QtCore.QSize(30, 30))
+        self.label_2.setText("")
+        self.label_2.setPixmap(QtGui.QPixmap("UI\\../Assets/warning.webp"))
+        self.label_2.setScaledContents(True)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_4.addWidget(self.label_2)
+        self.verticalLayout.addWidget(self.frame_4)
         self.msg = QtWidgets.QLabel(self.frame)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -52,17 +81,37 @@ class Ui_Alert(object):
         self.CANCEL = QtWidgets.QPushButton(self.frame_2)
         self.CANCEL.setMinimumSize(QtCore.QSize(0, 30))
         self.CANCEL.setBaseSize(QtCore.QSize(0, 1))
-        self.CANCEL.setStyleSheet("")
+        self.CANCEL.setStyleSheet("QPushButton {\n"
+"    border: none;\n"
+"    border-radius: 15px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(168, 168, 168);\n"
+"    color: white;\n"
+"}\n"
+"")
         self.CANCEL.setObjectName("CANCEL")
         self.horizontalLayout_3.addWidget(self.CANCEL)
         self.YES = QtWidgets.QPushButton(self.frame_2)
         self.YES.setMinimumSize(QtCore.QSize(0, 30))
+        self.YES.setStyleSheet("QPushButton {\n"
+"    border: none;\n"
+"    border-radius: 15px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(168, 168, 168);\n"
+"    color: white;\n"
+"}\n"
+"")
         self.YES.setObjectName("YES")
         self.horizontalLayout_3.addWidget(self.YES)
         self.verticalLayout.addWidget(self.frame_2)
-        self.horizontalLayout.addWidget(self.frame)
+        self.horizontalLayout_2.addWidget(self.frame)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
+        self.horizontalLayout_2.addItem(spacerItem1)
+        self.horizontalLayout.addWidget(self.frame_3)
 
         self.retranslateUi(Alert)
         QtCore.QMetaObject.connectSlotsByName(Alert)

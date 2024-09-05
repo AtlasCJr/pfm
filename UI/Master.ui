@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1059</width>
-    <height>772</height>
+    <width>1268</width>
+    <height>849</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -266,7 +266,7 @@ text-align: left;</string>
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../Assets/Grey Icon/visualize.png</normaloff>../Assets/Grey Icon/visualize.png</iconset>
+           <normaloff>../Assets/light-grey Icon/visualize.png</normaloff>../Assets/light-grey Icon/visualize.png</iconset>
          </property>
         </widget>
        </item>
@@ -437,7 +437,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -578,7 +578,7 @@ text-align: left;</string>
               </size>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -941,7 +941,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>748</width>
+                    <width>946</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1856,46 +1856,354 @@ QLabel{
           </layout>
          </widget>
          <widget class="QWidget" name="inputData">
-          <layout class="QVBoxLayout" name="verticalLayout_25">
-           <item>
-            <widget class="QLabel" name="ID_transactionName">
-             <property name="text">
-              <string>TextLabel</string>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QFrame" name="inputdataFrame">
+             <property name="maximumSize">
+              <size>
+               <width>1000</width>
+               <height>1000</height>
+              </size>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="ID_inputTransaction"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="ID_type">
-             <property name="text">
-              <string>TextLabel</string>
+             <property name="styleSheet">
+              <string notr="true">QLabel, #frame_4{
+	background-color:none;
+	padding:5px;
+}
+QLineEdit{
+	height:50px;
+	padding: 1px 15 px;
+	background-color: rgb(42, 43, 48);
+	border: 1px solid rgba(84,86,95,255);
+	border-radius: 10px;
+	color:rgb(255, 255, 255);
+}
+QLabel{
+	color: rgb(128, 131, 144);
+	font-family: Poppins;
+}
+QComboBox {
+	height:40px;
+    color: white;                        /* Warna teks combobox */
+    background-color:  rgb(128, 131, 144);           /* Warna latar belakang combobox */
+    border: 1px solid #555555;           /* Warna border combobox */
+    border-radius: 5px;                  /* Membuat sudut rounded */
+}
+QComboBox QAbstractItemView {
+    color: white;                        /* Warna teks dropdown */
+    background-color: #333333;           /* Warna latar belakang dropdown */
+    selection-background-color: #fedd3b; /* Warna latar belakang item yang dipilih*/
+    selection-color: black;              /* Warna teks item yang dipilih */
+    border: 1px solid #555555;          /* Warna border dropdown */
+}
+#inputdataFrame{
+	background-color: rgb(42, 43, 48);
+   	padding-left: 15px;      
+   	padding-right: 20px;       
+    padding-top: 20px;          
+    padding-bottom: 10px;
+	border-radius: 15px;      
+}
+#ID_calendarWidget QWidget{
+	alternate-background-color: #CCCCCC;
+}
+QCalendarWidget QTableView {
+    background-color: #FFFFFF;  /* Latar belakang tabel kalender */
+    gridline-color: #FFD700;  /* Warna gridline kuning */
+    selection-background-color: #FFD700;  /* Warna latar belakang saat tanggal dipilih*/
+    selection-color: #2A2B30;  /* Warna teks saat dipilih */
+}
+QCalendarWidget QToolButton {
+    background-color: #FFFFFF;  /* Tombol dengan latar belakang gelap */
+    color: rgb(0, 0, 0);  
+    border: none;
+}
+QCalendarWidget QToolButton:hover {
+    background-color: #F0F0F0;  /* Sedikit lebih gelap saat hover */
+}
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #FFFFFF;  /* Latar belakang putih untuk seluruh bar */
+    border: none;  /* Hilangkan border jika ada */
+
+}QCalendarWidget QMenu {
+    background-color:#FFFFFF;  /* Latar belakang dropdown menu (gelap) */
+	color: rgb(255, 255, 255);
+    color: ;  /* Warna teks putih untuk item di dropdown */
+	color: rgb(0, 0, 0);
+    border: 1px solid #FFD700;  /* Border kuning untuk konsistensi dengan tema */
+}
+
+/* Hover effect untuk item di dropdown */
+QCalendarWidget QMenu::item:selected {
+    background-color: #FFD700;  /* Latar belakang kuning saat di-hover */
+    color: #2A2B30;  /* Warna teks gelap saat di-hover */
+}
+QCalendarWidget QSpinBox {
+    background-color: #FFFFFF;  /* Latar belakang gelap */
+    color: rgb(0, 0, 0);  /* Teks putih */
+    border: 1px solid #FFD700;  /* Border kuning */
+}
+
+/* Tombol up/down saat di-hover */
+QCalendarWidget QSpinBox::up-button:hover,
+QCalendarWidget QSpinBox::down-button:hover {
+    background-color: #FFD700;  /* Tombol berwarna kuning saat di-hover */
+}
+
+QCalendarWidget QSpinBox::up-arrow,
+QCalendarWidget QSpinBox::down-arrow {
+    color: #FFFFFF;  /* Panah up/down berwarna putih */
+}
+QPushButton {
+    background-color: #28a745;  /* Warna hijau */
+    color: #FFFFFF;  /* Teks putih */
+    border-radius: 8px;  /* Sudut yang sedikit melengkung */
+    padding: 10px;  /* Ruang di dalam tombol */
+}
+
+QPushButton:hover {
+    background-color: #218838;  /* Warna hijau yang lebih gelap saat di-hover */
+}
+
+QPushButton:pressed {
+    background-color: #1e7e34;  /* Warna hijau lebih gelap saat ditekan */
+}
+
+QPushButton:disabled {
+    background-color: #6c757d;  /* Warna abu-abu saat tombol dinonaktifkan */
+    color: #D6D6D6;  /* Warna teks abu-abu saat tombol dinonaktifkan */
+}</string>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="ID_dropdownType"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="ID_calendar">
-             <property name="text">
-              <string>TextLabel</string>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCalendarWidget" name="ID_calendarWidget"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="ID_value">
-             <property name="text">
-              <string>TextLabel</string>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
+             <layout class="QVBoxLayout" name="verticalLayout_27">
+              <item>
+               <widget class="QLabel" name="ID_header">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; color:#fedd3b;&quot;&gt;Record&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; your expense&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="ID_transactionName">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Item Name</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="ID_inputTransaction">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="placeholderText">
+                 <string>Enter the name of the item...</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="ID_type">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Type</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="ID_dropdownType">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>   Food/Drink</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Transportation</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Entertainment</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Healthcare</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Insurance</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Luxury Goods</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Active Income</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Passive Income</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Investment Income</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>   Additional Income</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="ID_calendar">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Date Added</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCalendarWidget" name="ID_calendarWidget">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="ID_value">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Price</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="ID_inputValue">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="placeholderText">
+                 <string>Enter the price...</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_4">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_26">
+                 <item>
+                  <spacer name="horizontalSpacer_22">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>699</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton">
+                   <property name="minimumSize">
+                    <size>
+                     <width>200</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>SAVE</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="ID_inputValue"/>
            </item>
           </layout>
          </widget>
@@ -1947,8 +2255,8 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>378</width>
-                <height>1561</height>
+                <width>968</width>
+                <height>985</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2378,8 +2686,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>715</width>
-                   <height>547</height>
+                   <width>904</width>
+                   <height>588</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -2469,7 +2777,7 @@ border: none;</string>
                         <string/>
                        </property>
                        <property name="pixmap">
-                        <pixmap>../Assets/chatbot-blue.png</pixmap>
+                        <pixmap>../Assets/chatbot/chatbot-blue.png</pixmap>
                        </property>
                        <property name="scaledContents">
                         <bool>true</bool>
@@ -3085,8 +3393,8 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>773</width>
-                <height>1560</height>
+                <width>968</width>
+                <height>1657</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -3182,8 +3490,8 @@ QScrollBar::sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>345</width>
-                       <height>226</height>
+                       <width>438</width>
+                       <height>245</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -3643,16 +3951,152 @@ border-radius: 5px;</string>
           </layout>
          </widget>
          <widget class="QWidget" name="about">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#aboutFrame{
+	background-color: rgb(42, 43, 48);
+   	padding-left: 15px;      
+   	padding-right: 20px;       
+    padding-top: 25px;          
+    padding-bottom: 25px;
+	border-radius: 15px;      
+}
+#AB_about, #AB_headerDesc, #AB_aboutApp, #scrollAreaWidgetContents_5, #AB_appDesc{
+	background-color: rgb(42, 43, 48);
+}
+QScrollArea {
+    border: 10px solid rgb(42, 43, 48);; /* Set the border color and width */
+    border-radius: 15px; /* Optional: Add some rounding to the corners */
+    background-color:  rgb(42, 43, 48); /* Ensure the background matches your theme */
+}
+QScrollBar:vertical {
+    border: none;
+    background-color: #2C2F33;
+    width: 12px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #555;
+    min-height: 20px;
+    border-radius: 5px;
+    border: 2px solid #2C2F33;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #888;
+}
+
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:vertical {
+    border: none;
+    background: none;
+}
+
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical {
+    background: none;
+}</string>
+          </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;TextLabel&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+            <widget class="QFrame" name="aboutFrame">
+             <property name="minimumSize">
+              <size>
+               <width>1000</width>
+               <height>250</height>
+              </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>1000</width>
+               <height>600</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_22">
+              <item alignment="Qt::AlignBottom">
+               <widget class="QLabel" name="AB_about">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:28pt; color:#ffffff;&quot;&gt;ABOUT &lt;/span&gt;&lt;span style=&quot; font-size:28pt; color:#fedd3b;&quot;&gt;US&lt;/span&gt;&lt;span style=&quot; font-size:28pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item alignment="Qt::AlignTop">
+               <widget class="QLabel" name="AB_headerDesc">
+                <property name="font">
+                 <font>
+                  <family>Poppins Light</family>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">padding-top:0px;</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;If you want to learn more about us, you're in the right place. Read to learn how we can support&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;your financial journey and help manage your finances effectively.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
+            <spacer name="verticalSpacer_15">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item alignment="Qt::AlignHCenter">
             <widget class="QScrollArea" name="scrollArea_5">
+             <property name="minimumSize">
+              <size>
+               <width>1000</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>1000</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
@@ -3661,13 +4105,25 @@ border-radius: 5px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>803</width>
-                <height>697</height>
+                <width>968</width>
+                <height>915</height>
                </rect>
               </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
-                <widget class="QFrame" name="frame_4">
+               <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+                <widget class="QFrame" name="AB_aboutApp">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
@@ -3676,24 +4132,96 @@ border-radius: 5px;</string>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_5">
                   <item>
-                   <widget class="QLabel" name="label_5">
+                   <spacer name="horizontalSpacer_20">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="AB_appLogo">
+                    <property name="minimumSize">
+                     <size>
+                      <width>350</width>
+                      <height>350</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>350</width>
+                      <height>350</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: none;</string>
+                    </property>
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap>../Assets/Frame 1.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_7">
+                   <spacer name="horizontalSpacer_19">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="AB_appDesc">
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                     </font>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">
+</string>
+                    </property>
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#f9f9f9;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;Personal Finance Manager helps you take control of&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;your finances with an easy-to-use platform for &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;tracking income, expenses, and savings. Set goals, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;visualize your data, and make informed decisions for a &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;secure future.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;This app was developed by Jonathan Edward, Davin, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;and Farhan for the Control Laboratory Assistant &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_21">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                  </layout>
                 </widget>
                </item>
                <item>
                 <widget class="QFrame" name="frame_6">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(42, 43, 48);</string>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
@@ -3701,10 +4229,31 @@ border-radius: 5px;</string>
                   <enum>QFrame::Raised</enum>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_24">
-                  <item>
+                  <item alignment="Qt::AlignHCenter">
                    <widget class="QLabel" name="label_8">
+                    <property name="minimumSize">
+                     <size>
+                      <width>877</width>
+                      <height>347</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>877</width>
+                      <height>347</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true"/>
+                    </property>
                     <property name="text">
-                     <string>TextLabel</string>
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap>../Assets/Group 1.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>

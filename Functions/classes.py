@@ -230,8 +230,14 @@ class enrichedData:
         if time_cycle == "WoM":
             cur_data[time_cycle] = cur_data[time_cycle].replace(6, 5)
 
+        cur_data['ET'] = cur_data[('Expenses', 'TOTAL')]
+        cur_data['RT'] = cur_data[('Revenue', 'TOTAL')]
+        cur_data = cur_data.sort_index(axis=1)
+        cur_data = cur_data.drop(columns=['Features'])
+
         cur_data = cur_data.groupby(time_cycle, as_index=False).sum()
 
+        # Comment-able
         cur_data.loc[:, ('Expenses', 'TOTAL')] = cur_data[('Expenses', 'TOTAL')] - cur_data[('Expenses', '5')]
 
         indices = np.arange(len(cur_data))
@@ -249,6 +255,8 @@ class enrichedData:
         canvas.ax.set_xticks(indices + bar_width / 2)
         if time_cycle == "MONTH":
             canvas.ax.set_xticklabels(cur_data['LABEL'], rotation=45, ha='right')
+        else:
+            canvas.ax.set_xticklabels(cur_data['LABEL'])
         canvas.ax.set_ylabel('Rp.')
         canvas.ax.set_title(f'{title} Distribution', pad=20)
 

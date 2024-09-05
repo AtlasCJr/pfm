@@ -495,6 +495,15 @@ def deleteTransaction(account:Account, transaction_id:str) -> str:
         )
 
         conn.commit()
+
+        cursor.execute("""
+            UPDATE accounts
+            SET TRANSACTIONS = TRANSACTIONS - 1
+            WHERE USERNAME = ?
+        """, (account.username,))
+
+        conn.commit()
+        
         conn.close()
 
         # Delete transaction from online database

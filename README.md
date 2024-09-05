@@ -57,4 +57,4 @@ and one more table _sqlite_sequences_ which hold account the incrementation for 
 + Added the final home page
 
 #### Temporary Copy-Paste
-pyuic5 -x UI/Master.ui -o UI/Master.py 
+pyuic5 -x UI/Master.ui -o UI/Master.py
