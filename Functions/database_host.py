@@ -350,7 +350,7 @@ def getTimeSpent() -> datetime:
     return row[0]
 
 # Transaction functions
-def addTransaction(id: str, account:Account, item: str, type:int, category: int, value: int, created_at:str = None, updated_at:str = None) -> None:
+def addTransaction(id: str, account:Account, item: str, type:int, category: int, value: int, created_at:str, updated_at:str = None) -> None:
     """
     Inserts a transaction record into the transactions table.
     """
@@ -359,7 +359,7 @@ def addTransaction(id: str, account:Account, item: str, type:int, category: int,
     cursor = conn.cursor()
 
     if updated_at == None:
-        updated_at = created_at
+        updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     cursor.execute(
         "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
@@ -379,7 +379,7 @@ def getTransaction(account:Account) -> pd.DataFrame:
     
     return df
 
-def editTransaction(account: Account, transaction_id: str, item: str, type: int, category: int, value: int, updated_at: str = None) -> None:
+def editTransaction(account: Account, transaction_id: str, item: str, type: int, category: int, value: int, created_at: str, updated_at: str = None) -> None:
     """
     Updates a transaction record.
     """
@@ -391,8 +391,8 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
         updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     cursor.execute(
-        "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, UPDATED_AT = ? WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
-        (item, type, category, value, updated_at, transaction_id, account.username)
+        "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, CREATED AT = ?, UPDATED_AT = ? WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
+        (item, type, category, value, created_at, updated_at, transaction_id, account.username)
     )
 
     conn.commit()

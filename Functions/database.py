@@ -395,7 +395,7 @@ def getTimeSpent() -> datetime:
     return row[0]
 
 # Transaction functions
-def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at:str = None, updated_at:str = None) -> str:
+def addTransaction(account:Account, item: str, type:int, category: int, value: int, created_at:str) -> str:
     """
     Inserts a transaction record into the transactions table.
     """
@@ -404,10 +404,7 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
     cursor = conn.cursor()
     id = str(randomID())
 
-    # harusnya ditambahin created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    if updated_at == None:
-        updated_at = created_at
-
+    updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cursor.execute(
         "INSERT INTO transactions (TRANSACTION_ID, USERNAME, ITEM, TYPE, CATEGORY, VALUE, CREATED_AT, UPDATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
         (id, account.username, item, type, category, value, created_at, updated_at)
@@ -451,7 +448,7 @@ def getTransaction(account:Account) -> pd.DataFrame:
     else:
         return df
 
-def editTransaction(account: Account, transaction_id: str, item: str, type: int, category: int, value: int, updated_at: str = None) -> str:
+def editTransaction(account: Account, transaction_id: str, item: str, type: int, category: int, value: int, created_at: str) -> str:
     """
     Updates a transaction record.
     """
@@ -460,20 +457,19 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
     cursor = conn.cursor()
 
     try: 
-        if updated_at is None:
-            updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         cursor.execute(
-            "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, UPDATED_AT = ? WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
-            (item, type, category, value, updated_at, transaction_id, account.username)
+            "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, CREATED_AT = ?, UPDATED_AT = ?, WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
+            (item, type, category, value, created_at, updated_at, transaction_id, account.username)
         )
 
         conn.commit()
         conn.close()
 
         # Update transaction in online database
-        # _editTransaction(account.username, transaction_id, item, type, category, value, updated_at)
-        # if _editTransaction(account.username, transaction_id, item, type, category, value, updated_at):
+        # _editTransaction(account.username, transaction_id, item, type, category, value, created_at, updated_at)
+        # if _editTransaction(account.username, transaction_id, item, type, category, value, created_at, updated_at):
         #     return "Transaction information updated successfully"
         # else:
         #     return "Error updating transaction information"
@@ -507,11 +503,11 @@ def deleteTransaction(account:Account, transaction_id:str) -> str:
         conn.close()
 
         # Delete transaction from online database
-        # _deleteTransaction(account.username)
-        # if _deleteTransaction(account.username):
-        #     return "Transaction deleted successfully"
-        # else:
-        #     return "Error deleting transaction"
+        _deleteTransaction(account.username, transaction_id)
+        if _deleteTransaction(account.username, transaction_id):
+            return "Transaction deleted successfully"
+        else:
+            return "Error deleting transaction"
     except Exception as e:
         return f"Error deleting transaction: {str(e)}"
 
