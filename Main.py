@@ -239,7 +239,6 @@ class MainProgram(QMainWindow):
         self.currentAcc = getAccount(self.currentAcc.username)
         self.accountChanged()
 
-
     def handleDeleteTransaction(self):
         alert = Alert("You are about to delete your chosen transaction.")
         answer = alert.getResult()

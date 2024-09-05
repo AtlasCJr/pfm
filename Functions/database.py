@@ -6,7 +6,7 @@ from uuid import uuid4 as randomID
 from hashlib import sha256
 
 from Functions.classes import Account
-from Functions.database_client import _addAccount, _checkAccount, _checkSecurity, _updateBalance, _getAccount, _editAccount, _deleteAccount, _isUsernameAvailable, _addTransaction, _getTransaction, _editTransaction, _deleteTransaction, _addChats, _addLog
+from Functions import database_client as dc
 
 def createDatabase() -> None:
     """
@@ -112,8 +112,8 @@ def addAccount(account:Account) -> str:
         conn.commit()
 
         # Add account to online database
-        _addAccount(account)
-        if _addAccount(account):
+        dc._addAccount(account)
+        if dc._addAccount(account):
             conn.close()
             return "Account added successfully"
         else:
@@ -499,12 +499,11 @@ def deleteTransaction(account:Account, transaction_id:str) -> str:
         """, (account.username,))
 
         conn.commit()
-        
         conn.close()
 
         # Delete transaction from online database
-        _deleteTransaction(account.username, transaction_id)
-        if _deleteTransaction(account.username, transaction_id):
+        dc._deleteTransaction(account.username, transaction_id)
+        if dc._deleteTransaction(account.username, transaction_id):
             return "Transaction deleted successfully"
         else:
             return "Error deleting transaction"
@@ -530,8 +529,8 @@ def addChats(username:str, message_type:int, message:str) -> str:
         conn.close()
 
         # Add chat to online database
-        _addChats(username, message_type, message, id)
-        if _addChats(username, message_type, message, id):
+        dc._addChats(username, message_type, message, id)
+        if dc._addChats(username, message_type, message, id):
             return "Chat added successfully"
         else:
             return "Error adding chat"
