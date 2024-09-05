@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1268</width>
-    <height>849</height>
+    <width>1254</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -437,7 +437,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>7</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -941,7 +941,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>946</width>
+                    <width>748</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -2255,8 +2255,8 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>968</width>
-                <height>985</height>
+                <width>378</width>
+                <height>1561</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2686,8 +2686,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>904</width>
-                   <height>588</height>
+                   <width>910</width>
+                   <height>547</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -3393,8 +3393,8 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>968</width>
-                <height>1657</height>
+                <width>435</width>
+                <height>1560</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -3490,8 +3490,8 @@ QScrollBar::sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>438</width>
-                       <height>245</height>
+                       <width>98</width>
+                       <height>99</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -4106,7 +4106,7 @@ QScrollBar::sub-page:vertical {
                 <x>0</x>
                 <y>0</y>
                 <width>968</width>
-                <height>915</height>
+                <height>878</height>
                </rect>
               </property>
               <property name="maximumSize">
@@ -4193,8 +4193,7 @@ QScrollBar::sub-page:vertical {
                      </font>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">
-</string>
+                     <string notr="true"/>
                     </property>
                     <property name="text">
                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#f9f9f9;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;Personal Finance Manager helps you take control of&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;your finances with an easy-to-use platform for &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;tracking income, expenses, and savings. Set goals, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;visualize your data, and make informed decisions for a &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;secure future.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;This app was developed by Jonathan Edward, Davin, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;and Farhan for the Control Laboratory Assistant &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

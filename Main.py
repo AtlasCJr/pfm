@@ -521,7 +521,7 @@ class MainProgram(QMainWindow):
             LOGO.setMinimumSize(QtCore.QSize(40, 40))
             LOGO.setMaximumSize(QtCore.QSize(40, 40))
             LOGO.setText("")
-            LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/Grey/output-onlinepngtools (8).png"))
+            LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/chatbot/chatbot-blue.png"))
             LOGO.setScaledContents(True)
             LAYOUT.addWidget(LOGO)
         else:
@@ -562,7 +562,7 @@ class MainProgram(QMainWindow):
             LOGO.setMinimumSize(QtCore.QSize(40, 40))
             LOGO.setMaximumSize(QtCore.QSize(40, 40))
             LOGO.setText("")
-            LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/Grey/output-onlinepngtools (10).png"))
+            LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/chatbot/user2-blue.png"))
             LOGO.setScaledContents(True)
             LAYOUT.addWidget(LOGO)
 
@@ -625,6 +625,9 @@ class MainProgram(QMainWindow):
             if self.currentAcc.num_transactions != 0:
                 self.ui.visualizeButton.setEnabled(True)
                 self.ui.analyzeButton.setEnabled(True)
+            else:
+                self.ui.visualizeButton.setEnabled(False)
+                self.ui.analyzeButton.setEnabled(False)
 
             UNSHOW = QGraphicsOpacityEffect()
             UNSHOW.setOpacity(0.5)
@@ -646,6 +649,15 @@ class MainProgram(QMainWindow):
                 SHOW4 = QGraphicsOpacityEffect()
                 SHOW4.setOpacity(1)
                 self.ui.analyzeButton.setGraphicsEffect(SHOW4)
+            else:
+                UNSHOW2 = QGraphicsOpacityEffect()
+                UNSHOW2.setOpacity(0.5)
+                self.ui.visualizeButton.setGraphicsEffect(UNSHOW2)
+                
+                UNSHOW3 = QGraphicsOpacityEffect()
+                UNSHOW3.setOpacity(0.5)
+                self.ui.analyzeButton.setGraphicsEffect(UNSHOW3)
+
 
 
 
