@@ -29,3 +29,9 @@ def formatNumber(x) -> str:
         
     else:
         return ""
+    
+def cutString(x: str) -> str:
+    if len(x) < 20:
+        return x
+    else:
+        return x[:20] + "..."

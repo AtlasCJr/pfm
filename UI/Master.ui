@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1254</width>
-    <height>826</height>
+    <width>1483</width>
+    <height>825</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../Assets/UWOGH.jpg</normaloff>../Assets/UWOGH.jpg</iconset>
+    <normaloff>../Assets/App Icon/PFM_logoonly.png</normaloff>../Assets/App Icon/PFM_logoonly.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -404,6 +404,25 @@ text-align: left;</string>
         </spacer>
        </item>
        <item>
+        <widget class="QLabel" name="usernameHandle">
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #CCCCCC;</string>
+         </property>
+         <property name="text">
+          <string>USERNAME</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="profileButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -467,7 +486,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>5</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="home">
           <property name="styleSheet">
@@ -939,6 +958,38 @@ border-radius:1px;</string>
          </widget>
          <widget class="QWidget" name="loginsignup">
           <layout class="QGridLayout" name="gridLayout_2">
+           <item row="1" column="0">
+            <spacer name="horizontalSpacer_40">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>200</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="2">
+            <spacer name="horizontalSpacer_41">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>200</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
            <item row="1" column="1">
             <widget class="QStackedWidget" name="innerstackedWidget">
              <property name="minimumSize">
@@ -954,7 +1005,7 @@ border-radius:1px;</string>
               </size>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -1302,7 +1353,7 @@ QScrollBar::sub-page:vertical {
                 <widget class="QScrollArea" name="scrollArea">
                  <property name="minimumSize">
                   <size>
-                   <width>750</width>
+                   <width>0</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -1316,8 +1367,8 @@ QScrollBar::sub-page:vertical {
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>0</y>
-                    <width>718</width>
+                    <y>-167</y>
+                    <width>538</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1341,7 +1392,7 @@ QScrollBar::sub-page:vertical {
                     <widget class="QFrame" name="signupFrame">
                      <property name="minimumSize">
                       <size>
-                       <width>700</width>
+                       <width>0</width>
                        <height>900</height>
                       </size>
                      </property>
@@ -1458,6 +1509,12 @@ QComboBox QAbstractItemView {
                       </item>
                       <item>
                        <widget class="QLineEdit" name="SI_inputUsername">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
                         <property name="placeholderText">
                          <string>Create your username...</string>
                         </property>
@@ -1970,6 +2027,12 @@ QComboBox QAbstractItemView {
                   </item>
                   <item>
                    <widget class="QFrame" name="frame_5">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
                     </property>
@@ -1986,12 +2049,12 @@ QComboBox QAbstractItemView {
                         </font>
                        </property>
                        <property name="text">
-                        <string>What Are You Waiting For?</string>
+                        <string>Changed your mind?</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QPushButton" name="CP_buttonLogIn">
+                      <widget class="QPushButton" name="CP_buttonProfile">
                        <property name="font">
                         <font>
                          <family>Segoe UI</family>
@@ -2003,8 +2066,14 @@ QComboBox QAbstractItemView {
                        <property name="cursor">
                         <cursorShape>PointingHandCursor</cursorShape>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">color:rgb(255, 255, 255);
+background-color: rgb(84, 86, 95);
+border-radius:15px;
+height:30px;</string>
+                       </property>
                        <property name="text">
-                        <string>Back to Log In</string>
+                        <string>Back to Profile</string>
                        </property>
                       </widget>
                      </item>
@@ -2207,20 +2276,65 @@ QLabel{
                    </widget>
                   </item>
                   <item>
-                   <spacer name="verticalSpacer_8">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
+                   <widget class="QFrame" name="frame_10">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
                     </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(42, 43, 48);</string>
                     </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
                     </property>
-                   </spacer>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_35">
+                     <item>
+                      <widget class="QLabel" name="label">
+                       <property name="font">
+                        <font>
+                         <family>Poppins</family>
+                         <pointsize>9</pointsize>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">color: rgb(124, 126, 135);</string>
+                       </property>
+                       <property name="text">
+                        <string>Changed your mind?</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="FP_buttonLogIn">
+                       <property name="font">
+                        <font>
+                         <family>Segoe UI</family>
+                         <pointsize>9</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">color:rgb(255, 255, 255);
+background-color: rgb(84, 86, 95);
+border-radius:15px;
+height:30px;</string>
+                       </property>
+                       <property name="text">
+                        <string>Back to Log In</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -2235,8 +2349,24 @@ QLabel{
           <property name="styleSheet">
            <string notr="true"/>
           </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <spacer name="horizontalSpacer_18">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>200</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QFrame" name="inputdataFrame">
              <property name="maximumSize">
               <size>
@@ -2565,6 +2695,12 @@ QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
               </item>
               <item>
                <widget class="QLabel" name="ID_errorMsg">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="font">
                  <font>
                   <family>Poppins</family>
@@ -2643,6 +2779,22 @@ QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
              </layout>
             </widget>
            </item>
+           <item>
+            <spacer name="horizontalSpacer_39">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>200</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="analyze">
@@ -2697,7 +2849,7 @@ QScrollBar::sub-page:vertical {
                 <x>0</x>
                 <y>0</y>
                 <width>975</width>
-                <height>913</height>
+                <height>918</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2837,15 +2989,20 @@ QScrollBar::sub-page:vertical {
                       <height>100</height>
                      </size>
                     </property>
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                      <pointsize>8</pointsize>
+                      <weight>50</weight>
+                      <italic>false</italic>
+                      <bold>false</bold>
+                     </font>
+                    </property>
                     <property name="styleSheet">
-                     <string notr="true">color: rgb(255, 255, 255);
-
-font: 8pt &quot;Segoe UI&quot;;
-
-padding: 0 50px;</string>
+                     <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Linear regression is a statistical model which estimates the linear relationship between a scalar response (dependent variable) and one or more explanatory variables (regressor or independent variable). Linear regression analysis is used to predict the value of a variable based on the value of another variable. But aside predicting, it can also do something else like finding a gradient of a data/line.&lt;/p&gt;&lt;p&gt;By using Linear Regression, we can find the &lt;span style=&quot; font-weight:600;&quot;&gt;gradient (Rp. / unit of time)&lt;/span&gt; of a given data which is your transactions (expenses, revenue, or both).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Linear regression is a statistical model which estimates the linear relationship between a scalar response (dependent variable) and one or more explanatory variables (regressor or independent variable). Linear regression analysis is used to predict the value of a variable based on the value of another variable. But aside predicting, it can also do something else like finding a gradient of a data/line.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;By using Linear Regression, we can find the &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;gradient (Rp. / unit of time)&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; of a given data which is your transactions (expenses, revenue, or both).&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignJustify|Qt::AlignVCenter</set>
@@ -2931,6 +3088,12 @@ padding: 0 50px;</string>
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                      <pointsize>10</pointsize>
+                     </font>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">QHeaderView::section {
@@ -3078,6 +3241,12 @@ QTableWidget::item {
                   </item>
                   <item>
                    <widget class="QLabel" name="AN_Explanation">
+                    <property name="font">
+                     <font>
+                      <family>Poppins</family>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
                     <property name="styleSheet">
                      <string notr="true">color: white;</string>
                     </property>
@@ -3085,7 +3254,7 @@ QTableWidget::item {
                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Loading Analysis...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="alignment">
-                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     <set>Qt::AlignJustify|Qt::AlignVCenter</set>
                     </property>
                     <property name="wordWrap">
                      <bool>true</bool>
@@ -3415,6 +3584,22 @@ border: none;</string>
                       </widget>
                      </item>
                      <item>
+                      <spacer name="horizontalSpacer_42">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
                       <widget class="QLabel" name="CB_botChat_2">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -3672,7 +3857,7 @@ color:rgb(255, 255, 255);
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_12">
               <item>
-               <widget class="QFrame" name="frame_11">
+               <widget class="QFrame" name="PF_title">
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
                 </property>
@@ -3760,6 +3945,9 @@ color:rgb(255, 255, 255);
                      <widget class="QLabel" name="PF_usernamePassword">
                       <property name="text">
                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Username&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;Sigma&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ffffff;&quot;&gt;Password&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;sigma&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      </property>
+                      <property name="scaledContents">
+                       <bool>false</bool>
                       </property>
                       <property name="wordWrap">
                        <bool>true</bool>
@@ -4061,9 +4249,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-614</y>
+                <y>0</y>
                 <width>968</width>
-                <height>1397</height>
+                <height>1247</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -4116,6 +4304,12 @@ QScrollBar::sub-page:vertical {
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="baseSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
@@ -4128,7 +4322,7 @@ QScrollBar::sub-page:vertical {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>250</height>
+                      <height>200</height>
                      </size>
                     </property>
                     <property name="styleSheet">
@@ -4146,7 +4340,7 @@ QScrollBar::sub-page:vertical {
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>40</width>
+                      <width>20</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -4190,7 +4384,7 @@ QScrollBar::sub-page:vertical {
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>40</width>
+                      <width>20</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -4240,7 +4434,7 @@ QScrollBar::sub-page:vertical {
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>40</width>
+                      <width>20</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -4284,7 +4478,7 @@ QScrollBar::sub-page:vertical {
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>40</width>
+                      <width>20</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -4295,7 +4489,7 @@ QScrollBar::sub-page:vertical {
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>250</height>
+                      <height>200</height>
                      </size>
                     </property>
                     <property name="styleSheet">
@@ -4324,6 +4518,12 @@ QScrollBar::sub-page:vertical {
                </item>
                <item>
                 <widget class="QFrame" name="frame_22">
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton:hover {
+	background-color: rgb(93, 96, 107);
+	border-radius:6px;
+}</string>
+                 </property>
                  <property name="frameShape">
                   <enum>QFrame::StyledPanel</enum>
                  </property>
@@ -4373,7 +4573,7 @@ padding: 10px;</string>
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>250</height>
+                      <height>200</height>
                      </size>
                     </property>
                     <property name="baseSize">
@@ -4452,7 +4652,7 @@ padding: 10px;</string>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>200</width>
+                      <width>150</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -4490,7 +4690,7 @@ padding: 10px;</string>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>200</width>
+                      <width>150</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -4596,6 +4796,12 @@ QScrollBar::sub-page:vertical {
              <layout class="QVBoxLayout" name="verticalLayout_22">
               <item alignment="Qt::AlignBottom">
                <widget class="QLabel" name="AB_about">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -4620,8 +4826,26 @@ QScrollBar::sub-page:vertical {
                 </property>
                </widget>
               </item>
-              <item alignment="Qt::AlignTop">
+              <item alignment="Qt::AlignHCenter|Qt::AlignTop">
                <widget class="QLabel" name="AB_headerDesc">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>500</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
                   <family>Poppins Light</family>
@@ -4631,7 +4855,10 @@ QScrollBar::sub-page:vertical {
                  <string notr="true">padding-top:0px;</string>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;If you want to learn more about us, you're in the right place. Read to learn how we can support&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;your financial journey and help manage your finances effectively.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;If you want to learn more about us, you're in the right place. Read to learn how we can support your financial journey and help manage your finances effectively.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -4675,8 +4902,8 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
-                <width>968</width>
+                <y>-409</y>
+                <width>1197</width>
                 <height>878</height>
                </rect>
               </property>

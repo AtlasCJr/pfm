@@ -13,6 +13,7 @@ from Functions.database import *
 from Functions.classes import Account, botWorker
 from Functions.data_analysis import *
 from Functions.others import *
+from Functions.dicts import *
 
 
 class LoadingScreen(QMainWindow):
@@ -139,7 +140,9 @@ class MainProgram(QMainWindow):
 
         self.graphIndex = [0]
 
-        # Header Buttons
+        """
+        Header
+        """
         self.ui.homeButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.home))
         self.ui.loginButton.clicked.connect(self.Authentication)
         self.ui.inputdataButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.inputData))
@@ -150,45 +153,72 @@ class MainProgram(QMainWindow):
         self.ui.profileButton.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
         self.ui.editButton.clicked.connect(lambda: (self.searchData(), self.ui.stackedWidget.setCurrentWidget(self.ui.edit)))
 
-        # Authentication
+        """
+        Authentication
+        """
+
+        # log In
         self.ui.LI_buttonForgetPassword.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.forgetPW))  # Login -> FP
         self.ui.LI_buttonSignIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.signupPage))        # Login -> SignIn
-        self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
-        self.ui.FP_buttonSavePW.clicked.connect(lambda: self.handleForgetPW)                                                                                                                      # FP -> Login
-        self.ui.CP_buttonSavePW.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))                              # CP -> Profile
-
-
-        self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)                                                                  # Sign In
         self.ui.LI_buttonLI.clicked.connect(self.handleLogIn)                                                                   # Log In
-        self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)                                                            # Change Password
-
+        
         self.ui.LI_inputUsername.returnPressed.connect(lambda: self.ui.LI_inputPassword.setFocus())
         self.ui.LI_inputPassword.returnPressed.connect(self.handleLogIn)
 
-        self.ui.CP_inputSecAnswer.returnPressed.connect(lambda: self.ui.CP_inputPassword1.setFocus())
-        self.ui.CP_inputPassword1.returnPressed.connect(lambda: self.ui.CP_inputPassword2.setFocus())
-        self.ui.CP_inputPassword2.returnPressed.connect(self.handleChangePW)
+        # Sign In
+
+        self.ui.SI_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # SignIn -> Login
+        self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)                                                                  # Sign In
+
+        # Forget Password
+        self.ui.FP_buttonSavePW.clicked.connect(lambda: self.handleForgetPW)
+        self.ui.FP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # FP -> Login
 
         self.ui.FP_inputUsername.returnPressed.connect(lambda: self.ui.FP_inputSecAnswer.setFocus())
         self.ui.FP_inputSecAnswer.returnPressed.connect(lambda: self.ui.FP_inputPassword1.setFocus())
         self.ui.FP_inputPassword1.returnPressed.connect(lambda: self.ui.FP_inputPassword2.setFocus())
         self.ui.FP_inputPassword2.returnPressed.connect(lambda: self.ui.FP_buttonSavePW.click())
 
-        # Visualize
+        # Change Password
+        self.ui.CP_buttonProfile.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))
+        self.ui.CP_buttonSavePW.clicked.connect(lambda: (self.handleChangePW(), self.ui.setCurrentWidget(self.ui.profile)))     # Change Password
 
-        # Edit
+        self.ui.CP_inputSecAnswer.returnPressed.connect(lambda: self.ui.CP_inputPassword1.setFocus())
+        self.ui.CP_inputPassword1.returnPressed.connect(lambda: self.ui.CP_inputPassword2.setFocus())
+        self.ui.CP_inputPassword2.returnPressed.connect(self.handleChangePW)
+
+
+
+        """
+        Upload
+        """
+        self.ui.ID_addTransaction.clicked.connect(self.handleAddTransaction)
+
+        """
+        Edit
+        """
         self.ui.calendarWidget.selectionChanged.connect(self.searchData)
         self.ui.ED_updateButton.clicked.connect(self.handleUpdateTransaction)
         self.ui.ED_deleteButton.clicked.connect(self.handleDeleteTransaction)
 
-        # Analysis
+        """
+        Analysis
+        """
         self.ui.AN_backButton.clicked.connect(self.handleBackButton)
         self.ui.AN_forwardButton.clicked.connect(self.handleForwardButton)
 
-        # Chatting
+        """
+        Visualize
+        """
+
+        """
+        Chatbot
+        """
         self.ui.userChatInput.returnPressed.connect(self.askGemini)
 
-        # Profile
+        """
+        Profile
+        """
         self.ui.PF_changePassword.clicked.connect(lambda: (
             self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup),
             self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW)
@@ -196,8 +226,7 @@ class MainProgram(QMainWindow):
         self.ui.PF_logOut.clicked.connect(self.handleLogOut)
         self.ui.PF_deleteAccount.clicked.connect(self.handleDeleteAcc)
 
-        # Upload
-        self.ui.ID_addTransaction.clicked.connect(self.handleAddTransaction)
+
 
     def handleAddTransaction(self):
         item = self.ui.ID_inputTransaction.text()
@@ -357,25 +386,25 @@ class MainProgram(QMainWindow):
         title, data, time_dict, start = self.ED.plotTimeCycle(index, self.ui.VI_Graph3)
         self.ui.VI_LGraph3.update()
 
-        
         question = f"This is my expense and revenue grouped in {title}. I live in Indonesia. Please tell me about my current status.\n"
         for i, x in enumerate(data):
-            question += f"\n{time_dict[i + (start if start != None else 0) + (1 if title != 'Day' else 0)]}\n"
+            if time_dict is not None:
+                question += f"\n{time_dict.get(i + (start if start is not None else 0) + (1 if title != 'Day' else 0), 'Default Value')}\n"
+            else:
+                question += f"\n{title} {start + i}\n"
             question += f"Expense: {formatNumber(x[0])}\n"
             question += f"Revenue: {formatNumber(x[1])}\n"
-
-        print(question)
 
         self.botWorker = botWorker(question)
         self.botWorker.resultReady.connect(self.analyzeGraph3)
         self.botWorker.start()
 
-    def handleForwardButton(self):
+    def handleBackButton(self):
         self.graphIndex[0] -= 1
         self.graphIndex[0] %= 5
         self.graphGraph3(self.graphIndex[0])
 
-    def handleBackButton(self):
+    def handleForwardButton(self):
         self.graphIndex[0] -= 1
         self.graphIndex[0] %= 5
         self.graphGraph3(self.graphIndex[0])
@@ -650,6 +679,9 @@ class MainProgram(QMainWindow):
             LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/chatbot/chatbot-blue.png"))
             LOGO.setScaledContents(True)
             LAYOUT.addWidget(LOGO)
+
+            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+            LAYOUT.addItem(SPACERS)
         else:
             SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
@@ -683,6 +715,9 @@ class MainProgram(QMainWindow):
             SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
         else:
+            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+            LAYOUT.addItem(SPACERS)
+
             LOGO =  QtWidgets.QLabel(FRAME)
             LOGO.setMinimumSize(QtCore.QSize(40, 40))
             LOGO.setMaximumSize(QtCore.QSize(40, 40))
@@ -786,20 +821,24 @@ class MainProgram(QMainWindow):
                     </p>
                 </body></html>
             """)
+
+            self.ui.usernameHandle.setText("Not Logged In")
             
             return
         else:
             self.ui.loginButton.setEnabled(False)
             self.ui.inputdataButton.setEnabled(True)
             self.ui.profileButton.setEnabled(True)
-            self.ui.editButton.setEnabled(True)
 
-            if self.currentAcc.num_transactions != 0:
+            if self.currentAcc.num_transactions > 1:
                 self.ui.visualizeButton.setEnabled(True)
                 self.ui.analyzeButton.setEnabled(True)
+                self.ui.editButton.setEnabled(True)
             else:
                 self.ui.visualizeButton.setEnabled(False)
                 self.ui.analyzeButton.setEnabled(False)
+                self.ui.editButton.setEnabled(False)
+                
 
             UNSHOW = QGraphicsOpacityEffect()
             UNSHOW.setOpacity(0.5)
@@ -813,7 +852,7 @@ class MainProgram(QMainWindow):
             SHOW2.setOpacity(1)
             self.ui.inputdataButton.setGraphicsEffect(SHOW2)
 
-            if self.currentAcc.num_transactions != 0:
+            if self.currentAcc.num_transactions > 1:
                 SHOW3 = QGraphicsOpacityEffect()
                 SHOW3.setOpacity(1)
                 self.ui.visualizeButton.setGraphicsEffect(SHOW3)
@@ -838,13 +877,16 @@ class MainProgram(QMainWindow):
                 UNSHOW4.setOpacity(0.5)
                 self.ui.editButton.setGraphicsEffect(UNSHOW4)
 
-
-
-
-        if self.currentAcc.num_transactions != 0:
+        if self.currentAcc.num_transactions > 2:
             df = getTransaction(self.currentAcc)
             self.ED = enrichData(df)
             self.old_data = self.ED.old_data
+
+        self.ui.usernameHandle.setText(f"{self.currentAcc.username}")
+
+        self.ui.PF_infoBanner.setText(f"""
+            <html><head/><body><p><span style=" font-size:20pt;">{self.currentAcc.username}</span></p></body></html>
+        """)
     
         self.ui.HM_mainText.setText(f"""
             <html><head/><body>
@@ -899,7 +941,7 @@ class MainProgram(QMainWindow):
                 <p>
                     <span style=" font-size:12pt; font-weight:600; color:#ffffff;">Password</span></p>
                 <p>
-                    <span style=" font-size:12pt; color:#ffffff;">{self.currentAcc.password}</span></p>
+                    <span style=" font-size:12pt; color:#ffffff;">{cutString(self.currentAcc.password)}</span></p>
             </body></html>
         """)
 

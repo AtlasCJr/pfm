@@ -400,10 +400,7 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
         cursor = conn.cursor()
         id = str(randomID())
 
-        if category == 0:
-            value = -value
-
-        new_balance = account.balance + value
+        new_balance = account.balance + (value if category == 1 else -value)
         updateBalance(account, new_balance)
 
         updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
