@@ -204,6 +204,8 @@ class MainProgram(QMainWindow):
         # date = date.toString("yyyy-MM-dd")
         value = self.ui.ID_inputValue.text()
 
+        time = self.ui.ID_timeEdit.time().toPyTime()
+
         if item == "":
             self.ui.ID_errorMsg.setText("Item name cannot be empty.")
             return
@@ -225,7 +227,7 @@ class MainProgram(QMainWindow):
         
         category = 0 if type < 10 else 1
         value = int(value)
-        date = date.strftime("%Y-%m-%d")
+        date = date.strftime("%Y-%m-%d") + " " + time.strftime("%H:%M:%S")
 
         self.ui.ID_errorMsg.clear()
         addTransaction(self.currentAcc, item, type, category, value, date)
@@ -330,8 +332,8 @@ class MainProgram(QMainWindow):
         self.graphAnalyze(self.graphIndex[0])
 
     def graphAnalyze(self, index:int):
-        self.ED.plotTimeCycle(index, self.ui.AN_Graph1)
-        self.ui.AN_Graph1.update()
+        self.ED.plotTimeCycle(index, self.ui.VI_Graph3)
+        self.ui.VI_Graph3.update()
 
     def searchData(self):
         date = self.ui.calendarWidget.selectedDate()

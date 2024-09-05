@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1254</width>
-    <height>772</height>
+    <width>1242</width>
+    <height>948</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -437,7 +437,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>7</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -941,7 +941,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>748</width>
+                    <width>718</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -1975,7 +1975,19 @@ QPushButton:pressed {
 QPushButton:disabled {
     background-color: #6c757d;  /* Warna abu-abu saat tombol dinonaktifkan */
     color: #D6D6D6;  /* Warna teks abu-abu saat tombol dinonaktifkan */
-}</string>
+}
+QTimeEdit {
+    background-color: #2A2B30;  /* Latar belakang gelap */
+    color: #FFFFFF;  /* Warna teks putih */
+    border: 1px solid rgba(84,86,95,255); /* Border kuning untuk konsistensi dengan tema */
+    border-radius: 8px;  /* Sudut melengkung */
+    padding: 5px;
+}
+QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
+    background-color: #FFD700;  /* Tombol berwarna kuning saat di-hover */
+}
+
+</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
@@ -2107,7 +2119,20 @@ QPushButton:disabled {
                  </font>
                 </property>
                 <property name="text">
-                 <string>Date Added</string>
+                 <string>Date and Time Added</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTimeEdit" name="ID_timeEdit">
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">padding-left:20px;</string>
                 </property>
                </widget>
               </item>
@@ -2152,15 +2177,14 @@ QPushButton:disabled {
               </item>
               <item>
                <widget class="QLabel" name="ID_errorMsg">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
+                <property name="font">
+                 <font>
+                  <family>Poppins</family>
+                  <pointsize>9</pointsize>
+                 </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">color: red;
-</string>
+                 <string notr="true">color: red;</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -2275,8 +2299,8 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>378</width>
-                <height>1561</height>
+                <width>994</width>
+                <height>874</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -2493,79 +2517,6 @@ QTableWidget::item {
                 </spacer>
                </item>
                <item>
-                <widget class="QFrame" name="frame_22">
-                 <property name="frameShape">
-                  <enum>QFrame::StyledPanel</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_16">
-                  <item>
-                   <widget class="QPushButton" name="AN_backButton">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">border: none;
-color: rgb(255, 255, 255);
-padding: 10px;</string>
-                    </property>
-                    <property name="text">
-                     <string>&lt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QWidget" name="AN_Graph1" native="true">
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>400</height>
-                     </size>
-                    </property>
-                    <property name="baseSize">
-                     <size>
-                      <width>0</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(255, 255, 255);</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="AN_forwardButton">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">border: none;
-color: rgb(255, 255, 255);
-padding: 10px;</string>
-                    </property>
-                    <property name="text">
-                     <string>&gt;</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
                 <spacer name="verticalSpacer_12">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -2706,8 +2657,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>910</width>
-                   <height>547</height>
+                   <width>924</width>
+                   <height>723</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -3412,9 +3363,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
-                <width>435</width>
-                <height>1560</height>
+                <y>-1324</y>
+                <width>956</width>
+                <height>2198</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -3510,8 +3461,8 @@ QScrollBar::sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>98</width>
-                       <height>99</height>
+                       <width>436</width>
+                       <height>226</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -3918,6 +3869,22 @@ border-radius: 5px;</string>
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer_16">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <widget class="QFrame" name="frame_24">
                  <property name="minimumSize">
                   <size>
@@ -3950,6 +3917,95 @@ border-radius: 5px;</string>
                </item>
                <item>
                 <spacer name="verticalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_22">
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_16">
+                  <item>
+                   <widget class="QPushButton" name="AN_backButton">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">border: none;
+color: rgb(255, 255, 255);
+padding: 10px;</string>
+                    </property>
+                    <property name="text">
+                     <string>&lt;</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="VI_Graph3" native="true">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>400</height>
+                     </size>
+                    </property>
+                    <property name="baseSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="AN_forwardButton">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">border: none;
+color: rgb(255, 255, 255);
+padding: 10px;</string>
+                    </property>
+                    <property name="text">
+                     <string>&gt;</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_17">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
                  </property>
@@ -4136,8 +4192,14 @@ QScrollBar::sub-page:vertical {
                </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+               <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                 <widget class="QFrame" name="AB_aboutApp">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="maximumSize">
                   <size>
                    <width>16777215</width>
@@ -4155,6 +4217,9 @@ QScrollBar::sub-page:vertical {
                    <spacer name="horizontalSpacer_20">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
@@ -4197,6 +4262,9 @@ QScrollBar::sub-page:vertical {
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Expanding</enum>
+                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>40</width>
@@ -4216,7 +4284,10 @@ QScrollBar::sub-page:vertical {
                      <string notr="true"/>
                     </property>
                     <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#f9f9f9;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;Personal Finance Manager helps you take control of&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;your finances with an easy-to-use platform for &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;tracking income, expenses, and savings. Set goals, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;visualize your data, and make informed decisions for a &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;secure future.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;This app was developed by Jonathan Edward, Davin, &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;and Farhan for the Control Laboratory Assistant &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#f9f9f9;&quot;&gt;program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#ffffff;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;Personal Finance Manager helps you take control of your finances with an easy-to-use platform for tracking income, expenses, and savings. Set goals, visualize your data, and make informed decisions for a secure future. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;This app was developed by Jonathan Edward Charles De Fretes, Davin, and Muhammad Farhan Hanafi for the Control Laboratory Assistant program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>
@@ -4224,6 +4295,9 @@ QScrollBar::sub-page:vertical {
                    <spacer name="horizontalSpacer_21">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
