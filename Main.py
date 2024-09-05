@@ -610,7 +610,7 @@ class MainProgram(QMainWindow):
             self.ui.homeText.setText(f"""
                 <html><head/><body>
                     <p>Hi, User!</p>
-                    <p>It’s Monday, September 2nd, 2024. What would you like to do today?</p>
+                    <p>It’s {getDate()}. What would you like to do today?</p>
                     <p>It seems you’re not logged in at the moment. Try logging in or create a new account to get started and enjoy all the features of our app!</p>
                     <p>Need help? Feel free to reach out to our Chatbot<span style=" font-weight:600;"/>if you have any questions or need assistance.</p>
                 </body></html>
