@@ -154,7 +154,17 @@ class enrichedData:
                 parent.setLayout(layout)
             layout.addWidget(canvas)
 
-    def plotCategory(self, cat: int, parent):
+        exported_data = []
+        for year in curData.index:
+            exported_data.append([
+                curData[('Expenses', 'TOTAL')].loc[year],
+                curData[('Revenue', 'TOTAL')].loc[year],
+                curData[('Revenue', 'TOTAL')].loc[year] - curData[('Expenses', 'TOTAL')].loc[year]
+            ])
+
+        return exported_data, curData.index[0], len(curData.index)
+
+    def plotCategory(self, parent):
         if parent.layout() is None:
             layout = QtWidgets.QVBoxLayout(parent)
             parent.setLayout(layout)
@@ -189,7 +199,7 @@ class enrichedData:
         canvas.ax.set_xticks(range(len(byType['TYPE_LABEL'])))
         canvas.ax.set_xticklabels(byType['TYPE_LABEL'], rotation=45, ha='right')
 
-        canvas.ax.text(0.5, 1.01, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
+        canvas.ax.text(0.5, 1.04, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
         canvas.ax.grid(True)
         canvas.fig.tight_layout()
         canvas.draw()
@@ -200,6 +210,15 @@ class enrichedData:
                 layout = QtWidgets.QVBoxLayout(parent)
                 parent.setLayout(layout)
             layout.addWidget(canvas)
+
+        exported_data = []
+        for i in byType.index:
+            exported_data.append([
+                byType['TYPE_LABEL'][i], 
+                byType['VALUE'].loc[i]
+            ])
+
+        return exported_data
 
     def plotTimeCycle(self, x: int, parent):
         if x < 0 or x > 4:
@@ -266,3 +285,17 @@ class enrichedData:
         canvas.draw()
 
         layout.addWidget(canvas)
+
+        exported_data = []
+        for i in cur_data.index:
+            exported_data.append([
+                cur_data['ET'].loc[i],
+                cur_data['RT'].loc[i]
+            ])
+
+        if time_cycle == "YEAR":
+            start = cur_data['YEAR'].loc[0]
+        else:
+            start = None
+
+        return title, exported_data, time_dict, start

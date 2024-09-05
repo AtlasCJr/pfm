@@ -307,27 +307,78 @@ class MainProgram(QMainWindow):
             return
 
     def setupVisualize(self):
-        self.ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
+        """
+        Graph 1
+        """
+        data, start, length = self.ED.plotAll("YEAR", "YEAR", (0), self.ui.VI_Graph1)
         self.ui.VI_Graph1.update()
 
-        self.ED.plotCategory(0, self.ui.VI_Graph2)
+        question = "This is my yearly expense, revenue, and budget. I live in Indonesia. Please tell me about my current status."
+        for i in range(length):
+            question += f"\nYear {start + i}\n"
+            for j, txt in enumerate(["Expenses, Revenue, Budget"]):
+                question += f"{txt}: {formatNumber(data[i][j])}\n"
+                question += f"{txt}: {formatNumber(data[i][j])}\n"
+                question += f"{txt}: {formatNumber(data[i][j])}\n"
+
+        self.botWorker = botWorker(question)
+        self.botWorker.resultReady.connect(self.analyzeGraph1)
+        self.botWorker.start()
+
+        """
+        Graph 2
+        """
+        data = self.ED.plotCategory(self.ui.VI_Graph2)
         self.ui.VI_Graph2.update()
 
-        self.graphAnalyze(self.graphIndex[0])
+        question = "This is my expense and revenue grouped by types. I live in Indonesia. Please tell me about my current status.\n"
+        for x in data:
+            question += f"{x[0]}: {formatNumber(int(x[1]))}\n"
 
-    def graphAnalyze(self, index:int):
-        self.ED.plotTimeCycle(index, self.ui.VI_Graph3)
-        self.ui.VI_Graph3.update()
+        self.botWorker = botWorker(question)
+        self.botWorker.resultReady.connect(self.analyzeGraph2)
+        self.botWorker.start()
+
+        """
+        Graph 3
+        """
+        self.graphGraph3(self.graphIndex[0])
+
+    def analyzeGraph1(self, text:str):
+        self.ui.VI_LGraph1.setText(text)
+
+    def analyzeGraph2(self, text:str):
+        self.ui.VI_LGraph2.setText(text)
+    
+    def analyzeGraph3(self, text:str):
+        self.ui.VI_LGraph3.setText(text)
+
+    def graphGraph3(self, index:int):
+        title, data, time_dict, start = self.ED.plotTimeCycle(index, self.ui.VI_Graph3)
+        self.ui.VI_LGraph3.update()
+
+        
+        question = f"This is my expense and revenue grouped in {title}. I live in Indonesia. Please tell me about my current status.\n"
+        for i, x in enumerate(data):
+            question += f"\n{time_dict[i + (start if start != None else 0) + (1 if title != 'Day' else 0)]}\n"
+            question += f"Expense: {formatNumber(x[0])}\n"
+            question += f"Revenue: {formatNumber(x[1])}\n"
+
+        print(question)
+
+        self.botWorker = botWorker(question)
+        self.botWorker.resultReady.connect(self.analyzeGraph3)
+        self.botWorker.start()
 
     def handleForwardButton(self):
         self.graphIndex[0] -= 1
         self.graphIndex[0] %= 5
-        self.graphAnalyze(self.graphIndex[0])
+        self.graphGraph3(self.graphIndex[0])
 
     def handleBackButton(self):
         self.graphIndex[0] -= 1
         self.graphIndex[0] %= 5
-        self.graphAnalyze(self.graphIndex[0])
+        self.graphGraph3(self.graphIndex[0])
 
     def setupAnalyze(self):
         self.ui.linregTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -341,20 +392,20 @@ class MainProgram(QMainWindow):
                 self.ui.linregTable.setItem(j, i, item)
         
         question = f"""
-        This is my current economical state. I live in Indonesia. Please tell me about my current status.
-        Expenses:
-        Daily: {linreg[0][0]}
-        Weekly: {linreg[0][1]}
-        Monthly: {linreg[0][2]}
-        Quarterly: {linreg[0][3]}
-        Annually: {linreg[0][4]}
+            This is my current economical state. I live in Indonesia. Please tell me about my current status.
+            Expenses:
+            Daily: {linreg[0][0]}
+            Weekly: {linreg[0][1]}
+            Monthly: {linreg[0][2]}
+            Quarterly: {linreg[0][3]}
+            Annually: {linreg[0][4]}
 
-        Revenue:
-        Daily: {linreg[1][0]}
-        Weekly: {linreg[1][1]}
-        Monthly: {linreg[1][2]}
-        Quarterly: {linreg[1][3]}
-        Annually: {linreg[1][4]}
+            Revenue:
+            Daily: {linreg[1][0]}
+            Weekly: {linreg[1][1]}
+            Monthly: {linreg[1][2]}
+            Quarterly: {linreg[1][3]}
+            Annually: {linreg[1][4]}
         """
 
         self.botWorker = botWorker(question)
@@ -684,12 +735,55 @@ class MainProgram(QMainWindow):
             UNSHOW5.setOpacity(0.5)
             self.ui.editButton.setGraphicsEffect(UNSHOW5)
 
-            self.ui.homeText.setText(f"""
+            self.ui.HM_mainText.setText(f"""
                 <html><head/><body>
-                    <p>Hi, User!</p>
-                    <p>It’s {getDate()}. What would you like to do today?</p>
-                    <p>It seems you’re not logged in at the moment. Try logging in or create a new account to get started and enjoy all the features of our app!</p>
-                    <p>Need help? Feel free to reach out to our Chatbot<span style=" font-weight:600;"/>if you have any questions or need assistance.</p>
+                    <p align="center">
+                        <span style=" font-size:16pt; font-weight:600; color:#ffffff;">Hi, </span>
+                        <span style=" font-size:16pt; font-weight:600; color:#fedd3b;">User</span>
+                        <span style=" font-size:16pt; font-weight:600; color:#ffffff;">!</span>
+                    </p>
+                    <p align="center">
+                        <span style=" font-size:14pt; color:#ffffff;">It’s {getDate()}. What would you like to do today?</span>
+                    </p>
+                    <p align="center">
+                        <span style=" color:#ffffff;"><br/></span></p><p align="center">
+                        <span style=" font-size:14pt; color:#ffffff;">It seems you’re not logged in at the moment. Try </span>
+                        <span style=" font-size:14pt; color:#fedd3b;">logging in</span><span style=" font-size:14pt; color:#ffffff;"> or </span>
+                        <span style=" font-size:14pt; color:#fedd3b;">create</span>
+                    </p>
+                    <p align="center">
+                        <span style=" font-size:14pt; color:#fedd3b;">a new account</span>
+                        <span style=" font-size:14pt; color:#ffffff;"> to get started and enjoy all the features of our app!</span>
+                    </p>
+                    <p align="center">
+                        <span style=" color:#ffffff;"><br/></span>
+                    </p>
+                    <p align="center">
+                        <span style=" font-size:14pt; color:#ffffff;">Need help? Feel free to reach out to our </span>
+                        <span style=" font-size:14pt; color:#fedd3b;">Chatbot</span></p><p align="center">
+                        <span style=" font-size:14pt; color:#ffffff;">if you have any questions or need assistance.</span>
+                    </p>
+                </body></html>
+            """)
+
+            self.ui.HM_balance.setText(f"""
+                <html><head/><body>
+                    <p>
+                        <span style=" color:#cccccc;">Balance</span>
+                    </p>
+                    <p>
+                        <span style=" font-weight:600; color:#ffffff;">Rp. -</span>
+                    </p>
+                </body></html>
+            """)
+
+            self.ui.HM_num_trans.setText(f"""
+                <html><head/><body>
+                    <p>
+                        <span style=" color:#cccccc;">Transaction History</span>
+                    </p>
+                        <p><span style=" font-weight:600; color:#ffffff;">-</span>
+                    </p>
                 </body></html>
             """)
             
@@ -752,27 +846,60 @@ class MainProgram(QMainWindow):
             self.ED = enrichData(df)
             self.old_data = self.ED.old_data
     
-        self.ui.homeText.setText(f"""
+        self.ui.HM_mainText.setText(f"""
             <html><head/><body>
-                <p>Hi, {self.currentAcc.username}!</p>
-                <p>It is {getDate()}.<br/>What would you like to do?</p>
-                <p>Need help? Feel free to reach out to our Chatbot<span style=" font-weight:600;"/>if you have any questions or need assistance.</p>
+                <p align="center">
+                    <span style=" font-size:16pt; font-weight:600; color:#ffffff;">Hi, </span>
+                    <span style=" font-size:16pt; font-weight:600; color:#fedd3b;">{self.currentAcc.username}</span>
+                    <span style=" font-size:16pt; font-weight:600; color:#ffffff;">!</span>
+                </p>
+                <p align="center">
+                    <span style=" font-size:14pt; color:#ffffff;">It’s {getDate()}. What would you like to do today?</span>
+                </p>
+                <p align="center">
+                    <span style=" color:#ffffff;"><br/></span>
+                </p>
+                <p align="center">
+                    <span style=" font-size:14pt; color:#ffffff;">Need help? Feel free to reach out to our </span>
+                    <span style=" font-size:14pt; color:#fedd3b;">Chatbot</span>
+                </p>
+                <p align="center">
+                    <span style=" font-size:14pt; color:#ffffff;">if you have any questions or need assistance.</span>
+                </p>
             </body></html>
             """)
         
+        self.ui.HM_balance.setText(f"""
+            <html><head/><body>
+                <p>
+                    <span style=" color:#cccccc;">Balance</span>
+                </p>
+                <p>
+                    <span style=" font-weight:600; color:#ffffff;">{formatNumber(self.currentAcc.balance)}</span>
+                </p>
+            </body></html>
+        """)
+
+        self.ui.HM_num_trans.setText(f"""
+            <html><head/><body>
+                <p>
+                    <span style=" color:#cccccc;">Transaction History</span>
+                </p>
+                    <p><span style=" font-weight:600; color:#ffffff;">{self.currentAcc.num_transactions}</span>
+                </p>
+            </body></html>
+        """)
+        
         self.ui.PF_usernamePassword.setText(f"""
             <html><head/><body>
-                <p><span style=" font-weight:600;">
-                    Username
-                </span></p>
-                
-                <p>{self.currentAcc.username}</p>
-                
-                <p><span style=" font-weight:600;">
-                    Password
-                </span></p>
-                
-                <p>{self.currentAcc.password}</p>
+                <p>
+                    <span style=" font-size:12pt; font-weight:600; color:#ffffff;">Username</span></p>
+                <p>
+                    <span style=" font-size:12pt; color:#ffffff;">{self.currentAcc.username}</span></p>
+                <p>
+                    <span style=" font-size:12pt; font-weight:600; color:#ffffff;">Password</span></p>
+                <p>
+                    <span style=" font-size:12pt; color:#ffffff;">{self.currentAcc.password}</span></p>
             </body></html>
         """)
 
@@ -794,7 +921,7 @@ class MainProgram(QMainWindow):
                     Balance
                 </span></p>
                                        
-                <p>{self.currentAcc.balance}</p>
+                <p>{formatNumber(self.currentAcc.balance)}</p>
                                        
                 <p><span style=" font-weight:600;">
                     Transaction Uploaded
