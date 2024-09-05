@@ -8,8 +8,8 @@ app = Flask(__name__)
 createDatabase()
 
 # Route untuk menambahkan akun baru
-@app.route('/add_account', methods=['POST'])
-def add_account():
+@app.route('/_addAccount', methods=['POST'])
+def _addAccount():
     try:
         data = request.json
         username = data.get('username')
@@ -29,8 +29,8 @@ def add_account():
         return jsonify({"error": str(e)}), 500
     
 # Route untuk memeriksa keberadaan akun
-@app.route('/check_account/<username>/<password>', methods=['GET'])
-def check_account(username, password):
+@app.route('/_checkAccount/<username>/<password>', methods=['GET'])
+def _checkAccount(username, password):
     account = getAccount(username)
     if account and account.password == password:
         return jsonify({"exists": True}), 200
@@ -38,8 +38,8 @@ def check_account(username, password):
         return jsonify({"exists": False}), 200
 
 # Route untuk memeriksa keberadaan pertanyaan keamanan
-@app.route('/check_security/<username>/<security_question>/<security_answer>', methods=['GET'])
-def check_security(username, security_question, security_answer):
+@app.route('/_checkSecurity/<username>/<security_question>/<security_answer>', methods=['GET'])
+def _checkSecurity(username, security_question, security_answer):
     account = getAccount(username)
     if account and account.security_question == security_question and account.security_answer == security_answer:
         return jsonify({"exists": True}), 200
@@ -47,8 +47,8 @@ def check_security(username, security_question, security_answer):
         return jsonify({"exists": False}), 200
 
 # Route untuk memperbarui saldo akun
-@app.route('/update_balance', methods=['POST'])
-def update_balance():
+@app.route('/_updateBalance', methods=['POST'])
+def _updateBalance():
     try:
         data = request.json
         username = data.get('username')
@@ -65,8 +65,8 @@ def update_balance():
         return jsonify({'error': str(e)}), 500
 
 # Route untuk mendapatkan data akun
-@app.route('/get_account/<username>', methods=['GET'])
-def get_account(username):
+@app.route('/_getAccount/<username>', methods=['GET'])
+def _getAccount(username):
     account = getAccount(username)
     if account:
         return jsonify({
@@ -79,8 +79,8 @@ def get_account(username):
         return jsonify({"message": "Account not found!"}), 404
     
 # Route untuk mengedit akun
-@app.route('/edit_account', methods=['POST'])
-def edit_account():
+@app.route('/_editAccount', methods=['POST'])
+def _editAccount():
     try:
         data = request.json
         username = data.get('username')
@@ -100,8 +100,8 @@ def edit_account():
         return jsonify({'error': str(e)}), 500
 
 # Route untuk menghapus akun
-@app.route('/delete_account/<username>', methods=['DELETE'])
-def delete_account(username):
+@app.route('/_deleteAccount/<username>', methods=['DELETE'])
+def _deleteAccount(username):
     try:
         account = getAccount(username)
         deleteAccount(account)
@@ -112,8 +112,8 @@ def delete_account(username):
         return jsonify({'error': str(e)}), 500
     
 # Route untuk memeriksa ketersediaan username
-@app.route('/is_username_available/<username>', methods=['GET'])
-def is_username_available(username):
+@app.route('/_isUsernameAvailable/<username>', methods=['GET'])
+def _isUsernameAvailable(username):
     account = getAccount(username)
     if account:
         return jsonify({"available": False}), 200
@@ -121,8 +121,8 @@ def is_username_available(username):
         return jsonify({"available": True}), 200
 
 # Route untuk menambahkan transaksi baru
-@app.route('/add_transaction', methods=['POST'])
-def add_transaction():
+@app.route('/_addTransaction', methods=['POST'])
+def _addTransaction():
     try:
         data = request.json
         id = data.get('id')
@@ -145,8 +145,8 @@ def add_transaction():
         return jsonify({'error': str(e)}), 500
 
 # Route untuk mendapatkan data transaksi
-@app.route('/get_transaction/<username>', methods=['GET'])
-def get_transaction(username):
+@app.route('/_getTransaction/<username>', methods=['GET'])
+def _getTransaction(username):
     try:
 
         account = getAccount(username)
@@ -162,8 +162,8 @@ def get_transaction(username):
         return jsonify({'error': str(e)}), 500
     
 # Route untuk mengedit transaksi
-@app.route('/edit_transaction', methods=['POST'])
-def edit_transaction():
+@app.route('/_editTransaction', methods=['POST'])
+def _editTransaction():
     try:
         data = request.json
         username = data.get('username')
@@ -186,8 +186,8 @@ def edit_transaction():
         return jsonify({'error': str(e)}), 500
 
 # Route untuk menambahkan chat
-@app.route('/add_chats', methods=['POST'])
-def add_chats():
+@app.route('/_addChats', methods=['POST'])
+def _addChats():
     try:
         data = request.json
         id = data.get('id')
@@ -204,8 +204,8 @@ def add_chats():
         return jsonify({'error': str(e)}), 500
 
 # Route untuk menambahkan log
-@app.route('/add_log', methods=['POST'])
-def add_log():
+@app.route('/_addLog', methods=['POST'])
+def _addLog():
     try:
         data = request.json
         message = data.get('message')
