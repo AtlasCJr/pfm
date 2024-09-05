@@ -118,7 +118,7 @@ class MainProgram(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         
-        global start 
+        global start
         start = datetime.now()
 
         self.ui = Ui_Master()

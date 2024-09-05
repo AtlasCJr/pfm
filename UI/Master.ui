@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1242</width>
-    <height>948</height>
+    <width>1254</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -437,7 +437,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>7</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="home">
           <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -578,7 +578,7 @@ text-align: left;</string>
               </size>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -941,7 +941,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>718</width>
+                    <width>950</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -2004,7 +2004,7 @@ QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
                  </font>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; color:#fedd3b;&quot;&gt;Record&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; your expense&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; color:#fedd3b;&quot;&gt;Record&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt; your transactions&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -2138,6 +2138,12 @@ QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
               </item>
               <item>
                <widget class="QCalendarWidget" name="ID_calendarWidget">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="font">
                  <font>
                   <family>Poppins</family>
@@ -2164,6 +2170,12 @@ QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
               </item>
               <item>
                <widget class="QLineEdit" name="ID_inputValue">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="font">
                  <font>
                   <family>Poppins</family>
@@ -2216,7 +2228,7 @@ QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>699</width>
+                     <width>40</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -2224,6 +2236,12 @@ QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
                  </item>
                  <item>
                   <widget class="QPushButton" name="ID_addTransaction">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="minimumSize">
                     <size>
                      <width>200</width>
@@ -2657,7 +2675,7 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>924</width>
+                   <width>910</width>
                    <height>723</height>
                   </rect>
                  </property>
@@ -3364,7 +3382,7 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>-1324</y>
-                <width>956</width>
+                <width>968</width>
                 <height>2198</height>
                </rect>
               </property>
@@ -3461,7 +3479,7 @@ QScrollBar::sub-page:vertical {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>436</width>
+                       <width>442</width>
                        <height>226</height>
                       </rect>
                      </property>
@@ -4154,22 +4172,22 @@ QScrollBar::sub-page:vertical {
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
-               <height>10</height>
+               <height>20</height>
               </size>
              </property>
             </spacer>
            </item>
-           <item alignment="Qt::AlignHCenter">
+           <item>
             <widget class="QScrollArea" name="scrollArea_5">
              <property name="minimumSize">
               <size>
-               <width>1000</width>
+               <width>0</width>
                <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>1000</width>
+               <width>16777215</width>
                <height>16777215</height>
               </size>
              </property>
@@ -4284,7 +4302,7 @@ QScrollBar::sub-page:vertical {
                      <string notr="true"/>
                     </property>
                     <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#ffffff;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;Personal Finance Manager helps you take control of your finances with an easy-to-use platform for tracking income, expenses, and savings. Set goals, visualize your data, and make informed decisions for a secure future. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;This app was developed by &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Jonathan Edward Charles De Fretes&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Davin Nazhif&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, and &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Muhammad Farhan Hanafi&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt; for the Control Laboratory Assistant program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#ffffff;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;Personal Finance Manager helps you take control of your finances with an easy-to-use platform for tracking income, expenses, and savings. Set goals, visualize your data, and make informed decisions for a secure future. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;This app was developed by &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Jonathan Edward Charles De Fretes&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Davin Nazhif Wilviadli&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, and &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Muhammad Farhan Hanafi&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt; for the Control Laboratory Assistant program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                     <property name="wordWrap">
                      <bool>true</bool>
