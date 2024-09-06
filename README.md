@@ -1,15 +1,15 @@
 # Personal Finance Manager
 
-A **Personal Finance Manager (PFM)** is a tool designed to help individuals manage their finances effectively. With features for tracking income, expenses, budgeting, saving, investing, and managing debts, this PFM aims to empower users to make informed financial decisions and achieve their financial goals.
+**Personal Finance Manager (PFM)** is a tool designed to help individuals manage their finances effectively. With features for tracking income, expenses, and budgeting. 
 
 ## Features
 
 - **Multiple Accounts**: Track various accounts in one place.
 - **Embedded Database System**: Includes an internal database (cloud-based aswell) to store financial data.
-- **Budgeting Tools**: Set up custom budgets and track spending by category (e.g., groceries, entertainment).
+- **Budgeting Tools**: Set up custom budgets and track spending by category (groceries, entertainment, etc.).
 - **Income & Expense Tracking**: Log all transactions and categorize them easily.
 - **Data Visualization**: Charts and graphs to visualize financial trends and spending patterns.
-- **Internal Chatbot**: Use a chatbot to assist in interacting with the PFM and get quick tips or insights.
+- **Internal Chatbot**: Use a chatbot to assist in interacting with PFM and get quick tips or insights.
 
 ## Technologies Used
 
@@ -28,8 +28,8 @@ This project is built using the following technologies:
         <img alt="SQL" src="https://custom-icon-badges.demolab.com/badge/SQL-025E8C.svg?logo=database&logoColor=white"></a>
 </p>
 
-- **HTML/CSS** for user interface and styling.
-- **Python** for backend logic and data processing.
+- **HTML/CSS**: for TOS and PP.
+- **Python** for backend logic, data processing, and front-end (PyQt5).
 - **SQL** for database management to store financial data.
 - **Markdown** for easy documentation and support.
 
