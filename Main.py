@@ -226,14 +226,8 @@ class MainProgram(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup),
             self.ui.innerstackedWidget.setCurrentWidget(self.ui.changePW)
         ))
-        self.ui.PF_logOut.clicked.connect(self.handleLogOut)
+        self.ui.PF_logOut.clicked.connect(self.handleLogOut)    
         self.ui.PF_deleteAccount.clicked.connect(self.handleDeleteAcc)
-
-        self.ui.PF_usernamePassword.setMouseTracking(True)
-        self.ui.PF_usernamePassword.mouseMoveEvent = self.showPassword
-
-    def showPassword(self):
-        pass
 
     def handleAddTransaction(self):
         item = self.ui.ID_inputTransaction.text()

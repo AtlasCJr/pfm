@@ -486,7 +486,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>6</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="home">
           <property name="styleSheet">
@@ -2020,6 +2020,9 @@ QComboBox QAbstractItemView {
                       <bold>true</bold>
                      </font>
                     </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
                     <property name="text">
                      <string>Save</string>
                     </property>
@@ -2269,6 +2272,9 @@ QLabel{
                       <weight>75</weight>
                       <bold>true</bold>
                      </font>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
                     </property>
                     <property name="text">
                      <string>Save</string>
@@ -2847,9 +2853,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
-                <width>975</width>
-                <height>918</height>
+                <y>-121</y>
+                <width>1197</width>
+                <height>916</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -3485,8 +3491,8 @@ border: none;</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>322</width>
-                   <height>306</height>
+                   <width>1139</width>
+                   <height>644</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
