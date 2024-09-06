@@ -888,11 +888,9 @@ class MainProgram(QMainWindow):
 
             if self.currentAcc.num_transactions > 1:
                 self.ui.visualizeButton.setEnabled(True)
-                self.ui.analyzeButton.setEnabled(True)
                 self.ui.editButton.setEnabled(True)
             else:
                 self.ui.visualizeButton.setEnabled(False)
-                self.ui.analyzeButton.setEnabled(False)
                 self.ui.editButton.setEnabled(False)
                 
 
@@ -913,10 +911,6 @@ class MainProgram(QMainWindow):
                 SHOW3.setOpacity(1)
                 self.ui.visualizeButton.setGraphicsEffect(SHOW3)
 
-                SHOW4 = QGraphicsOpacityEffect()
-                SHOW4.setOpacity(1)
-                self.ui.analyzeButton.setGraphicsEffect(SHOW4)
-
                 SHOW5 = QGraphicsOpacityEffect()
                 SHOW5.setOpacity(1)
                 self.ui.editButton.setGraphicsEffect(SHOW5)
@@ -924,25 +918,35 @@ class MainProgram(QMainWindow):
                 UNSHOW2 = QGraphicsOpacityEffect()
                 UNSHOW2.setOpacity(0.5)
                 self.ui.visualizeButton.setGraphicsEffect(UNSHOW2)
-                
-                UNSHOW3 = QGraphicsOpacityEffect()
-                UNSHOW3.setOpacity(0.5)
-                self.ui.analyzeButton.setGraphicsEffect(UNSHOW3)
 
                 UNSHOW4 = QGraphicsOpacityEffect()
                 UNSHOW4.setOpacity(0.5)
                 self.ui.editButton.setGraphicsEffect(UNSHOW4)
 
-        if self.currentAcc.num_transactions > 2:
-            df = getTransaction(self.currentAcc)
-            self.ED = enrichData(df)
-            self.old_data = self.ED.old_data
+            if self.currentAcc.num_transactions > 1:
+                df = getTransaction(self.currentAcc)
+                self.ED = enrichData(df)
+                self.old_data = self.ED.old_data
 
-        if self.ED:
-            if (self.ED.data.index[-1].year - self.ED.data.index[0].year) > 0:
-                self.ui.frame_20.show()
-            else:
-                self.ui.frame_20.hide()
+                print(self.ED.data.index[-1].year - self.ED.data.index[0].year)
+
+                if (self.ED.data.index[-1].year - self.ED.data.index[0].year) > 0:
+                    self.ui.frame_20.show()
+
+                    SHOW4 = QGraphicsOpacityEffect()
+                    SHOW4.setOpacity(1)
+                    self.ui.analyzeButton.setGraphicsEffect(SHOW4)
+
+                    self.ui.analyzeButton.setEnabled(True)
+                else:
+                    self.ui.frame_20.hide()
+
+                    UNSHOW3 = QGraphicsOpacityEffect()
+                    UNSHOW3.setOpacity(0.5)
+                    self.ui.analyzeButton.setGraphicsEffect(UNSHOW3)
+
+                    self.ui.analyzeButton.setEnabled(False)
+
 
         self.ui.usernameHandle.setText(f"{self.currentAcc.username}")
 

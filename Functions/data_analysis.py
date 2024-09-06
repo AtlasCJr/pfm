@@ -87,57 +87,63 @@ def getTimeCycle(data: pd.DataFrame, cycle: str, pos: int = 0) -> pd.DataFrame:
 
 def enrichData(df: pd.DataFrame) -> enrichedData:
     old_data = df.copy()
+    
     def WoM(dt):
-        """ Returns the week of the month for the specified date. """
         first_day = dt.replace(day=1)
         dom = dt.day
         adjusted_dom = dom + first_day.weekday()
-        
         return int(np.ceil(adjusted_dom / 7.0))
-
+    
     df['CREATED_AT'] = pd.to_datetime(df['CREATED_AT'])
     df = df.drop(columns=['UPDATED_AT', 'TRANSACTION_ID', 'ITEM', 'USERNAME']).set_index('CREATED_AT').sort_index()
-    
-    
-    expenses = pd.concat([
+
+    expenses_list = [
         df[(df['CATEGORY'] == 0) & (df['TYPE'] == i)]
         .drop(columns=['CATEGORY', 'TYPE'])
         .resample('D')
         .sum()
         .rename(columns={'VALUE': f'{i}'})
         for i in df[df['CATEGORY'] == 0]['TYPE'].unique()
-    ], axis=1)
+    ]
 
-    
-    revenue = pd.concat([
+    expenses_list = [x for x in expenses_list if not x.empty]
+    expenses = pd.concat(expenses_list, axis=1) if expenses_list else pd.DataFrame()
+
+    revenue_list = [
         df[(df['CATEGORY'] == 1) & (df['TYPE'] == i)]
         .drop(columns=['CATEGORY', 'TYPE'])
         .resample('D')
         .sum()
         .rename(columns={'VALUE': f'{i}'})
         for i in df[df['CATEGORY'] == 1]['TYPE'].unique()
-    ], axis=1)
+    ]
+    revenue_list = [x for x in revenue_list if not x.empty]
+    revenue = pd.concat(revenue_list, axis=1) if revenue_list else pd.DataFrame()
 
-    expenses = expenses.reindex(sorted(expenses.columns, key=lambda x: int(x)), axis=1)
-    revenue = revenue.reindex(sorted(revenue.columns, key=lambda x: int(x)), axis=1)
-
-
-    expenses.columns = pd.MultiIndex.from_product([['Expenses'], expenses.columns])
-    revenue.columns = pd.MultiIndex.from_product([['Revenue'], revenue.columns])
-
-    expenses[('Expenses', 'TOTAL')] = expenses.sum(axis=1)
-    revenue[('Revenue', 'TOTAL')] = revenue.sum(axis=1)
-
+    if not expenses.empty:
+        expenses = expenses.reindex(sorted(expenses.columns, key=lambda x: int(x)), axis=1)
+        expenses.columns = pd.MultiIndex.from_product([['Expenses'], expenses.columns])
+        expenses[('Expenses', 'TOTAL')] = expenses.sum(axis=1)
+    
+    if not revenue.empty:
+        revenue = revenue.reindex(sorted(revenue.columns, key=lambda x: int(x)), axis=1)
+        revenue.columns = pd.MultiIndex.from_product([['Revenue'], revenue.columns])
+        revenue[('Revenue', 'TOTAL')] = revenue.sum(axis=1)
+    else:
+        revenue = pd.DataFrame(index=expenses.index)
+        revenue[('Revenue', 'TOTAL')] = 0
 
     features = pd.DataFrame(index=expenses.index.union(revenue.index))
-    features[("Features", "DoW")] = features.index.day_of_week
-    features[("Features", "DoM")] = features.index.day
-    features[("Features", "WoM")] = features.index.map(WoM)
-    features[("Features", "DAY")] = features.index.day_of_year
-    features[("Features", "WEEK")] = features.index.isocalendar().week
-    features[("Features", "QUARTER")] = features.index.quarter
-    features[("Features", "MONTH")] = features.index.month
-    features[("Features", "YEAR")] = features.index.year
+    datetime_index = pd.DatetimeIndex(features.index)
+
+    features[("Features", "DoW")] = datetime_index.dayofweek
+    features[("Features", "DoM")] = datetime_index.day
+    features[("Features", "WoM")] = datetime_index.map(WoM)
+    features[("Features", "DAY")] = datetime_index.dayofyear
+    features[("Features", "WEEK")] = datetime_index.isocalendar().week
+    features[("Features", "QUARTER")] = datetime_index.quarter
+    features[("Features", "MONTH")] = datetime_index.month
+    features[("Features", "YEAR")] = datetime_index.year
 
     DATA = pd.concat([expenses, revenue, features], axis=1).fillna(0)
     

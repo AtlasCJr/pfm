@@ -128,14 +128,14 @@ def checkAccount(username:str, password:str) -> bool:
 
     conn.close()
 
-    if row == None:
+    # if row == None:
         # Check online database
-        if dc._checkAccount(username, password):
-            return True
-        else:
-            return False
-    else:
-        return sha256(password.encode()).hexdigest() == row[1]
+        # if dc._checkAccount(username, password):
+        #     return True
+        # else:
+        #     return False
+    # else:
+    return sha256(password.encode()).hexdigest() == row[1]
 
 def checkSecurity(username:str, security_answer:str) -> bool:
     """
@@ -210,15 +210,15 @@ def getAccount(username:str) -> Account:
 
     updateLastUser(row[0])
 
-    if row is None:
-        # Check online database
-        account = dc._getAccount(username)
-        if account is None:
-            return None
-        else:
-            return account
-    else:
-        return Account(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
+    # if row is None:
+        # # Check online database
+        # account = dc._getAccount(username)
+        # if account is None:
+        #     return None
+        # else:
+        #     return account
+    # else:
+    return Account(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
 
 def editAccount(account:Account) -> None:
     """
@@ -543,4 +543,4 @@ def addLog(message: str) -> None:
         conn.close()
 
     # Add log to online database
-    dc._addLog(message)
+    # dc._addLog(message)

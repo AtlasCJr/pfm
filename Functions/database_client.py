@@ -14,7 +14,7 @@ def _addAccount(account: Account) -> bool:
     }
     try:
         response = requests.post(url, json=data)
-        response.raise_for_status()  # Raise an exception for HTTP errors
+        response.raise_for_status()
         return True
     except requests.exceptions.RequestException:
         return False

@@ -14,8 +14,6 @@ import numpy as np
 import pandas as pd
 from PyQt5 import QtWidgets
 
-# plt.style.use('fivethirtyeight')
-
 class Account:
     def __init__(self, username: str, 
                  password: str, 
@@ -58,8 +56,6 @@ class Canvas(FigureCanvas):
         self.fig, self.ax = plt.subplots(figsize=figsize, dpi=60)
         super().__init__(self.fig)
         self.setParent(parent)
-        # self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        # self.updateGeometry()
 
 class enrichedData:
     def __init__(self, old_data: pd.DataFrame, data: pd.DataFrame, figsize: tuple[int, int] = (15, 5)) -> None:
@@ -257,7 +253,8 @@ class enrichedData:
         cur_data = cur_data.groupby(time_cycle, as_index=False).sum()
 
         # Comment-able
-        cur_data.loc[:, ('Expenses', 'TOTAL')] = cur_data[('Expenses', 'TOTAL')] - cur_data[('Expenses', '5')]
+        # if ('Expenses', '5') in cur_data.columns:
+        #     cur_data.loc[:, ('Expenses', 'TOTAL')] = cur_data[('Expenses', 'TOTAL')] - cur_data[('Expenses', '5')]
 
         indices = np.arange(len(cur_data))
         bar_width = 0.35
