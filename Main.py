@@ -136,7 +136,7 @@ class MainProgram(QMainWindow):
         try: self.currentAcc = getLastUser()
         except Exception: pass
 
-        updateBalance(self.currentAcc)
+        if self.currentAcc: updateBalance(self.currentAcc)
         self.accountChanged()
 
         self.graphIndex = [0]
@@ -182,7 +182,7 @@ class MainProgram(QMainWindow):
 
         # Change Password
         self.ui.CP_buttonProfile.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))
-        self.ui.CP_buttonSavePW.clicked.connect(lambda: (self.handleChangePW(), self.ui.setCurrentWidget(self.ui.profile)))     # Change Password
+        self.ui.CP_buttonSavePW.clicked.connect(lambda: self.handleChangePW)                                                    # Change Password
 
         self.ui.CP_inputSecAnswer.returnPressed.connect(lambda: self.ui.CP_inputPassword1.setFocus())
         self.ui.CP_inputPassword1.returnPressed.connect(lambda: self.ui.CP_inputPassword2.setFocus())
@@ -262,7 +262,7 @@ class MainProgram(QMainWindow):
         date = date.strftime("%Y-%m-%d") + " " + time.strftime("%H:%M:%S")
 
         self.ui.ID_errorMsg.clear()
-        addTransaction(self.currentAcc, item, type, category, value, date)
+        addTransaction(self.currentAcc, item.title(), type, category, value, date)
 
         self.ui.ID_inputTransaction.clear()
         self.ui.ID_dropdownType.clear()
@@ -591,7 +591,7 @@ class MainProgram(QMainWindow):
         self.ui.SI_checkboxTerm.setChecked(False)
 
 
-        newAcc = Account(username, password1, security_q, security_a)
+        newAcc = Account(username, password1, security_q, security_a.lower())
         self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
         addAccount(newAcc)
 
@@ -616,36 +616,43 @@ class MainProgram(QMainWindow):
 
     def handleForgetPW(self):
         username = self.ui.FP_inputUsername.text()
+        sec_a = self.ui.FP_inputSecAnswer.text()
 
-        answer = self.ui.FP_inputSecAnswer.text()
-
-        password1 = self.ui.CP_inputPassword1.text()
-        password2 = self.ui.CP_inputPassword2.text()
+        password1 = self.ui.FP_inputPassword1.text()
+        password2 = self.ui.FP_inputPassword2.text()
+    
+        print("1")
 
         if password1 == "" or password2 == "":
-            self.ui.CP_errorMsg.setText("Password cannot be empty.")
+            self.ui.FP_errorMsg.setText("Password cannot be empty.")
             return
         if len(password1) <= 5:
-            self.ui.CP_errorMsg.setText("Password cannot be less than 5 characters.")
+            self.ui.FP_errorMsg.setText("Password cannot be less than 5 characters.")
             return
         if " " in password1:
-            self.ui.CP_errorMsg.setText("Password cannot has spaces.")
+            self.ui.FP_errorMsg.setText("Password cannot has spaces.")
             return
         if password1 != password2:
-            self.ui.CP_errorMsg.setText("The typed password doesn't match.")
+            self.ui.FP_errorMsg.setText("The typed password doesn't match.")
             return
 
-        if answer == self.currentAcc.security_question:
+        print("2")
+
+        if checkSecurity(username, sec_a.lower()):
+            print("3")
+            self.ui.FP_errorMsg.clear()
+
             thisAcc = getAccount(username)
             thisAcc.password = password1
             editAccount(thisAcc)
 
             self.ui.stackedWidget.setCurrentWidget(self.ui.loginPage)
         else:
+            print("4")
             self.ui.CP_errorMsg.setText("Wrong security answer.")
 
     def handleChangePW(self):
-        answer = self.ui.CP_inputSecAnswer.text()
+        sec_a = self.ui.CP_inputSecAnswer.text()
 
         password1 = self.ui.CP_inputPassword1.text()
         password2 = self.ui.CP_inputPassword2.text()
@@ -663,11 +670,14 @@ class MainProgram(QMainWindow):
             self.ui.CP_errorMsg.setText("The typed password doesn't match.")
             return
 
-        if answer == self.currentAcc.security_question:
-            thisAcc = getAccount(self.currentAcc.username)
-            thisAcc.password = password1
-            editAccount(thisAcc)
-            self.ui.stackedWidget.setCurrentWidget(self.ui.loginPage)
+        if checkSecurity(self.currentAcc.username, sec_a.lower()):
+            self.ui.CP_errorMsg.clear()
+
+            self.currentAcc.password = password1
+            editAccount(self.currentAcc)
+            self.accountChanged()
+
+            self.ui.setCurrentWidget(self.ui.profile)
         else:
             self.ui.CP_errorMsg.setText("Wrong security answer.")
 

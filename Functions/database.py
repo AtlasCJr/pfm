@@ -137,7 +137,7 @@ def checkAccount(username:str, password:str) -> bool:
     else:
         return sha256(password.encode()).hexdigest() == row[1]
 
-def checkSecurity(username:str, security_question:int, security_answer:str) -> bool:
+def checkSecurity(username:str, security_answer:str) -> bool:
     """
     Check if the given security question and answer is correct
     """
@@ -150,14 +150,14 @@ def checkSecurity(username:str, security_question:int, security_answer:str) -> b
 
     conn.close()
 
-    if row == None:
+    # if row == None:
         # Check online database
-        if dc._checkSecurity(username, security_question, security_answer):
-            return True
-        else:
-            return False
-    else:
-        return security_question == row[2] and sha256(security_answer.encode()).hexdigest() == row[3]
+        # if dc._checkSecurity(username, security_question, security_answer):
+        #     return True
+        # else:
+        #     return False
+    # else:
+    return sha256(security_answer.encode()).hexdigest() == row[3]
     
 def updateBalance(account:Account)-> None:
     """
@@ -230,10 +230,8 @@ def editAccount(account:Account) -> None:
 
     try:
         cursor.execute(
-            "UPDATE accounts SET HASHED_PASSWORD = ?, SECURITY_QUESTION = ?, HASHED_SECURITY_ANSWER = ?, UPDATED_AT = ?, WHERE USERNAME = ?", 
+            "UPDATE accounts SET HASHED_PASSWORD = ?, UPDATED_AT = ? WHERE USERNAME = ?", 
             (sha256(account.password.encode()).hexdigest(), 
-            account.security_question, 
-            sha256(account.security_answer.encode()).hexdigest(), 
             datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             account.username)
         )

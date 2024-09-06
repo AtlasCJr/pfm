@@ -486,7 +486,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>8</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="home">
           <property name="styleSheet">
@@ -1005,7 +1005,7 @@ border-radius:1px;</string>
               </size>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -2260,6 +2260,9 @@ QLabel{
                     </property>
                     <property name="text">
                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#2a2b30;&quot;&gt;*Passwords don't match&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                     </property>
                    </widget>
                   </item>
