@@ -470,7 +470,7 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
         updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         cursor.execute(
-            "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, CREATED_AT = ?, UPDATED_AT = ?, WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
+            "UPDATE transactions SET ITEM = ?, TYPE = ?, CATEGORY = ?, VALUE = ?, CREATED_AT = ?, UPDATED_AT = ? WHERE TRANSACTION_ID = ? AND USERNAME = ?", 
             (item, type, category, value, created_at, updated_at, transaction_id, account.username)
         )
 

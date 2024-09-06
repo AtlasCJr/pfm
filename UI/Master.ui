@@ -486,7 +486,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>8</number>
          </property>
          <widget class="QWidget" name="home">
           <property name="styleSheet">
@@ -1005,7 +1005,7 @@ border-radius:1px;</string>
               </size>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="loginPage">
               <property name="styleSheet">
@@ -1368,7 +1368,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>385</width>
+                    <width>767</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -2861,7 +2861,7 @@ QScrollBar::sub-page:vertical {
                 <x>0</x>
                 <y>0</y>
                 <width>975</width>
-                <height>847</height>
+                <height>994</height>
                </rect>
               </property>
               <property name="minimumSize">
@@ -3564,7 +3564,7 @@ border: none;</string>
                     </property>
                    </spacer>
                   </item>
-                  <item alignment="Qt::AlignHCenter">
+                  <item alignment="Qt::AlignLeft">
                    <widget class="QFrame" name="botBubble_2">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
@@ -4313,9 +4313,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-513</y>
+                <y>-431</y>
                 <width>968</width>
-                <height>1308</height>
+                <height>1408</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -4673,7 +4673,7 @@ padding: 10px;</string>
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>200</height>
+                      <height>300</height>
                      </size>
                     </property>
                     <property name="baseSize">
@@ -5585,7 +5585,7 @@ QComboBox QAbstractItemView {
                  <item>
                   <widget class="QScrollArea" name="listTransaction">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -5680,20 +5680,68 @@ padding-left:20px;</string>
                       </widget>
                      </item>
                      <item>
-                      <spacer name="verticalSpacer_2">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
+                      <widget class="QFrame" name="Transaction1_2">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
                        </property>
-                       <property name="sizeType">
-                        <enum>QSizePolicy::Expanding</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
+                       <property name="minimumSize">
                         <size>
-                         <width>20</width>
-                         <height>40</height>
+                         <width>0</width>
+                         <height>0</height>
                         </size>
                        </property>
-                      </spacer>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_20">
+                        <item alignment="Qt::AlignVCenter">
+                         <widget class="QLabel" name="label_14">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>80</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>80</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Poppins</family>
+                            <pointsize>9</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(154, 158, 173);
+border-radius:10px;
+padding-top:10px;
+padding-bottom:10px;
+padding-right:10px;
+padding-left:20px;</string>
+                          </property>
+                          <property name="text">
+                           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Sigma&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Rp. 20.000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
                      </item>
                     </layout>
                    </widget>

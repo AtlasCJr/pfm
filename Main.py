@@ -479,7 +479,7 @@ class MainProgram(QMainWindow):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
         FRAME.setSizePolicy(sizePolicy)
-        FRAME.setMinimumSize(QtCore.QSize(80, 80))
+        FRAME.setMinimumSize(QtCore.QSize(0, 0))
         FRAME.setFrameShape(QtWidgets.QFrame.StyledPanel)
         FRAME.setFrameShadow(QtWidgets.QFrame.Raised)
 
@@ -498,7 +498,8 @@ class MainProgram(QMainWindow):
         "padding-bottom:10px;\n"
         "padding-right:10px;\n"
         "padding-left:20px;")
-
+        LABEL.setMinimumSize(QtCore.QSize(0, 80))
+        LABEL.setMaximumSize(QtCore.QSize(16777215, 80))
         font = QtGui.QFont()
         font.setFamily("Poppins")
         font.setPointSize(9)
@@ -509,7 +510,7 @@ class MainProgram(QMainWindow):
 
         FRAME.mousePressEvent = lambda event, trans_id=id: self.showData(trans_id)
 
-        self.ui.verticalLayout_18.addWidget(FRAME)
+        self.ui.verticalLayout_18.addWidget(FRAME, 0, QtCore.Qt.AlignVCenter)
 
     def Authentication(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.loginsignup)
