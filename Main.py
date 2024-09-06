@@ -208,6 +208,8 @@ class MainProgram(QMainWindow):
         self.ui.AN_backButton.clicked.connect(self.handleBackButton)
         self.ui.AN_forwardButton.clicked.connect(self.handleForwardButton)
 
+        self.ui.AN_askUs.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.chatBot))
+
         """
         Visualize
         """
@@ -227,7 +229,11 @@ class MainProgram(QMainWindow):
         self.ui.PF_logOut.clicked.connect(self.handleLogOut)
         self.ui.PF_deleteAccount.clicked.connect(self.handleDeleteAcc)
 
+        self.ui.PF_usernamePassword.setMouseTracking(True)
+        self.ui.PF_usernamePassword.mouseMoveEvent = self.showPassword
 
+    def showPassword(self):
+        pass
 
     def handleAddTransaction(self):
         item = self.ui.ID_inputTransaction.text()
@@ -323,6 +329,8 @@ class MainProgram(QMainWindow):
             deleteAccount(self.currentAcc)
             self.currentAcc = None
             self.accountChanged()
+
+            self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         else:
             return
 
