@@ -131,7 +131,6 @@ class MainProgram(QMainWindow):
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-
         self.currentAcc = None
         self.selectedTransactionID = None
 
@@ -277,7 +276,7 @@ class MainProgram(QMainWindow):
         addTransaction(self.currentAcc, item.title(), type, category, value, date)
 
         self.ui.ID_inputTransaction.clear()
-        self.ui.ID_dropdownType.clear()
+        self.ui.ID_dropdownType.setCurrentIndex(0)
         self.ui.ID_inputValue.clear()
 
         updateBalance(self.currentAcc)
