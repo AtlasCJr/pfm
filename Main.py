@@ -675,7 +675,9 @@ class MainProgram(QMainWindow):
         question = self.ui.userChatInput.text()
         self.ui.userChatInput.clear()
 
-        self.addChatFrame(question, False)
+        if(question == ""): return
+
+        self.addChatFrame(question, isBot=False)
         
         # addChats(self.currentAcc.username)
 
