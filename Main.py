@@ -224,6 +224,7 @@ class MainProgram(QMainWindow):
         self.ui.AB_PP.clicked.connect(lambda: webbrowser.open(f'file://{os.path.abspath("legal/PP.html")}'))
 
         self.ui.AB_namaJojo.clicked.connect(lambda: webbrowser.open("https://github.com/AtlasCJr"))
+        self.ui.AB_namaJojo.clicked.connect(lambda: webbrowser.open("https://www.linkedin.com/in/muhammadfarhanhanafi331104/"))
 
         """
         Chatbot
