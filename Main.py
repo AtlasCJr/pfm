@@ -270,7 +270,7 @@ class MainProgram(QMainWindow):
             self.ui.ID_errorMsg.setText("Date cannot be later than today.")
             return
         
-        category = 0 if type < 10 else 1
+        category = 0 if type <= 5 else 1
         value = int(value)
         date = date.strftime("%Y-%m-%d") + " " + time.strftime("%H:%M:%S")
 
@@ -927,8 +927,6 @@ class MainProgram(QMainWindow):
                 df = getTransaction(self.currentAcc)
                 self.ED = enrichData(df)
                 self.old_data = self.ED.old_data
-
-                print(self.ED.data.index[-1].year - self.ED.data.index[0].year)
 
                 if (self.ED.data.index[-1].year - self.ED.data.index[0].year) > 0:
                     self.ui.frame_20.show()
