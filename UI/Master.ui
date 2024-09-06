@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1483</width>
-    <height>869</height>
+    <height>870</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -486,7 +486,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="home">
           <property name="styleSheet">
@@ -1368,7 +1368,7 @@ QScrollBar::sub-page:vertical {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>767</width>
+                    <width>385</width>
                     <height>900</height>
                    </rect>
                   </property>
@@ -3541,7 +3541,7 @@ border: none;</string>
                    <x>0</x>
                    <y>0</y>
                    <width>1139</width>
-                   <height>624</height>
+                   <height>625</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -4316,7 +4316,7 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-431</y>
+                <y>0</y>
                 <width>968</width>
                 <height>1408</height>
                </rect>
@@ -4912,7 +4912,7 @@ QScrollBar::sub-page:vertical {
 }</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
-           <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+           <item>
             <widget class="QFrame" name="aboutFrame">
              <property name="minimumSize">
               <size>
@@ -4922,7 +4922,7 @@ QScrollBar::sub-page:vertical {
              </property>
              <property name="maximumSize">
               <size>
-               <width>1000</width>
+               <width>1200</width>
                <height>600</height>
               </size>
              </property>
@@ -5005,7 +5005,7 @@ QScrollBar::sub-page:vertical {
             </widget>
            </item>
            <item>
-            <spacer name="verticalSpacer_15">
+            <spacer name="verticalSpacer_2">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -5015,7 +5015,7 @@ QScrollBar::sub-page:vertical {
              <property name="sizeHint" stdset="0">
               <size>
                <width>20</width>
-               <height>20</height>
+               <height>40</height>
               </size>
              </property>
             </spacer>
@@ -5024,15 +5024,20 @@ QScrollBar::sub-page:vertical {
             <widget class="QScrollArea" name="scrollArea_5">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>1000</width>
                <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>16777215</width>
+               <width>1200</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton:hover {
+	text-decoration: underline;
+}</string>
              </property>
              <property name="widgetResizable">
               <bool>true</bool>
@@ -5041,9 +5046,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
-                <width>1197</width>
-                <height>878</height>
+                <y>-613</y>
+                <width>1168</width>
+                <height>1571</height>
                </rect>
               </property>
               <property name="maximumSize">
@@ -5053,6 +5058,12 @@ QScrollBar::sub-page:vertical {
                </size>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
                <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                 <widget class="QFrame" name="AB_aboutApp">
                  <property name="sizePolicy">
@@ -5135,21 +5146,118 @@ QScrollBar::sub-page:vertical {
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QLabel" name="AB_appDesc">
-                    <property name="font">
-                     <font>
-                      <family>Poppins</family>
-                     </font>
-                    </property>
+                   <widget class="QFrame" name="frame_13">
                     <property name="styleSheet">
-                     <string notr="true"/>
+                     <string notr="true">	background-color:rgb(42,43,48);</string>
                     </property>
-                    <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#ffffff;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;Personal Finance Manager helps you take control of your finances with an easy-to-use platform for tracking income, expenses, and savings. Set goals, visualize your data, and make informed decisions for a secure future. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;This app was developed by &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Jonathan Edward Charles De Fretes&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Davin Nazhif Wilviadli&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, and &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Muhammad Farhan Hanafi&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt; for the Control Laboratory Assistant program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
                     </property>
-                    <property name="wordWrap">
-                     <bool>true</bool>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
                     </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_32">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>5</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QLabel" name="AB_appDesc">
+                       <property name="font">
+                        <font>
+                         <family>Poppins</family>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600; color:#ffffff;&quot;&gt;ABOUT THE APP&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;Personal Finance Manager helps you take control of your finances with an easy-to-use platform for tracking income, expenses, and savings. Set goals, visualize your data, and make informed decisions for a secure future. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;This app was developed by &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Jonathan Edward Charles De Fretes&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Davin Nazhif Wilviadli&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt;, and &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ffffff;&quot;&gt;Muhammad Farhan Hanafi&lt;/span&gt;&lt;span style=&quot; font-size:9pt; color:#ffffff;&quot;&gt; for the Control Laboratory Assistant program at FTUI. The project is available on GitHub.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="wordWrap">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="linkFrame">
+                       <property name="styleSheet">
+                        <string notr="true">#linkFrame{
+	background-color:rgb(42,43,48);
+}
+QPushButton{
+	background-color:rgb(42,43,48);
+	color:#CCCCCC;
+	border-radius:15px;
+	height:30px;
+}
+QPushButton:hover {
+    text-decoration: underline;
+}</string>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QHBoxLayout" name="horizontalLayout_38">
+                        <property name="spacing">
+                         <number>0</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <widget class="QPushButton" name="AB_TOS">
+                          <property name="font">
+                           <font>
+                            <family>Poppins</family>
+                            <pointsize>9</pointsize>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Terms of Service</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="AB_PP">
+                          <property name="font">
+                           <font>
+                            <family>Poppins</family>
+                            <pointsize>9</pointsize>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Privacy Policy</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
                    </widget>
                   </item>
                   <item>
@@ -5183,8 +5291,14 @@ QScrollBar::sub-page:vertical {
                   <enum>QFrame::Raised</enum>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_24">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
                   <item alignment="Qt::AlignHCenter">
-                   <widget class="QLabel" name="label_8">
+                   <widget class="QLabel" name="AB_banner">
                     <property name="minimumSize">
                      <size>
                       <width>877</width>
@@ -5212,7 +5326,37 @@ QScrollBar::sub-page:vertical {
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="frame_26">
+                   <spacer name="verticalSpacer_11">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item alignment="Qt::AlignLeft">
+                   <widget class="QFrame" name="jojoFrame">
+                    <property name="minimumSize">
+                     <size>
+                      <width>700</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QFrame {
+background-color:#23272A;
+    border-top-right-radius: 60px; /* Top-right corner rounded */
+    border-bottom-right-radius: 60px; /* Bottom-right corner rounded */
+    padding: 10px; /* Optional padding */
+}</string>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
                     </property>
@@ -5221,16 +5365,66 @@ QScrollBar::sub-page:vertical {
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_22">
                      <item>
-                      <widget class="QLabel" name="label_10">
+                      <widget class="QLabel" name="AB_papJojo">
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">padding:10px;</string>
+                       </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap>../Assets/pap/Jojo.png</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_22">
+                      <spacer name="horizontalSpacer_30">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item alignment="Qt::AlignLeft">
+                      <widget class="QPushButton" name="AB_namaJojo">
+                       <property name="font">
+                        <font>
+                         <family>Poppins</family>
+                         <pointsize>16</pointsize>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color:#23272A;
+color:#CCCCCC;
+border-radius:15px;
+height:30px;
+</string>
+                       </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string>Jonathan Edward</string>
                        </property>
                       </widget>
                      </item>
@@ -5238,7 +5432,37 @@ QScrollBar::sub-page:vertical {
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="frame_27">
+                   <spacer name="verticalSpacer_19">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>5</width>
+                      <height>10</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item alignment="Qt::AlignRight">
+                   <widget class="QFrame" name="davinFrame">
+                    <property name="minimumSize">
+                     <size>
+                      <width>700</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QFrame {
+background-color: rgb(222, 191, 51);
+    border-top-left-radius: 60px; /* Top-right corner rounded */
+    border-bottom-left-radius: 60px; /* Bottom-right corner rounded */
+    padding: 10px; /* Optional padding */
+}</string>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
                     </property>
@@ -5246,17 +5470,69 @@ QScrollBar::sub-page:vertical {
                      <enum>QFrame::Raised</enum>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_23">
-                     <item>
-                      <widget class="QLabel" name="label_23">
+                     <item alignment="Qt::AlignRight">
+                      <widget class="QPushButton" name="AB_namaDavin">
+                       <property name="font">
+                        <font>
+                         <family>Poppins</family>
+                         <pointsize>16</pointsize>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">	background-color:rgb(222, 191, 51);
+	color:#23272A;
+	border-radius:15px;
+	height:30px;</string>
+                       </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string>Davin Nazhif Wilviadli</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_24">
+                      <spacer name="horizontalSpacer_47">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="AB_papDavin">
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">padding:10px;</string>
+                       </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap>../Assets/pap/Davin.png</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -5264,7 +5540,34 @@ QScrollBar::sub-page:vertical {
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="frame_28">
+                   <spacer name="verticalSpacer_20">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>10</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item alignment="Qt::AlignLeft">
+                   <widget class="QFrame" name="farhanFrame">
+                    <property name="minimumSize">
+                     <size>
+                      <width>700</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">QFrame {
+background-color:#23272A;
+    border-top-right-radius: 60px; /* Top-right corner rounded */
+    border-bottom-right-radius: 60px; /* Bottom-right corner rounded */
+    padding: 10px; /* Optional padding */
+}</string>
+                    </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
                     </property>
@@ -5273,16 +5576,65 @@ QScrollBar::sub-page:vertical {
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_24">
                      <item>
-                      <widget class="QLabel" name="label_25">
+                      <widget class="QLabel" name="AB_papFarhan">
+                       <property name="minimumSize">
+                        <size>
+                         <width>200</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>200</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">padding:10px;</string>
+                       </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap>../Assets/pap/farhan.png</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_26">
+                      <spacer name="horizontalSpacer_48">
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                       <property name="sizeType">
+                        <enum>QSizePolicy::Fixed</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>40</width>
+                         <height>20</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                     <item alignment="Qt::AlignLeft">
+                      <widget class="QPushButton" name="AB_namaFarhan">
+                       <property name="font">
+                        <font>
+                         <family>Poppins</family>
+                         <pointsize>16</pointsize>
+                        </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">background-color:#23272A;
+	color:#CCCCCC;
+	border-radius:15px;
+	height:30px;</string>
+                       </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string>Muhammad Farhan Hanafi</string>
                        </property>
                       </widget>
                      </item>
@@ -5610,8 +5962,8 @@ QComboBox QAbstractItemView {
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>268</width>
-                      <height>313</height>
+                      <width>137</width>
+                      <height>224</height>
                      </rect>
                     </property>
                     <property name="styleSheet">

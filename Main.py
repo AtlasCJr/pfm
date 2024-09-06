@@ -1,5 +1,7 @@
 import sys
 import os
+import webbrowser
+
 from datetime import datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QDateTime, Qt
@@ -178,7 +180,7 @@ class MainProgram(QMainWindow):
         self.ui.FP_inputUsername.returnPressed.connect(lambda: self.ui.FP_inputSecAnswer.setFocus())
         self.ui.FP_inputSecAnswer.returnPressed.connect(lambda: self.ui.FP_inputPassword1.setFocus())
         self.ui.FP_inputPassword1.returnPressed.connect(lambda: self.ui.FP_inputPassword2.setFocus())
-        self.ui.FP_inputPassword2.returnPressed.connect(lambda: self.ui.FP_buttonSavePW.click())
+        self.ui.FP_inputPassword2.returnPressed.connect(lambda: self.handleForgetPW)
 
         # Change Password
         self.ui.CP_buttonProfile.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))
@@ -213,6 +215,14 @@ class MainProgram(QMainWindow):
         """
         Visualize
         """
+
+        """
+        About
+        """
+        self.ui.AB_TOS.clicked.connect(lambda: webbrowser.open(f'file://{os.path.abspath("legal/TOS.html")}'))
+        self.ui.AB_PP.clicked.connect(lambda: webbrowser.open(f'file://{os.path.abspath("legal/PP.html")}'))
+
+        self.ui.AB_namaJojo.clicked.connect(lambda: webbrowser.open("https://github.com/AtlasCJr"))
 
         """
         Chatbot
@@ -268,8 +278,8 @@ class MainProgram(QMainWindow):
         self.ui.ID_dropdownType.clear()
         self.ui.ID_inputValue.clear()
 
-        self.currentAcc = getAccount(self.currentAcc.username)
         updateBalance(self.currentAcc)
+        self.currentAcc = getAccount(self.currentAcc.username)
         self.accountChanged()
 
     def handleDeleteTransaction(self):
@@ -325,8 +335,8 @@ class MainProgram(QMainWindow):
             self.ui.ED_Type.setCurrentIndex(0)
             self.ui.ED_Value.clear()
 
-            self.currentAcc = getAccount(self.currentAcc.username)
             updateBalance(self.currentAcc)
+            self.currentAcc = getAccount(self.currentAcc.username)
             self.accountChanged()
             self.searchData()
         else:
@@ -750,7 +760,10 @@ class MainProgram(QMainWindow):
             padding-bottom: 20px;
             border-radius: 25px;
         """)
-        LABEL.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        if isBot:
+            LABEL.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        else:
+            LABEL.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         LABEL.setWordWrap(True)
         LABEL.setText(f"<html><head/><body><p><span style=\" font-size:11pt;\">{text}</span></p></body></html>")
         LAYOUT.addWidget(LABEL)
