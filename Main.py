@@ -143,6 +143,8 @@ class MainProgram(QMainWindow):
 
         self.graphIndex = [0]
 
+        self.addChatFrame("Hello there! How may I assist you today?", True)
+
         """
         Header
         """
@@ -708,16 +710,17 @@ class MainProgram(QMainWindow):
 
     def addChatFrame(self, text:str, isBot:bool):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
-        FRAME.setSizePolicy(sizePolicy)
-        FRAME.setMinimumSize(QtCore.QSize(1000, 0))
-        FRAME.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        FRAME.setStyleSheet("background-color: rgb(42, 43, 48); ")
         FRAME.setFrameShape(QtWidgets.QFrame.StyledPanel)
         FRAME.setFrameShadow(QtWidgets.QFrame.Raised)
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
+        # FRAME.setSizePolicy(sizePolicy)
+        # FRAME.setMinimumSize(QtCore.QSize(1000, 0))
+        # FRAME.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        # FRAME.setStyleSheet("background-color: rgb(42, 43, 48); ")
+
         
         LAYOUT = QtWidgets.QHBoxLayout(FRAME)
         LAYOUT.setContentsMargins(0, -1, 0, -1)
@@ -734,20 +737,21 @@ class MainProgram(QMainWindow):
             LOGO.setScaledContents(True)
             LAYOUT.addWidget(LOGO)
 
-            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+            SPACERS = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
         else:
-            SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+            SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
 
         LABEL = QtWidgets.QLabel(FRAME)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(LABEL.sizePolicy().hasHeightForWidth())
         LABEL.setSizePolicy(sizePolicy)
-        LABEL.setMinimumSize(QtCore.QSize(0, 50))
-        LABEL.setMaximumSize(QtCore.QSize(4000, 16777215))
+        LABEL.setMinimumSize(QtCore.QSize(0, 0))
+        LABEL.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        LABEL.setSizeIncrement(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setFamily("Poppins")
         LABEL.setFont(font)
@@ -769,10 +773,10 @@ class MainProgram(QMainWindow):
         LAYOUT.addWidget(LABEL)
 
         if isBot:
-            SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+            SPACERS = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
         else:
-            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+            SPACERS = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
             LAYOUT.addItem(SPACERS)
 
             LOGO =  QtWidgets.QLabel(FRAME)
@@ -782,6 +786,9 @@ class MainProgram(QMainWindow):
             LOGO.setPixmap(QtGui.QPixmap("UI\\../Assets/chatbot/user2-blue.png"))
             LOGO.setScaledContents(True)
             LAYOUT.addWidget(LOGO)
+
+            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+            LAYOUT.addItem(SPACERS)
 
         self.ui.verticalLayout_9.addWidget(FRAME)
         self.ui.chatHandle.verticalScrollBar().setValue(self.ui.chatHandle.verticalScrollBar().maximum())
