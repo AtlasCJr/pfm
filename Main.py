@@ -302,8 +302,6 @@ class MainProgram(QMainWindow):
 
             editTransaction(self.currentAcc, self.selectedTransactionID, item, type, category, value, date)
 
-            print("changed")
-
             self.ui.ED_Item.clear()
             self.ui.ED_Type.setCurrentIndex(0)
             self.ui.ED_Value.clear()
@@ -399,8 +397,6 @@ class MainProgram(QMainWindow):
                 question += f"\n{title} {start + i}\n"
             question += f"Revenue: {formatNumber(x[0])}\n"
             question += f"Expense: {formatNumber(x[1])}\n"
-
-        print(question)
 
         self.botChat = botChat(question)
         self.botChat.resultReady.connect(self.analyzeGraph3)
@@ -674,7 +670,8 @@ class MainProgram(QMainWindow):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
         FRAME.setSizePolicy(sizePolicy)
-        FRAME.setMaximumSize(QtCore.QSize(1000, 16777215))
+        FRAME.setMinimumSize(QtCore.QSize(1000, 0))
+        FRAME.setMaximumSize(QtCore.QSize(16777215, 16777215))
         FRAME.setStyleSheet("background-color: rgb(42, 43, 48); ")
         FRAME.setFrameShape(QtWidgets.QFrame.StyledPanel)
         FRAME.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -893,10 +890,11 @@ class MainProgram(QMainWindow):
             self.ED = enrichData(df)
             self.old_data = self.ED.old_data
 
-        if (self.ED.data.index[-1].year - self.ED.data.index[0].year) > 0:
-            self.ui.frame_20.show()
-        else:
-            self.ui.frame_20.hide()
+        if self.ED:
+            if (self.ED.data.index[-1].year - self.ED.data.index[0].year) > 0:
+                self.ui.frame_20.show()
+            else:
+                self.ui.frame_20.hide()
 
         self.ui.usernameHandle.setText(f"{self.currentAcc.username}")
 
