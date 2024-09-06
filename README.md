@@ -39,7 +39,7 @@ To get started with the project, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/personal-finance-manager.git
+    git clone https://github.com/AtlasCJr/pfm.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -57,7 +57,7 @@ To get started with the project, follow these steps:
 ## Contributors
 
 <h4>
-• <a href="https://github.com/AtlasCJr">Jonathan Edward</a><br/>
+• <a href="https://github.com/AtlasCJr">Jonathan Edward Charles</a><br/>
 • <a href="https://github.com/PinZapPin">Davin Nazhif Wilviadli</a><br/>
 • <a href="https://github.com/farhanhanafi">Muhammad Farhan Hanafi</a><br/>
 </h4>
