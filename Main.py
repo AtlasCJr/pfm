@@ -175,7 +175,7 @@ class MainProgram(QMainWindow):
         self.ui.SI_buttonSI.clicked.connect(self.handleSignIn)                                                                  # Sign In
 
         # Forget Password
-        self.ui.FP_buttonSavePW.clicked.connect(lambda: self.handleForgetPW)
+        self.ui.FP_buttonSavePW.clicked.connect(self.handleForgetPW)
         self.ui.FP_buttonLogIn.clicked.connect(lambda: self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage))          # FP -> Login
 
         self.ui.FP_inputUsername.returnPressed.connect(lambda: self.ui.FP_inputSecAnswer.setFocus())
@@ -184,8 +184,8 @@ class MainProgram(QMainWindow):
         self.ui.FP_inputPassword2.returnPressed.connect(lambda: self.handleForgetPW)
 
         # Change Password
-        self.ui.CP_buttonProfile.clicked.connect(lambda: self.ui.setCurrentWidget(self.ui.profile))
-        self.ui.CP_buttonSavePW.clicked.connect(lambda: self.handleChangePW)                                                    # Change Password
+        self.ui.CP_buttonProfile.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.profile))
+        self.ui.CP_buttonSavePW.clicked.connect(self.handleChangePW)                                                            # Change Password
 
         self.ui.CP_inputSecAnswer.returnPressed.connect(lambda: self.ui.CP_inputPassword1.setFocus())
         self.ui.CP_inputPassword1.returnPressed.connect(lambda: self.ui.CP_inputPassword2.setFocus())
@@ -631,8 +631,6 @@ class MainProgram(QMainWindow):
 
         password1 = self.ui.FP_inputPassword1.text()
         password2 = self.ui.FP_inputPassword2.text()
-    
-        print("1")
 
         if password1 == "" or password2 == "":
             self.ui.FP_errorMsg.setText("Password cannot be empty.")
@@ -647,19 +645,15 @@ class MainProgram(QMainWindow):
             self.ui.FP_errorMsg.setText("The typed password doesn't match.")
             return
 
-        print("2")
-
         if checkSecurity(username, sec_a.lower()):
-            print("3")
             self.ui.FP_errorMsg.clear()
 
             thisAcc = getAccount(username)
             thisAcc.password = password1
             editAccount(thisAcc)
 
-            self.ui.stackedWidget.setCurrentWidget(self.ui.loginPage)
+            self.ui.innerstackedWidget.setCurrentWidget(self.ui.loginPage)
         else:
-            print("4")
             self.ui.CP_errorMsg.setText("Wrong security answer.")
 
     def handleChangePW(self):
@@ -688,7 +682,7 @@ class MainProgram(QMainWindow):
             editAccount(self.currentAcc)
             self.accountChanged()
 
-            self.ui.setCurrentWidget(self.ui.profile)
+            self.ui.stackedWidget.setCurrentWidget(self.ui.profile)
         else:
             self.ui.CP_errorMsg.setText("Wrong security answer.")
 

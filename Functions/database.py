@@ -98,22 +98,22 @@ def addAccount(account:Account) -> None:
 
         conn.commit()
 
-        addLog("Account added successfully")
+        addLog(f"Account {account.username} added successfully")
 
         # Add account to online database
-        dc._addAccount(account)
-        if dc._addAccount(account):
-            conn.close()
-            addLog("Account added in online successfully")
-        else:
-            conn.rollback()
-            conn.close()
-            addLog("Failed added account in online")
+        # dc._addAccount(account)
+        # if dc._addAccount(account):
+        #     conn.close()
+        #     addLog("Account added in online successfully")
+        # else:
+        #     conn.rollback()
+        #     conn.close()
+        #     addLog("Failed added account in online")
 
     except sqlite3.IntegrityError:
         conn.rollback()
         conn.close()
-        addLog("Failed added account : Username already exists")
+        addLog(f"Failed added account {account.username}: Username already exists")
 
 def checkAccount(username:str, password:str) -> bool:
     """
@@ -184,7 +184,7 @@ def updateBalance(account:Account)-> None:
         conn.commit()
         conn.close()
 
-        addLog("Balance updated successfully")
+        addLog(f"Balance {account.username} updated successfully")
 
         # Update online database
         # if dc._updateBalance(account.username, new_balance):
@@ -193,7 +193,7 @@ def updateBalance(account:Account)-> None:
         #     addLog("Error updating balance in online")
 
     except Exception as e:
-        addLog(f"Error updating balance: {str(e)}")
+        addLog(f"Error updating balance {account.username}: {str(e)}")
 
 def getAccount(username:str) -> Account:
     """
@@ -239,16 +239,16 @@ def editAccount(account:Account) -> None:
         conn.commit()
         conn.close()
 
-        addLog("Account information updated successfully")
+        addLog(f"Account {account.username} updated successfully")
 
         #Update online database
-        dc._editAccount(account)
-        if dc._editAccount(account):
-            addLog("Account information updated in online successfully")
-        else:
-            addLog("Error updating account information in online")
+        # dc._editAccount(account)
+        # if dc._editAccount(account):
+        #     addLog("Account information updated in online successfully")
+        # else:
+        #     addLog("Error updating account information in online")
     except Exception as e:
-        addLog(f"Error updating account information: {str(e)}")
+        addLog(f"Error updating account information {account.username}: {str(e)}")
 
 def deleteAccount(account:Account) -> None:
     """
@@ -267,16 +267,16 @@ def deleteAccount(account:Account) -> None:
         conn.commit()
         conn.close()
 
-        addLog("Account deleted successfully")
+        addLog(f"Account {account.username} deleted successfully")
 
         # Delete account from online database
-        dc._deleteAccount(account.username)
-        if dc._deleteAccount(account.username):
-            addLog("Account deleted in online successfully")
-        else:
-            addLog("Error deleting account in online")
+        # dc._deleteAccount(account.username)
+        # if dc._deleteAccount(account.username):
+        #     addLog("Account deleted in online successfully")
+        # else:
+        #     addLog("Error deleting account in online")
     except Exception as e:
-        addLog(f"Error deleting account: {str(e)}")
+        addLog(f"Error deleting account {account.username}: {str(e)}")
 
 def isUsernameAvailable(username:str) -> bool:
     conn = sqlite3.connect("DB.db")
@@ -422,7 +422,7 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
 
         conn.commit()
 
-        addLog("Transaction added successfully")
+        addLog(f"Transaction {id} added successfully")
 
         # # Add transaction to online database
         # _addTransaction(id, account.username, item, type, category, value, created_at, updated_at)
@@ -475,7 +475,7 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
         conn.commit()
         conn.close()
 
-        addLog("Transaction edited successfully")
+        addLog(f"Transaction {transaction_id} edited successfully")
 
         # Update transaction in online database
         # _editTransaction(account.username, transaction_id, item, type, category, value, created_at, updated_at)
@@ -484,7 +484,7 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
         # else:
         #     addLog("Error updating transaction information in online")
     except Exception as e:
-        addLog(f"Error edited transaction information: {str(e)}")
+        addLog(f"Error edited transaction {transaction_id} information: {str(e)}")
 
 def deleteTransaction(account:Account, transaction_id:str) -> None:
     """
@@ -511,7 +511,7 @@ def deleteTransaction(account:Account, transaction_id:str) -> None:
         conn.commit()
         conn.close()
 
-        addLog("Transaction deleted successfully")
+        addLog(f"Transaction {transaction_id} deleted successfully")
 
         # # Delete transaction from online database
         # dc._deleteTransaction(account.username, transaction_id)
@@ -520,7 +520,7 @@ def deleteTransaction(account:Account, transaction_id:str) -> None:
         # else:
         #     addLog("Error deleting transaction in online")
     except Exception as e:
-        addLog(f"Error deleting transaction: {str(e)}")
+        addLog(f"Error deleting transaction {transaction_id}: {str(e)}")
 
 # Log functions
 def addLog(message: str) -> None:
