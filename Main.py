@@ -284,28 +284,48 @@ class MainProgram(QMainWindow):
             self.ui.ED_Value.clear()
 
             self.currentAcc = getAccount(self.currentAcc.username)
+            updateBalance(self.currentAcc)
             self.accountChanged()
             self.searchData()
         else:
             return
 
     def handleUpdateTransaction(self):
+        item = self.ui.ED_Item.text()
+        type = self.ui.ED_Type.currentIndex()
+        category = 0 if type < 10 else 1
+        value = self.ui.ED_Value.text()
+        date = self.ui.ED_Date.dateTime().toPyDateTime()
+
+        if item == "":
+            self.ui.ED_ErrorMsg.setText("Item name cannot be empty.")
+            return
+        try: int(value)
+        except Exception:
+            self.ui.ED_ErrorMsg.setText("Value cannot be converted to int. Please input numbers only.")
+            return
+        if int(value) < 0:
+            self.ui.ED_ErrorMsg.setText("Value cannot be negative.")
+            return
+        
+        if date.date() > datetime.now().date():
+            self.ui.ED_ErrorMsg.setText("Date cannot be later than today.")
+            return
+        
+    
         alert = Alert("You are about to change your chosen transaction.")
         answer = alert.getResult()
 
         if answer:
-            item = self.ui.ED_Item.text()
-            type = self.ui.ED_Type.currentIndex()
-            category = 0 if type < 10 else 1
-            value = self.ui.ED_Value.text()
-            date = self.ui.ED_Date.dateTime().toPyDateTime().strftime("%Y-%m-%d %H:%M:%S")
-
+            date = date.strftime("%Y-%m-%d %H:%M:%S")
             editTransaction(self.currentAcc, self.selectedTransactionID, item, type, category, value, date)
 
+            self.ui.ED_ErrorMsg.clear()
             self.ui.ED_Item.clear()
             self.ui.ED_Type.setCurrentIndex(0)
             self.ui.ED_Value.clear()
 
+            self.currentAcc = getAccount(self.currentAcc.username)
             updateBalance(self.currentAcc)
             self.accountChanged()
             self.searchData()
