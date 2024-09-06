@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1483</width>
+    <width>1524</width>
     <height>869</height>
    </rect>
   </property>
@@ -4156,9 +4156,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>-510</y>
+                <y>0</y>
                 <width>968</width>
-                <height>1305</height>
+                <height>816</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -4241,8 +4241,8 @@ border-radius:15px;
                    <widget class="QWidget" name="VI_Graph1" native="true">
                     <property name="minimumSize">
                      <size>
-                      <width>500</width>
-                      <height>150</height>
+                      <width>0</width>
+                      <height>0</height>
                      </size>
                     </property>
                     <property name="styleSheet">
@@ -4414,8 +4414,8 @@ border-radius:15px;
                    <widget class="QWidget" name="VI_Graph2" native="true">
                     <property name="minimumSize">
                      <size>
-                      <width>500</width>
-                      <height>150</height>
+                      <width>0</width>
+                      <height>0</height>
                      </size>
                     </property>
                     <property name="styleSheet">
@@ -4516,7 +4516,7 @@ padding: 10px;</string>
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>300</height>
+                      <height>0</height>
                      </size>
                     </property>
                     <property name="baseSize">
@@ -4768,7 +4768,7 @@ QScrollBar::sub-page:vertical {
 }</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
-           <item>
+           <item alignment="Qt::AlignHCenter">
             <widget class="QFrame" name="aboutFrame">
              <property name="minimumSize">
               <size>
@@ -4876,7 +4876,7 @@ QScrollBar::sub-page:vertical {
              </property>
             </spacer>
            </item>
-           <item>
+           <item alignment="Qt::AlignHCenter">
             <widget class="QScrollArea" name="scrollArea_5">
              <property name="minimumSize">
               <size>
@@ -4903,7 +4903,7 @@ QScrollBar::sub-page:vertical {
                <rect>
                 <x>0</x>
                 <y>-613</y>
-                <width>1168</width>
+                <width>968</width>
                 <height>1571</height>
                </rect>
               </property>

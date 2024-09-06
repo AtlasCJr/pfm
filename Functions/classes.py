@@ -114,12 +114,12 @@ class enrichedData:
             curData = self.data[self.data['Features', RANGE2] == last_data]
             curData = curData.groupby(self.data['Features'][RANGE1]).sum()
 
-            canvas.ax.text(0.5, 1.01, f"{RANGE2.title()} {last_data}", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=15)
+            # canvas.ax.text(0.5, 1.01, f"{RANGE2.title()} {last_data}", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=15)
         else:
             curData = self.data.groupby(self.data['Features']['YEAR']).sum()
             last_data = curData.index[-1]
 
-            canvas.ax.text(0.5, 1.04, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
+            # canvas.ax.text(0.5, 1.04, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
 
         canvas.ax.set_xlabel('')
         canvas.ax.set_title("Complete Plot", pad=20)
@@ -149,10 +149,11 @@ class enrichedData:
         canvas.ax.set_yticklabels(yticks_labels)
 
         canvas.ax.set_ylabel(f"{powerMapping.get(power, '')} Rp.")
+        canvas.ax.text(0.5, 1.04, f"All Year (Scaled {powerMapping.get(power, '')} Rp.)", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
+
 
         canvas.ax.grid(True)
         canvas.fig.tight_layout()
-
 
         canvas.draw()
 
@@ -220,7 +221,7 @@ class enrichedData:
 
         canvas.ax.set_ylabel(f"{powerMapping.get(power, '')} Rp.")
 
-        canvas.ax.text(0.5, 1.04, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
+        canvas.ax.text(0.5, 1.04, f"All Year (Scaled {powerMapping.get(power, '')} Rp.)", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
         canvas.ax.grid(True)
         canvas.fig.tight_layout()
         canvas.draw()
@@ -316,6 +317,8 @@ class enrichedData:
         canvas.ax.set_yticks(yticks_values) 
         canvas.ax.set_yticklabels(yticks_labels)
         canvas.ax.set_ylabel(f"{powerMapping.get(power, '')} Rp.")
+
+        canvas.ax.text(0.5, 1.04, f"Scaled ({powerMapping.get(power, '')} Rp.)", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
 
         canvas.fig.tight_layout()
         canvas.draw()
