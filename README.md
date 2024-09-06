@@ -4,9 +4,9 @@ A personal finance manager (PFM) is a tool or software designed to help individu
 
 #### Created By
 <h4> 
-• <a href="https://github.com/AtlasCJr">Jonathan Edward</a>
-• <a href="https://github.com/PinZapPin">Davin Nazhif Wilviadli</a>
-• <a href="https://github.com/farhanhanafi">Muhammad Farhan Hanafi</a>
+• <a href="https://github.com/AtlasCJr">Jonathan Edward</a><br/>
+• <a href="https://github.com/PinZapPin">Davin Nazhif Wilviadli</a><br/>
+• <a href="https://github.com/farhanhanafi">Muhammad Farhan Hanafi</a><br/>
 </h4>
 
 #### Features
@@ -15,6 +15,7 @@ A personal finance manager (PFM) is a tool or software designed to help individu
 - Internal model prediction
 - Internal chatbot
 
+#### Language Used
 <p align="center">
     <a href="https://github.com/search?q=user%3ADenverCoder1+language%3Acss"><img alt="CSS" src="https://img.shields.io/badge/CSS-1572B6.svg?logo=css3&logoColor=white"></a>
     <a href="https://github.com/search?q=user%3ADenverCoder1+language%3Ahtml"><img alt="HTML" src="https://img.shields.io/badge/HTML-E34F26.svg?logo=html5&logoColor=white"></a>

@@ -187,10 +187,10 @@ def updateBalance(account:Account)-> None:
         addLog("Balance updated successfully")
 
         # Update online database
-        if dc._updateBalance(account.username, new_balance):
-            addLog("Balance updated in online successfully")
-        else:
-            addLog("Error updating balance in online")
+        # if dc._updateBalance(account.username, new_balance):
+        #     addLog("Balance updated in online successfully")
+        # else:
+        #     addLog("Error updating balance in online")
 
     except Exception as e:
         addLog(f"Error updating balance: {str(e)}")

@@ -738,9 +738,6 @@ class MainProgram(QMainWindow):
             LOGO.setScaledContents(True)
             LAYOUT.addWidget(LOGO)
 
-            SPACERS = QtWidgets.QSpacerItem(7, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-            LAYOUT.addItem(SPACERS)
-
         self.ui.verticalLayout_9.addWidget(FRAME)
         self.ui.chatHandle.verticalScrollBar().setValue(self.ui.chatHandle.verticalScrollBar().maximum())
     
@@ -893,6 +890,11 @@ class MainProgram(QMainWindow):
             df = getTransaction(self.currentAcc)
             self.ED = enrichData(df)
             self.old_data = self.ED.old_data
+
+        if (self.ED.data.index[-1].year - self.ED.data.index[0].year) > 0:
+            self.ui.frame_20.show()
+        else:
+            self.ui.frame_20.hide()
 
         self.ui.usernameHandle.setText(f"{self.currentAcc.username}")
 
