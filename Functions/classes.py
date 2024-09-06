@@ -122,7 +122,6 @@ class enrichedData:
             canvas.ax.text(0.5, 1.04, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
 
         canvas.ax.set_xlabel('')
-        canvas.ax.set_ylabel("Rp.")
         canvas.ax.set_title("Complete Plot", pad=20)
     
         curData['Expenses']['TOTAL'].cumsum().plot(ax=canvas.ax, label='Cumulative Expenses', alpha=0.6, linewidth=2)
@@ -132,15 +131,29 @@ class enrichedData:
         if RANGE1 == "YEAR":
             canvas.ax.set_xticks(curData.index)
             canvas.ax.set_xticklabels([int(year) for year in curData.index])
-
-        def format_y(value, tick_number):
-            return f'{value / 1e8:.1f}e8'
-
-        canvas.ax.yaxis.set_major_formatter(FuncFormatter(format_y))
     
         canvas.ax.legend()
+
+        max_value = max(
+            curData['TOTAL'].cumsum().max(),
+            curData['Expenses']['TOTAL'].cumsum().max(),
+            curData['Revenue']['TOTAL'].cumsum().max()
+        )
+
+        power = np.floor(np.log10(max_value)).astype(int)
+
+        yticks_values = np.arange(0, max_value + 10**power, 10**power / 4)
+        yticks_labels = [f'{tick / 10**power:.1f}' for tick in yticks_values]
+
+        canvas.ax.set_yticks(yticks_values)
+        canvas.ax.set_yticklabels(yticks_labels)
+
+        canvas.ax.set_ylabel(f"{powerMapping.get(power, '')} Rp.")
+
         canvas.ax.grid(True)
         canvas.fig.tight_layout()
+
+
         canvas.draw()
 
         if parent is not None:
@@ -194,6 +207,18 @@ class enrichedData:
         canvas.ax.set_title('Expenses by Type', pad=20)
         canvas.ax.set_xticks(range(len(byType['TYPE_LABEL'])))
         canvas.ax.set_xticklabels(byType['TYPE_LABEL'], rotation=45, ha='right')
+
+        max_value = byType['VALUE'].max()
+        power = np.floor(np.log10(max_value)).astype(int)
+        
+        yticks_values = np.arange(0, max_value + 10**power, 10**power / 4)
+
+        yticks_labels = [f'{tick / 10**power:.1f}' for tick in yticks_values]
+
+        canvas.ax.set_yticks(yticks_values) 
+        canvas.ax.set_yticklabels(yticks_labels)
+
+        canvas.ax.set_ylabel(f"{powerMapping.get(power, '')} Rp.")
 
         canvas.ax.text(0.5, 1.04, f"All Year", ha='center', va='center', transform=canvas.ax.transAxes, fontsize=10)
         canvas.ax.grid(True)
@@ -278,6 +303,20 @@ class enrichedData:
 
         canvas.ax.grid(True)
         canvas.ax.legend()
+
+        max_value = max(
+            cur_data[('Expenses', 'TOTAL')].cumsum().max(),
+            cur_data[('Revenue', 'TOTAL')].cumsum().max(),
+        )
+
+        power = np.floor(np.log10(max_value)).astype(int)
+        yticks_values = np.arange(0, max_value/1.5, 10**power/4)
+        yticks_labels = [f'{tick / 10**power:.1f}' for tick in yticks_values]
+
+        canvas.ax.set_yticks(yticks_values) 
+        canvas.ax.set_yticklabels(yticks_labels)
+        canvas.ax.set_ylabel(f"{powerMapping.get(power, '')} Rp.")
+
         canvas.fig.tight_layout()
         canvas.draw()
 

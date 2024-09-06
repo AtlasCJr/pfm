@@ -50,3 +50,19 @@ quarterMapping = {
     3: "Q3 (Jul–Sep)",
     4: "Q4 (Oct–Dec)"
 }
+
+powerMapping = {
+    0: "",
+    1: "10",
+    2: "100",
+    3: "1 Thousand",
+    4: "10 Thousand",
+    5: "100 Thousand",
+    6: "1 Million",
+    7: "10 Million",
+    8: "100 Million",
+    9: "1 Billion",
+    10: "10 Billion",
+    11: "100 Billion",
+    12: "1 Trillion"
+}

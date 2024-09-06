@@ -486,7 +486,7 @@ text-align: left;</string>
        <item row="0" column="0">
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>4</number>
+          <number>6</number>
          </property>
          <widget class="QWidget" name="home">
           <property name="styleSheet">
@@ -4156,9 +4156,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
+                <y>-510</y>
                 <width>968</width>
-                <height>1408</height>
+                <height>1305</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -4241,8 +4241,8 @@ border-radius:15px;
                    <widget class="QWidget" name="VI_Graph1" native="true">
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
-                      <height>200</height>
+                      <width>500</width>
+                      <height>150</height>
                      </size>
                     </property>
                     <property name="styleSheet">
@@ -4277,7 +4277,7 @@ border-radius:15px;
                     <property name="font">
                      <font>
                       <family>Poppins</family>
-                      <pointsize>9</pointsize>
+                      <pointsize>8</pointsize>
                      </font>
                     </property>
                     <property name="styleSheet">
@@ -4377,7 +4377,7 @@ border-radius:15px;
                     <property name="font">
                      <font>
                       <family>Poppins</family>
-                      <pointsize>9</pointsize>
+                      <pointsize>8</pointsize>
                      </font>
                     </property>
                     <property name="styleSheet">
@@ -4414,8 +4414,8 @@ border-radius:15px;
                    <widget class="QWidget" name="VI_Graph2" native="true">
                     <property name="minimumSize">
                      <size>
-                      <width>0</width>
-                      <height>200</height>
+                      <width>500</width>
+                      <height>150</height>
                      </size>
                     </property>
                     <property name="styleSheet">
@@ -4636,11 +4636,27 @@ padding: 10px;</string>
                    </widget>
                   </item>
                   <item>
+                   <spacer name="horizontalSpacer_16">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QLabel" name="VI_LGraph3">
                     <property name="font">
                      <font>
                       <family>Poppins</family>
-                      <pointsize>9</pointsize>
+                      <pointsize>8</pointsize>
                      </font>
                     </property>
                     <property name="styleSheet">
