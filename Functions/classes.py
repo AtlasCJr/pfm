@@ -42,7 +42,7 @@ class Account:
         print(f"{'Date Updated':>15}: {self.updated_at}")
         print(f"{'Balance':>15}: {self.balance}")
 
-class botWorker(QThread):
+class botChat(QThread):
     resultReady = pyqtSignal(str)
 
     def __init__(self, question):

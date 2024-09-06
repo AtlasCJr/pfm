@@ -95,8 +95,8 @@ def enrichData(df: pd.DataFrame) -> enrichedData:
         
         return int(np.ceil(adjusted_dom / 7.0))
 
-    df['UPDATED_AT'] = pd.to_datetime(df['UPDATED_AT'])
-    df = df.drop(columns=['CREATED_AT', 'TRANSACTION_ID', 'ITEM', 'USERNAME']).set_index('UPDATED_AT').sort_index()
+    df['CREATED_AT'] = pd.to_datetime(df['CREATED_AT'])
+    df = df.drop(columns=['UPDATED_AT', 'TRANSACTION_ID', 'ITEM', 'USERNAME']).set_index('CREATED_AT').sort_index()
     
     
     expenses = pd.concat([

@@ -2,7 +2,10 @@ import google.generativeai as genai
 
 
 def getBotAnswer(message:str) -> str:
-    genai.configure(api_key="AIzaSyB5iU1LJKRpeJWYsGpFiYW7jXiXZiiirV4")
+    with open('other/API.key', 'r') as file:
+        api_key = file.read().strip()
+
+    genai.configure(api_key=api_key)
 
     generation_config = {
         "temperature": 0.0,

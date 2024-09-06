@@ -159,7 +159,7 @@ def checkSecurity(username:str, security_question:int, security_answer:str) -> b
     else:
         return security_question == row[2] and sha256(security_answer.encode()).hexdigest() == row[3]
     
-def updateBalance(account:Account, new_balance:int)-> None:
+def updateBalance(account:Account)-> None:
     """
     Updates the balance of a user account.
     """
@@ -168,9 +168,17 @@ def updateBalance(account:Account, new_balance:int)-> None:
     cursor = conn.cursor()
 
     try:
+        df = getTransaction(account)
+        new_balance = 0
+        for _, row in df.iterrows():
+            if row['CATEGORY'] == 0:
+                new_balance -= row['VALUE']
+            else:
+                new_balance += row['VALUE']
+
         cursor.execute(
-            "UPDATE accounts SET BALANCE = ?, UPDATED_AT = ?, WHERE USERNAME = ?", 
-            (new_balance, datetime.now().strftime("%Y-%m-%d %H:%M:%S"), account.username)
+            "UPDATE accounts SET BALANCE = ? WHERE USERNAME = ?", 
+            (new_balance, account.username)
         )
 
         conn.commit()
@@ -399,9 +407,6 @@ def addTransaction(account:Account, item: str, type:int, category: int, value: i
         conn = sqlite3.connect("DB.db")
         cursor = conn.cursor()
         id = str(randomID())
-
-        new_balance = account.balance + (value if category == 1 else -value)
-        updateBalance(account, new_balance)
 
         updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         cursor.execute(

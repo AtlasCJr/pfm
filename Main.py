@@ -10,7 +10,7 @@ from UI.loadingScreen import Ui_loadingScreen
 from UI.Alert import Ui_Alert
 
 from Functions.database import *
-from Functions.classes import Account, botWorker
+from Functions.classes import Account, botChat
 from Functions.data_analysis import *
 from Functions.others import *
 from Functions.dicts import *
@@ -136,6 +136,7 @@ class MainProgram(QMainWindow):
         try: self.currentAcc = getLastUser()
         except Exception: pass
 
+        updateBalance(self.currentAcc)
         self.accountChanged()
 
         self.graphIndex = [0]
@@ -197,7 +198,7 @@ class MainProgram(QMainWindow):
         """
         Edit
         """
-        self.ui.calendarWidget.selectionChanged.connect(self.searchData)
+        self.ui.ED_calendarWidget.selectionChanged.connect(self.searchData)
         self.ui.ED_updateButton.clicked.connect(self.handleUpdateTransaction)
         self.ui.ED_deleteButton.clicked.connect(self.handleDeleteTransaction)
 
@@ -268,6 +269,7 @@ class MainProgram(QMainWindow):
         self.ui.ID_inputValue.clear()
 
         self.currentAcc = getAccount(self.currentAcc.username)
+        updateBalance(self.currentAcc)
         self.accountChanged()
 
     def handleDeleteTransaction(self):
@@ -306,6 +308,7 @@ class MainProgram(QMainWindow):
             self.ui.ED_Type.setCurrentIndex(0)
             self.ui.ED_Value.clear()
 
+            updateBalance(self.currentAcc)
             self.accountChanged()
             self.searchData()
         else:
@@ -350,9 +353,9 @@ class MainProgram(QMainWindow):
                 question += f"{txt}: {formatNumber(data[i][j])}\n"
                 question += f"{txt}: {formatNumber(data[i][j])}\n"
 
-        self.botWorker = botWorker(question)
-        self.botWorker.resultReady.connect(self.analyzeGraph1)
-        self.botWorker.start()
+        self.botChat = botChat(question)
+        self.botChat.resultReady.connect(self.analyzeGraph1)
+        self.botChat.start()
 
         """
         Graph 2
@@ -364,9 +367,9 @@ class MainProgram(QMainWindow):
         for x in data:
             question += f"{x[0]}: {formatNumber(int(x[1]))}\n"
 
-        self.botWorker = botWorker(question)
-        self.botWorker.resultReady.connect(self.analyzeGraph2)
-        self.botWorker.start()
+        self.botChat = botChat(question)
+        self.botChat.resultReady.connect(self.analyzeGraph2)
+        self.botChat.start()
 
         """
         Graph 3
@@ -392,12 +395,14 @@ class MainProgram(QMainWindow):
                 question += f"\n{time_dict.get(i + (start if start is not None else 0) + (1 if title != 'Day' else 0), 'Default Value')}\n"
             else:
                 question += f"\n{title} {start + i}\n"
-            question += f"Expense: {formatNumber(x[0])}\n"
-            question += f"Revenue: {formatNumber(x[1])}\n"
+            question += f"Revenue: {formatNumber(x[0])}\n"
+            question += f"Expense: {formatNumber(x[1])}\n"
 
-        self.botWorker = botWorker(question)
-        self.botWorker.resultReady.connect(self.analyzeGraph3)
-        self.botWorker.start()
+        print(question)
+
+        self.botChat = botChat(question)
+        self.botChat.resultReady.connect(self.analyzeGraph3)
+        self.botChat.start()
 
     def handleBackButton(self):
         self.graphIndex[0] -= 1
@@ -437,15 +442,15 @@ class MainProgram(QMainWindow):
             Annually: {linreg[1][4]}
         """
 
-        self.botWorker = botWorker(question)
-        self.botWorker.resultReady.connect(self.analyzeTable)
-        self.botWorker.start()
+        self.botChat = botChat(question)
+        self.botChat.resultReady.connect(self.analyzeTable)
+        self.botChat.start()
 
     def analyzeTable(self, answer):
         self.ui.AN_Explanation.setText(answer)
 
     def searchData(self):
-        date = self.ui.calendarWidget.selectedDate()
+        date = self.ui.ED_calendarWidget.selectedDate()
         date = date.toString("yyyy-MM-dd")
 
         self.selectedData = self.old_data[self.old_data['CREATED_AT'].str.startswith(date)]
@@ -471,12 +476,12 @@ class MainProgram(QMainWindow):
 
     def addDataFrame(self, title:str, price:int, id:str):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents_3)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(FRAME.sizePolicy().hasHeightForWidth())
         FRAME.setSizePolicy(sizePolicy)
-        FRAME.setMinimumSize(QtCore.QSize(0, 75))
+        FRAME.setMinimumSize(QtCore.QSize(80, 80))
         FRAME.setFrameShape(QtWidgets.QFrame.StyledPanel)
         FRAME.setFrameShadow(QtWidgets.QFrame.Raised)
 
@@ -485,14 +490,21 @@ class MainProgram(QMainWindow):
         LABEL.setStyleSheet("color: rgb(255, 255, 255);")
         LABEL.setText(f"""
         <html><head/><body>
-            <p><span style=\" font-weight:600;\">
-                {title}
-            </span></p>
-            <p>
-                {str(price)}
-            </p>
-        </body></html>
+            <p><span style=\" font-weight:600;\">{cutString(title, 30)}</span></p>
+            <p>{formatNumber(price)}</p></body></html>
         """)
+        LABEL.setStyleSheet("color: rgb(255, 255, 255);\n"
+        "background-color: rgb(154, 158, 173);\n"
+        "border-radius:10px;\n"
+        "padding-top:10px;\n"
+        "padding-bottom:10px;\n"
+        "padding-right:10px;\n"
+        "padding-left:20px;")
+
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(9)
+        LABEL.setFont(font)
 
         LAYOUT = QtWidgets.QVBoxLayout(FRAME)
         LAYOUT.addWidget(LABEL)
@@ -649,9 +661,9 @@ class MainProgram(QMainWindow):
         # addChats(self.currentAcc.username)
 
         # Multi-threading
-        self.botWorker = botWorker(question)
-        self.botWorker.resultReady.connect(self.handleBotAnswer)
-        self.botWorker.start()
+        self.botChat = botChat(question)
+        self.botChat.resultReady.connect(self.handleBotAnswer)
+        self.botChat.start()
 
     def addChatFrame(self, text:str, isBot:bool):
         FRAME = QtWidgets.QFrame(self.ui.scrollAreaWidgetContents)

@@ -99,10 +99,10 @@ def addAccount(account:Account) -> None:
     except sqlite3.IntegrityError:
         conn.rollback()
         conn.close()
-        addLog("Failed added account : Username already exists")
+        print("Failed added account : Username already exists")
 
     conn.close()
-    addLog("Account added successfully")
+    print("Account added successfully")
 
 def checkAccount(username:str, password:str) -> bool:
     """
@@ -140,7 +140,7 @@ def checkSecurity(username:str, security_question:int, security_answer:str) -> b
     else:
         return security_question == row[2] and sha256(security_answer.encode()).hexdigest() == row[3]
     
-def updateBalance(account:Account, new_balance:int)-> None:
+def updateBalance(account:Account, new_balance:int = None)-> None:
     """
     Updates the balance of a user account.
     """
@@ -149,18 +149,27 @@ def updateBalance(account:Account, new_balance:int)-> None:
     cursor = conn.cursor()
 
     try:
+        if new_balance is None:
+            df = getTransaction(account)
+            new_balance = account.balance
+            for _, row in df.iterrows():
+                if row['CATEGORY'] == 0:
+                    new_balance -= row['VALUE']
+                else:
+                    new_balance += row['VALUE']
+        
         cursor.execute(
-            "UPDATE accounts SET BALANCE = ?, UPDATED_AT = ? WHERE USERNAME = ?", 
-            (new_balance, datetime.now().strftime("%Y-%m-%d %H:%M:%S"), account.username)
+            "UPDATE accounts SET BALANCE = ? WHERE USERNAME = ?", 
+            (new_balance, account.username)
         )
 
         conn.commit()
         conn.close()
 
-        addLog("Balance updated successfully")
+        print("Balance updated successfully")
 
     except Exception as e:
-        addLog(f"Error updating balance: {str(e)}")
+        print(f"Error updating balance: {str(e)}")
 
 def getAccount(username:str) -> Account:
     """
@@ -203,9 +212,9 @@ def editAccount(account:Account) -> None:
         conn.commit()
         conn.close()
 
-        addLog("Account information updated successfully")
+        print("Account information updated successfully")
     except Exception as e:
-        addLog(f"Error updating account information: {str(e)}")
+        print(f"Error updating account information: {str(e)}")
 
 def deleteAccount(account:Account) -> None:
     """
@@ -224,9 +233,9 @@ def deleteAccount(account:Account) -> None:
         conn.commit()
         conn.close()
 
-        addLog("Account deleted successfully")
+        print("Account deleted successfully")
     except Exception as e:
-        addLog(f"Error deleting account: {str(e)}")
+        print(f"Error deleting account: {str(e)}")
 
 def isUsernameAvailable(username:str) -> bool:
     conn = sqlite3.connect("DB.db")
@@ -350,12 +359,6 @@ def addTransaction(id: str, account:Account, item: str, type:int, category: int,
         conn = sqlite3.connect("DB.db")
         cursor = conn.cursor()
 
-        if category == 0:
-            value = -value
-
-        new_balance = account.balance + value
-        updateBalance(account, new_balance)
-
         if updated_at == None:
             updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -367,10 +370,10 @@ def addTransaction(id: str, account:Account, item: str, type:int, category: int,
         conn.commit()
         conn.close()
 
-        addLog("Transaction added successfully")
+        print("Transaction added successfully")
 
     except Exception as e:
-        addLog(f"Error adding transaction: {str(e)}")
+        print(f"Error adding transaction: {str(e)}")
 
 def getTransaction(account:Account) -> pd.DataFrame:
     """
@@ -402,10 +405,10 @@ def editTransaction(account: Account, transaction_id: str, item: str, type: int,
         conn.commit()
         conn.close()
 
-        addLog("Transaction edited successfully")
+        print("Transaction edited successfully")
     
     except Exception as e:
-        addLog(f"Error editing transaction: {str(e)}")
+        print(f"Error editing transaction: {str(e)}")
 
 def deleteTransaction(account:Account, transaction_id:str) -> None:
     """
@@ -432,10 +435,10 @@ def deleteTransaction(account:Account, transaction_id:str) -> None:
         conn.commit()
         conn.close()
 
-        addLog("Transaction deleted successfully")
+        print("Transaction deleted successfully")
     
     except Exception as e:
-        addLog(f"Error deleting transaction: {str(e)}")
+        print(f"Error deleting transaction: {str(e)}")
 
 # Log functions
 def addLog(message: str) -> None:
@@ -453,6 +456,6 @@ def addLog(message: str) -> None:
 
         conn.commit()
     except Exception as e:
-        addLog(f"Error inserting log: {str(e)}")
+        print(f"Error inserting log: {str(e)}")
     finally:
         conn.close()

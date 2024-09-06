@@ -30,8 +30,8 @@ def formatNumber(x) -> str:
     else:
         return ""
     
-def cutString(x: str) -> str:
-    if len(x) < 20:
+def cutString(x: str, limit:int = 20) -> str:
+    if len(x) < limit:
         return x
     else:
         return x[:20] + "..."
