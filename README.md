@@ -53,6 +53,13 @@ To get started with the project, follow these steps:
     ```bash
     python main.py
     ```
+
+## Notes
+- Files in the **other** folder are not executable unless they are moved out of the folder, to the same hierarchy level as the folder (root).
+- The app has two initial accounts with the following username, password, and security question answers:
++ "user1", "user1_template", "depok"
++ "user2", "user2_template", "jakarta"
+- You need a Gemini API key to use the app. Place your key in **other/API.key**.
     
 ## Contributors
 
