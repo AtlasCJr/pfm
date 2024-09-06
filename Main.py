@@ -619,6 +619,7 @@ class MainProgram(QMainWindow):
 
         if isCorrect:
             self.ui.LI_ErrorMsg.setText("")
+            updateBalance(getAccount(username))
             self.currentAcc = getAccount(username)
             self.accountChanged()
             self.ui.stackedWidget.setCurrentWidget(self.ui.home)

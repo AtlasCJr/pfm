@@ -4156,9 +4156,9 @@ QScrollBar::sub-page:vertical {
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>0</y>
+                <y>-72</y>
                 <width>968</width>
-                <height>816</height>
+                <height>1083</height>
                </rect>
               </property>
               <property name="sizePolicy">
@@ -4516,7 +4516,7 @@ padding: 10px;</string>
                     <property name="minimumSize">
                      <size>
                       <width>0</width>
-                      <height>0</height>
+                      <height>300</height>
                      </size>
                     </property>
                     <property name="baseSize">
