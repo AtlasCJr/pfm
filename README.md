@@ -53,7 +53,6 @@ To get started with the project, follow these steps:
     ```bash
     python main.py
     ```
-    or
     ```bash
     PFM.exe
     ```
