@@ -1906,7 +1906,7 @@ class Ui_Master(object):
         sizePolicy.setHeightForWidth(self.userChatInput.sizePolicy().hasHeightForWidth())
         self.userChatInput.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        # font.setPointSize(12)
         self.userChatInput.setFont(font)
         self.userChatInput.setAutoFillBackground(False)
         self.userChatInput.setStyleSheet("\n"
