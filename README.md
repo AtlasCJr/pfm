@@ -58,11 +58,17 @@ To get started with the project, follow these steps:
     ```
 
 ## Notes
+
 1. Files in the **other** folder are not executable unless they are moved out of the folder, to the same hierarchy level as the folder (root).
-2. The app has two initial accounts with the following username, password, and security question answers:
-    1. "user1", "user1_template", "depok"
-    2. "user2", "user2_template", "jakarta"
+2. The application includes two pre-configured user accounts with the following credentials and security question answers:
+    1. Username: "user1", Password: "user1_template", Security Answer: "depok"
+    2. Username: "user2", Password: "user2_template", Security Answer: "jakarta"
 3. You need a Gemini API key to use the app. Place your key in **other/API.key**.
+4. For the app:
+    1. 'Login' page wouldn't show if you are already logged in.
+    2. 'Visualize', 'Analyze', 'Profile', and 'Edit' pages will not be available unless the user is logged in.
+    3. 'Visualize' and 'Edit' pages will only be accessible if the user's account has a minimum of two transactions.
+    4. The 'Analyze' page will be unavailable unless the user's account contains transactions with a minimum time gap of one year (e.g., from 31st December 2023 to 1st January 2024).
     
 ## Contributors
 
