@@ -63,7 +63,7 @@ To get started with the project, follow these steps:
 2. The application includes two pre-configured user accounts with the following credentials and security question answers:
     1. Username: "user1", Password: "user1_template", Security Answer: "depok"
     2. Username: "user2", Password: "user2_template", Security Answer: "jakarta"
-3. You need a Gemini API key to use the app. Place your key in **other/API.key**.
+3. A Gemini API key is required to use the application. The key should be placed in **other/API.key**. However, an API key has already been added for now.
 4. For the app:
     1. 'Login' page wouldn't show if you are already logged in.
     2. 'Visualize', 'Analyze', 'Profile', and 'Edit' pages will not be available unless the user is logged in.
