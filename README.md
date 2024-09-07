@@ -29,7 +29,7 @@ This project is built using the following technologies:
 </p>
 
 1. **HTML/CSS**: for TOS and PP.
-2. **Python** for backend logic, data processing, and front-end (PyQt5).
+2. **Python** for backend logic, data processing, and frontend (PyQt5).
 3. **SQL** for database management to store financial data.
 4. **Markdown** for easy documentation and support.
 
